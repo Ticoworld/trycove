@@ -1,5 +1,7 @@
 # TC-01B implementation and evidence
 
+> **Current status:** the continuation work on 2026-11-16 supersedes the candidate-discovery and product-workflow assessment below. Read the [current continuation evidence](../evidence/connection-engine-run-2026-11-16.md) for the latest PostgreSQL run, pckt × CellFlow hypothesis, compatibility findings, smoke checks, and blockers. The sections that follow preserve the earlier baseline report.
+
 This is a continuation of the existing TC-01 repository. The work adds versioned source footprints, a conservative corpus discovery pass, persisted assessment findings, project and opportunity UI, and isolated trial receipts. It does not claim that the engine found a new viable integration.
 
 ## Acceptance gates

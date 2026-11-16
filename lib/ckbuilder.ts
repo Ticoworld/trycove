@@ -1,0 +1,3 @@
+import {safeUrl} from './ingest';
+export type BuilderRow={name:string;description:string;repository:string|null;website:string|null;status:string;raw:string};
+export function parseBuilderTable(markdown:string):BuilderRow[]{return markdown.split('\n').filter(line=>line.startsWith('|')).slice(2).flatMap(line=>{const cols=line.split('|').slice(1,-1).map(x=>x.trim());if(cols.length<5||!cols[1])return [];const [name,...desc]=cols[1].split(/:\s+/);const repo=cols[2].match(/\]\((https:\/\/github\.com\/[^)]+)\)/)?.[1]??null;const site=cols[3].match(/https?:\/\/[^\s|)]+/)?.[0]??null;return [{name:name.trim(),description:desc.join(': ').trim(),repository:safeUrl(repo),website:safeUrl(site),status:cols[4],raw:line}]})}

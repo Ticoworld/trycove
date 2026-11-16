@@ -18,7 +18,10 @@
     "investigate:relays": "tsx scripts/investigate-relays.ts",
     "intelligence:footprints": "tsx scripts/footprints.ts",
     "intelligence:discover": "tsx scripts/intelligence-discover.ts",
-    "intelligence:run": "pnpm intelligence:footprints && pnpm intelligence:discover"
+    "intelligence:run": "pnpm intelligence:footprints && pnpm intelligence:discover",
+    "trial:capsule": "tsx scripts/run-trial-capsule.ts",
+    "trial:pledge": "tsx scripts/run-pledge-record.ts",
+    "trial:semantics": "tsx scripts/run-semantic-record.ts"
   },
   "dependencies": {
     "@electric-sql/pglite": "0.5.16",

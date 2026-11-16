@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0",
+  "id": "synthetic-revalidation",
+  "purpose": "Exercise a synthetic validation boundary across mutation and a rebuilt input.",
+  "mode": "synthetic-isolated",
+  "worker": "revalidation-v1",
+  "runtime": {
+    "image": "node:24-alpine@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+    "nodeMajor": 24,
+    "network": "none"
+  },
+  "sources": [],
+  "components": [
+    {
+      "name": "Trycove synthetic fixture",
+      "role": "models validation and submission"
+    }
+  ],
+  "requirements": {
+    "scripts": [],
+    "deployments": [],
+    "prerequisites": [
+      "Docker daemon with the exact pre-pulled runtime image"
+    ]
+  },
+  "fixture": {
+    "sha256": "8f6fbecee49c62b2998b280d9f9a1c1417a2eaa33444df415666058845cdc5a8",
+    "data": {
+      "scenario": "revalidation-v1",
+      "original": {
+        "input": "synthetic:one",
+        "inputCapacity": 100,
+        "outputCapacity": 95,
+        "fee": 5
+      },
+      "modified": {
+        "input": "synthetic:one",
+        "inputCapacity": 100,
+        "outputCapacity": 101,
+        "fee": 5
+      },
+      "rebuilt": {
+        "input": "synthetic:two",
+        "inputCapacity": 100,
+        "outputCapacity": 95,
+        "fee": 5
+      }
+    }
+  },
+  "actions": [
+    "validate-original",
+    "reject-modified",
+    "reject-stale-check",
+    "revalidate-rebuilt"
+  ],
+  "expected": {
+    "validAccepted": true,
+    "invalidBlocked": true,
+    "staleValidationBlocked": true,
+    "rebuiltAcceptedAfterFreshCheck": true
+  },
+  "limits": {
+    "timeoutMs": 30000,
+    "memoryMiB": 192,
+    "pids": 32,
+    "cpus": 0.5
+  },
+  "reset": "fresh-container",
+  "cleanup": "remove-container-and-staging",
+  "evidence": {
+    "captureStdout": true,
+    "captureStderr": true
+  }
+}

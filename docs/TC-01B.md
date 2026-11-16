@@ -1,8 +1,12 @@
 # TC-01B implementation and evidence
 
-> **Current status:** the continuation work on 2026-11-16 supersedes the candidate-discovery and product-workflow assessment below. Read the [current continuation evidence](../evidence/connection-engine-run-2026-11-16.md) for the latest PostgreSQL run, the pckt × CellFlow regression result (already investigated at commit `4a9a6cd`), compatibility findings, smoke checks, and blockers. The sections that follow preserve the earlier baseline report.
+> **Current status:** the continuation and pair-blind evaluation supersede the candidate-discovery and product-workflow assessment below. The [blind-corpus record](../evidence/unseen-corpus-evaluation.json) contains the fixed-seed sample, candidates, source revisions, compatibility unknowns, rejected overlaps, and limited novelty-search scope. The [earlier continuation report](../evidence/connection-engine-run-2026-11-16.md) preserves the PostgreSQL run and pckt × CellFlow regression finding. The sections that follow preserve the original TC-01B baseline.
 
 This is a continuation of the existing TC-01 repository. The work adds versioned source footprints, a conservative corpus discovery pass, persisted assessment findings, project and opportunity UI, and isolated trial receipts. It does not claim that the engine found a new viable integration.
+
+## Pair-blind structured discovery continuation
+
+The later continuation supersedes the initial 8-project sample with a pair-blind census of all 49 imported need-bearing projects, selected before footprint availability was checked. It produced two new-to-local-evidence review-offer candidates (CKB Geo-Wars × Cellora and CKB Escrow × Cellora), a documented Explorer/cycle-tools lead with an earlier related-tools mention, and the known DripFund/Cellora pair. The cycle replay could not reach the public RPC: the configured proxy returned HTTP 403 after Node DNS resolution failed. No transaction replay or compatibility pass is claimed. The [current evaluation JSON](../evidence/unseen-corpus-evaluation.json) and [evidence report](../evidence/unseen-corpus-evaluation.md) replace the earlier sample description.
 
 ## Acceptance gates
 

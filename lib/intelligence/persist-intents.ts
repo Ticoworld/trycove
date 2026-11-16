@@ -1,0 +1,41 @@
+import {createHash} from 'node:crypto';
+import {db} from '../db';
+import {evidence,intelligenceAssessments,intelligenceRuns,opportunities,projects,signalIntents} from '../schema';
+import {eq,inArray} from 'drizzle-orm';
+import {discoverIntentCandidates,extractObservationIntents,extractSignalIntents,intentCompatibilityFindings,type IntentCandidate,type IntentObservation,type SignalInput} from './intents';
+
+const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
+const link=(o:IntentObservation)=>`${o.repository}/blob/${o.revision}/${o.path}#L${o.startLine}`;
+export async function replaceStructuredIntentRecords(sourceSignals:SignalInput[],observations:IntentObservation[]){
+ const oldSignalIds=sourceSignals.map(x=>x.id);const oldObservationIds=observations.map(x=>x.id);
+ for(let i=0;i<oldSignalIds.length;i+=500)await db.delete(signalIntents).where(inArray(signalIntents.signalId,oldSignalIds.slice(i,i+500)));
+ for(let i=0;i<oldObservationIds.length;i+=500)await db.delete(signalIntents).where(inArray(signalIntents.observationId,oldObservationIds.slice(i,i+500)));
+ const intents=[...extractSignalIntents(sourceSignals),...extractObservationIntents(observations)];
+ for(let i=0;i<intents.length;i+=250){const rows=intents.slice(i,i+250).map(x=>({id:x.id,signalId:x.signalId??null,observationId:x.observationId??null,projectId:x.projectId,direction:x.direction,intentType:x.intentType,scope:x.scope,extractionRule:x.extractionRule,verification:x.verification,sourceUrl:x.sourceUrl,revision:x.revision,observedAt:x.observedAt??new Date()}));if(rows.length)await db.insert(signalIntents).values(rows)}
+ return intents;
+}
+
+export async function persistIntentCandidates(input:{candidates:IntentCandidate[];sourceSignals:SignalInput[];observations:IntentObservation[];footprints:{id:string;projectId:string;repository?:string}[];runId:string;createdAt:Date}){
+ const projectRows=await db.select({id:projects.id,name:projects.name}).from(projects);const output=[];
+ for(const c of input.candidates){const a=projectRows.find(x=>x.id===c.need.projectId),b=projectRows.find(x=>x.id===c.provider.projectId);const aSignals=input.sourceSignals.filter(x=>x.projectId===c.need.projectId),bSignals=input.sourceSignals.filter(x=>x.projectId===c.provider.projectId);
+  const findings=intentCompatibilityFindings({consumerProjectId:c.need.projectId,providerProjectId:c.provider.projectId,consumerSignals:aSignals,providerSignals:bSignals,providerClaim:c.provider.claim,observations:input.observations,intentType:c.intentType,relation:c.relation});const conclusion=findings.some(x=>x.conclusion==='environment_blocked')?'environment_blocked':'unknown';const id=`intent-${c.id.slice(0,32)}`;
+  const identity=c.scope==='ckb-verified-address-primary-name',cycles=c.scope==='ckb-per-script-group-cycle-analysis';
+  const problem=identity?`Investigate whether ${c.provider.projectId}’s address-verified primary-name API can meet ${c.need.projectId}’s explicit primary-name lookup need.`:cycles?'Investigate using ckb-cycle-tools to add per-script-group cycle attribution to CKB Devnet Explorer.':c.relation==='explicit-offer'&&c.intentType==='technical-review'?`Assess the explicit ${c.provider.projectId} review offer against ${c.need.projectId}’s ${c.scope.replaceAll('-',' ')} question.`:`Investigate the documented ${c.scope.replaceAll('-',' ')} need and provider capability.`;
+  const reasoning=c.relation==='explicit-offer'?`The source records contain a specific ${c.need.intentType} need and an explicit provider offer for the same scope (${c.scope}). The offer is an imported claim; its current availability and fit have not been reconfirmed.`:`Imported source records express a need and a separate project capability on the same specific scope (${c.scope}). The match uses structured claims and, where available, a source-observed API declaration. It does not imply an existing integration, compatible runtime, partner offer, or adoption.`;
+  const experiment=identity?'Using a known CKB testnet address with a verified primary name, query GET /primary/{address}; check the response name, expiration and ownership semantics against the consumer’s explicit address/name requirement. Include unregistered, expired, malformed and wrong-network names. Do not sign or broadcast a transaction.':cycles?'On the same scripted local devnet, obtain one explorer transaction from its raw RPC route and pass that transaction plus the same RPC URL to pinned ckb-cycles. Compare the sum of profile.groups[].cycles with the node aggregate. Reject on missing debugger/binaries, hardfork mismatch, failed replay, or cycle discrepancy; consider a browser integration only after that check passes.':c.relation==='explicit-offer'?'Review the original source claim and confirm the offer is still open before any introduction. Prepare the project-specific question and desired output; record a response only if one is actually received. No outreach is initiated by Trycove.':`Trace the exact source boundary for ${c.scope}; define a bounded experiment with positive and negative cases before changing either project.`;
+  const value={id,projectA:c.need.projectId,projectB:c.provider.projectId,kind:`${c.relation==='explicit-offer'?'Explicit offer':'Documented need'} / ${c.intentType}`,problem,reasoning,requirements:findings.map(f=>`${f.dimension} (${f.conclusion}): ${f.explanation}`).join('\n'),experiment,status:'discovered'};
+  const [previous]=await db.select().from(opportunities).where(eq(opportunities.id,id));if(!previous)await db.insert(opportunities).values(value);else if(previous.status==='discovered')await db.update(opportunities).set(value).where(eq(opportunities.id,id));
+  const claims=[c.need,...c.relatedNeeds,c.provider];const researchObservations=input.observations.filter(o=>{
+   if(c.scope==='ckb-verified-address-primary-name')return(o.projectId===c.provider.projectId&&o.id===c.provider.observationId);
+   if(c.scope==='ckb-per-script-group-cycle-analysis')return(o.projectId===c.provider.projectId&&o.kind==='function'&&['src/profile.ts','src/replay.ts'].includes(o.path)&&/^Exported function (?:profileTransaction|planReplay|replayGroups)\b/.test(o.fact))||(o.projectId===c.need.projectId&&o.path==='src/explorer.ts'&&o.kind==='function'&&/^Method (?:transaction|rawTransaction|blockDetail)\b/.test(o.fact));
+   if(c.scope==='ckb-indexing-architecture')return(o.projectId===c.need.projectId&&['cell_query','live_cell_query'].includes(o.kind))||(o.projectId===c.provider.projectId&&o.kind==='api_route'&&/\/v1\/cells/.test(o.fact));
+   return false;
+  });for(const o of researchObservations)claims.push({...c.provider,claim:o.fact,sourceUrl:link(o),revision:o.revision,verification:'pinned source observation; runtime compatibility unknown'});
+  const current=await db.select().from(evidence).where(eq(evidence.opportunityId,id));for(const item of claims){if(current.some(x=>x.sourceUrl===item.sourceUrl&&x.claim===item.claim))continue;await db.insert(evidence).values({opportunityId:id,claim:item.claim,sourceUrl:item.sourceUrl,revision:item.revision,observedAt:input.createdAt,verification:item.verification})}
+  const providerObservation=c.provider.observationId?input.observations.find(x=>x.id===c.provider.observationId):undefined;const footprintA=input.footprints.find(x=>x.projectId===c.need.projectId),footprintB=(providerObservation?input.footprints.find(x=>x.projectId===c.provider.projectId&&x.repository===providerObservation.repository):undefined)??input.footprints.find(x=>x.projectId===c.provider.projectId);if(footprintA&&footprintB)await db.insert(intelligenceAssessments).values({id:hash(input.runId+c.id),runId:input.runId,opportunityId:id,consumerFootprintId:footprintA.id,providerFootprintId:footprintB.id,conclusion,findings:JSON.stringify(findings),createdAt:input.createdAt}).onConflictDoNothing();
+  output.push({id,consumer:a?.name??c.need.projectId,provider:b?.name??c.provider.projectId,scope:c.scope,conclusion,need:c.need.claim,providerClaim:c.provider.claim});
+ }
+ return output;
+}
+
+export function intentRunId(input:{footprintIds:string[];intents:{id:string;revision:string}[]}){return hash(JSON.stringify({footprints:[...input.footprintIds].sort(),intents:input.intents.map(x=>[x.id,x.revision]).sort(),taxonomy:'intent-v1'}))}

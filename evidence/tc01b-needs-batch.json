@@ -1,0 +1,50 @@
+{
+  "projectsProcessed": 5,
+  "projectIds": [
+    "ckbuilder-ckautomata-73",
+    "ckbuilder-ckbcycletools-62",
+    "ckbuilder-ckbdevnetexplorer-65",
+    "ckbuilder-ckbgeowars-38",
+    "ckbuilder-ckbgovernance-29"
+  ],
+  "footprintRevisions": [
+    {
+      "projectId": "ckbuilder-ckautomata-73",
+      "revision": "8eec44406667627cd60c0c1ee8346e27220f94a2",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-ckbcycletools-62",
+      "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-ckbdevnetexplorer-65",
+      "revision": "b6aef5571bbe5a112b4809881a1b6229095f6da7",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-ckbgeowars-38",
+      "revision": "9e8424d0a857ef80799070ff44071c72363cfc57",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-ckbgovernance-29",
+      "revision": "2af7bafb9e579de56b0103bad2dc1eab7eee4662",
+      "status": "partial"
+    }
+  ],
+  "observationCount": 21941,
+  "needCount": 15,
+  "candidateCount": 1,
+  "rejected": {
+    "missingNeed": 14350,
+    "missingProvider": 36,
+    "invalidEvidence": 0
+  },
+  "limitations": [
+    "Only exact source interface names mentioned in documented needs are considered; semantic synonym discovery is not implemented.",
+    "Static source matches do not prove runtime compatibility.",
+    "Rust behavior, licensing, deployment identity and dynamic dispatch may be unknown."
+  ]
+}

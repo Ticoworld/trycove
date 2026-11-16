@@ -1,0 +1,50 @@
+{
+  "projectsProcessed": 5,
+  "projectIds": [
+    "chainpress",
+    "ckb-ai",
+    "ckb-cinnabar",
+    "ckb-connect-wallet-kit",
+    "ckb-node-probe"
+  ],
+  "footprintRevisions": [
+    {
+      "projectId": "chainpress",
+      "revision": "9bda098f4c50cfb8f1051d981fe92aecaa2fb2bd",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckb-ai",
+      "revision": "de66053c4a83ffedbafe98d20e5a061f4ebe5edf",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckb-cinnabar",
+      "revision": "66dbd9a4e1d3d94c9d6f8c5c08ecab700a0f026e",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckb-connect-wallet-kit",
+      "revision": "52dcaaf492fad8fd4e3a482a79968e8205309265",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckb-node-probe",
+      "revision": "b733b0f1a40e43fd9ef64c8e43d2bbd26d305a7b",
+      "status": "partial"
+    }
+  ],
+  "observationCount": 2365,
+  "needCount": 0,
+  "candidateCount": 0,
+  "rejected": {
+    "missingNeed": 1326,
+    "missingProvider": 0,
+    "invalidEvidence": 0
+  },
+  "limitations": [
+    "Only exact source interface names mentioned in documented needs are considered; semantic synonym discovery is not implemented.",
+    "Static source matches do not prove runtime compatibility.",
+    "Rust behavior, licensing, deployment identity and dynamic dispatch may be unknown."
+  ]
+}

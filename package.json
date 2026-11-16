@@ -16,7 +16,9 @@
     "extract:code": "tsx scripts/extract-code.ts",
     "investigate": "tsx scripts/investigate.ts",
     "investigate:relays": "tsx scripts/investigate-relays.ts",
-    "intelligence:footprints": "tsx scripts/footprints.ts"
+    "intelligence:footprints": "tsx scripts/footprints.ts",
+    "intelligence:discover": "tsx scripts/intelligence-discover.ts",
+    "intelligence:run": "pnpm intelligence:footprints && pnpm intelligence:discover"
   },
   "dependencies": {
     "@electric-sql/pglite": "0.5.16",

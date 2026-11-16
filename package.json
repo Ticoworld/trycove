@@ -11,7 +11,11 @@
     "test": "vitest run",
     "seed": "tsx scripts/seed.ts",
     "sync:builder": "tsx scripts/sync-builder.ts",
-    "discover": "tsx scripts/discover.ts"
+    "discover": "tsx scripts/discover.ts",
+    "sync:issues": "tsx scripts/sync-issues.ts",
+    "extract:code": "tsx scripts/extract-code.ts",
+    "investigate": "tsx scripts/investigate.ts",
+    "investigate:relays": "tsx scripts/investigate-relays.ts"
   },
   "dependencies": {
     "@electric-sql/pglite": "0.5.16",

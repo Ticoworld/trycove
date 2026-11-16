@@ -20,6 +20,22 @@ Open the local development server. `sync` clones CKBDapps and upserts source-loc
 
 ## Connection discovery and access
 
-After migration and `pnpm sync`, run `pnpm sync:builder` and `pnpm discover`. The former imports CKBuilder's public README table; its issue API was inaccessible in this environment, so issue needs were not imported. Identity merging requires a unique matching name and corroborating site or repository. The discovery command inspects pinned DripFund and CellGuard code and applies a narrow interface rule; its output is a hypothesis, not a verified integration. `scripts/run-cross-trial.sh` reproduces the separate synthetic cross-project experiment; `pnpm exec tsx scripts/record-cross-trial.ts` records its result after running it.
+After migration and `pnpm sync`, run `pnpm sync:builder` and `pnpm discover`. The former imports CKBuilder's public README table; the public-issue adapter below imports issue bodies separately. Identity merging requires a unique matching name and corroborating site or repository. Discovery uses explicit interface rules; its results are candidates, not verified integrations. `scripts/run-cross-trial.sh` reproduces the separate synthetic cross-project experiment; `pnpm exec tsx scripts/record-cross-trial.ts` records its result after running it.
 
 Writes are disabled by default. To enable the local ledger set a strong `TRYCOVE_WRITE_KEY` in the server environment and enter it on the form. Do not expose this app publicly: this shared key is a local access control, not a complete multi-user authentication system. Restart the server after changing it.
+
+## Issue intelligence and connection workflow
+
+After `pnpm migrate`, `pnpm sync`, `pnpm seed`, and `pnpm sync:builder`, run:
+
+```sh
+pnpm sync:issues                  # GitHub public issue pages, no API token required
+pnpm extract:code                 # scan repositories referenced by five imported issues
+pnpm discover                     # save interface-based candidates
+pnpm investigate                  # source-level check of first documented lock-query candidate
+pnpm investigate:relays           # inspect selected transaction-recovery candidates
+```
+
+`sync:issues` also accepts issue numbers to refresh specific issues, and `extract:code` accepts issue numbers to scan other imported issue repositories. Only fixed interface signatures produce candidates; source claims, code observations, hypotheses and independent checks retain different labels. No candidate is automatically marked compatible. Inspection commands clone public repositories and never execute their code. Code scanners are bounded and may miss interfaces; they are not a general program analysis engine. The HTML issue adapter validates the current upstream payload and will report failures if GitHub changes it. No issue comments are imported. Re-running discovery marks previously generated but no longer supported discovered candidates as needing review, and preserves investigations and follow-ups.
+
+The strongest current documented match is DripFund × Cellora. See [the investigation](evidence/connection-investigation.md) for source revisions, limitations and reproducible checks. The exact matching rules do not infer a need from broad category similarity; absent network, SDK, script or signer information stays unknown. Explicitly disjoint declared network or SDK values exclude a candidate, but shared or missing values do not prove compatibility.

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "command": "scripts/semantic-run.sh",
+  "exitStatus": 0,
+  "evidenceLevel": 2,
+  "executionMode": "reviewed-pinned-code-network-disabled-container",
+  "result": "passed",
+  "cases": {
+    "explicitLiveAndData": [
+      "Alice"
+    ],
+    "defaultBothWithData": [
+      "Alice",
+      "Bob"
+    ],
+    "omittedData": 0,
+    "tiedBlockCacheFirst": [
+      "Cached",
+      "Chain"
+    ],
+    "tiedBlockChainFirst": [
+      "Chain",
+      "Cached"
+    ]
+  },
+  "limitations": [
+    "Cellora service and query code were not executed",
+    "mock CCC liveness is an assumption",
+    "no actual chain, transaction, signer, or network call",
+    "counterexamples show output differences, not historical accounting correctness or actual cache state"
+  ],
+  "sourceRevisions": {
+    "dripfund": "34241019e35f4e4f00f505f5b6aac24619a1f400",
+    "cellora": "a534c38f248c0406eeafee94adadb8c2c9072f8a"
+  },
+  "logs": [
+    {
+      "path": "evidence/semantic-execution.stdout",
+      "sha256": "f1fdf64d3a132d39033e8b2dc80ec28ef095334ab3bd56ed1fbf46d596bc0b80"
+    },
+    {
+      "path": "evidence/semantic-execution.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "image": "node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+  "nodeVersion": "v24.22.3"
+}

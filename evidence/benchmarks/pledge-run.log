@@ -1,0 +1,10 @@
+Verified pinned revisions and CrowdCell file hashes; extracted loop lines 215–348.
+Running reviewed extraction with synthetic mocks; Docker network disabled; no host credentials mounted.
+PASS valid synthetic pledge executes upstream loop; CellGuard and additional pledge checks pass before mock submit
+PASS modified pledge output rejected before mock submit
+PASS wrong pledge data rejected by pledge-specific guard despite valid shape
+PASS missing code dependency rejected by CellGuard before mock submit
+PASS mutation between check and mock submission rejected
+PASS simulated stale-cell error triggers upstream rebuild, revalidation and second mock submit
+PASS invalid rebuilt pledge rejected before second mock submit
+LIMITATIONS: synthetic contract identities and data; mocked CCC transaction object, coin selection, fees, wallet and submission; no CKB VM, real signature, live cell or network. Offline policy checks cannot authorize a real broadcast.

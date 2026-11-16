@@ -1,0 +1,38 @@
+crates/api/src/routes/cells.rs: sha256 905f4a64e8bba15488a5fbb67fe112308b076ecc4deb54b7be51111c40dc7d72
+crates/db/src/cells.rs: sha256 c9378818862db5e334563283dc7db93406fd42dc39b432916a8bc2763e2da860
+LICENSE.md: sha256 bdc1b8b67770c97549bfcbef8458041d41eb24acd96e9e76557ffe573fb382c7
+PASS pinned Cellora source: default both liveness, opt-in data, 32-byte hash, SQL liveness and descending order; source inspection only
+PASS lockfile-resolved CCC core 1.12.2 integrity; exact lock search and cache-first iteration observed; order parameter is documented as RPC-only
+Reviewed source sha256 ad77255268fa41c3b6d23d67fb6c7cba86dbbc55359518ab10f4f43a0f8b9181; transpiled sha256 12a1034bcd4ddd7f0d739899642d9f758c62a90181375770c790c9ff6ab73bec
+12a1034bcd4ddd7f0d739899642d9f758c62a90181375770c790c9ff6ab73bec  dripfund-indexer.js
+bd261e30d9792a4c82115a921b0ff93faf6f74a14117a7a279e421ff90ff276b  semantic-fixture.cjs
+Executing reviewed DripFund function in network-disabled container; image node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5
+{
+  "result": "passed",
+  "nodeVersion": "v24.22.3",
+  "execution": "reviewed DripFund indexer with synthetic CCC and modeled Cellora rows",
+  "cases": {
+    "explicitLiveAndData": [
+      "Alice"
+    ],
+    "defaultBothWithData": [
+      "Alice",
+      "Bob"
+    ],
+    "omittedData": 0,
+    "tiedBlockCacheFirst": [
+      "Cached",
+      "Chain"
+    ],
+    "tiedBlockChainFirst": [
+      "Chain",
+      "Cached"
+    ]
+  },
+  "limitations": [
+    "Cellora service and query code were not executed",
+    "mock CCC liveness is an assumption",
+    "no actual chain, transaction, signer, or network call",
+    "counterexamples show output differences, not historical accounting correctness or actual cache state"
+  ]
+}

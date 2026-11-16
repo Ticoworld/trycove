@@ -15,7 +15,8 @@
     "sync:issues": "tsx scripts/sync-issues.ts",
     "extract:code": "tsx scripts/extract-code.ts",
     "investigate": "tsx scripts/investigate.ts",
-    "investigate:relays": "tsx scripts/investigate-relays.ts"
+    "investigate:relays": "tsx scripts/investigate-relays.ts",
+    "intelligence:footprints": "tsx scripts/footprints.ts"
   },
   "dependencies": {
     "@electric-sql/pglite": "0.5.16",
@@ -25,6 +26,7 @@
     "pg": "8.16.3",
     "react": "19.1.1",
     "react-dom": "19.1.1",
+    "smol-toml": "^1.9.1",
     "zod": "4.3.6"
   },
   "devDependencies": {

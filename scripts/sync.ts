@@ -1,0 +1,5 @@
+import {execFileSync} from 'node:child_process';
+import {mkdtemp,readFile,readdir,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os'; import {join} from 'node:path';
+import {db} from '../lib/db'; import {projects} from '../lib/schema'; import {parseProject} from '../lib/ingest';
+async function main(){const dir=await mkdtemp(join(tmpdir(),'trycove-'));let count=0,failed=0;try{execFileSync('git',['clone','--depth','1','https://github.com/CKBFansDAO/ckbdapps.git',dir],{stdio:'inherit'});const rev=execFileSync('git',['-C',dir,'rev-parse','HEAD'],{encoding:'utf8'}).trim();for(const file of await readdir(join(dir,'content/projects'))){if(!file.endsWith('.md'))continue;try{const p=parseProject(file.slice(0,-3),await readFile(join(dir,'content/projects',file),'utf8'),rev);await db.insert(projects).values(p).onConflictDoUpdate({target:projects.id,set:p});count++}catch(e){failed++;console.error('Skipped',file,String(e))}} console.log(`Imported ${count}; skipped ${failed}; revision ${rev}`)}finally{await rm(dir,{recursive:true,force:true})}process.exit(failed?1:0)}main().catch(e=>{console.error(e);process.exit(1)});

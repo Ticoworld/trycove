@@ -1,0 +1,5 @@
+# Independent trial record
+
+Observed 2026-11-16 in Codex Cloud with Node v24.22.1. CellGuard MIT repository revision `2bb3182adb1a5d00bca24e2068f790a50e8e2d70`; CrowdCell inspected at `0835ad42decf2c9594fa92a185eea4cee9eba622`. Run `scripts/run-trial.sh` to reproduce the CellGuard upstream test run. Result: 11 tests passed, zero failed. The suite checks conversion, synthetic valid and diverted capacity, mock RPC behavior, exact signed object handling, and fail-closed cases. Fixtures and RPC are synthetic. It does not run CrowdCell code, validate a real pledge, establish chain validity, test rebuild/contention, or demonstrate maintainer adoption. No funds were spent and no transaction was broadcast.
+
+The CellGuard adapter states it is finalize-only and not merged into CrowdCell. A reviewed deployment-specific policy, current type and lock identities, dependency outpoints, network, and actual transaction builder hookup remain prerequisites for live validation. Revalidate after every rebuild; this run did not establish that requirement is enforced by a CrowdCell integration.

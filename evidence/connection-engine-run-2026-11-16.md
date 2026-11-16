@@ -5,8 +5,8 @@
 | Gate | Verdict | Evidence and remaining gap |
 | --- | --- | --- |
 | A. Ecosystem intelligence | PARTIAL | CKBDapps and CKBuilder table/issues import and refresh, identity corroboration, structured claim signals, and pinned repo analysis run against PostgreSQL. No CKB Pulse adapter exists yet; technical extraction is bounded. |
-| B. Connection discovery | PARTIAL | A real corpus run saved pckt × CellFlow from needs in both issues plus signed-relay, relay-guard, intent-tracking, and ambiguous-send source observations. The candidate remains `unknown`; discovery uses a small explicit rule set, so broader semantic and architectural coverage is not established. |
-| C. User workflow | PASS | The production build served project listing, the pckt project profile, and its saved Opportunity Workspace from PostgreSQL with HTTP 200. The workspace shows needs, pinned source evidence, compatibility unknowns, the next experiment, and follow-up history controls. |
+| B. Connection discovery | PARTIAL | A real corpus run rediscovered pckt × CellFlow from needs in both issues plus signed-relay, relay-guard, intent-tracking, and ambiguous-send source observations. The same pair was investigated earlier at commit `4a9a6cd`, so this is a regression result, not evidence of a new discovery. The candidate remains `unknown`; discovery uses a small explicit rule set, so broader semantic and architectural coverage is not established. |
+| C. User workflow | PARTIAL | The production build served the project listing, pckt profile, and saved Opportunity Workspace from PostgreSQL with HTTP 200. This confirms server-rendered access, not that a builder completed a useful investigation or acted on the result. The existing follow-up form still needs an end-to-end state-change smoke test. |
 | D. Cross-project experiment | PARTIAL | No safe executable pckt × CellFlow integration was possible from inspected code: neither repository includes a root license file at the pinned revisions, CCC versions differ, and direct CellFlow submission would bypass pckt's relay guard. A resolver endpoint check was blocked by the environment proxy (HTTP CONNECT 403). Existing synthetic fixtures do not establish a live integration. |
 | PostgreSQL persistence and build | PASS | PostgreSQL 17 migrations were applied twice; imports, scans, discovery persistence, production build, and server-rendered page reads succeeded against that disposable database. Production service deployment and production authentication remain untested. |
 
@@ -21,7 +21,9 @@ The import and discovery path was run against a disposable PostgreSQL 17 instanc
 5. Ran `pnpm intelligence:discover -- --limit 100`. The PostgreSQL run processed 4 repositories, 4,635 source observations and 14 imported needs. It saved two candidates with `unknown` compatibility conclusions. The same engine on the local PGlite corpus processed 20 repositories, 39,276 observations and 32 needs, and also returned two candidates.
 6. Built the production app against PostgreSQL and smoke-requested `/projects`, the pckt profile, and the saved pckt–CellFlow Opportunity Workspace. All three returned HTTP 200 and the workspace rendered source-backed needs, code touchpoints, compatibility unknowns, the next experiment, and evidence links.
 
-## New inferred opportunity: pckt × CellFlow
+## Reconstructed known opportunity: pckt × CellFlow
+
+The current engine rediscovered the same pckt × CellFlow relationship already documented in [`evidence/connection-investigation.md` at commit `4a9a6cd`](https://github.com/Ticoworld/trycove/blob/4a9a6cdc8a4e44755c476f18618366437b50eb85/evidence/connection-investigation.md). This is a useful regression result showing that the structured source matcher can recover an earlier investigation. It is not a new Trycove discovery and is not used as evidence for autonomous novelty.
 
 This candidate is discovered by matching imported needs to pinned source observations; the rule does not contain either project ID.
 
@@ -31,7 +33,7 @@ This candidate is discovered by matching imported needs to pinned source observa
 - At the same revision, [`backend/src/routes/relay.rs:29-43`](https://github.com/RobaireTH/pckt/blob/f351c6c2eea531814e78d557b8a23c2695df292d/backend/src/routes/relay.rs#L29) rejects a transaction without the configured packet-lock cell dependency before calling CKB RPC.
 - At CellFlow revision `027ce1c4202a3e62ae504bc9aa0f14169b2ca085`, [`packages/ccc/src/ccc.ts:137-263`](https://github.com/tydeptrai21042004/CellFlow/blob/027ce1c4202a3e62ae504bc9aa0f14169b2ca085/packages/ccc/src/ccc.ts#L137) signs, persists intent and input evidence, preflights, broadcasts through `signer.client.sendTransaction`, and records ambiguous outcomes without automatic rebroadcast.
 
-The proposed benefit is a bounded adapter experiment around pckt's existing relay: make submission uncertainty auditable and give CellFlow an integration target while retaining pckt's packet-lock guard. This is an independently investigated hypothesis, not an established integration, verified compatibility, maintainer response, or adoption.
+The hypothesis is a bounded adapter experiment around pckt's existing relay: make submission uncertainty auditable and give CellFlow an integration target while retaining pckt's packet-lock guard. This remains an unverified hypothesis, not an established integration, verified compatibility, maintainer response, or adoption.
 
 Compatibility findings stored in the workspace:
 

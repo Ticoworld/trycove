@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "tc01e-trusted-upstream-profile-v1",
+  "capability": "CKB transaction hash to network-scoped read-only transaction inspector deep link",
+  "discoveryCandidateId": "b2032ed152e5f87e4691d7376a1b24c0a2b0a2ebbcb77452679397476061f533",
+  "adapterSha256": "25287553b980aa476b04ef7d6d14976af6a92f7fc288eb2ecf5149ef5c6dccf9",
+  "fixtureSha256": "b4575e10c28a822f1ca094307643955efccb4f5975abd7ffe84776a9f608b68a",
+  "consumer": {
+    "repository": "https://github.com/truthixify/grid3",
+    "revision": "abaaaf7b6812e0515e1191b949314fa295543979",
+    "licenseMetadataAtReview": null,
+    "licenseMetadataCheckedAt": "2026-11-17T21:30:00Z",
+    "sourceFiles": [
+      { "path": "client/src/lib/constants.ts", "sha256": "0e6b380bb27ac9b884675ab3e731b90923c2b613f9bc4ed1764b633bd5fc4f59", "purpose": "testnet RPC, existing Pudge explorer origin and source-declared script CellDep hash" },
+      { "path": "client/src/providers/CKBProvider.tsx", "sha256": "c09f9e6e4dd19544dbd53210cb879f5d7c182400322d423aa6a92f6503546172", "purpose": "explicit nervos_testnet signer configuration" },
+      { "path": "client/src/app/game/[id]/page.tsx", "sha256": "184d60a055135bc90fc2fa193cbeafc37f8c47bb4248ccdb97ebcd536e62c49a", "purpose": "current transaction-hash links to the existing explorer" },
+      { "path": "client/src/hooks/useGameActions.ts", "sha256": "28138d418a188647b3091f2c50b7a3937d7f90ce2b5175263f57a3411bc6cbe1", "purpose": "signer.sendTransaction hash production boundary" }
+    ]
+  },
+  "provider": {
+    "repository": "https://github.com/truthixify/ckb-viz",
+    "revision": "ccaf766df6e19d8da787d39aadda9aea084cd64a",
+    "licenseMetadataAtReview": null,
+    "licenseMetadataCheckedAt": "2026-11-17T21:30:00Z",
+    "publicOriginSource": "README.md",
+    "publicOrigin": "https://ckb-viz.truthixify.dev",
+    "sourceFiles": [
+      { "path": "src/app/url.ts", "sha256": "5a4730ad6e0d6144ae19cba7d218c0a9bf1842a17cab39fba3ad3cf4028ab444", "purpose": "actual deep-link builder and route parser" },
+      { "path": "src/domain/address.ts", "sha256": "b3c9d77dfcc664b49d918e80313c1948451af0d485f686aa782122cf176eed1e", "purpose": "runtime helper imported by the route parser" },
+      { "path": "src/domain/units.ts", "sha256": "7129412b6b653ca258293df5abf2fe1c1be8d3583237dd1063bbb2c98295953e", "purpose": "actual 32-byte CKB transaction hash validator" },
+      { "path": "src/domain/types.ts", "sha256": "896b6fde28fb88ccb4c390136b5ea25dc1658f0fbae217c4c82d05039c9bca8e", "purpose": "mainnet/testnet network union" },
+      { "path": "README.md", "sha256": "5b200e16dc089f0124beb450f08f7e9a135aa3b6bc3464dc309973f280949e3a", "purpose": "read-only visualizer feature and public origin claim" }
+    ]
+  },
+  "licenseAndReuseBoundary": "GitHub API metadata returned license=null for both repositories and no root LICENSE/COPYING file is present at the pinned commits. Do not copy, modify or redistribute upstream source. The fixed profile may fetch and execute only the reviewed route and constant modules transiently for a private isolated compatibility experiment; the generated bundle is destroyed and not committed.",
+  "networkBoundary": "No public RPC calls, signing, transaction rebuilding or broadcasting. The experiment validates local browser-route composition and parser behavior only.",
+  "runtime": {
+    "nodeImage": "node:24-alpine@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+    "esbuild": "0.28.2"
+  }
+}

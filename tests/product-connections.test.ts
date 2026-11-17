@@ -22,11 +22,15 @@ describe('capability-first product interface discovery', () => {
     expect(result.candidates).toHaveLength(1);
     expect(result.candidates[0]).toMatchObject({ kind: 'transaction-inspector-deep-link', evidenceLevel: 'source-observed hypothesis', consumer: { projectId: 'consumer', network: 'testnet' }, provider: { projectId: 'viewer', networks: ['mainnet', 'testnet'] } });
     expect(result.candidates[0]?.findings.find(x => x.dimension === 'chain compatibility')?.state).toBe('out-of-scope');
+    expect(result.roleAssessments).toHaveLength(2);
+    expect(result.roleAssessments.filter(x => x.consumerEligible || x.providerEligible)).toHaveLength(2);
   });
 
   it('does not match shared CKB or CCC dependencies without functional interface evidence', () => {
     const rows = [row('a', 'one/app', 'locked_dependency', '@ckb-ccc/core: 1.2.0'), row('b', 'two/app', 'locked_dependency', '@ckb-ccc/core: 1.2.0')];
-    expect(discoverTransactionInspectorConnections(rows).candidates).toEqual([]);
+    const result = discoverTransactionInspectorConnections(rows);
+    expect(result.candidates).toEqual([]);
+    expect(result.roleAssessments.every(x => !x.consumerEligible && !x.providerEligible)).toBe(true);
   });
 
   it('rejects unsupported networks and missing validation evidence', () => {

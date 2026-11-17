@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "tc01e-grid3-source-reference-v1",
+  "transactionHash": "0xc1fdf9c24c256df4cc391c02509a8448555b43506401610085231f6deca97211",
+  "source": {
+    "repository": "https://github.com/truthixify/grid3",
+    "revision": "abaaaf7b6812e0515e1191b949314fa295543979",
+    "path": "client/src/lib/constants.ts",
+    "startLine": 10,
+    "endLine": 16,
+    "claim": "The pinned source declares this value as SCRIPT_CELL_DEP.outPoint.txHash. This is a code claim, not an independently verified on-chain transaction."
+  }
+}

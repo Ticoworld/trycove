@@ -47,12 +47,16 @@ export function discoverTransactionInspectorConnections(observations: InterfaceO
   for (const row of trusted) groups.set(groupKey(row), [...(groups.get(groupKey(row)) ?? []), row]);
   const consumers: ProductConnection['consumer'][] = [];
   const providers: ProductConnection['provider'][] = [];
+  const roleAssessments: Array<{ projectId: string; repository: string; revision: string; consumerEligible: boolean; consumerNetworks: string[]; consumerMissing: string[]; providerEligible: boolean; providerNetworks: string[]; providerMissing: string[] }> = [];
   const rejected = { selfMatch: 0, missingConsumerEvidence: 0, missingProviderEvidence: 0, networkMismatch: 0, invalidEvidence: observations.length - trusted.length };
 
   for (const rows of groups.values()) {
     const link = rows.find(x => x.kind === 'transaction_explorer_link');
     const submissions = rows.filter(x => x.kind === 'broadcast' && /Calls sendTransaction\b/.test(x.fact));
     const networks = [...new Set(rows.flatMap(x => ['mainnet', 'testnet'].filter(n => isNetwork(x, n))))] as Array<'mainnet' | 'testnet'>;
+    const consumerMissing = [!link ? 'no source-observed CKB transaction explorer link' : null,
+      !submissions.length ? 'no source-observed transaction submission result' : null,
+      !networks.length ? 'no explicit mainnet/testnet configuration' : null].filter((x): x is string => x !== null);
     if (link && submissions.length && networks.length) {
       for (const network of networks) consumers.push({ projectId: rows[0]!.projectId, repository: rows[0]!.repository, revision: rows[0]!.revision, network, link, submissions });
     } else if (link || submissions.length) rejected.missingConsumerEvidence++;
@@ -61,9 +65,15 @@ export function discoverTransactionInspectorConnections(observations: InterfaceO
     const parser = rows.find(x => x.kind === 'transaction_deep_link_parser');
     const networkContract = rows.find(x => x.kind === 'network_contract');
     const supportedNetworks = networkContract ? (['mainnet', 'testnet'] as const).filter(n => new RegExp(`\\b${n}\\b`).test(networkContract.fact)) : [];
+    const providerMissing = [!builder ? 'no transaction deep-link builder' : null,
+      !parser ? 'no route parser that validates a CKB transaction hash' : null,
+      !networkContract || !supportedNetworks.length ? 'no explicit provider CKB network contract' : null].filter((x): x is string => x !== null);
     if (builder && parser && networkContract && supportedNetworks.length) providers.push({ projectId: rows[0]!.projectId, repository: rows[0]!.repository, revision: rows[0]!.revision,
       networks: [...supportedNetworks], builder, parser, networkContract });
     else if (builder || parser) rejected.missingProviderEvidence++;
+    roleAssessments.push({ projectId: rows[0]!.projectId, repository: rows[0]!.repository, revision: rows[0]!.revision,
+      consumerEligible: consumerMissing.length === 0, consumerNetworks: networks, consumerMissing,
+      providerEligible: providerMissing.length === 0, providerNetworks: [...supportedNetworks], providerMissing });
   }
 
   const candidates: ProductConnection[] = [];
@@ -89,5 +99,6 @@ export function discoverTransactionInspectorConnections(observations: InterfaceO
   candidates.sort((a, b) => a.id.localeCompare(b.id));
   if (!consumers.length) rejected.missingConsumerEvidence++;
   if (!providers.length) rejected.missingProviderEvidence++;
-  return { candidates, rejected, evidenceLinks: candidates.map(x => ({ id: x.id, consumer: sourceLink(x.consumer.link), providerBuilder: sourceLink(x.provider.builder), providerParser: sourceLink(x.provider.parser), network: sourceLink(x.provider.networkContract) })) };
+  return { candidates, rejected, roleAssessments: roleAssessments.sort((a, b) => a.projectId.localeCompare(b.projectId) || a.repository.localeCompare(b.repository)),
+    evidenceLinks: candidates.map(x => ({ id: x.id, consumer: sourceLink(x.consumer.link), providerBuilder: sourceLink(x.provider.builder), providerParser: sourceLink(x.provider.parser), network: sourceLink(x.provider.networkContract) })) };
 }

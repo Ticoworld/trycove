@@ -1,0 +1,320 @@
+{
+  "schemaVersion": "tc-01e-source-scan-v1",
+  "cohortPath": "evidence/tc-01e/product-source-cohort.json",
+  "cohortSha256": "0851d127fa5c5b9a2f718c2b556fea76162a3da2ff80e81770e0d479553a9365",
+  "scanner": "scripts/footprints.ts; bounded source clone and static analyzer; repository code is not executed",
+  "results": [
+    {
+      "repositoryPath": "truthixify/grid3",
+      "productIds": [
+        "grid3"
+      ],
+      "revision": "abaaaf7b6812e0515e1191b949314fa295543979",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "grid3",
+        "--repository-url",
+        "https://github.com/truthixify/grid3",
+        "--revision",
+        "abaaaf7b6812e0515e1191b949314fa295543979",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:12:13.190Z",
+      "finishedAt": "2026-11-17T21:12:18.716Z",
+      "exitCode": 0,
+      "stdout": "Analyzed grid3 repository abaaaf7b6812e0515e1191b949314fa295543979: 53 files, 610 observations, 5 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "dotbithq/did-contracts",
+      "productIds": [
+        "dotbit"
+      ],
+      "revision": "5186304bd7d1f5b8b8507b6d46a121883d31b050",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "dotbit",
+        "--repository-url",
+        "https://github.com/dotbithq/did-contracts",
+        "--revision",
+        "5186304bd7d1f5b8b8507b6d46a121883d31b050",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:12:18.717Z",
+      "finishedAt": "2026-11-17T21:12:28.597Z",
+      "exitCode": 0,
+      "stdout": "Analyzed dotbit primary 5186304bd7d1f5b8b8507b6d46a121883d31b050: 213 files, 17409 observations, 3 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "janx/ckbadger",
+      "productIds": [
+        "ckbadger"
+      ],
+      "revision": "f966534b1d3bd28f17b1a4f322a8ee2224d7ff58",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "ckbadger",
+        "--repository-url",
+        "https://github.com/janx/ckbadger",
+        "--revision",
+        "f966534b1d3bd28f17b1a4f322a8ee2224d7ff58",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:12:28.598Z",
+      "finishedAt": "2026-11-17T21:12:34.989Z",
+      "exitCode": 0,
+      "stdout": "Analyzed ckbadger primary f966534b1d3bd28f17b1a4f322a8ee2224d7ff58: 385 files, 51 observations, 3 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "chukwuma619/fiber-studio",
+      "productIds": [
+        "fiberstudio"
+      ],
+      "revision": "f61106f90c51af41e13c4568214d62254f8500ef",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "fiberstudio",
+        "--repository-url",
+        "https://github.com/chukwuma619/fiber-studio",
+        "--revision",
+        "f61106f90c51af41e13c4568214d62254f8500ef",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:12:34.990Z",
+      "finishedAt": "2026-11-17T21:12:42.123Z",
+      "exitCode": 0,
+      "stdout": "Analyzed fiberstudio primary f61106f90c51af41e13c4568214d62254f8500ef: 297 files, 4876 observations, 8 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "rgbplusplus/rgbpp-explorer",
+      "productIds": [
+        "rgbppexplorer"
+      ],
+      "revision": "4cdc97ef54b24628105a678b22730a962400cd45",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "rgbppexplorer",
+        "--repository-url",
+        "https://github.com/rgbplusplus/rgbpp-explorer",
+        "--revision",
+        "4cdc97ef54b24628105a678b22730a962400cd45",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:12:42.123Z",
+      "finishedAt": "2026-11-17T21:12:53.459Z",
+      "exitCode": 0,
+      "stdout": "Analyzed rgbppexplorer primary 4cdc97ef54b24628105a678b22730a962400cd45: 410 files, 3449 observations, 3 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "retricsu/ckb-on-ramp",
+      "productIds": [
+        "ckb-on-ramp"
+      ],
+      "revision": "491a3fbdc51e9ff202349885147dbbb7256dec3e",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "ckb-on-ramp",
+        "--repository-url",
+        "https://github.com/retricsu/ckb-on-ramp",
+        "--revision",
+        "491a3fbdc51e9ff202349885147dbbb7256dec3e",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:12:53.461Z",
+      "finishedAt": "2026-11-17T21:12:58.487Z",
+      "exitCode": 0,
+      "stdout": "Analyzed ckb-on-ramp primary 491a3fbdc51e9ff202349885147dbbb7256dec3e: 61 files, 1772 observations, 2 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "nervosnetwork/ckbguardian",
+      "productIds": [
+        "ckbguardian"
+      ],
+      "revision": "016442899a5e8d72ad9915d0982cceef05fcfbac",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "ckbguardian",
+        "--repository-url",
+        "https://github.com/nervosnetwork/ckbguardian",
+        "--revision",
+        "016442899a5e8d72ad9915d0982cceef05fcfbac",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:12:58.488Z",
+      "finishedAt": "2026-11-17T21:13:02.255Z",
+      "exitCode": 0,
+      "stdout": "Analyzed ckbguardian primary 016442899a5e8d72ad9915d0982cceef05fcfbac: 9 files, 7 observations, 1 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "code3ks/fibernuts",
+      "productIds": [
+        "fibernuts"
+      ],
+      "revision": "9d5a066973415a3cebbb833dea849640dc2ef9bd",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "fibernuts",
+        "--repository-url",
+        "https://github.com/code3ks/fibernuts",
+        "--revision",
+        "9d5a066973415a3cebbb833dea849640dc2ef9bd",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:13:02.256Z",
+      "finishedAt": "2026-11-17T21:13:08.014Z",
+      "exitCode": 0,
+      "stdout": "Analyzed fibernuts primary 9d5a066973415a3cebbb833dea849640dc2ef9bd: 92 files, 3362 observations, 8 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "sporeprotocol/spore-sdk",
+      "productIds": [
+        "spore"
+      ],
+      "revision": "5e5d886e49bfbd78253e9c14fd8baebccb488a81",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "spore",
+        "--repository-url",
+        "https://github.com/sporeprotocol/spore-sdk",
+        "--revision",
+        "5e5d886e49bfbd78253e9c14fd8baebccb488a81",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:13:08.015Z",
+      "finishedAt": "2026-11-17T21:13:13.635Z",
+      "exitCode": 0,
+      "stdout": "Analyzed spore primary 5e5d886e49bfbd78253e9c14fd8baebccb488a81: 152 files, 2281 observations, 1 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "onekeyhq/app-monorepo",
+      "productIds": [
+        "onekey"
+      ],
+      "revision": "42c606eb2565af5002a5a0b2e99c5298a5b5d5f4",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "onekey",
+        "--repository-url",
+        "https://github.com/onekeyhq/app-monorepo",
+        "--revision",
+        "42c606eb2565af5002a5a0b2e99c5298a5b5d5f4",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:13:13.636Z",
+      "finishedAt": "2026-11-17T21:14:33.179Z",
+      "exitCode": 0,
+      "stdout": "Analyzed onekey primary 42c606eb2565af5002a5a0b2e99c5298a5b5d5f4: 1500 files, 38050 observations, 68 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "janx/cknerv",
+      "productIds": [
+        "cknerv"
+      ],
+      "revision": "649fc51c77f6edb319058be80372b762207d6a8d",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "cknerv",
+        "--repository-url",
+        "https://github.com/janx/cknerv",
+        "--revision",
+        "649fc51c77f6edb319058be80372b762207d6a8d",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:14:33.180Z",
+      "finishedAt": "2026-11-17T21:14:53.270Z",
+      "exitCode": 0,
+      "stdout": "Analyzed cknerv primary 649fc51c77f6edb319058be80372b762207d6a8d: 447 files, 16429 observations, 14 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "truthixify/ckb-viz",
+      "productIds": [
+        "ckbviz"
+      ],
+      "revision": "ccaf766df6e19d8da787d39aadda9aea084cd64a",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "ckbviz",
+        "--repository-url",
+        "https://github.com/truthixify/ckb-viz",
+        "--revision",
+        "ccaf766df6e19d8da787d39aadda9aea084cd64a",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-17T21:14:53.270Z",
+      "finishedAt": "2026-11-17T21:14:59.792Z",
+      "exitCode": 0,
+      "stdout": "Analyzed ckbviz primary ccaf766df6e19d8da787d39aadda9aea084cd64a: 89 files, 1939 observations, 2 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    }
+  ]
+}

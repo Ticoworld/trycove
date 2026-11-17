@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "tc01e-upstream-interface-receipt-v1",
+  "id": "tc01e-grid3-ckb-viz-transaction-inspector-v1",
+  "receiptSha256": "c2899a71d82c95902a73e7b3319bb18c9f293e07713b9dc49516acc741885614",
+  "runId": "dd1a058c2c66f1a60460",
+  "opportunityId": "tc01e-b2032ed152e5f87e4691d7376a1b24c0",
+  "candidateId": "b2032ed152e5f87e4691d7376a1b24c0a2b0a2ebbcb77452679397476061f533",
+  "mode": "real-upstream-source-interface-isolated",
+  "executionResult": "passed",
+  "overallGateAssessment": "partial",
+  "evidenceLevel": 3,
+  "startedAt": "2026-11-17T21:41:20.826Z",
+  "finishedAt": "2026-11-17T21:41:24.196Z",
+  "source": {
+    "consumer": {
+      "repository": "https://github.com/truthixify/grid3",
+      "revision": "abaaaf7b6812e0515e1191b949314fa295543979",
+      "files": [
+        {
+          "path": "client/src/lib/constants.ts",
+          "sha256": "0e6b380bb27ac9b884675ab3e731b90923c2b613f9bc4ed1764b633bd5fc4f59",
+          "purpose": "testnet RPC, existing Pudge explorer origin and source-declared script CellDep hash"
+        },
+        {
+          "path": "client/src/providers/CKBProvider.tsx",
+          "sha256": "c09f9e6e4dd19544dbd53210cb879f5d7c182400322d423aa6a92f6503546172",
+          "purpose": "explicit nervos_testnet signer configuration"
+        },
+        {
+          "path": "client/src/app/game/[id]/page.tsx",
+          "sha256": "184d60a055135bc90fc2fa193cbeafc37f8c47bb4248ccdb97ebcd536e62c49a",
+          "purpose": "current transaction-hash links to the existing explorer"
+        },
+        {
+          "path": "client/src/hooks/useGameActions.ts",
+          "sha256": "28138d418a188647b3091f2c50b7a3937d7f90ce2b5175263f57a3411bc6cbe1",
+          "purpose": "signer.sendTransaction hash production boundary"
+        }
+      ]
+    },
+    "provider": {
+      "repository": "https://github.com/truthixify/ckb-viz",
+      "revision": "ccaf766df6e19d8da787d39aadda9aea084cd64a",
+      "files": [
+        {
+          "path": "src/app/url.ts",
+          "sha256": "5a4730ad6e0d6144ae19cba7d218c0a9bf1842a17cab39fba3ad3cf4028ab444",
+          "purpose": "actual deep-link builder and route parser"
+        },
+        {
+          "path": "src/domain/units.ts",
+          "sha256": "7129412b6b653ca258293df5abf2fe1c1be8d3583237dd1063bbb2c98295953e",
+          "purpose": "actual 32-byte CKB transaction hash validator"
+        },
+        {
+          "path": "src/domain/types.ts",
+          "sha256": "896b6fde28fb88ccb4c390136b5ea25dc1658f0fbae217c4c82d05039c9bca8e",
+          "purpose": "mainnet/testnet network union"
+        },
+        {
+          "path": "README.md",
+          "sha256": "5b200e16dc089f0124beb450f08f7e9a135aa3b6bc3464dc309973f280949e3a",
+          "purpose": "read-only visualizer feature and public origin claim"
+        }
+      ]
+    },
+    "sourceRootsChecked": true
+  },
+  "adapter": {
+    "path": "experiments/tc01e/transaction-inspector/adapter.ts",
+    "sha256": "25287553b980aa476b04ef7d6d14976af6a92f7fc288eb2ecf5149ef5c6dccf9",
+    "candidateSpecificCodeInMatcher": false
+  },
+  "fixture": {
+    "path": "fixtures/tc01e/grid3-contract-dependency.json",
+    "sha256": "b4575e10c28a822f1ca094307643955efccb4f5975abd7ffe84776a9f608b68a",
+    "value": "0xc1fdf9c24c256df4cc391c02509a8448555b43506401610085231f6deca97211",
+    "provenance": "Value is declared by pinned Grid3 source as a script CellDep transaction hash. It is not claimed as a transaction broadcast by Grid3 or independently checked on chain."
+  },
+  "runtime": {
+    "image": "node:24-alpine@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+    "node": "v24.22.1",
+    "esbuild": "0.28.2",
+    "docker": "Docker version 29.9.2, build a82e528",
+    "network": "none",
+    "timeoutMs": 20000,
+    "memoryMiB": 128,
+    "cpus": 1,
+    "pids": 32,
+    "containerUser": "65534:65534"
+  },
+  "command": [
+    "pnpm",
+    "tc01e:run:transaction-inspector",
+    "--",
+    "--source-root",
+    "<pinned-source-parent>",
+    "then fixed Docker invocation with /input/run.cjs"
+  ],
+  "isolation": [
+    "Reviewed source acquisition and hash validation happened outside the execution container.",
+    "No package installation or external dependencies were required.",
+    "Only the generated route-check bundle was mounted read-only.",
+    "Container had no network, credentials, signer keys or home directory.",
+    "Read-only root filesystem, no capabilities, non-root UID 1000, no-new-privileges, process/memory/CPU/time/output limits.",
+    "Generated bundle and transient staging directory were deleted after recording output hashes."
+  ],
+  "cases": [
+    {
+      "description": "positive: Grid3 source constants provide the existing explorer origin and a pinned CKB CellDep transaction-hash fixture; Trycove adapter calls the actual CKB Viz URL builder; actual CKB Viz parser returns the same hash and testnet network",
+      "result": "passed",
+      "output": {
+        "legacyConsumerHref": "https://pudge.explorer.nervos.org/transaction/0xc1fdf9c24c256df4cc391c02509a8448555b43506401610085231f6deca97211",
+        "adapterHref": "https://ckb-viz.truthixify.dev/tx/0xc1fdf9c24c256df4cc391c02509a8448555b43506401610085231f6deca97211?network=testnet",
+        "parsedHash": "0xc1fdf9c24c256df4cc391c02509a8448555b43506401610085231f6deca97211",
+        "network": "testnet"
+      }
+    },
+    {
+      "description": "negative: malformed hash rejected by the adapter",
+      "result": "passed"
+    },
+    {
+      "description": "negative: unsupported devnet rejected by the adapter",
+      "result": "passed"
+    },
+    {
+      "description": "negative: route that changes the validated hash or network rejected by the adapter",
+      "result": "passed"
+    },
+    {
+      "description": "negative: actual CKB Viz parser ignores a malformed transaction route",
+      "result": "passed"
+    }
+  ],
+  "stdout": {
+    "passed": true,
+    "candidateId": "b2032ed152e5f87e4691d7376a1b24c0a2b0a2ebbcb77452679397476061f533",
+    "legacyConsumerHref": "https://pudge.explorer.nervos.org/transaction/0xc1fdf9c24c256df4cc391c02509a8448555b43506401610085231f6deca97211",
+    "href": "https://ckb-viz.truthixify.dev/tx/0xc1fdf9c24c256df4cc391c02509a8448555b43506401610085231f6deca97211?network=testnet",
+    "hash": "0xc1fdf9c24c256df4cc391c02509a8448555b43506401610085231f6deca97211",
+    "network": "testnet",
+    "parsedHash": "0xc1fdf9c24c256df4cc391c02509a8448555b43506401610085231f6deca97211",
+    "invalidParsedHash": null,
+    "errors": []
+  },
+  "stdoutSha256": "ee7c6a0449b99264cf6f7baaaaae285e87dfa8f1caeebd2306ee6b6b273c5658",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "exitCode": 0,
+  "signal": null,
+  "timedOut": false,
+  "truncated": false,
+  "bundleSha256": "93c8a1aa273c37169ee6e50bc9a1dee1a4d8f47a8514e24fe6eae8872955d5b7",
+  "license": {
+    "githubMetadata": {
+      "consumer": null,
+      "provider": null
+    },
+    "rootLicenseFilesFound": false,
+    "restriction": "No license grant was identified at the inspected revisions. Source code was not committed; the combined bundle existed only in transient private staging for this bounded execution and was destroyed."
+  },
+  "limitations": [
+    "The only runtime consumer module exercised is Grid3 constants.ts; the actual React signer hook and game page were inspected but not executed.",
+    "The fixture hash is a Grid3 source-declared CellDep transaction hash, not a Grid3 transaction produced by sendTransaction and not an independently verified on-chain transaction.",
+    "This run proves only read-only URL adapter and CKB Viz parser behavior, not provider deployment availability, RPC success, cell-flow correctness, transaction acceptance, chain compatibility, user value, adoption or maintainer approval.",
+    "Unlicensed upstream repositories were used only for this transient private compatibility test; no source bundle was retained or redistributed."
+  ],
+  "reproduction": [
+    "Acquire the exact repositories and checkout the recorded full commit SHAs.",
+    "Verify all source file SHA-256 values in the profile.",
+    "Run pnpm install --frozen-lockfile.",
+    "Run pnpm tc01e:run:transaction-inspector -- --source-root <pinned-source-parent>."
+  ]
+}

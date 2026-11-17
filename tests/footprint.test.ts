@@ -14,6 +14,10 @@ describe('versioned technical footprint',()=>{
   {path:'src/network.ts',content:`export type Network = 'mainnet' | 'testnet'`},
   {path:'src/url.ts',content:`export function link(network: Network, hash: string | null) { const query = \`${'?network='}${'${network}'}\`; if (!hash) return \`/${'${query}'}\`; return \`/tx/${'${hash}'}${'${query}'}\` }\nexport function parse(url: URL) { const network = url.searchParams.get('network') === 'testnet' ? 'testnet' : 'mainnet'; const match = url.pathname.match(/^\\/tx\\/(0x[0-9a-fA-F]{64})$/); return match && isValidTxHash(match[1]) ? network : null }`},
  ]});expect(r.observations.map(x=>x.kind)).toEqual(expect.arrayContaining(['transaction_explorer_link','declared_network','network_contract','transaction_deep_link','transaction_deep_link_parser']));expect(r.observations.find(x=>x.kind==='transaction_explorer_link')?.fact).toContain('pudge.explorer.nervos.org');expect(r.observations.find(x=>x.kind==='transaction_deep_link')?.fact).toContain('network query');expect(r.observations.every(x=>x.verification==='source_observed')).toBe(true)});
+ it('resolves an exported explorer origin through a bounded project-local import set',()=>{const r=analyzeFootprint({...base,files:[
+  {path:'src/constants.ts',content:`export const EXPLORER_URL = 'https://pudge.explorer.nervos.org'`},
+  {path:'src/page.tsx',content:`import { EXPLORER_URL } from '@/constants'; export function page(txHash: string) { return <a href={\`${'${EXPLORER_URL}'}/transaction/${'${txHash}'}\`} /> }`},
+ ]});expect(r.observations.find(x=>x.kind==='transaction_explorer_link')?.fact).toContain('pudge.explorer.nervos.org')});
  it('rejects generic website URLs and unvalidated transaction-like routes as CKB interfaces',()=>{const r=analyzeFootprint({...base,files:[
   {path:'src/app.tsx',content:`const SITE = 'https://example.org'; export function view(hash: string) { return <a href={\`${'${SITE}'}/transaction/${'${hash}'}\`}>View</a> }`},
   {path:'src/url.ts',content:`export function link(slug: string) { return \`/tx/${'${slug}'}\` }`},

@@ -22,9 +22,10 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
   db.select().from(technicalFootprints).where(eq(technicalFootprints.projectId,id)).orderBy(desc(technicalFootprints.analyzedAt)).limit(5),
  ]);
  const opportunityIds=ops.map(x=>x.id);const footprintIds=footprints.map(x=>x.id);
- const [allProjects,observations,trials,trialEvents]=await Promise.all([
+ const [allProjects,observations,interfaceObservations,trials,trialEvents]=await Promise.all([
   db.select({id:projects.id,name:projects.name}).from(projects),
   footprintIds.length?db.select().from(footprintObservations).where(inArray(footprintObservations.footprintId,footprintIds)).orderBy(desc(footprintObservations.startLine)).limit(80):Promise.resolve([]),
+  footprints[0]?db.select().from(footprintObservations).where(and(eq(footprintObservations.footprintId,footprints[0].id),inArray(footprintObservations.kind,['transaction_explorer_link','transaction_deep_link','transaction_deep_link_parser','network_contract','declared_network','broadcast']))).orderBy(desc(footprintObservations.startLine)).limit(300):Promise.resolve([]),
   opportunityIds.length?db.select().from(trialEvidenceRecords).where(inArray(trialEvidenceRecords.opportunityId,opportunityIds)).orderBy(desc(trialEvidenceRecords.createdAt)):Promise.resolve([]),
   opportunityIds.length?db.select().from(trialRuns).where(inArray(trialRuns.opportunityId,opportunityIds)).orderBy(desc(trialRuns.observedAt)):Promise.resolve([]),
  ]);
@@ -44,7 +45,8 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
  const sourceClaim=(url:string)=>safeHttpUrl(url);
  const primaryWebsite=safeHttpUrl(project.website)??safeHttpUrl(directory?.url);
  const githubClaim=directory?.github&&/^[\w.-]+\/[\w.-]+$/.test(directory.github)?`https://github.com/${directory.github}`:null;
- const codeObservations=observations.filter(o=>['function','interface_declaration','api_route','call_signature','locked_dependency','dependency','declared_network','client_network'].includes(o.kind));
+ const interfacePriority=(kind:string)=>kind==='transaction_explorer_link'||kind==='transaction_deep_link'||kind==='transaction_deep_link_parser'?0:kind==='network_contract'?1:kind==='broadcast'?2:kind==='declared_network'?3:4;
+ const codeObservations=[...new Map([...interfaceObservations,...observations].filter(o=>['function','interface_declaration','api_route','call_signature','locked_dependency','dependency','declared_network','client_network','transaction_explorer_link','transaction_deep_link','transaction_deep_link_parser','network_contract','broadcast'].includes(o.kind)).map(item=>[item.id,item])).values()].sort((a,b)=>interfacePriority(a.kind)-interfacePriority(b.kind)||a.path.localeCompare(b.path)||a.startLine-b.startLine);
  return <>
   <section className="hero"><Link className="eyebrow" href="/projects">← Product Hub</Link><h1>{project.name}</h1><p>{project.description||localized(directory?.tagline)||'No product description is available from the imported sources.'}</p><div className="bar">{primaryWebsite&&<a className="button" href={primaryWebsite} rel="noreferrer">Visit source-listed website ↗</a>}{githubClaim&&<a className="button secondary" href={githubClaim} rel="noreferrer">CKBdapps repository claim ↗</a>}</div></section>
   <section className="section"><div className="eyebrow">Product Passport</div><h2>Purpose and public entry points</h2>

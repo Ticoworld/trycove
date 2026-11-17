@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "tc01e-product-journey-http-smoke-v1",
+  "checkedAt": "2026-11-17T22:02:44.871Z",
+  "baseOrigin": "http://127.0.0.1:3000",
+  "discoveryPath": "evidence/tc-01e/discovery/source-discovery-2026-11-17T21-44-13-815Z.json",
+  "candidateId": "b2032ed152e5f87e4691d7376a1b24c0a2b0a2ebbcb77452679397476061f533",
+  "consumerId": "grid3",
+  "providerId": "ckbviz",
+  "opportunityId": "tc01e-b2032ed152e5f87e4691d7376a1b24c0",
+  "receiptPath": "evidence/tc-01e/execution/tc01e-grid3-ckb-viz-transaction-inspector-2026-11-17t21-55-42-207z.json",
+  "receiptId": "tc01e-grid3-ckb-viz-transaction-inspector-2026-11-17t21-55-42-207z",
+  "results": [
+    {
+      "url": "http://127.0.0.1:3000/projects",
+      "status": 200,
+      "responseBytes": 207622,
+      "responseSha256": "cdc82b2a7cc98ad1c0830290152c725b593154a0ef83a471495ec348d33f951c",
+      "requiredContent": [
+        "Grid3",
+        "ckb-viz"
+      ],
+      "missing": []
+    },
+    {
+      "url": "http://127.0.0.1:3000/projects/grid3",
+      "status": 200,
+      "responseBytes": 75033,
+      "responseSha256": "74490f3216f01eef2b6cc9d4e60b1b5a1cce7d3dfb92f29b51f8770047633669",
+      "requiredContent": [
+        "Product Passport",
+        "Known and proposed relationships",
+        "transaction_explorer_link",
+        "tc01e-b2032ed152e5f87e4691d7376a1b24c0"
+      ],
+      "missing": []
+    },
+    {
+      "url": "http://127.0.0.1:3000/projects/ckbviz",
+      "status": 200,
+      "responseBytes": 54828,
+      "responseSha256": "5036340d0fdbd0777f428d6e86f473dddb6aaee0c2d27161354a12fc917a0f2b",
+      "requiredContent": [
+        "Product Passport",
+        "Grid3",
+        "transaction_deep_link",
+        "transaction_deep_link_parser"
+      ],
+      "missing": []
+    },
+    {
+      "url": "http://127.0.0.1:3000/opportunities/tc01e-b2032ed152e5f87e4691d7376a1b24c0",
+      "status": 200,
+      "responseBytes": 51226,
+      "responseSha256": "bb254935596e90cc56f01958a5c7fee845363d943d84dd2460f9f58561dccaa3",
+      "requiredContent": [
+        "Functional boundary",
+        "Adapter contract",
+        "Compatibility findings",
+        "Execution receipts",
+        "bounded_source_search"
+      ],
+      "missing": []
+    },
+    {
+      "url": "http://127.0.0.1:3000/trials/tc01e-grid3-ckb-viz-transaction-inspector-2026-11-17t21-55-42-207z",
+      "status": 200,
+      "responseBytes": 31938,
+      "responseSha256": "4826fe8c782dced6941c2fd1fec00a597b4bb6f4272550c95b1fb881038cce64",
+      "requiredContent": [
+        "real-upstream-source-interface-isolated",
+        "read-only URL builder/parser boundary",
+        "legacyConsumerHref",
+        "inspect adapter source",
+        "limitations"
+      ],
+      "missing": []
+    }
+  ],
+  "result": "passed"
+}

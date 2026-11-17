@@ -11,6 +11,7 @@ import {LifecycleVerification} from '../../components/lifecycle-verification';
 import {addFollowUp} from './actions';
 
 export const dynamic='force-dynamic';
+type ConnectionDetails={boundary?:string;adapter?:string;findings?:Array<{dimension:string;state:string;explanation:string}>;providerRevision?:string;consumerRevision?:string};
 
 function safeExternalUrl(raw:string){
  try{const url=new URL(raw);return url.protocol==='https:'&&!url.username&&!url.password?url.href:null}catch{return null}
@@ -49,6 +50,8 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
  const workspaceCandidateId=priorWorkReport?(id===priorWorkReport.workspaces.originalSupplyGapOpportunityId?priorWorkReport.workspaces.originalSupplyGapCandidateId:id===priorWorkReport.workspaces.contactCandidateOpportunityId?priorWorkReport.workspaces.contactCandidateId:null):null;
  const workspaceCandidate=workspaceCandidateId?priorWorkReport?.candidates.find(candidate=>candidate.candidateId===workspaceCandidateId)??null:null;
  const assessment=assessments[0];
+ let connectionDetails:ConnectionDetails|null=null;
+ try{const parsed=JSON.parse(opportunity.requirements) as unknown;if(parsed&&typeof parsed==='object'&&!Array.isArray(parsed)){const value=parsed as Record<string,unknown>;if(typeof value.boundary==='string'&&typeof value.adapter==='string')connectionDetails={boundary:value.boundary,adapter:value.adapter,providerRevision:typeof value.providerRevision==='string'?value.providerRevision:undefined,consumerRevision:typeof value.consumerRevision==='string'?value.consumerRevision:undefined,findings:Array.isArray(value.findings)?value.findings.filter((item):item is {dimension:string;state:string;explanation:string}=>Boolean(item)&&typeof item==='object'&&typeof (item as Record<string,unknown>).dimension==='string'&&typeof (item as Record<string,unknown>).state==='string'&&typeof (item as Record<string,unknown>).explanation==='string'):undefined}}}catch{/* Preserve the original text when this is not structured connection data. */}
  const [usedConsumer,usedProvider]=assessment&&opportunity.projectB?await Promise.all([
   db.select().from(technicalFootprints).where(and(eq(technicalFootprints.id,assessment.consumerFootprintId),eq(technicalFootprints.projectId,opportunity.projectA))).limit(1),
   db.select().from(technicalFootprints).where(and(eq(technicalFootprints.id,assessment.providerFootprintId),eq(technicalFootprints.projectId,opportunity.projectB))).limit(1),
@@ -67,7 +70,15 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
    <div className="prose">
     <div className="eyebrow">Opportunity workspace / 机会工作区</div>
     <h2>Why these projects?</h2><p>{opportunity.reasoning}</p>
-    <h2>{provider?'Compatibility & unknowns':'Search decision and unknowns'}</h2><p>{opportunity.requirements}</p>
+    <h2>{provider?'Compatibility & unknowns':'Search decision and unknowns'}</h2>
+    {connectionDetails?.boundary&&connectionDetails?.adapter?<article className="card">
+     <span className="tag">Source-derived connection hypothesis · not a compatibility claim</span>
+     <h3>Functional boundary</h3><p>{connectionDetails.boundary}</p>
+     <h3>Adapter contract</h3><p>{connectionDetails.adapter}</p>
+     {(connectionDetails.consumerRevision||connectionDetails.providerRevision)&&<p>Consumer revision {connectionDetails.consumerRevision??'unknown'} · provider revision {connectionDetails.providerRevision??'unknown'}.</p>}
+     {connectionDetails.findings&&<><h3>Compatibility findings</h3>{connectionDetails.findings.map((finding,index)=><article key={`${finding.dimension}-${index}`}><span className="tag">{finding.dimension} · {finding.state==='source-compatible'?'static source-interface match':finding.state}</span><p>{finding.explanation}</p></article>)}</>}
+     <p className="muted">Later bounded prior-art checks and execution receipts appear in the evidence and follow-up sections below. Unknown source or deployment data remains unresolved.</p>
+    </article>:<p>{opportunity.requirements}</p>}
     {linkedNeeds.length>0&&<><h2>Atomic builder need</h2>{linkedNeeds.map(item=><article className="card" key={item.id}><span className="tag">{item.category.replaceAll('-',' ')} · {item.stance.replaceAll('-',' ')} · automated interpretation</span><blockquote><p>{item.excerpt}</p></blockquote><p>Source revision {item.revision} · character offsets {item.startOffset}–{item.endOffset} · lineage {item.lineageKey.slice(-12)}</p><p>Parent source claim: {item.sourceClaim}</p><p>{item.verification}</p></article>)}</>}
     {savedQualification.length>0&&<section className="section" aria-labelledby="qualification-review">
      {qualificationReport?<>
@@ -170,7 +181,7 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
    <aside className="stack">
     <div className="card"><span className="tag">Source evidence / 证据</span>{sourceEvidence.map(item=>{const href=safeExternalUrl(item.sourceUrl);return <div key={item.id}><p>{item.claim}</p>{href&&<a className="source" href={href} target="_blank" rel="noreferrer">Inspect source ↗</a>}<p>{item.verification} · {item.observedAt.toISOString().slice(0,10)}</p></div>})}</div>
     <div className="card"><span className="tag">Project technical footprints</span><p>Latest stored source scans for these projects; observations may not be specific to this opportunity.</p>{consumerFootprints[0]&&<FootprintLink footprint={consumerFootprints[0]} projectName={consumer?.name}/>} {providerFootprints[0]&&<FootprintLink footprint={providerFootprints[0]} projectName={provider?.name}/>} {!consumerFootprints.length&&!providerFootprints.length&&<p>No technical footprints have been recorded for these projects.</p>}</div>
-    <div className="card"><span className="tag">Important distinction</span><p>{provider?'Offline script execution and synthetic fixtures do not prove fresh chain acceptance, a live deployment, maintainer approval or adoption.':'No suitable provider was supported by the source evidence searched; this is an explicit no-match decision, not proof that no provider exists.'}</p><Link className="source" href={`/projects/${opportunity.projectA}`}>{consumer?.name} profile →</Link>{opportunity.projectB&&<><br/><Link className="source" href={`/projects/${opportunity.projectB}`}>{provider?.name} profile →</Link></>}</div>
+    <div className="card"><span className="tag">Evidence scope</span><p>{provider?'The stored hypothesis is source-derived. Any attached trial is limited to the exact behavior described in its receipt; a passed route check does not prove live chain acceptance, deployment availability, maintainer approval or adoption.':'No suitable provider was supported by the source evidence searched; this is an explicit no-match decision, not proof that no provider exists.'}</p><Link className="source" href={`/projects/${opportunity.projectA}`}>{consumer?.name} profile →</Link>{opportunity.projectB&&<><br/><Link className="source" href={`/projects/${opportunity.projectB}`}>{provider?.name} profile →</Link></>}</div>
    </aside>
   </div>
  </>;

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-17T17:46:07Z",
+  "method": "Authenticated, read-only GitHub REST GET of the complete first page for the single repository directly named by the CKBuilder thread; per_page=100 exceeds the five returned PRs, so the bounded listing is complete at that time.",
+  "repository": {
+    "sourceUrl": "https://github.com/LusoCryptoLabs/cells-contracts",
+    "canonicalUrl": "https://github.com/LusoCryptoLabs/cells-contracts",
+    "repositoryId": 1383571986
+  },
+  "queryUrl": "https://api.github.com/repos/LusoCryptoLabs/cells-contracts/pulls?state=all&per_page=100",
+  "responsePath": "evidence/tc-01d-r1/cells-contracts-pulls-response-20261117.json",
+  "responseSha256": "5bb1a360011ff84b47f186672ce5b590d7603799c9f4c91c094338c0d7c1ebda",
+  "returnedCount": 5,
+  "pullRequests": [
+    {"number":5,"title":"fix(contracts): count only plain cells as payments","state":"closed","mergedAt":"2026-11-06T21:07:01Z","headSha":"44283edcad16f42dce7d7baae1cdd0e4959410bc","updatedAt":"2026-11-06T21:07:04Z"},
+    {"number":4,"title":"ci: bump actions/checkout from 4 to 7","state":"closed","mergedAt":"2026-11-02T18:27:47Z","headSha":"ba3ee3703e58d759cf067600fe10e02097d4d1e8","updatedAt":"2026-11-02T18:27:50Z"},
+    {"number":3,"title":"ci: bump actions/cache from 4 to 6","state":"closed","mergedAt":"2026-11-02T18:27:00Z","headSha":"7e99031a9d4cd8bdf22f86130c3bbc1e63716888","updatedAt":"2026-11-02T18:27:02Z"},
+    {"number":2,"title":"build(deps): bump xxhash-rust from 0.8.15 to 0.8.19 in /tests","state":"closed","mergedAt":"2026-11-02T18:26:12Z","headSha":"28a376072393279449e0ab57145ba80ccb4f19f7","updatedAt":"2026-11-02T18:26:15Z"},
+    {"number":1,"title":"ci: check pull requests and keep actions updated","state":"closed","mergedAt":"2026-11-02T16:16:57Z","headSha":"f65c9b5bd63368e04ef1559546fafaddbdad3ce7","updatedAt":"2026-11-02T16:17:00Z"}
+  ],
+  "conclusion": "No cycle-report workflow PR appears in this complete bounded list as of the check time. This is not a claim about private branches, drafts not returned by the endpoint, or other repositories."
+}

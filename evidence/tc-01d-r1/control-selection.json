@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "selectionMethod": "Before retrieving any control thread, rank distinct imported issue URLs not present in the fixed ten-candidate pool by SHA-256(seed + NUL + lowercase URL); select the first. This is a sampling rule, not a relevance or outcome filter.",
+  "seed": "tc-01d-r1-independent-control-v1",
+  "inputSnapshotSha256": "257ae9da5f65b7bd309b0f6b009eece769da5d8937e525bd8f022dd28624009e",
+  "candidatePoolSha256": "aa09ddd08229362745d11e867ef4bc09151451101edff3a1ce7157fb2fe8b7ea",
+  "excludedCandidateIssueCount": 10,
+  "eligibleDistinctIssueCount": 39,
+  "selected": {
+    "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/35",
+    "rankSha256": "0e07b1354f9f67c3679bf3132b9d3d4003167142de0f10b6a1a36853d5c20422"
+  },
+  "rankedIssueUrls": [
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/35",
+      "rankSha256": "0e07b1354f9f67c3679bf3132b9d3d4003167142de0f10b6a1a36853d5c20422"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/5",
+      "rankSha256": "16b437e65de5b9a060bd49f1f5ba4c0fb20cc3f00c03eb583b0be37149d167cf"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/37",
+      "rankSha256": "1e49df17cd7a9bde6034fc5c711f98bccfcee622e56c69a406cf5121c664ea59"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/24",
+      "rankSha256": "1e767dd6512547f65558a6e2d268ae94eae9bf8e176592fee7ad5c236798eb4e"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/10",
+      "rankSha256": "1ef72933572460a0279ab33299219a3678c5bda6f212cbb3cee14f93ac90e151"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/21",
+      "rankSha256": "25294777384beca8eee10cfac6a2d4f3506f9318c0af63c3e66cafa56d2f382e"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/2",
+      "rankSha256": "2bc5e677724697f46aa81390527ce19754177485f8a46d5a83088b358c2df208"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/27",
+      "rankSha256": "315fde8f40d838ea9456f3e247ba584c76b45675d5fe05345d83279995144f10"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/19",
+      "rankSha256": "371efe972ded4d6a5ef3feeb67aa3c1894abab72cad4892c822cc4339ea6aa9b"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/7",
+      "rankSha256": "3b6c4940808021cc60cae538fbb900ca5a98cc42a1cf6a28207a985603753a09"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/50",
+      "rankSha256": "42561f556b2f6237e7423d6aa2f35d1ed77a3b4354e082ca11e9bbb759c24144"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/17",
+      "rankSha256": "489fb4d4d2bea468469523d26654fffce53176f8e9d92284423255b696fef7af"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/52",
+      "rankSha256": "5c53cc664c6cae754a3907bcd311cc1d472d46683b674b2ce50a0e126ae9abe0"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/32",
+      "rankSha256": "6123af18f2f9e51697e9c58eddb97a9dc07df9151a3d3d4e6989717b64068f35"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/38",
+      "rankSha256": "671ba3081df0e02c9f2138a0647590f2d82c1869b230fb1bd511b7c72e219e1f"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/13",
+      "rankSha256": "6796c28df175a5b6764d597e294a8e0082fe276f344e95373124d80aba20f80c"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/14",
+      "rankSha256": "74e7a4241421d261921d238d794e36efbdf8e2798bc73db85e3c6fbad3c8f63f"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/30",
+      "rankSha256": "78c988d4be6a313e06b43456344e9552873f8407a2548b364d63ef82d7dd550f"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/25",
+      "rankSha256": "7a478bcc37d9ead8ea3a667cfb57396a7ea3e04bd97529171d66571c2d53c2cf"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/34",
+      "rankSha256": "83f135c5ccc15d55cadee67d621cdf19d508d63f17c88f5b1ab31d023235692b"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/16",
+      "rankSha256": "862023950e810063d1a0b2c9742918f4674f050e4e40ed621ac2ded02fbecbfc"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+      "rankSha256": "8dfdfce0a4e0784e3a2d2c082e9b42b4b8341029cedd52bafbf52e2a912986d3"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/18",
+      "rankSha256": "8e61400ee43be2029032b98a9607950e0d8caec6b346077930ce5a72b716b963"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/53",
+      "rankSha256": "8fd6cffec5f2f8b7e601f2f2abb0f7fa779cbcbc892ba982f0316cb9430db463"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/11",
+      "rankSha256": "91f659ea7ef5f85492ad3cb763d8a20b6efbcf20d6304e1b87dcfe926ab4dafd"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/49",
+      "rankSha256": "92d6b5f5fffbaea9d63f9e60ab4a575e413eebee073a248d72b9cbe964f0aeba"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/1",
+      "rankSha256": "940563f336dd6ea770a3796b206776e8ca7fab82fe0bbfa296ae01cccb792922"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/48",
+      "rankSha256": "96c02f39c9a467746253ab957df94b79df663089f1ef583c94db3052d60eef3a"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/47",
+      "rankSha256": "b33780dcfbc54d40a7656f0a8e7c2ea4aff67060a2a074c6124b1092b81bbd0d"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+      "rankSha256": "b5af5c117b5bf4613438d4228ef4d0042a25a9205664ac1f57199f452990f278"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/23",
+      "rankSha256": "b950074dc6fe373202f0e537a64e8749a44c1559ce93e6b41765dedf61f3eeca"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/44",
+      "rankSha256": "d4d461a105508bef71627043cdaa26e26db84f736d4edf2252c2f552a35b6731"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+      "rankSha256": "d53e3a6537ff449b82f61878e4dec34ce4cb05192d5b50e9f61e6e7fed74548f"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/20",
+      "rankSha256": "d8cc526fc5c73ae5fbea78f1158111f9fffb0d434fabf516f042f69c289c4eb4"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/9",
+      "rankSha256": "e18dbee833e238db67dbb2276c6c69ca9d6eff110cb862ca49eae8a707441303"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/36",
+      "rankSha256": "e3a9fe7ee7ba71ed36b795d7c9eeac2e629cf6913cc4bf4e79772aceb766cb92"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/29",
+      "rankSha256": "eaf21e1ddbc4e33f9e2707923d2f47bdf21853c381b61d7a0af056051ae8ca44"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/31",
+      "rankSha256": "f0c73cb9ee4d06579539a202027714d115919275bfcadcd0ebc0808cddffb17f"
+    },
+    {
+      "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/45",
+      "rankSha256": "fd05588367e8de83b9798606d4f8462b1e4e3225f2eeb724a72432908a6289fb"
+    }
+  ]
+}

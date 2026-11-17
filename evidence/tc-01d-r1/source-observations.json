@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-17T17:21:00Z",
+  "observations": [
+    {
+      "repositoryRequestedUrl": "https://github.com/alesfer001/decentralized-kickstarter",
+      "repositoryCanonicalUrl": "https://github.com/alesfer001/CrowdCell",
+      "repositoryId": 1179274652,
+      "repositoryNodeId": "R_kgDORkpNnA",
+      "defaultBranch": "main",
+      "revision": "78f8ec6babae7d5d344d90dda1afb12cc4429fd1",
+      "revisionCommittedAt": "2026-11-16T17:11:49Z",
+      "sourceUrl": "https://github.com/alesfer001/CrowdCell/blob/78f8ec6babae7d5d344d90dda1afb12cc4429fd1/off-chain/indexer/src/indexer.ts",
+      "path": "off-chain/indexer/src/indexer.ts",
+      "sha256": "f9b2673eb8ddfd4a9d51cca3ecc6bbe3018e1ea961257b4588157547c43e4898",
+      "retrieval": "Authenticated GitHub REST contents endpoint at the pinned full commit SHA; source decoded and hashed locally.",
+      "interpretation": "Code-observed network-aware client selection. This only verifies the client-construction branches; it does not verify a production hosting topology, service availability, mainnet operation, or production readiness.",
+      "excerpts": [
+        {
+          "lineStart": 10,
+          "lineEnd": 18,
+          "text": "Create a network-aware CKB client\nfunction createCkbClient(rpcUrl: string): ccc.Client {\n  const network = (process.env.CKB_NETWORK || \"devnet\").toLowerCase();\n\n  // For devnet, use ClientPublicTestnet with OffCKB script overrides\n  if (network === \"devnet\") {"
+        },
+        {
+          "lineStart": 113,
+          "lineEnd": 125,
+          "text": "return new ccc.ClientPublicTestnet({\n      url: rpcUrl,\n      scripts: OFFCKB_DEVNET_SCRIPTS,\n      fallbacks: [],\n    });\n  } else if (network === \"testnet\") {\n    return new ccc.ClientPublicTestnet({ url: rpcUrl });\n  } else if (network === \"mainnet\") {\n    return new ccc.ClientPublicMainnet({ url: rpcUrl });\n  } else {\n    // Default to testnet for unknown networks\n    return new ccc.ClientPublicTestnet({ url: rpcUrl });"
+        }
+      ]
+    }
+  ]
+}

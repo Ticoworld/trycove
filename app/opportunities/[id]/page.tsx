@@ -2,8 +2,9 @@ import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {and,desc,eq,inArray} from 'drizzle-orm';
 import {db} from '../../../lib/db';
-import {candidateCapabilities,evidence,followUps,intelligenceAssessments,lifecycleEvidence,lifecycleVerificationRuns,needItems,opportunities,opportunityQualificationReviews,projects,technicalFootprints,trialEvidenceRecords,trialRuns} from '../../../lib/schema';
+import {candidateCapabilities,evidence,followUps,intelligenceAssessments,lifecycleEvidence,lifecycleVerificationRuns,needItems,opportunities,opportunityPriorWorkReconciliations,opportunityQualificationReviews,projects,technicalFootprints,trialEvidenceRecords,trialRuns} from '../../../lib/schema';
 import {QualificationReviewReportSchema} from '../../../lib/intelligence/qualification';
+import {PriorWorkR1ReportSchema} from '../../../lib/intelligence/prior-work-reconciliation';
 import {FootprintLink} from '../../components/footprint';
 import {IntelligenceAssessment} from '../../components/assessment';
 import {LifecycleVerification} from '../../components/lifecycle-verification';
@@ -37,9 +38,16 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
   db.select().from(intelligenceAssessments).where(eq(intelligenceAssessments.opportunityId,id)).orderBy(desc(intelligenceAssessments.createdAt)).limit(1),
   db.select({id:trialEvidenceRecords.id,mode:trialEvidenceRecords.mode,result:trialEvidenceRecords.result,evidenceLevel:trialEvidenceRecords.evidenceLevel,createdAt:trialEvidenceRecords.createdAt}).from(trialEvidenceRecords).where(eq(trialEvidenceRecords.opportunityId,id)).orderBy(desc(trialEvidenceRecords.createdAt)).limit(20),
  ]);
- const savedQualification=await db.select().from(opportunityQualificationReviews).where(eq(opportunityQualificationReviews.opportunityId,id)).orderBy(desc(opportunityQualificationReviews.createdAt)).limit(1);
+ const [savedQualification,savedPriorWork]=await Promise.all([
+  db.select().from(opportunityQualificationReviews).where(eq(opportunityQualificationReviews.opportunityId,id)).orderBy(desc(opportunityQualificationReviews.createdAt)).limit(1),
+  db.select().from(opportunityPriorWorkReconciliations).where(eq(opportunityPriorWorkReconciliations.opportunityId,id)).orderBy(desc(opportunityPriorWorkReconciliations.createdAt)).limit(1),
+ ]);
  let qualificationReport:null|ReturnType<typeof QualificationReviewReportSchema.parse>=null;
  if(savedQualification[0]){try{const parsed=QualificationReviewReportSchema.safeParse(JSON.parse(savedQualification[0].review));if(parsed.success)qualificationReport=parsed.data}catch{/* Preserve malformed historical reviews and keep the rest of the workspace available. */}}
+ let priorWorkReport:null|ReturnType<typeof PriorWorkR1ReportSchema.parse>=null;
+ if(savedPriorWork[0]){try{const parsed=PriorWorkR1ReportSchema.safeParse(JSON.parse(savedPriorWork[0].report));if(parsed.success)priorWorkReport=parsed.data}catch{/* Keep the existing workspace usable if a historical reconciliation is malformed. */}}
+ const workspaceCandidateId=priorWorkReport?(id===priorWorkReport.workspaces.originalSupplyGapOpportunityId?priorWorkReport.workspaces.originalSupplyGapCandidateId:id===priorWorkReport.workspaces.contactCandidateOpportunityId?priorWorkReport.workspaces.contactCandidateId:null):null;
+ const workspaceCandidate=workspaceCandidateId?priorWorkReport?.candidates.find(candidate=>candidate.candidateId===workspaceCandidateId)??null:null;
  const assessment=assessments[0];
  const [usedConsumer,usedProvider]=assessment&&opportunity.projectB?await Promise.all([
   db.select().from(technicalFootprints).where(and(eq(technicalFootprints.id,assessment.consumerFootprintId),eq(technicalFootprints.projectId,opportunity.projectA))).limit(1),
@@ -94,6 +102,52 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
       </article>)}</div>
       <p className="muted">Evidence bundle {qualificationReport.evaluation.reviewInputSha256.slice(0,16)} · source snapshot {qualificationReport.evaluation.sourceSnapshotSha256.slice(0,16)} · external outcome {qualificationReport.externalOutcome}.</p>
      </>:<><h2 id="qualification-review">Qualification review</h2><p className="muted">A saved qualification record exists but failed validation for display. The original record remains preserved.</p></>}
+    </section>}
+    {priorWorkReport&&<section className="section" aria-labelledby="prior-work-review">
+     <h2 id="prior-work-review">Issue history and contact readiness</h2>
+     <article className="card">
+      <span className="tag">{workspaceCandidate?.actionReadiness??savedPriorWork[0]?.actionReadiness??'NEEDS_CONFIRMATION'} · checked {priorWorkReport.evaluation.checkedAt.slice(0,10)} · contact not sent</span>
+      <p>This review reuses the original ten-candidate pool. It records later issue replies and linked changes without replacing the earlier TC-01D conclusion. A prepared question is not a contact, a confirmed participant, or an agreed pilot.</p>
+      <p>Original pool {priorWorkReport.evaluation.candidatePoolSha256.slice(0,16)} · corrected inputs {priorWorkReport.evaluation.inputSnapshotSha256.slice(0,16)} · external outcome {priorWorkReport.externalOutcome}.</p>
+      {workspaceCandidate?.contactDraft&&<div className="card">
+       <span className="tag">{workspaceCandidate.contactDraft.status} · pilot {workspaceCandidate.pilotReadiness}</span>
+       <h3>Proposed first question for @{workspaceCandidate.contactDraft.targetLogin}</h3>
+       <p><strong>Purpose:</strong> {workspaceCandidate.contactDraft.purpose}</p>
+       <p><strong>Question:</strong> {workspaceCandidate.contactDraft.question}</p>
+       <blockquote><p>{workspaceCandidate.contactDraft.draft}</p></blockquote>
+       {workspaceCandidate.contactDraft.needEvidence.map((item,index)=>{const href=safeExternalUrl(item.sourceUrl);return href?<a className="source" key={`${item.sourceUrl}-${index}`} href={href} target="_blank" rel="noreferrer">Inspect original need ↗</a>:null})}
+       <p className="muted">No message was sent, no follow-up response was recorded, no volunteers were recruited, and no pilot was agreed.</p>
+      </div>}
+      {priorWorkReport.actionReadiness==='NO_CONTACT_WORTHY_OPPORTUNITY'&&<p>No reviewed candidate currently justifies first contact. The individual unresolved questions and evidence gaps remain below.</p>}
+      {priorWorkReport.repositoryResolutions.filter(item=>item.requestedUrl.replace(/\/$/,'').toLowerCase()!==item.canonicalUrl.replace(/\/$/,'').toLowerCase()).map(item=><p key={`${item.requestedUrl}-${item.repositoryId}`}>Resolved repository alias: <a className="source" href={item.requestedUrl} target="_blank" rel="noreferrer">{item.requestedUrl}</a> → <a className="source" href={item.canonicalUrl} target="_blank" rel="noreferrer">{item.canonicalUrl}</a> (GitHub repository ID {item.repositoryId}; {item.resolution}).</p>)}
+     </article>
+     <div className="stack">{priorWorkReport.candidates.map(candidate=><details className="card" key={candidate.candidateId} open={candidate.candidateId===workspaceCandidate?.candidateId}>
+      <summary><strong>{candidate.projectName}</strong> · prior {candidate.previousConclusion.outcome} → {candidate.actionReadiness} · pilot {candidate.pilotReadiness}</summary>
+      <blockquote><p>{candidate.needExcerpt}</p></blockquote>
+      <p><strong>Previous decision:</strong> {candidate.previousConclusion.rationale}</p>
+      <p><strong>Current need:</strong> {candidate.needState} · <strong>Question:</strong> {candidate.questionState} · <strong>Discussion:</strong> {candidate.discussion.completeness}, {candidate.discussion.commentCount} comments{candidate.discussion.latestCommentAt?`, last ${candidate.discussion.latestCommentAt.slice(0,10)}`:''}.</p>
+      <p><strong>Implementation:</strong> {candidate.implementationEvidence.reported?'maintainer reported · ':''}{candidate.implementationEvidence.observed?'code observed · ':''}{candidate.implementationEvidence.demonstrated?'demonstration recorded · ':''}{candidate.implementationEvidence.adopted?'adoption evidenced':'no implementation/adoption finding in this capability scope'}</p>
+      <p><strong>Related integration milestones:</strong> {Object.entries(candidate.relatedIntegrationMilestones).filter(([,value])=>value).map(([key])=>key).join(', ')||'none found in this bounded review'}{candidate.relatedIntegrationDemonstration!=='none_found'?` · demonstration: ${candidate.relatedIntegrationDemonstration}`:''}</p>
+      {candidate.relatedPullRequests.map(pull=><p key={pull.url}><strong>Linked PR:</strong> <a className="source" href={pull.url} target="_blank" rel="noreferrer">{pull.title} ↗</a> · {pull.state}, {pull.merged?'merged':'unmerged'} · head {pull.headSha} · files {pull.filesStatus}.</p>)}
+      <p>{candidate.rationale}</p>
+      <h4>Subsequent evidence</h4>
+      {candidate.events.map(event=><article key={event.eventId}>
+       <span className="tag">{event.eventType.replaceAll('_',' ')} · {event.verification.replaceAll('_',' ')} · {event.relationship.replaceAll('_',' ')}</span>
+       <p>{event.summary}</p>
+       {event.references.map((reference,index)=>{const href=safeExternalUrl(reference.sourceUrl),comment=reference.commentId?candidate.discussion.commentTimeline.find(item=>item.id===reference.commentId):null;return <div key={`${reference.sourceUrl}-${index}`}><blockquote><p>{reference.quote}</p></blockquote><p>{comment?`@${comment.author} · ${comment.createdAt.slice(0,10)} · `:''}{href&&<a className="source" href={href} target="_blank" rel="noreferrer">Open cited source ↗</a>}{reference.revision?` · revision ${reference.revision}`:''}</p></div>})}
+      </article>)}
+      {candidate.remainingUnknowns.length>0&&<><h4>Still unknown</h4><ul>{candidate.remainingUnknowns.map(item=><li key={item}>{item}</li>)}</ul></>}
+      <p><strong>Next action:</strong> {candidate.nextAction}</p>
+     </details>)}
+      <details className="card">
+       <summary>Independent control: {priorWorkReport.control.projectName} · {priorWorkReport.control.actionReadiness} · pilot {priorWorkReport.control.pilotReadiness}</summary>
+       <blockquote><p>{priorWorkReport.control.needExcerpt}</p></blockquote>
+       <p>{priorWorkReport.control.rationale}</p>
+       {priorWorkReport.control.events.map(event=><article key={event.eventId}><span className="tag">{event.eventType.replaceAll('_',' ')} · {event.verification.replaceAll('_',' ')}</span><p>{event.summary}</p>{event.references.map((reference,index)=>{const href=safeExternalUrl(reference.sourceUrl),comment=reference.commentId?priorWorkReport?.control.discussion.commentTimeline.find(item=>item.id===reference.commentId):null;return <div key={`${reference.sourceUrl}-${index}`}><blockquote><p>{reference.quote}</p></blockquote><p>{comment?`@${comment.author} · ${comment.createdAt.slice(0,10)} · `:''}{href&&<a className="source" href={href} target="_blank" rel="noreferrer">Open cited source ↗</a>}</p></div>})}</article>)}
+       <h4>Still unknown</h4><ul>{priorWorkReport.control.remainingUnknowns.map(item=><li key={item}>{item}</li>)}</ul><p><strong>Next action:</strong> {priorWorkReport.control.nextAction}</p>
+      </details>
+     </div>
+     <p className="muted">The original qualification review and follow-up ledger remain separate historical records. The corrected report is attached to this workspace and the selected builder-need workspace.</p>
     </section>}
     <h2>Engine assessment</h2>
     {assessment?<IntelligenceAssessment assessment={assessment} consumer={usedConsumer[0]} provider={usedProvider[0]}/>:<p className="muted">No structured intelligence assessment has been recorded for this opportunity.</p>}

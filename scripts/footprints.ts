@@ -8,7 +8,7 @@ import {analyzeFootprint,type SourceFile} from '../lib/intelligence/footprint';
 import {eq} from 'drizzle-orm';
 
 type Target={projectId:string;repository:string;role:string};
-function parseRepo(raw:string|null){if(!raw)return null;try{const u=new URL(raw);if(u.protocol!=='https:'||u.hostname!=='github.com'||u.username||u.password)return null;const parts=u.pathname.split('/').filter(Boolean);if(parts.length<2||!/^[\w.-]+$/.test(parts[0])||!/^[\w.-]+$/.test(parts[1]))return null;const repo=`https://github.com/${parts[0]}/${parts[1].replace(/\.git$/,'')}`;const scope=parts[2]==='tree'&&['main','master'].includes(parts[3])?parts.slice(4).join('/'):'';if(scope.split('/').some(x=>x==='..'||x==='.'||!x))return scope?null:{repo,scope:''};return {repo,scope}}catch{return null}}
+function parseRepo(raw:string|null){if(!raw)return null;try{const u=new URL(raw);if(u.protocol!=='https:'||u.hostname.toLowerCase()!=='github.com'||u.username||u.password)return null;const parts=u.pathname.split('/').filter(Boolean);if(parts.length<2||!/^[\w.-]+$/.test(parts[0])||!/^[\w.-]+$/.test(parts[1]))return null;const repo=`https://github.com/${parts[0]!.toLowerCase()}/${parts[1]!.replace(/\.git$/,'').toLowerCase()}`;const scope=parts[2]==='tree'&&['main','master'].includes(parts[3])?parts.slice(4).join('/'):'';if(scope.split('/').some(x=>x==='..'||x==='.'||!x))return scope?null:{repo,scope:''};return {repo,scope}}catch{return null}}
 function arg(name:string){const i=process.argv.indexOf(name);return i<0?undefined:process.argv[i+1]}
 const componentRole=(role:string)=>/^(?:repository|contracts?|resolver|sdk|api|backend|frontend|service|server|client|application|app)$/i.test(role.trim())||/(?:resolver|contracts?|sdk|api|backend|frontend|service|server|client|application|\bapp\b)/i.test(role)&&!/(?:met on|background|example|issue|referenced repository)/i.test(role);
 async function main(){
@@ -24,7 +24,7 @@ async function main(){
   return [...new Map([{repository:p.repository??'',role:'primary'},...associated].filter(x=>x.repository).map(x=>[x.repository,x])).values()].map(x=>({projectId:p.id,...x}));
  }).filter(x=>Boolean(parseRepo(x.repository))).sort((a,b)=>a.projectId.localeCompare(b.projectId)||a.repository.localeCompare(b.repository));
  let scoped=targets;
- if(repositoryUrl){const parsed=parseRepo(repositoryUrl);if(!parsed||parsed.scope)throw Error('--repository-url must be a canonical GitHub repository root');scoped=targets.filter(x=>x.projectId===projectId&&parseRepo(x.repository)?.repo===parsed.repo);if(!scoped.length)throw Error('Repository is not associated with this imported project in source records')}
+ if(repositoryUrl){const parsed=parseRepo(repositoryUrl);if(!parsed||parsed.scope)throw Error('--repository-url must be a canonical GitHub repository root');scoped=targets.filter(x=>x.projectId===projectId&&parseRepo(x.repository)?.repo.toLowerCase()===parsed.repo.toLowerCase());if(!scoped.length)throw Error('Repository is not associated with this imported project in source records')}
  const chosen=scoped.slice(offset,offset+limit);if(!chosen.length)throw Error('No imported project repositories in scope');
  let succeeded=0,failed=0;const tmp=await mkdtemp(join(tmpdir(),'tc-footprints-'));
  try{for(const [index,targetSpec] of chosen.entries()){

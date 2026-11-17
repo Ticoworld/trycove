@@ -1,0 +1,18 @@
+{
+  "source": "CKBdapps JSON",
+  "url": "https://ckbdapps.com/projects.json",
+  "checkedAt": "2026-11-17T20:31:04.339Z",
+  "fetchedAt": "2026-11-17T20:31:04.303Z",
+  "httpStatus": 200,
+  "etag": null,
+  "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+  "recordCount": 150,
+  "existingMarkdownProjects": 150,
+  "inserted": 0,
+  "updated": 150,
+  "skippedIdentityCollisions": 0,
+  "structuredClaimsAdded": 1480,
+  "repositoryAssociationsAdded": 49,
+  "storedSnapshots": 1,
+  "exactSnapshot": "evidence/tc-01e/sources/ckbdapps-projects-d1c5b55359c34d33.json"
+}

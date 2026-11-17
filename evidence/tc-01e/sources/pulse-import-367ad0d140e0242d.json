@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "tc-01e-pulse-ingestion-v1",
+  "service": "https://pulse-lab.lusocryptolabs.com/api/state",
+  "sourceRepository": "https://github.com/LusoCryptoLabs/ckb-pulse",
+  "upstreamRevision": "e1414a9ee1f96c81f76a428991c6af820ff94d79",
+  "observedAt": "2026-11-17T20:31:19.216Z",
+  "state": {
+    "status": "ok",
+    "httpStatus": 200,
+    "etag": "W/\"yvgfFFMqLIbLkBIxvsVoMp\"",
+    "sha256": "d07d32f725e250c91f107df8339e96de0d77afd9a7dad9dcc909605a0ab7610b",
+    "repoCount": 275,
+    "reportedAt": "2026-11-17T20:31:20.565Z",
+    "exactSnapshot": "evidence/tc-01e/sources/pulse-state-d07d32f725e250c9.json"
+  },
+  "repositoryDetails": {
+    "requested": 53,
+    "ok": 0,
+    "notFollowed": 0,
+    "unavailable": 53,
+    "exactSnapshot": "evidence/tc-01e/sources/pulse-repositories-5dfd25750bfbb6f7.json"
+  },
+  "repositoryIdentity": {
+    "linkedAssociations": 124,
+    "exactOrAliasMatches": 53,
+    "exactMatches": 52,
+    "authoritativeAliases": 1,
+    "githubLookups": [
+      {
+        "requestedPath": "truthixify/grid3",
+        "identity": {
+          "id": 1201644964,
+          "node_id": "R_kgDOR5-lpA",
+          "full_name": "truthixify/grid3",
+          "html_url": "https://github.com/truthixify/grid3",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "0dd1749a8aabb21d80180013c3becebead22e560ccdbf4091ebc4d207f2ba012",
+        "canonicalUrl": "https://github.com/truthixify/grid3"
+      },
+      {
+        "requestedPath": "christofa/contestledger",
+        "identity": {
+          "id": 1236051540,
+          "node_id": "R_kgDOSaymVA",
+          "full_name": "christofa/contestledger",
+          "html_url": "https://github.com/christofa/contestledger",
+          "default_branch": "master"
+        },
+        "status": "ok",
+        "digest": "52428716ba705b02e304c6ca01c58e9c2b945febf65b5fb1fe531aad8a6a6762",
+        "canonicalUrl": "https://github.com/christofa/contestledger"
+      },
+      {
+        "requestedPath": "alesfer001/decentralized-kickstarter",
+        "identity": {
+          "id": 1179274652,
+          "node_id": "R_kgDORkpNnA",
+          "full_name": "alesfer001/CrowdCell",
+          "html_url": "https://github.com/alesfer001/CrowdCell",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "4ebb3a93e91d6d99a8a9eced50602d4dcc672959fe9a3223b040beab36cb324f",
+        "canonicalUrl": "https://github.com/alesfer001/CrowdCell"
+      },
+      {
+        "requestedPath": "dotbithq/did-contracts",
+        "identity": {
+          "id": 323254485,
+          "node_id": "MDEwOlJlcG9zaXRvcnkzMjMyNTQ0ODU=",
+          "full_name": "dotbitHQ/did-contracts",
+          "html_url": "https://github.com/dotbitHQ/did-contracts",
+          "default_branch": "master"
+        },
+        "status": "ok",
+        "digest": "e30b7049568a83e43665645cb00ea54b2d039535396db5612da893e22923306a",
+        "canonicalUrl": "https://github.com/dotbitHQ/did-contracts"
+      },
+      {
+        "requestedPath": "calledado/lean-oracle",
+        "identity": {
+          "id": 1227041863,
+          "node_id": "R_kgDOSSMsRw",
+          "full_name": "calledAdo/lean-oracle",
+          "html_url": "https://github.com/calledAdo/lean-oracle",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "9b91d78a9b173305a9bb5012c5f7f45399725ea1c7edb0e9d3267c69cc840f11",
+        "canonicalUrl": "https://github.com/calledAdo/lean-oracle"
+      },
+      {
+        "requestedPath": "bitgetwallet/download",
+        "identity": {
+          "id": 470008655,
+          "node_id": "R_kgDOHAPDTw",
+          "full_name": "bitgetwallet/download",
+          "html_url": "https://github.com/bitgetwallet/download",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "a5b68e99468bc3295cb3e87b2ac2266f8ea7daa7d4a94aa2d04eac07c9c98ffc",
+        "canonicalUrl": "https://github.com/bitgetwallet/download"
+      },
+      {
+        "requestedPath": "tydeptrai21042004/cellflow",
+        "identity": {
+          "id": 1385799153,
+          "node_id": "R_kgDOUpmd8Q",
+          "full_name": "tydeptrai21042004/CellFlow",
+          "html_url": "https://github.com/tydeptrai21042004/CellFlow",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "49fbd8fbeac3928baa488602817cccd50f453308d412f53b4ca60d300224eda2",
+        "canonicalUrl": "https://github.com/tydeptrai21042004/CellFlow"
+      },
+      {
+        "requestedPath": "ajayfrizzy/veyrivo",
+        "identity": {
+          "id": 1308839357,
+          "node_id": "R_kgDOTgNNvQ",
+          "full_name": "Ajayfrizzy/klaveroq",
+          "html_url": "https://github.com/Ajayfrizzy/klaveroq",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "ea1f1f32975cee5e23f5ca93a845dac2941772d580bce9aa850c007cade5b490",
+        "canonicalUrl": "https://github.com/Ajayfrizzy/klaveroq"
+      }
+    ]
+  },
+  "discoveryLeads": {
+    "unmatchedPulseRows": 0,
+    "entries": []
+  },
+  "limits": {
+    "maxGithubAliasChecks": 8,
+    "maxRepositoryDetails": 60,
+    "repositoryDetailCacheHours": 6,
+    "activityDoesNotProveFunctionalityOrAdoption": true
+  }
+}

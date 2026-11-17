@@ -1,0 +1,1329 @@
+{
+  "schemaVersion": "tc-01e-product-cohort-v1",
+  "baselineCommit": "21708af1d2cfe19e420d84d67f51f5c8fb64550e",
+  "frozenAt": "2026-11-17T20:47:13.981Z",
+  "source": {
+    "name": "CKBdapps published JSON record claims",
+    "url": "https://ckbdapps.com/projects.json",
+    "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+    "recordCount": 150,
+    "pulseStateRevision": "e1414a9ee1f96c81f76a428991c6af820ff94d79",
+    "pulseStateSha256": "ddd5b1ee2ecccd7b13ac754ef7f91dcdd4a0747348858da303197ad5ee6cffe4"
+  },
+  "selection": {
+    "algorithm": "From CKBdapps JSON repository claims, exclude repository identities already source-scanned at the baseline and claims associated with multiple product identities; sort the remaining repository paths by SHA-256(lowercase owner/repository); take the first 12; pin each with git ls-remote HEAD before any relationship evaluation.",
+    "limit": 12,
+    "preexistingRepositories": 10,
+    "ambiguousRepositoryClaims": 0,
+    "eligibleCount": 39
+  },
+  "eligible": [
+    {
+      "repositoryPath": "truthixify/grid3",
+      "productIds": [
+        "grid3"
+      ],
+      "productNames": [
+        "Grid3"
+      ],
+      "selectionDigest": "03f55636c7f0b8c7700958af816ce6a2a472595dc6a8b0514dd773870e4fac24",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "grid3",
+          "name": "Grid3",
+          "repositoryPath": "truthixify/grid3",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "dotbithq/did-contracts",
+      "productIds": [
+        "dotbit"
+      ],
+      "productNames": [
+        ".bit"
+      ],
+      "selectionDigest": "0c535385534f7243029429f7da6404c3aad3eac578d06c11f2040fd5dcdcc337",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "dotbit",
+          "name": ".bit",
+          "repositoryPath": "dotbithq/did-contracts",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "janx/ckbadger",
+      "productIds": [
+        "ckbadger"
+      ],
+      "productNames": [
+        "CKBadger"
+      ],
+      "selectionDigest": "129e2534bad2adf7ee3688e3c96acf77f82bce0a388b9cb704b5e49cd8e9ff39",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckbadger",
+          "name": "CKBadger",
+          "repositoryPath": "janx/ckbadger",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "chukwuma619/fiber-studio",
+      "productIds": [
+        "fiberstudio"
+      ],
+      "productNames": [
+        "Fiber Studio"
+      ],
+      "selectionDigest": "181cb9c67ccc996a5e76d3d4ea3689fe26dfcf5076ac0fb66d6cabea58acc788",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "fiberstudio",
+          "name": "Fiber Studio",
+          "repositoryPath": "chukwuma619/fiber-studio",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "rgbplusplus/rgbpp-explorer",
+      "productIds": [
+        "rgbppexplorer"
+      ],
+      "productNames": [
+        "RGB++ Explorer"
+      ],
+      "selectionDigest": "20aaeebdded26aeb413b7aae4bfe524521c8cc7709f8afc9a2625898c7f36d3d",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "rgbppexplorer",
+          "name": "RGB++ Explorer",
+          "repositoryPath": "rgbplusplus/rgbpp-explorer",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "retricsu/ckb-on-ramp",
+      "productIds": [
+        "ckb-on-ramp"
+      ],
+      "productNames": [
+        "CKB On-ramp"
+      ],
+      "selectionDigest": "2452ce3744fa18de76551ce79b6dae737113ed44bb7d7d2c4309d3eabe4eb95e",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckb-on-ramp",
+          "name": "CKB On-ramp",
+          "repositoryPath": "retricsu/ckb-on-ramp",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "nervosnetwork/ckbguardian",
+      "productIds": [
+        "ckbguardian"
+      ],
+      "productNames": [
+        "CKB Guardian"
+      ],
+      "selectionDigest": "2904eea7338e6227c524b1538eb08aa3db1ff275e50d70fd2410a6e350112582",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckbguardian",
+          "name": "CKB Guardian",
+          "repositoryPath": "nervosnetwork/ckbguardian",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "code3ks/fibernuts",
+      "productIds": [
+        "fibernuts"
+      ],
+      "productNames": [
+        "FiberNuts"
+      ],
+      "selectionDigest": "2cba8ab32e8890a13a3f699329781d1bee20a7946e3d43e07742abfc2a709e19",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "fibernuts",
+          "name": "FiberNuts",
+          "repositoryPath": "code3ks/fibernuts",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "sporeprotocol/spore-sdk",
+      "productIds": [
+        "spore"
+      ],
+      "productNames": [
+        "Spore"
+      ],
+      "selectionDigest": "2e8e4ab7d2f571aefc3383b4f0a89b0a587694bc34aafce29132bba0a02da932",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "spore",
+          "name": "Spore",
+          "repositoryPath": "sporeprotocol/spore-sdk",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "onekeyhq/app-monorepo",
+      "productIds": [
+        "onekey"
+      ],
+      "productNames": [
+        "OneKey"
+      ],
+      "selectionDigest": "400fae4094128029cf9c5cfd058681b1d97ebaa65229a3811fbbfb75c2cfd301",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "onekey",
+          "name": "OneKey",
+          "repositoryPath": "onekeyhq/app-monorepo",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "janx/cknerv",
+      "productIds": [
+        "cknerv"
+      ],
+      "productNames": [
+        "cknerv"
+      ],
+      "selectionDigest": "58de0cf7c5812e7e1d4bac53b538d09c619b4d6c3056e899a11a91f93892c496",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "cknerv",
+          "name": "cknerv",
+          "repositoryPath": "janx/cknerv",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "truthixify/ckb-viz",
+      "productIds": [
+        "ckbviz"
+      ],
+      "productNames": [
+        "ckb-viz"
+      ],
+      "selectionDigest": "6b85428a5880ddc53169859f8c18695dcf21a3730353ecc0a1bf38c05690b676",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckbviz",
+          "name": "ckb-viz",
+          "repositoryPath": "truthixify/ckb-viz",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "psawyerberlin/vericellnet",
+      "productIds": [
+        "vericell"
+      ],
+      "productNames": [
+        "VeriCell.net"
+      ],
+      "selectionDigest": "70e62a9e756779024b609aaaf6b866ad281584e356ed679a5296b93700ca5852",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "vericell",
+          "name": "VeriCell.net",
+          "repositoryPath": "psawyerberlin/vericellnet",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "utxoplay/utxoplay",
+      "productIds": [
+        "utxoplay"
+      ],
+      "productNames": [
+        "UTXOPlay"
+      ],
+      "selectionDigest": "734481a1780e3c4775b2305b9b40e8e24e7ff4065e4ea7d2196be5cc6e686611",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "utxoplay",
+          "name": "UTXOPlay",
+          "repositoryPath": "utxoplay/utxoplay",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "nervosnetwork/fiber-dashboard",
+      "productIds": [
+        "fiberdashboard"
+      ],
+      "productNames": [
+        "Fiber Network Dashboard"
+      ],
+      "selectionDigest": "73f3d59f2b8137f41e358016bc1413b713b11a7d9c4d68082f1161166fe79954",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "fiberdashboard",
+          "name": "Fiber Network Dashboard",
+          "repositoryPath": "nervosnetwork/fiber-dashboard",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "lusocryptolabs/ckb-pulse",
+      "productIds": [
+        "ckbpulse"
+      ],
+      "productNames": [
+        "CKB Pulse"
+      ],
+      "selectionDigest": "82258395e47b5486d7acd94f68f240579c86c111a97af54cf7d3f77c00b4fe61",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckbpulse",
+          "name": "CKB Pulse",
+          "repositoryPath": "lusocryptolabs/ckb-pulse",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "nervosnetwork/ckb-script-templates",
+      "productIds": [
+        "ckb-script-templates"
+      ],
+      "productNames": [
+        "CKB Script Templates"
+      ],
+      "selectionDigest": "8257d06069c25f0fed185f7ee465f8e667c00ee09e2ed430d9b408019a36dc1e",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckb-script-templates",
+          "name": "CKB Script Templates",
+          "repositoryPath": "nervosnetwork/ckb-script-templates",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "hiepthach/credora_ckb",
+      "productIds": [
+        "credora"
+      ],
+      "productNames": [
+        "Credora"
+      ],
+      "selectionDigest": "8874c924194def725a0bbb7b054d251ac03d4468133d71e3cb16745fe11999b2",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "credora",
+          "name": "Credora",
+          "repositoryPath": "hiepthach/credora_ckb",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "hitbtc-com/hitbtc-api",
+      "productIds": [
+        "hitbtc"
+      ],
+      "productNames": [
+        "HitBTC"
+      ],
+      "selectionDigest": "8baf252ec55849304f6666fe73103f54323d5604662f9aefd6244d697fc4f8a1",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "hitbtc",
+          "name": "HitBTC",
+          "repositoryPath": "hitbtc-com/hitbtc-api",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "nervosnetwork/ckb-explorer-frontend",
+      "productIds": [
+        "ckbexplorer"
+      ],
+      "productNames": [
+        "CKB Explorer"
+      ],
+      "selectionDigest": "8e01f5f347a38df24455f9d59e28529451e784c25a10d194273566ed7201cd87",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckbexplorer",
+          "name": "CKB Explorer",
+          "repositoryPath": "nervosnetwork/ckb-explorer-frontend",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "rgbplusplus/rgbpp",
+      "productIds": [
+        "rgbpp"
+      ],
+      "productNames": [
+        "RGB++"
+      ],
+      "selectionDigest": "919831c0fb986f90f07944a62fb0d6bcba1cb8ad6ea29e6213c8c4afd06dcada",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "rgbpp",
+          "name": "RGB++",
+          "repositoryPath": "rgbplusplus/rgbpp",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "truthixify/vellum",
+      "productIds": [
+        "vellum"
+      ],
+      "productNames": [
+        "Vellum"
+      ],
+      "selectionDigest": "933affbb4eb7fea32829d2c95368c3096823980e43c1669e725e9a465eac5a75",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "vellum",
+          "name": "Vellum",
+          "repositoryPath": "truthixify/vellum",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "jackylhh/ckb-community-fund-dao-dashboard",
+      "productIds": [
+        "ckbcfdao"
+      ],
+      "productNames": [
+        "CKB Community Fund DAO Dashboard"
+      ],
+      "selectionDigest": "9a19ed50f361ee24d99681c9fd7569f1c617760727cf870a0ba9ed9dbbb7d45f",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckbcfdao",
+          "name": "CKB Community Fund DAO Dashboard",
+          "repositoryPath": "jackylhh/ckb-community-fund-dao-dashboard",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "quantumpurse/quantum-purse-v2",
+      "productIds": [
+        "quantumpurse"
+      ],
+      "productNames": [
+        "Quantum Purse"
+      ],
+      "selectionDigest": "9ae5509c71a640b16cafed75d2f5c575a0be21a3293a0328f3ae7558a45c3367",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "quantumpurse",
+          "name": "Quantum Purse",
+          "repositoryPath": "quantumpurse/quantum-purse-v2",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "gpblockchain/ckb-contract-flow-html",
+      "productIds": [
+        "ckbcontractflow"
+      ],
+      "productNames": [
+        "CKB Contract Flow"
+      ],
+      "selectionDigest": "a16f65f166f9d59f7d74f55ccec52a05e04d3c711e3e638c46e9b4366bf7ac8c",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckbcontractflow",
+          "name": "CKB Contract Flow",
+          "repositoryPath": "gpblockchain/ckb-contract-flow-html",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "keith-cy/fiber-link",
+      "productIds": [
+        "fiberlink"
+      ],
+      "productNames": [
+        "Fiber Link"
+      ],
+      "selectionDigest": "a3ae2b89493ebf54f3aceb361ae621782f3c6c1c7880273f9e5437cc8de2d906",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "fiberlink",
+          "name": "Fiber Link",
+          "repositoryPath": "keith-cy/fiber-link",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "nervape/nervape-btc-mint",
+      "productIds": [
+        "nervape"
+      ],
+      "productNames": [
+        "Nervape"
+      ],
+      "selectionDigest": "aaaef1b8c1d4cf9d91d6530a309b58714aeea5413c12e84cb70ed4b9424547aa",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "nervape",
+          "name": "Nervape",
+          "repositoryPath": "nervape/nervape-btc-mint",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "ckb-service-runner/ckb-service-runner",
+      "productIds": [
+        "ckb-service-runner"
+      ],
+      "productNames": [
+        "CKB Service Runner (CSR)"
+      ],
+      "selectionDigest": "b04038357a233618c1d51f7563aa8b9c57237ebaa05d32b7c25aabee249bb28e",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckb-service-runner",
+          "name": "CKB Service Runner (CSR)",
+          "repositoryPath": "ckb-service-runner/ckb-service-runner",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "robaireth/ckb-pop",
+      "productIds": [
+        "ckb-pop"
+      ],
+      "productNames": [
+        "CKB PoP"
+      ],
+      "selectionDigest": "b2fa5bafceb8264b99cac12ea10e788035cd0efdf97fe8abf5b2d28df1a37d6e",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckb-pop",
+          "name": "CKB PoP",
+          "repositoryPath": "robaireth/ckb-pop",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "mimblewimble/grin",
+      "productIds": [
+        "grin"
+      ],
+      "productNames": [
+        "Grin"
+      ],
+      "selectionDigest": "ba61b033b791414652d6d60567704d4ec2aa75253cb75396b7405d7197b3b47c",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "grin",
+          "name": "Grin",
+          "repositoryPath": "mimblewimble/grin",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "ckb-devrel/nervdao",
+      "productIds": [
+        "nervdao"
+      ],
+      "productNames": [
+        "NervDAO"
+      ],
+      "selectionDigest": "be5617b272fb5d546288817a039f60c83187fdea93df28f74928b4068dcd4e0e",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "nervdao",
+          "name": "NervDAO",
+          "repositoryPath": "ckb-devrel/nervdao",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "maxima24/sluice",
+      "productIds": [
+        "sluice"
+      ],
+      "productNames": [
+        "Sluice"
+      ],
+      "selectionDigest": "e633d282d5bcfc5e22f34e48ecd1cfcff154911005dd5d9b5001d4ed1094384b",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "sluice",
+          "name": "Sluice",
+          "repositoryPath": "maxima24/sluice",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "raheemjnr/pocket-node",
+      "productIds": [
+        "pocketnode"
+      ],
+      "productNames": [
+        "Pocket Node"
+      ],
+      "selectionDigest": "eeaea598bc6b046f38bfa1fc7e9cff1b1fca61d9b5cc49c37313401b9d765060",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "pocketnode",
+          "name": "Pocket Node",
+          "repositoryPath": "raheemjnr/pocket-node",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "utxo-global/utxo-wallet-extension",
+      "productIds": [
+        "utxoglobal"
+      ],
+      "productNames": [
+        "UTXO Global"
+      ],
+      "selectionDigest": "eef385f3bceb0f9d1c790b11717940a45ea312240dae944890b92590179a0406",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "utxoglobal",
+          "name": "UTXO Global",
+          "repositoryPath": "utxo-global/utxo-wallet-extension",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "ckb-devrel/offckb",
+      "productIds": [
+        "offckb"
+      ],
+      "productNames": [
+        "OffCKB"
+      ],
+      "selectionDigest": "f119743e2c38c8a0dae4d8dc35fb2dc89ff7b773f0d1d4e302c6dafe4e27bacb",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "offckb",
+          "name": "OffCKB",
+          "repositoryPath": "ckb-devrel/offckb",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "enoch208/clasp",
+      "productIds": [
+        "clasp"
+      ],
+      "productNames": [
+        "Clasp"
+      ],
+      "selectionDigest": "f26d8f992190578d1e38adabf6a93227a43d924976cec87094b7d56c136a6695",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "clasp",
+          "name": "Clasp",
+          "repositoryPath": "enoch208/clasp",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "ickb/stack",
+      "productIds": [
+        "ickb"
+      ],
+      "productNames": [
+        "iCKB"
+      ],
+      "selectionDigest": "f50b892b0e86c41c9d869eac1decbda8b33e1b62c1ee308f82f5c7cc2e3e1c6b",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "ickb",
+          "name": "iCKB",
+          "repositoryPath": "ickb/stack",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "nervosnetwork/fiber",
+      "productIds": [
+        "fiber"
+      ],
+      "productNames": [
+        "Fiber Network"
+      ],
+      "selectionDigest": "fe98c0b750b389f582b8e815e6086e19ebd96d89b9f53e1c3ed3145e58dbb9ca",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "fiber",
+          "name": "Fiber Network",
+          "repositoryPath": "nervosnetwork/fiber",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "nervosnetwork/neuron",
+      "productIds": [
+        "neuron"
+      ],
+      "productNames": [
+        "Neuron"
+      ],
+      "selectionDigest": "ff38a1a6463c41872f0316ac1242bfba584c3854f5745ee7ecdb8f3b4ddb321f",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "sourceProjectClaims": [
+        {
+          "projectId": "neuron",
+          "name": "Neuron",
+          "repositoryPath": "nervosnetwork/neuron",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "repositoryPath": "bitgetwallet/download",
+      "productIds": [
+        "bitkeep"
+      ],
+      "productNames": [
+        "Bitget Wallet"
+      ],
+      "selectionDigest": "11ba83a3df4ff528bdd11f4dc594f77f94e51ef46669d9cced49aadcea955128",
+      "alreadyScanned": true,
+      "identityAmbiguous": false,
+      "reason": "repository identity was scanned at baseline",
+      "sourceProjectClaims": [
+        {
+          "projectId": "bitkeep",
+          "name": "Bitget Wallet",
+          "repositoryPath": "bitgetwallet/download",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "ckb-devrel/ccc",
+      "productIds": [
+        "ccc"
+      ],
+      "productNames": [
+        "CCC"
+      ],
+      "selectionDigest": "a748d4d69bb044eda1d15d8e272ac3376a2e865d223803b6e4523af1579b96d9",
+      "alreadyScanned": true,
+      "identityAmbiguous": false,
+      "reason": "repository identity was scanned at baseline",
+      "sourceProjectClaims": [
+        {
+          "projectId": "ccc",
+          "name": "CCC",
+          "repositoryPath": "ckb-devrel/ccc",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "cellscript-labs/cellscript",
+      "productIds": [
+        "cellscript"
+      ],
+      "productNames": [
+        "CellScript"
+      ],
+      "selectionDigest": "4afd80ac9a672802f1e8894e413e5c31465372ce827e86b89f815026acb2fb3a",
+      "alreadyScanned": true,
+      "identityAmbiguous": false,
+      "reason": "repository identity was scanned at baseline",
+      "sourceProjectClaims": [
+        {
+          "projectId": "cellscript",
+          "name": "CellScript",
+          "repositoryPath": "cellscript-labs/cellscript",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "lusocryptolabs/cells-contracts",
+      "productIds": [
+        "cellula"
+      ],
+      "productNames": [
+        "Cellula.id"
+      ],
+      "selectionDigest": "f72c2821ef746a762df0246c63d4808341324b8988a46d200262d62ddecde33b",
+      "alreadyScanned": true,
+      "identityAmbiguous": false,
+      "reason": "repository identity was scanned at baseline",
+      "sourceProjectClaims": [
+        {
+          "projectId": "cellula",
+          "name": "Cellula.id",
+          "repositoryPath": "lusocryptolabs/cells-contracts",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "chetanchauhan64/ckb-academy-progress",
+      "productIds": [
+        "chainpress"
+      ],
+      "productNames": [
+        "ChainPress"
+      ],
+      "selectionDigest": "54f66c635cd3ede79fdcc50bad823c323abb3dc53b6151c4211cc1bfbc3d5e5b",
+      "alreadyScanned": true,
+      "identityAmbiguous": false,
+      "reason": "repository identity was scanned at baseline",
+      "sourceProjectClaims": [
+        {
+          "projectId": "chainpress",
+          "name": "ChainPress",
+          "repositoryPath": "chetanchauhan64/ckb-academy-progress",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "sonami-tech/ckb-mcp",
+      "productIds": [
+        "ckb-ai"
+      ],
+      "productNames": [
+        "CKB AI"
+      ],
+      "selectionDigest": "931559687541417462b33a345b234a4ce06892e577153e1f5e0a7c2a889a7476",
+      "alreadyScanned": true,
+      "identityAmbiguous": false,
+      "reason": "repository identity was scanned at baseline",
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckb-ai",
+          "name": "CKB AI",
+          "repositoryPath": "sonami-tech/ckb-mcp",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "ashuralyk/ckb-cinnabar",
+      "productIds": [
+        "ckb-cinnabar"
+      ],
+      "productNames": [
+        "Cinnabar"
+      ],
+      "selectionDigest": "895fad6479c528762c457c2f82afdef6e071c0d9f0bd2fb6433333424444578f",
+      "alreadyScanned": true,
+      "identityAmbiguous": false,
+      "reason": "repository identity was scanned at baseline",
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckb-cinnabar",
+          "name": "Cinnabar",
+          "repositoryPath": "ashuralyk/ckb-cinnabar",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "victor-okenwa/revamp-ckb-connect-wallet",
+      "productIds": [
+        "ckb-connect-wallet-kit"
+      ],
+      "productNames": [
+        "CKB Connect Wallet Kit"
+      ],
+      "selectionDigest": "f76ef1e764ba488dc297fab11560b95186bf716a42c09ecc0e6c7e9b08b9be2b",
+      "alreadyScanned": true,
+      "identityAmbiguous": false,
+      "reason": "repository identity was scanned at baseline",
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckb-connect-wallet-kit",
+          "name": "CKB Connect Wallet Kit",
+          "repositoryPath": "victor-okenwa/revamp-ckb-connect-wallet",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "nervosnetwork/ckb-node-probe-frontend",
+      "productIds": [
+        "ckb-node-probe"
+      ],
+      "productNames": [
+        "CKB Node Probe"
+      ],
+      "selectionDigest": "2ea67f1281d5c5e48de100e2ca8433c5fc912101ac220c8fad37ff9435b583e4",
+      "alreadyScanned": true,
+      "identityAmbiguous": false,
+      "reason": "repository identity was scanned at baseline",
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckb-node-probe",
+          "name": "CKB Node Probe",
+          "repositoryPath": "nervosnetwork/ckb-node-probe-frontend",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "alesfer001/crowdcell",
+      "productIds": [
+        "crowdcell"
+      ],
+      "productNames": [
+        "CrowdCell"
+      ],
+      "selectionDigest": "5e97bff1c8ba1cdb24826cdf5b33e492e4551241929145b8c95532d1c1b0a42c",
+      "alreadyScanned": true,
+      "identityAmbiguous": false,
+      "reason": "repository identity was scanned at baseline",
+      "sourceProjectClaims": [
+        {
+          "projectId": "crowdcell",
+          "name": "CrowdCell",
+          "repositoryPath": "alesfer001/crowdcell",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    }
+  ],
+  "selected": [
+    {
+      "repositoryPath": "truthixify/grid3",
+      "productIds": [
+        "grid3"
+      ],
+      "productNames": [
+        "Grid3"
+      ],
+      "selectionDigest": "03f55636c7f0b8c7700958af816ce6a2a472595dc6a8b0514dd773870e4fac24",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "abaaaf7b6812e0515e1191b949314fa295543979",
+      "sourceProjectClaims": [
+        {
+          "projectId": "grid3",
+          "name": "Grid3",
+          "repositoryPath": "truthixify/grid3",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "dotbithq/did-contracts",
+      "productIds": [
+        "dotbit"
+      ],
+      "productNames": [
+        ".bit"
+      ],
+      "selectionDigest": "0c535385534f7243029429f7da6404c3aad3eac578d06c11f2040fd5dcdcc337",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "5186304bd7d1f5b8b8507b6d46a121883d31b050",
+      "sourceProjectClaims": [
+        {
+          "projectId": "dotbit",
+          "name": ".bit",
+          "repositoryPath": "dotbithq/did-contracts",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "janx/ckbadger",
+      "productIds": [
+        "ckbadger"
+      ],
+      "productNames": [
+        "CKBadger"
+      ],
+      "selectionDigest": "129e2534bad2adf7ee3688e3c96acf77f82bce0a388b9cb704b5e49cd8e9ff39",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "f966534b1d3bd28f17b1a4f322a8ee2224d7ff58",
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckbadger",
+          "name": "CKBadger",
+          "repositoryPath": "janx/ckbadger",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "chukwuma619/fiber-studio",
+      "productIds": [
+        "fiberstudio"
+      ],
+      "productNames": [
+        "Fiber Studio"
+      ],
+      "selectionDigest": "181cb9c67ccc996a5e76d3d4ea3689fe26dfcf5076ac0fb66d6cabea58acc788",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "f61106f90c51af41e13c4568214d62254f8500ef",
+      "sourceProjectClaims": [
+        {
+          "projectId": "fiberstudio",
+          "name": "Fiber Studio",
+          "repositoryPath": "chukwuma619/fiber-studio",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "rgbplusplus/rgbpp-explorer",
+      "productIds": [
+        "rgbppexplorer"
+      ],
+      "productNames": [
+        "RGB++ Explorer"
+      ],
+      "selectionDigest": "20aaeebdded26aeb413b7aae4bfe524521c8cc7709f8afc9a2625898c7f36d3d",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "4cdc97ef54b24628105a678b22730a962400cd45",
+      "sourceProjectClaims": [
+        {
+          "projectId": "rgbppexplorer",
+          "name": "RGB++ Explorer",
+          "repositoryPath": "rgbplusplus/rgbpp-explorer",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "retricsu/ckb-on-ramp",
+      "productIds": [
+        "ckb-on-ramp"
+      ],
+      "productNames": [
+        "CKB On-ramp"
+      ],
+      "selectionDigest": "2452ce3744fa18de76551ce79b6dae737113ed44bb7d7d2c4309d3eabe4eb95e",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "491a3fbdc51e9ff202349885147dbbb7256dec3e",
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckb-on-ramp",
+          "name": "CKB On-ramp",
+          "repositoryPath": "retricsu/ckb-on-ramp",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "nervosnetwork/ckbguardian",
+      "productIds": [
+        "ckbguardian"
+      ],
+      "productNames": [
+        "CKB Guardian"
+      ],
+      "selectionDigest": "2904eea7338e6227c524b1538eb08aa3db1ff275e50d70fd2410a6e350112582",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "016442899a5e8d72ad9915d0982cceef05fcfbac",
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckbguardian",
+          "name": "CKB Guardian",
+          "repositoryPath": "nervosnetwork/ckbguardian",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "code3ks/fibernuts",
+      "productIds": [
+        "fibernuts"
+      ],
+      "productNames": [
+        "FiberNuts"
+      ],
+      "selectionDigest": "2cba8ab32e8890a13a3f699329781d1bee20a7946e3d43e07742abfc2a709e19",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "9d5a066973415a3cebbb833dea849640dc2ef9bd",
+      "sourceProjectClaims": [
+        {
+          "projectId": "fibernuts",
+          "name": "FiberNuts",
+          "repositoryPath": "code3ks/fibernuts",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "sporeprotocol/spore-sdk",
+      "productIds": [
+        "spore"
+      ],
+      "productNames": [
+        "Spore"
+      ],
+      "selectionDigest": "2e8e4ab7d2f571aefc3383b4f0a89b0a587694bc34aafce29132bba0a02da932",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "5e5d886e49bfbd78253e9c14fd8baebccb488a81",
+      "sourceProjectClaims": [
+        {
+          "projectId": "spore",
+          "name": "Spore",
+          "repositoryPath": "sporeprotocol/spore-sdk",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "onekeyhq/app-monorepo",
+      "productIds": [
+        "onekey"
+      ],
+      "productNames": [
+        "OneKey"
+      ],
+      "selectionDigest": "400fae4094128029cf9c5cfd058681b1d97ebaa65229a3811fbbfb75c2cfd301",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "42c606eb2565af5002a5a0b2e99c5298a5b5d5f4",
+      "sourceProjectClaims": [
+        {
+          "projectId": "onekey",
+          "name": "OneKey",
+          "repositoryPath": "onekeyhq/app-monorepo",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "janx/cknerv",
+      "productIds": [
+        "cknerv"
+      ],
+      "productNames": [
+        "cknerv"
+      ],
+      "selectionDigest": "58de0cf7c5812e7e1d4bac53b538d09c619b4d6c3056e899a11a91f93892c496",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "649fc51c77f6edb319058be80372b762207d6a8d",
+      "sourceProjectClaims": [
+        {
+          "projectId": "cknerv",
+          "name": "cknerv",
+          "repositoryPath": "janx/cknerv",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    },
+    {
+      "repositoryPath": "truthixify/ckb-viz",
+      "productIds": [
+        "ckbviz"
+      ],
+      "productNames": [
+        "ckb-viz"
+      ],
+      "selectionDigest": "6b85428a5880ddc53169859f8c18695dcf21a3730353ecc0a1bf38c05690b676",
+      "alreadyScanned": false,
+      "identityAmbiguous": false,
+      "revision": "ccaf766df6e19d8da787d39aadda9aea084cd64a",
+      "sourceProjectClaims": [
+        {
+          "projectId": "ckbviz",
+          "name": "ckb-viz",
+          "repositoryPath": "truthixify/ckb-viz",
+          "feedRevision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+          "recordObservedAt": "2026-11-17T20:31:04.339Z"
+        }
+      ]
+    }
+  ]
+}

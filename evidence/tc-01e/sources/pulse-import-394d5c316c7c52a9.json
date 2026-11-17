@@ -1,0 +1,1421 @@
+{
+  "schemaVersion": "tc-01e-pulse-ingestion-v1",
+  "service": "https://pulse-lab.lusocryptolabs.com/api/state",
+  "sourceRepository": "https://github.com/LusoCryptoLabs/ckb-pulse",
+  "upstreamRevision": "e1414a9ee1f96c81f76a428991c6af820ff94d79",
+  "observedAt": "2026-11-17T20:42:33.465Z",
+  "state": {
+    "status": "ok",
+    "httpStatus": 200,
+    "etag": "W/\"XIIKOZ-S8UgCU1k43MUAs6\"",
+    "sha256": "ddd5b1ee2ecccd7b13ac754ef7f91dcdd4a0747348858da303197ad5ee6cffe4",
+    "repoCount": 275,
+    "reportedAt": "2026-11-17T20:42:34.517Z",
+    "exactSnapshot": "evidence/tc-01e/sources/pulse-state-ddd5b1ee2ecccd7b.json"
+  },
+  "repositoryDetails": {
+    "requested": 53,
+    "ok": 53,
+    "notFollowed": 0,
+    "unavailable": 0,
+    "invalid": 0,
+    "exactSnapshot": "evidence/tc-01e/sources/pulse-repositories-07479e321ff6993d.json"
+  },
+  "repositoryIdentity": {
+    "linkedAssociations": 124,
+    "exactOrAliasMatches": 53,
+    "exactMatches": 52,
+    "authoritativeAliases": 1,
+    "githubLookups": [
+      {
+        "requestedPath": "truthixify/grid3",
+        "identity": {
+          "id": 1201644964,
+          "node_id": "R_kgDOR5-lpA",
+          "full_name": "truthixify/grid3",
+          "html_url": "https://github.com/truthixify/grid3",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "0dd1749a8aabb21d80180013c3becebead22e560ccdbf4091ebc4d207f2ba012",
+        "canonicalUrl": "https://github.com/truthixify/grid3"
+      },
+      {
+        "requestedPath": "christofa/contestledger",
+        "identity": {
+          "id": 1236051540,
+          "node_id": "R_kgDOSaymVA",
+          "full_name": "christofa/contestledger",
+          "html_url": "https://github.com/christofa/contestledger",
+          "default_branch": "master"
+        },
+        "status": "ok",
+        "digest": "52428716ba705b02e304c6ca01c58e9c2b945febf65b5fb1fe531aad8a6a6762",
+        "canonicalUrl": "https://github.com/christofa/contestledger"
+      },
+      {
+        "requestedPath": "alesfer001/decentralized-kickstarter",
+        "identity": {
+          "id": 1179274652,
+          "node_id": "R_kgDORkpNnA",
+          "full_name": "alesfer001/CrowdCell",
+          "html_url": "https://github.com/alesfer001/CrowdCell",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "4ebb3a93e91d6d99a8a9eced50602d4dcc672959fe9a3223b040beab36cb324f",
+        "canonicalUrl": "https://github.com/alesfer001/CrowdCell"
+      },
+      {
+        "requestedPath": "dotbithq/did-contracts",
+        "identity": {
+          "id": 323254485,
+          "node_id": "MDEwOlJlcG9zaXRvcnkzMjMyNTQ0ODU=",
+          "full_name": "dotbitHQ/did-contracts",
+          "html_url": "https://github.com/dotbitHQ/did-contracts",
+          "default_branch": "master"
+        },
+        "status": "ok",
+        "digest": "e30b7049568a83e43665645cb00ea54b2d039535396db5612da893e22923306a",
+        "canonicalUrl": "https://github.com/dotbitHQ/did-contracts"
+      },
+      {
+        "requestedPath": "calledado/lean-oracle",
+        "identity": {
+          "id": 1227041863,
+          "node_id": "R_kgDOSSMsRw",
+          "full_name": "calledAdo/lean-oracle",
+          "html_url": "https://github.com/calledAdo/lean-oracle",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "9b91d78a9b173305a9bb5012c5f7f45399725ea1c7edb0e9d3267c69cc840f11",
+        "canonicalUrl": "https://github.com/calledAdo/lean-oracle"
+      },
+      {
+        "requestedPath": "bitgetwallet/download",
+        "identity": {
+          "id": 470008655,
+          "node_id": "R_kgDOHAPDTw",
+          "full_name": "bitgetwallet/download",
+          "html_url": "https://github.com/bitgetwallet/download",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "a5b68e99468bc3295cb3e87b2ac2266f8ea7daa7d4a94aa2d04eac07c9c98ffc",
+        "canonicalUrl": "https://github.com/bitgetwallet/download"
+      },
+      {
+        "requestedPath": "tydeptrai21042004/cellflow",
+        "identity": {
+          "id": 1385799153,
+          "node_id": "R_kgDOUpmd8Q",
+          "full_name": "tydeptrai21042004/CellFlow",
+          "html_url": "https://github.com/tydeptrai21042004/CellFlow",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "49fbd8fbeac3928baa488602817cccd50f453308d412f53b4ca60d300224eda2",
+        "canonicalUrl": "https://github.com/tydeptrai21042004/CellFlow"
+      },
+      {
+        "requestedPath": "ajayfrizzy/veyrivo",
+        "identity": {
+          "id": 1308839357,
+          "node_id": "R_kgDOTgNNvQ",
+          "full_name": "Ajayfrizzy/klaveroq",
+          "html_url": "https://github.com/Ajayfrizzy/klaveroq",
+          "default_branch": "main"
+        },
+        "status": "ok",
+        "digest": "ea1f1f32975cee5e23f5ca93a845dac2941772d580bce9aa850c007cade5b490",
+        "canonicalUrl": "https://github.com/Ajayfrizzy/klaveroq"
+      }
+    ]
+  },
+  "discoveryLeads": {
+    "unmatchedPulseRows": 100,
+    "entries": [
+      {
+        "name": "Hanssen0-Alter-Ego/ckb-vm-js",
+        "url": "https://github.com/Hanssen0-Alter-Ego/ckb-vm-js",
+        "group": "builders",
+        "description": "Offline CKB transaction and script-group verification in WebAssembly with caller-supplied context",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-17T18:12:09Z",
+        "lastKind": "push",
+        "activity24h": 24
+      },
+      {
+        "name": "nervosnetwork/ckb",
+        "url": "https://github.com/nervosnetwork/ckb",
+        "group": "nervosnetwork",
+        "description": "The Nervos CKB is a public permissionless blockchain, and the layer 1 of Nervos network.",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T11:30:59Z",
+        "lastKind": "issue_closed",
+        "activity24h": 14
+      },
+      {
+        "name": "officialcmg/ckb-keyway",
+        "url": "https://github.com/officialcmg/ckb-keyway",
+        "group": "builders",
+        "description": "Email-native CKB wallet infrastructure that lets React applications onboard users and provide routed Fiber payments through one SDK.",
+        "tags": [
+          "ckb",
+          "fiber"
+        ],
+        "lastAt": "2026-11-17T20:10:32Z",
+        "lastKind": "pr_open",
+        "activity24h": 14
+      },
+      {
+        "name": "LusoCryptoLabs/ckb-ward",
+        "url": "https://github.com/LusoCryptoLabs/ckb-ward",
+        "group": "LusoCryptoLabs",
+        "description": "Ward: lock proof for CKB. Prove control of any CKB lock with a proof transaction that can never land on chain.",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-17T16:57:29Z",
+        "lastKind": "push",
+        "activity24h": 9
+      },
+      {
+        "name": "Nervos-Community-Catalyst/CKBuilder-projects",
+        "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects",
+        "group": "Nervos-Community-Catalyst",
+        "description": "A tracker and hub for CKBuilder projects",
+        "tags": [
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T18:44:20Z",
+        "lastKind": "comment",
+        "activity24h": 5
+      },
+      {
+        "name": "CECILIA-MULANDI/zk-Lock",
+        "url": "https://github.com/CECILIA-MULANDI/zk-Lock",
+        "group": "builders",
+        "description": "Reusable CKB lock script that conditions cell spending on a valid Groth16 proof.",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-17T16:52:30Z",
+        "lastKind": "push",
+        "activity24h": 3
+      },
+      {
+        "name": "nervosnetwork/ckb-light-test",
+        "url": "https://github.com/nervosnetwork/ckb-light-test",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T07:51:10Z",
+        "lastKind": "pr_open",
+        "activity24h": 3
+      },
+      {
+        "name": "gpBlockchain/fiber-wasm-user-e2e",
+        "url": "https://github.com/gpBlockchain/fiber-wasm-user-e2e",
+        "group": "builders",
+        "description": "fiber-wasm-user-e2e",
+        "tags": [
+          "fiber"
+        ],
+        "lastAt": "2026-11-17T07:23:27Z",
+        "lastKind": "push",
+        "activity24h": 2
+      },
+      {
+        "name": "HeySomtee/streak",
+        "url": "https://github.com/HeySomtee/streak",
+        "group": "builders",
+        "description": "Streak: sports prediction markets settled on Nervos CKB, fantasy games and community competitions",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T15:08:24Z",
+        "lastKind": "push",
+        "activity24h": 2
+      },
+      {
+        "name": "nervosnetwork/ckb-js-vm",
+        "url": "https://github.com/nervosnetwork/ckb-js-vm",
+        "group": "nervosnetwork",
+        "description": "Write on-chain scripts in TypeScript on CKB-VM",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T14:07:52Z",
+        "lastKind": "issue_open",
+        "activity24h": 2
+      },
+      {
+        "name": "Peersyst/fiber-lsp-sdk",
+        "url": "https://github.com/Peersyst/fiber-lsp-sdk",
+        "group": "Peersyst",
+        "description": "",
+        "tags": [
+          "fiber"
+        ],
+        "lastAt": "2026-11-17T12:55:29Z",
+        "lastKind": "issue_open",
+        "activity24h": 2
+      },
+      {
+        "name": "LusoCryptoLabs/LusoCryptoLabs",
+        "url": "https://github.com/LusoCryptoLabs/LusoCryptoLabs",
+        "group": "LusoCryptoLabs",
+        "description": "Our contributions to the Nervos CKB projects we build on",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T16:00:40Z",
+        "lastKind": "push",
+        "activity24h": 1
+      },
+      {
+        "name": "nervosnetwork/ckb-cli",
+        "url": "https://github.com/nervosnetwork/ckb-cli",
+        "group": "nervosnetwork",
+        "description": "CKB command line interface",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T14:13:42Z",
+        "lastKind": "comment",
+        "activity24h": 1
+      },
+      {
+        "name": "nervosnetwork/ckb-light-client",
+        "url": "https://github.com/nervosnetwork/ckb-light-client",
+        "group": "nervosnetwork",
+        "description": "CKB light client reference implementation",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T01:50:06Z",
+        "lastKind": "comment",
+        "activity24h": 1
+      },
+      {
+        "name": "nervosnetwork/ckb-standalone-debugger",
+        "url": "https://github.com/nervosnetwork/ckb-standalone-debugger",
+        "group": "nervosnetwork",
+        "description": "A standalone debugger enabling off-chain contract development",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T14:07:19Z",
+        "lastKind": "issue_open",
+        "activity24h": 1
+      },
+      {
+        "name": "nervosnetwork/fiber-docs",
+        "url": "https://github.com/nervosnetwork/fiber-docs",
+        "group": "nervosnetwork",
+        "description": "Docs for Fiber Network",
+        "tags": [
+          "fiber",
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T07:47:21Z",
+        "lastKind": "push",
+        "activity24h": 1
+      },
+      {
+        "name": "nervosnetwork/nervos-official-website",
+        "url": "https://github.com/nervosnetwork/nervos-official-website",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T03:22:46Z",
+        "lastKind": "push",
+        "activity24h": 1
+      },
+      {
+        "name": "psawyerberlin/ckb-revocable-timelock",
+        "url": "https://github.com/psawyerberlin/ckb-revocable-timelock",
+        "group": "builders",
+        "description": "Revocable timelock encryption on Nervos CKB. Permissionless nodes hold a fresh per-switch key and publish it once an on-chain condition is met — or delete it forever when the owner cancels.",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-17T06:45:07Z",
+        "lastKind": "issue_open",
+        "activity24h": 1
+      },
+      {
+        "name": "sunchengzhu/fiber-windows-smoke",
+        "url": "https://github.com/sunchengzhu/fiber-windows-smoke",
+        "group": "builders",
+        "description": "Run, safely update, and monitor a long-lived Fiber node and channel on Windows",
+        "tags": [
+          "fiber"
+        ],
+        "lastAt": "2026-11-17T07:39:18Z",
+        "lastKind": "push",
+        "activity24h": 1
+      },
+      {
+        "name": "a19q3/fiber-paid-http",
+        "url": "https://github.com/a19q3/fiber-paid-http",
+        "group": "builders",
+        "description": "Rust-first replay-safe paid HTTP gateway and Fiber payment-method toolkit for service metering.",
+        "tags": [
+          "ckb",
+          "fiber"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "Ajayfrizzy/ckb_builder_track",
+        "url": "https://github.com/Ajayfrizzy/ckb_builder_track",
+        "group": "builders",
+        "description": "CKB builder track",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "Akane-CN/blockbeat",
+        "url": "https://github.com/Akane-CN/blockbeat",
+        "group": "builders",
+        "description": "Hear CKB Cells being consumed and born as deterministic music and motion.",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "Akane-CN/spark-verify",
+        "url": "https://github.com/Akane-CN/spark-verify",
+        "group": "builders",
+        "description": "Executable acceptance claims and reproducible evidence reports for CKB projects",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-13T00:36:58Z",
+        "lastKind": "release",
+        "activity24h": 0
+      },
+      {
+        "name": "Alephant6/fiber-jepsen",
+        "url": "https://github.com/Alephant6/fiber-jepsen",
+        "group": "builders",
+        "description": "Jepsen tests for Nervos Fiber: fault injection (kill, pause, partition, clock skew) and invariant checking for payment channels",
+        "tags": [
+          "fiber",
+          "nervos"
+        ],
+        "lastAt": "2026-11-13T16:34:20Z",
+        "lastKind": "issue_open",
+        "activity24h": 0
+      },
+      {
+        "name": "Alive24/CKBoost",
+        "url": "https://github.com/Alive24/CKBoost",
+        "group": "builders",
+        "description": "Gamified Community Engagement Platform built proudly with CKB and other decentralized technology",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-03T00:07:58Z",
+        "lastKind": "comment",
+        "activity24h": 0
+      },
+      {
+        "name": "AltbaseWallet/module-ckb",
+        "url": "https://github.com/AltbaseWallet/module-ckb",
+        "group": "builders",
+        "description": "Altbase Wallet NervosCKB module (cell), source-only, v0.1.5",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "api-evangelist/doublezero",
+        "url": "https://github.com/api-evangelist/doublezero",
+        "group": "api-evangelist",
+        "description": "DoubleZero — independent third-party profile of a public API surface, by API Evangelist. DoubleZero is a decentralized physical infrastructure network (DePIN) that builds and operates a global, permissionless, dedicated-fiber backbone for distributed systems like blockchains — delivering low-latency, high-throughput connectivity where milliseconds",
+        "tags": [
+          "fiber"
+        ],
+        "lastAt": "2026-10-29T21:28:32Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "CECILIA-MULANDI/fiber-probe",
+        "url": "https://github.com/CECILIA-MULANDI/fiber-probe",
+        "group": "builders",
+        "description": "Payment Readiness SDK for Fiber Network - pre-flight check, failure classifier, and channel status for Fiber payments.",
+        "tags": [
+          "fiber"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "CellScript-Labs/AgoraSeal",
+        "url": "https://github.com/CellScript-Labs/AgoraSeal",
+        "group": "CellScript-Labs",
+        "description": "ZK governance and treasury settlement on CKB with CellScript; under development",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "CellScript-Labs/lineage",
+        "url": "https://github.com/CellScript-Labs/lineage",
+        "group": "CellScript-Labs",
+        "description": "Therapeutic batch release evidence, independent verification, and local CellScript CKB-VM checks",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "chukwuma619/twine_app",
+        "url": "https://github.com/chukwuma619/twine_app",
+        "group": "builders",
+        "description": "Flutter app for buying and selling Nervos CKB person to person. Fiat stays outside the app. CKB stays in your Fiber wallet.",
+        "tags": [
+          "ckb",
+          "fiber",
+          "nervos"
+        ],
+        "lastAt": "2026-11-16T01:14:09Z",
+        "lastKind": "star",
+        "activity24h": 0
+      },
+      {
+        "name": "chukwuma619/twine-fiber-poc",
+        "url": "https://github.com/chukwuma619/twine-fiber-poc",
+        "group": "builders",
+        "description": "",
+        "tags": [
+          "fiber"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "chukwuma619/twine-web",
+        "url": "https://github.com/chukwuma619/twine-web",
+        "group": "builders",
+        "description": "Website for Twine, a non-custodial peer-to-peer desk for Nervos CKB on Nostr and Fiber.",
+        "tags": [
+          "ckb",
+          "fiber",
+          "nervos"
+        ],
+        "lastAt": "2026-11-08T03:06:05Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "ckb-devrel/ckb-proxy-locks",
+        "url": "https://github.com/ckb-devrel/ckb-proxy-locks",
+        "group": "ckb-devrel",
+        "description": "",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-07T12:48:50Z",
+        "lastKind": "issue_open",
+        "activity24h": 0
+      },
+      {
+        "name": "ckb-service-runner/csr-network-monitor",
+        "url": "https://github.com/ckb-service-runner/csr-network-monitor",
+        "group": "ckb-service-runner",
+        "description": "CSR Network Monitor — probes CKB Service Runners, publishes availability, ranking and a weekly on-chain stat cell",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-10T07:14:05Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "CKBFansDAO/ckbdapps",
+        "url": "https://github.com/CKBFansDAO/ckbdapps",
+        "group": "CKBFansDAO",
+        "description": "The directory of the Nervos CKB ecosystem: every project in one Markdown file, a live halving countdown and network stats.",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-12T09:45:13Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "ckbswap/ckb-cell-framework",
+        "url": "https://github.com/ckbswap/ckb-cell-framework",
+        "group": "builders",
+        "description": "A Rust framework for Nervos CKB smart contracts with typed Cells, declarative constraints, off-chain transaction builders, and local CKB-VM testing.",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-02T15:54:23Z",
+        "lastKind": "branch",
+        "activity24h": 0
+      },
+      {
+        "name": "dlToanDev/CKB-Cell-Inspector",
+        "url": "https://github.com/dlToanDev/CKB-Cell-Inspector",
+        "group": "builders",
+        "description": "",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-09T08:40:47Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "godwokenrises/godwoken",
+        "url": "https://github.com/godwokenrises/godwoken",
+        "group": "godwokenrises",
+        "description": "Godwoken is an optimistic rollup solution built on Nervos CKB.",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-10-20T13:53:37Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "gpBlockchain/ckb-release-monitor",
+        "url": "https://github.com/gpBlockchain/ckb-release-monitor",
+        "group": "builders",
+        "description": "Daily integrity monitor for nervosnetwork/ckb release binaries",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "gpBlockchain/fiber-wasm-demo",
+        "url": "https://github.com/gpBlockchain/fiber-wasm-demo",
+        "group": "builders",
+        "description": "",
+        "tags": [
+          "fiber"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "Hanssen0-Alter-Ego/test-khie-apps",
+        "url": "https://github.com/Hanssen0-Alter-Ego/test-khie-apps",
+        "group": "builders",
+        "description": "Reusable evidence-based testnet browser workflow for any Khie-compatible CKB app using CCC App and the Nervos faucet.",
+        "tags": [
+          "ckb",
+          "ccc",
+          "nervos"
+        ],
+        "lastAt": "2026-11-12T08:19:27Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "Hanssen0/khie-mobile",
+        "url": "https://github.com/Hanssen0/khie-mobile",
+        "group": "builders",
+        "description": "An AI generated simple CKB wallet and Khie Provider",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-16T15:55:18Z",
+        "lastKind": "release",
+        "activity24h": 0
+      },
+      {
+        "name": "humble-little-bear/fiber-swap-demo",
+        "url": "https://github.com/humble-little-bear/fiber-swap-demo",
+        "group": "builders",
+        "description": "",
+        "tags": [
+          "fiber"
+        ],
+        "lastAt": "2026-10-26T01:06:24Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "ickb/contracts",
+        "url": "https://github.com/ickb/contracts",
+        "group": "ickb",
+        "description": "The iCKB L1 scripts: NervosDAO deposits as a liquid token",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-11T15:43:47Z",
+        "lastKind": "comment",
+        "activity24h": 0
+      },
+      {
+        "name": "ickb/whitepaper",
+        "url": "https://github.com/ickb/whitepaper",
+        "group": "ickb",
+        "description": "iCKB whitepaper: a NervosDAO liquid staking token",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "ILE-Labs/ckb-msig",
+        "url": "https://github.com/ILE-Labs/ckb-msig",
+        "group": "ILE-Labs",
+        "description": "Check, merge and convert CKB multisig signatures between ckb-cli, Neuron and CCC. A CLI and GitHub Action that never holds keys.",
+        "tags": [
+          "ckb",
+          "ccc",
+          "nervos"
+        ],
+        "lastAt": "2026-11-08T17:15:38Z",
+        "lastKind": "pr_open",
+        "activity24h": 0
+      },
+      {
+        "name": "jiangxianliang007/ckb-block-auditor",
+        "url": "https://github.com/jiangxianliang007/ckb-block-auditor",
+        "group": "builders",
+        "description": "",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-10-20T03:18:39Z",
+        "lastKind": "release",
+        "activity24h": 0
+      },
+      {
+        "name": "Kaylahray/CKBuilder",
+        "url": "https://github.com/Kaylahray/CKBuilder",
+        "group": "builders",
+        "description": "My CKB developer journey",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-07T17:59:30Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "Kaylahray/evolving-stateful-object",
+        "url": "https://github.com/Kaylahray/evolving-stateful-object",
+        "group": "builders",
+        "description": "A CKB protocol for on-chain objects that evolve. Unforgeable identity, state transitions enforced by consensus, and full history you can rebuild from the chain alone. Rust core + TypeScript SDK.",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "kydchen/fiber-quest",
+        "url": "https://github.com/kydchen/fiber-quest",
+        "group": "builders",
+        "description": "Interactive bilingual quest explaining what Fiber (CKB's payment-channel network) still needs for a real mobile wallet. Live: https://fiber-quest.vercel.app",
+        "tags": [
+          "ckb",
+          "fiber",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "lay2dev/pw-lock",
+        "url": "https://github.com/lay2dev/pw-lock",
+        "group": "lay2dev",
+        "description": "A ckb lock script which can make use of other blockchain wallets as ckb wallets.",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-08T16:55:41Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/cardano-ckb-isomorphic",
+        "url": "https://github.com/LusoCryptoLabs/cardano-ckb-isomorphic",
+        "group": "LusoCryptoLabs",
+        "description": "An experiment in moving assets between Cardano and CKB with no custodian and no committee: each chain verifies the other's consensus on-chain. Testnet prototype, unaudited.",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-02T18:49:34Z",
+        "lastKind": "comment",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/ckb-explorer-frontend",
+        "url": "https://github.com/LusoCryptoLabs/ckb-explorer-frontend",
+        "group": "LusoCryptoLabs",
+        "description": "Nervos CKB Explorer Frontend",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-06T22:00:05Z",
+        "lastKind": "branch",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/ckb-htlc-swap",
+        "url": "https://github.com/LusoCryptoLabs/ckb-htlc-swap",
+        "group": "LusoCryptoLabs",
+        "description": "Atomic swaps between CKB and USDC, ETH or BTC: a hashlock lock on CKB, an order book and a market maker. Testnet.",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-12T12:32:08Z",
+        "lastKind": "star",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/ckb-mldsa-lock",
+        "url": "https://github.com/LusoCryptoLabs/ckb-mldsa-lock",
+        "group": "LusoCryptoLabs",
+        "description": "A CKB lock for ML-DSA (FIPS 204) signatures, with its tests, controls and benchmark. Prototype, testnet only.",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-15T04:32:50Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/ckb-monitor",
+        "url": "https://github.com/LusoCryptoLabs/ckb-monitor",
+        "group": "LusoCryptoLabs",
+        "description": "Live CKB on-chain monitor: subscribe to the public WebSocket, classify every tx, and fire alert/webhook/exec actions on rules you care about. Zero deps on Node 22+.",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-02T16:17:51Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/ckbdapps",
+        "url": "https://github.com/LusoCryptoLabs/ckbdapps",
+        "group": "LusoCryptoLabs",
+        "description": "The directory of the Nervos CKB ecosystem: every project in one Markdown file, a live halving countdown and network stats.",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-10-29T10:16:12Z",
+        "lastKind": "branch",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/ckbfs-reader",
+        "url": "https://github.com/LusoCryptoLabs/ckbfs-reader",
+        "group": "LusoCryptoLabs",
+        "description": "Read a CKBFS v3 file off Nervos CKB and verify it against the chain, including every prefix of an append history.",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-02T16:08:21Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/docs.nervos.org",
+        "url": "https://github.com/LusoCryptoLabs/docs.nervos.org",
+        "group": "LusoCryptoLabs",
+        "description": "Nervos CKB Documentation, curated by Nervos Foundation, contributed by the Nervos Community with ❤️.",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-10-29T17:11:36Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/fiber",
+        "url": "https://github.com/LusoCryptoLabs/fiber",
+        "group": "LusoCryptoLabs",
+        "description": "A scalable, privacy-by-default payment & swap network",
+        "tags": [
+          "fiber"
+        ],
+        "lastAt": "2026-11-13T17:44:54Z",
+        "lastKind": "branch",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/fiber-node",
+        "url": "https://github.com/LusoCryptoLabs/fiber-node",
+        "group": "LusoCryptoLabs",
+        "description": "Configuration and rebuild recipe for the LusoCryptoLabs Fiber routing node on Nervos CKB",
+        "tags": [
+          "ckb",
+          "fiber",
+          "nervos"
+        ],
+        "lastAt": "2026-11-02T17:27:08Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/fiber-node-installer",
+        "url": "https://github.com/LusoCryptoLabs/fiber-node-installer",
+        "group": "LusoCryptoLabs",
+        "description": "Archived. Use the official Fiber install scripts: github.com/nervosnetwork/fiber/tree/develop/tools/install",
+        "tags": [
+          "fiber",
+          "nervos"
+        ],
+        "lastAt": "2026-11-06T11:20:14Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/Liquid-Cells",
+        "url": "https://github.com/LusoCryptoLabs/Liquid-Cells",
+        "group": "LusoCryptoLabs",
+        "description": "Trust Minimized pooled multi-recipient payment rollup for Nervos CKB",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-02T17:39:25Z",
+        "lastKind": "comment",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/poi-onchain",
+        "url": "https://github.com/LusoCryptoLabs/poi-onchain",
+        "group": "LusoCryptoLabs",
+        "description": "The CKB steps behind POI: Proof of Identity, as small runnable examples.",
+        "tags": [
+          "ckb",
+          "fiber",
+          "ccc",
+          "nervos"
+        ],
+        "lastAt": "2026-11-02T18:24:51Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/scryve-tools",
+        "url": "https://github.com/LusoCryptoLabs/scryve-tools",
+        "group": "LusoCryptoLabs",
+        "description": "TypeScript utilities for building on CKB, taken from the Scryve production app.",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-11-02T17:48:51Z",
+        "lastKind": "comment",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/trickle",
+        "url": "https://github.com/LusoCryptoLabs/trickle",
+        "group": "LusoCryptoLabs",
+        "description": "Streaming allowances on CKB Fiber: approve a budget once with a passkey, then tiny payments settle every tick up to a hard cap.",
+        "tags": [
+          "ckb",
+          "fiber"
+        ],
+        "lastAt": "2026-11-02T17:41:33Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/twine",
+        "url": "https://github.com/LusoCryptoLabs/twine",
+        "group": "LusoCryptoLabs",
+        "description": "Coordinator for Twine, a non-custodial peer-to-peer market for Nervos CKB. Orders run over Nostr. CKB locks in Fiber hold invoices on each trader's own node.",
+        "tags": [
+          "ckb",
+          "fiber",
+          "nervos"
+        ],
+        "lastAt": "2026-11-12T11:17:30Z",
+        "lastKind": "branch",
+        "activity24h": 0
+      },
+      {
+        "name": "LusoCryptoLabs/vortx-swap",
+        "url": "https://github.com/LusoCryptoLabs/vortx-swap",
+        "group": "LusoCryptoLabs",
+        "description": "Greatest dex in the world on CKB. Testnet only, not audited, not maintained.",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-10-22T20:46:16Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "mohanson/ckb-tw",
+        "url": "https://github.com/mohanson/ckb-tw",
+        "group": "builders",
+        "description": "",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-10-28T02:00:29Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "mohanson/ckb-tw-web",
+        "url": "https://github.com/mohanson/ckb-tw-web",
+        "group": "builders",
+        "description": "",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "Morph-Channel-Network/Morph",
+        "url": "https://github.com/Morph-Channel-Network/Morph",
+        "group": "Morph-Channel-Network",
+        "description": "Channel/Factory Protocol Under the CKB Cell Model",
+        "tags": [
+          "ckb",
+          "fiber",
+          "dob/spore"
+        ],
+        "lastAt": "2026-11-11T23:03:46Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "mulhamna/CKB-report",
+        "url": "https://github.com/mulhamna/CKB-report",
+        "group": "builders",
+        "description": "",
+        "tags": [
+          "ckb"
+        ],
+        "lastAt": "2026-10-31T18:21:18Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "Myelin-Labs/Myelin",
+        "url": "https://github.com/Myelin-Labs/Myelin",
+        "group": "Myelin-Labs",
+        "description": "A CKB-aligned session runtime for finite Cell execution in production, powering UTXOPlay.io",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-07T16:45:46Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "nervina-labs/ckb-dex-contract",
+        "url": "https://github.com/nervina-labs/ckb-dex-contract",
+        "group": "nervina-labs",
+        "description": "DEX Contract on Nervos CKB",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-10-22T04:09:03Z",
+        "lastKind": "pr_open",
+        "activity24h": 0
+      },
+      {
+        "name": "nervina-labs/ckb-dex-sdk",
+        "url": "https://github.com/nervina-labs/ckb-dex-sdk",
+        "group": "nervina-labs",
+        "description": "DEX SDK on Nervos CKB",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-10-23T16:36:24Z",
+        "lastKind": "pr_closed",
+        "activity24h": 0
+      },
+      {
+        "name": "Nervos-Community-Catalyst/Claw-Order-Hackathon",
+        "url": "https://github.com/Nervos-Community-Catalyst/Claw-Order-Hackathon",
+        "group": "Nervos-Community-Catalyst",
+        "description": "",
+        "tags": [
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "Nervos-Community-Catalyst/Onhandl",
+        "url": "https://github.com/Nervos-Community-Catalyst/Onhandl",
+        "group": "Nervos-Community-Catalyst",
+        "description": "Agentic DEFAI workflows",
+        "tags": [
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ai-test-agent",
+        "url": "https://github.com/nervosnetwork/ai-test-agent",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "nervos"
+        ],
+        "lastAt": "2026-11-10T07:40:19Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-auth",
+        "url": "https://github.com/nervosnetwork/ckb-auth",
+        "group": "nervosnetwork",
+        "description": "A consolidated library featuring numerous blockchains authentication techniques on CKB-VM",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-10T05:09:06Z",
+        "lastKind": "pr_open",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-c-stdlib",
+        "url": "https://github.com/nervosnetwork/ckb-c-stdlib",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-10T07:22:01Z",
+        "lastKind": "pr_open",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-contract-tests",
+        "url": "https://github.com/nervosnetwork/ckb-contract-tests",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-dev-skills",
+        "url": "https://github.com/nervosnetwork/ckb-dev-skills",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-discovery",
+        "url": "https://github.com/nervosnetwork/ckb-discovery",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-09T07:12:03Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-docker-builder",
+        "url": "https://github.com/nervosnetwork/ckb-docker-builder",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-explorer",
+        "url": "https://github.com/nervosnetwork/ckb-explorer",
+        "group": "nervosnetwork",
+        "description": "CKB Explorer",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-12T22:49:53Z",
+        "lastKind": "comment",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-miscellaneous-scripts",
+        "url": "https://github.com/nervosnetwork/ckb-miscellaneous-scripts",
+        "group": "nervosnetwork",
+        "description": "Interesting and useful CKB scripts which aren't necessarily in system scripts",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-nginx-proxy",
+        "url": "https://github.com/nervosnetwork/ckb-nginx-proxy",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-node-bridge-miner",
+        "url": "https://github.com/nervosnetwork/ckb-node-bridge-miner",
+        "group": "nervosnetwork",
+        "description": "adapt ckbNodeBridge ",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-production-scripts",
+        "url": "https://github.com/nervosnetwork/ckb-production-scripts",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-py-integration-test",
+        "url": "https://github.com/nervosnetwork/ckb-py-integration-test",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-12T11:13:49Z",
+        "lastKind": "pr_open",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-rocksdb",
+        "url": "https://github.com/nervosnetwork/ckb-rocksdb",
+        "group": "nervosnetwork",
+        "description": "A high-performance RocksDB wrapper tailored for Nervos CKB (Common Knowledge Base), with CKB-specific optimizations",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-10-30T08:50:08Z",
+        "lastKind": "release",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-rpc-resources",
+        "url": "https://github.com/nervosnetwork/ckb-rpc-resources",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-sdk-rust",
+        "url": "https://github.com/nervosnetwork/ckb-sdk-rust",
+        "group": "nervosnetwork",
+        "description": "Rust SDK for Nervos CKB",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-06T08:01:39Z",
+        "lastKind": "issue_closed",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-std",
+        "url": "https://github.com/nervosnetwork/ckb-std",
+        "group": "nervosnetwork",
+        "description": "This library contains serveral modules that could help you write CKB contract with Rust.",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-10T08:12:08Z",
+        "lastKind": "pr_open",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-sync",
+        "url": "https://github.com/nervosnetwork/ckb-sync",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-12T10:31:47Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-system-scripts",
+        "url": "https://github.com/nervosnetwork/ckb-system-scripts",
+        "group": "nervosnetwork",
+        "description": "CKB's official system scripts. Those contracts will be included in system cells in genesis blocks",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-07T12:46:29Z",
+        "lastKind": "comment",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-testtool",
+        "url": "https://github.com/nervosnetwork/ckb-testtool",
+        "group": "nervosnetwork",
+        "description": "A helper library for writing CKB script test cases. It is migrated from capsule: https://github.com/nervosnetwork/capsule",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-treasury-lab",
+        "url": "https://github.com/nervosnetwork/ckb-treasury-lab",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": "2026-11-05T12:26:59Z",
+        "lastKind": "push",
+        "activity24h": 0
+      },
+      {
+        "name": "nervosnetwork/ckb-tui",
+        "url": "https://github.com/nervosnetwork/ckb-tui",
+        "group": "nervosnetwork",
+        "description": "",
+        "tags": [
+          "ckb",
+          "nervos"
+        ],
+        "lastAt": null,
+        "lastKind": null,
+        "activity24h": 0
+      }
+    ]
+  },
+  "limits": {
+    "maxGithubAliasChecks": 8,
+    "maxRepositoryDetails": 60,
+    "repositoryDetailCacheHours": 6,
+    "activityDoesNotProveFunctionalityOrAdoption": true
+  }
+}

@@ -17,7 +17,7 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
  const offline=record.mode==='offline-script-group-replay';
  return <>
   <section className="hero">
-   <Link className="eyebrow" href="/trials">← Trials</Link>
+   <Link className="eyebrow" href="/trials">← Integration Lab</Link>
    <h1>Execution receipt.</h1>
    <p>Level {record.evidenceLevel} · {record.mode} · {record.result}</p>
    <p>Recorded digest: <code>{record.receiptSha256}</code></p>

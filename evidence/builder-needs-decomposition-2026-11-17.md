@@ -6,7 +6,7 @@ Run date: 2026-11-17. Database: the existing local PGlite corpus. No project rec
 
 The pipeline read all 385 imported signals. It selected 164 records whose imported source kind is `need` or `obstacle`, split their source text into 856 literal statements, and attached each statement to its project, original source URL, source revision, observation time, and character offsets in the imported claim. Those records span 49 projects and 49 issue URLs.
 
-Each statement receives one bounded topic label and one stance label. The topic describes the subject of the source excerpt; stance distinguishes an explicit ask, a reported obstacle, a roadmap item, a status update, or ambiguous language. Labels are automated interpretations. Source statements remain unverified upstream claims.
+Each statement receives one bounded topic label and one stance label. The topic describes the subject of the source excerpt; stance distinguishes an explicit ask, a reported obstacle, a roadmap item, a status update, or ambiguous language. Labels are automated interpretations. Source statements remain unverified upstream claims. The project browser searches the excerpts and filters projects by these need categories, and each project profile links the visible fragments back to the originating source.
 
 ## Corpus counts
 

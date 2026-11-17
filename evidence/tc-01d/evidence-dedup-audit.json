@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "scopeOpportunityId": "need-53135c9a7743cd070658f7756be90c5b",
+  "reason": "Audit copy before removing duplicate evidence rows created by an early non-transactional qualification-script test run. The opportunity was created during this TC-01D run; the corrected writer compares claims in a transaction and repeated runs insert no further copies.",
+  "beforeRowCount": 6,
+  "duplicateGroups": [
+    {
+      "claim": "Current source status: issue OPEN, updated 2026-11-11T17:18:35Z; exact atomic request still occurs in the body.",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+      "revision": "2026-11-11T17:18:35Z",
+      "keepId": 992,
+      "removeIds": [
+        1025
+      ]
+    },
+    {
+      "claim": "Historical human review offer: No blockers right now \u2014 this issue is specifically to\ncollect community input before the API and reorg-handling work lands.\n\nHappy to jump on a 20-minute call with anyone whose app has non-trivial\nindexing needs. The architecture document in the repo has more detail for\nreviewers who want to dig in.",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+      "revision": "2026-04-28T05:42:11Z",
+      "keepId": 993,
+      "removeIds": [
+        1026
+      ]
+    },
+    {
+      "claim": "Builder need (exact imported atomic statement): 4. **Indexer infrastructure for production** \u2014 Currently the indexer runs locally and is exposed via ngrok. For production, what's the recommended approach?",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+      "revision": "2026-11-11T17:18:35Z",
+      "keepId": 991,
+      "removeIds": [
+        1024
+      ]
+    }
+  ],
+  "preservedRows": [
+    {
+      "id": 1025,
+      "opportunityId": "need-53135c9a7743cd070658f7756be90c5b",
+      "needItemId": "ffbf06804d614a01b008c8fd697d348df1f3ef8c389337be01793c5b4917047f",
+      "claim": "Current source status: issue OPEN, updated 2026-11-11T17:18:35Z; exact atomic request still occurs in the body.",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+      "revision": "2026-11-11T17:18:35Z",
+      "observedAt": "2026-11-17T13:05:46.000Z",
+      "verification": "Read-only authenticated GitHub API check at 2026-11-17T13:05:46Z; open status is not proof the builder still wants outside help."
+    },
+    {
+      "id": 1026,
+      "opportunityId": "need-53135c9a7743cd070658f7756be90c5b",
+      "needItemId": "ffbf06804d614a01b008c8fd697d348df1f3ef8c389337be01793c5b4917047f",
+      "claim": "Historical human review offer: No blockers right now \u2014 this issue is specifically to\ncollect community input before the API and reorg-handling work lands.\n\nHappy to jump on a 20-minute call with anyone whose app has non-trivial\nindexing needs. The architecture document in the repo has more detail for\nreviewers who want to dig in.",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+      "revision": "2026-04-28T05:42:11Z",
+      "observedAt": "2026-11-17T13:05:46.000Z",
+      "verification": "This same-scope alternative was rejected by the discovery matcher as offer_type_mismatch; current-state result is partial/partial. Offer is not confirmed as available."
+    },
+    {
+      "id": 991,
+      "opportunityId": "need-53135c9a7743cd070658f7756be90c5b",
+      "needItemId": "ffbf06804d614a01b008c8fd697d348df1f3ef8c389337be01793c5b4917047f",
+      "claim": "Builder need (exact imported atomic statement): 4. **Indexer infrastructure for production** \u2014 Currently the indexer runs locally and is exposed via ngrok. For production, what's the recommended approach?",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+      "revision": "2026-11-11T17:18:35Z",
+      "observedAt": "2026-11-17T13:05:46.000Z",
+      "verification": "Exact need remains present in public issue body checked 2026-11-17T13:05:46Z; source issue is OPEN. Imported category and offsets are automated, and the public status does not confirm current intent. Evidence body SHA-256: b1a1d98a62c4f8b4b82c5a43803058f9d3288844a48b598c695904d38e267235."
+    },
+    {
+      "id": 992,
+      "opportunityId": "need-53135c9a7743cd070658f7756be90c5b",
+      "needItemId": "ffbf06804d614a01b008c8fd697d348df1f3ef8c389337be01793c5b4917047f",
+      "claim": "Current source status: issue OPEN, updated 2026-11-11T17:18:35Z; exact atomic request still occurs in the body.",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+      "revision": "2026-11-11T17:18:35Z",
+      "observedAt": "2026-11-17T13:05:46.000Z",
+      "verification": "Read-only authenticated GitHub API check at 2026-11-17T13:05:46Z; open status is not proof the builder still wants outside help."
+    },
+    {
+      "id": 993,
+      "opportunityId": "need-53135c9a7743cd070658f7756be90c5b",
+      "needItemId": "ffbf06804d614a01b008c8fd697d348df1f3ef8c389337be01793c5b4917047f",
+      "claim": "Historical human review offer: No blockers right now \u2014 this issue is specifically to\ncollect community input before the API and reorg-handling work lands.\n\nHappy to jump on a 20-minute call with anyone whose app has non-trivial\nindexing needs. The architecture document in the repo has more detail for\nreviewers who want to dig in.",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+      "revision": "2026-04-28T05:42:11Z",
+      "observedAt": "2026-11-17T13:05:46.000Z",
+      "verification": "This same-scope alternative was rejected by the discovery matcher as offer_type_mismatch; current-state result is partial/partial. Offer is not confirmed as available."
+    },
+    {
+      "id": 1024,
+      "opportunityId": "need-53135c9a7743cd070658f7756be90c5b",
+      "needItemId": "ffbf06804d614a01b008c8fd697d348df1f3ef8c389337be01793c5b4917047f",
+      "claim": "Builder need (exact imported atomic statement): 4. **Indexer infrastructure for production** \u2014 Currently the indexer runs locally and is exposed via ngrok. For production, what's the recommended approach?",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+      "revision": "2026-11-11T17:18:35Z",
+      "observedAt": "2026-11-17T13:05:46.000Z",
+      "verification": "Exact need remains present in public issue body checked 2026-11-17T13:05:46Z; source issue is OPEN. Imported category and offsets are automated, and the public status does not confirm current intent. Evidence body SHA-256: b1a1d98a62c4f8b4b82c5a43803058f9d3288844a48b598c695904d38e267235."
+    }
+  ],
+  "auditRecordedAt": "2026-11-17T13:30:20Z",
+  "originalCaptureTimestampKnown": false,
+  "timestampNote": "The prior copy timestamp was not retained; the earlier fixed createdAt value was not a verified observation time and has been removed. Row values, IDs and source observation times remain preserved."
+}

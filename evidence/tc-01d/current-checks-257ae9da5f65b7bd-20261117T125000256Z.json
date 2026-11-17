@@ -1,0 +1,1782 @@
+{
+  "schemaVersion": 1,
+  "sourcePool": "evidence/tc-01d/candidate-pool-257ae9da5f65b7bd.json",
+  "sourcePoolSha256": "aa09ddd08229362745d11e867ef4bc09151451101edff3a1ce7157fb2fe8b7ea",
+  "sourceSnapshotSha256": "257ae9da5f65b7bd309b0f6b009eece769da5d8937e525bd8f022dd28624009e",
+  "verificationMethod": "Existing bounded candidate-scoped current-state verifier. Need-only checks omit a provider. Same-scope matcher-rejected alternatives are fetched only as alternatives and remain rejected in the engine record. No contacts or external writes.",
+  "checks": [
+    {
+      "candidateId": "qualification-259687514edd36a88df2ddcaa7e993ec",
+      "needItemId": "428f8089c355e615bca7d7adc1dc9d829e1c533d7c2dd810b80f6931b161f073",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+      "sourceRevision": "2026-05-06T13:42:09Z",
+      "engineDisposition": "no_supported_provider",
+      "checkedPair": null,
+      "check": {
+        "checkedAt": "2026-11-17T12:49:39.409Z",
+        "result": "complete",
+        "freshness": "current",
+        "lifecycleState": "proposed",
+        "compatibilityState": "unknown",
+        "summary": "Relevant current source material discusses the scoped capability, but does not demonstrate completion.",
+        "uncertainty": "The source does not establish implementation or compatible runtime behavior.",
+        "nextAction": "Inspect the cited code and record a reproducible compatibility check before promotion.",
+        "queries": [
+          "pckt - Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+          "pckt - Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on test",
+          "- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on test",
+          "ckb human distribution"
+        ],
+        "limitations": [
+          "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+          "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+          "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility."
+        ],
+        "sources": [
+          {
+            "url": "https://github.com/RobaireTH/pckt/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:39.409Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "f351c6c2eea531814e78d557b8a23c2695df292d",
+            "publishedAt": "2026-10-03T20:19:30Z",
+            "etag": "\"3984aa6f2ebf556318b3bc33324d0f8e\"",
+            "cache": "miss",
+            "contentSha256": "4597528300b28cbeaa4cd76e5dc314d2dcd112adb899dc2b2edab3ec66603cd7",
+            "excerpt": "f351c6c2eea531814e78d557b8a23c2695df292d 2026-10-03T20:19:30Z Recent Commits to pckt:f351c6c2eea531814e78d557b8a23c2695df292d"
+          },
+          {
+            "url": "https://github.com/RobaireTH/pckt/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:39.409Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-10-03T20:27:24Z",
+            "etag": "W/\"8a2c1efb96ee30bd7d8625b3fb060436\"",
+            "cache": "miss",
+            "contentSha256": "98e2b2b03aa80e87a2b40a9d6416b1e83d1bc24c29da6ea6264ddca2800b460e",
+            "excerpt": "REPO_PULL_REQUEST_STATE_MERGED fix(frontend): show public claim links as view only REPO_PULL_REQUEST_STATE_MERGED fix(frontend): remove the claim key from the url after a successful claim REPO_PULL_REQUEST_STATE_MERGED refactor(frontend): drop unused header dep from claim transactions REPO_PULL_REQUEST_STATE_MERGED fix(frontend): resolve the live packet cell and retry stale claims REPO_PULL_REQUEST_STATE_MERGED build(frontend): declare @noble/curves instead of unused @noble/secp256k1 REPO_PULL_REQUEST_STATE_MERGED fix(api): map relay errors only when the packet lock fails REPO_PULL_REQUEST_STATE_MERGED feat(api): paginate packet and claim lists REPO_PULL_REQUEST_STATE_MERGED fix(api): cap and rate limit event stream connections REPO_PULL_REQUEST_STATE_MERGED refactor(api): remove unused messages endpoint REPO_PULL_REQUEST_STATE_MERGED fix(indexer): classify packet spends from the packet input witness REPO_PULL_REQUEST_STATE_MERGED fix(indexer): scan missed blocks instead of skipping to tip after downtime REPO_PULL_REQUEST_STATE_MERGED fix(api): restrict shortlinks to claim pages REPO_PULL_REQUEST_STATE_MERGED fix(api): rate limit by the proxy-reported client ip REPO_PULL_REQUEST_STATE_MERGED fix(indexer): skip packet cells that are not well-formed seals REPO_PULL_REQUEST_STATE_MERGED test(contract): cover multi-slot claims, successor capacity and post-expiry claims REPO_PULL_REQUEST_STATE_MERGED feat(contract): let claims pay their fee out of the payout REPO_PULL_REQUEST_STATE_MERGED fix(contract): mix claimer lock hash into lucky slot seed REPO_PULL_REQUEST_STATE_MERGED fix(contract): require reclaim to return the packet capacity to the owner REPO_PULL_REQUEST_STATE_MERGED fix(contract): reject claim successors that carry a type script Pull requests · RobaireTH/pckt Pull requests · RobaireTH/pckt"
+          },
+          {
+            "url": "https://github.com/RobaireTH/pckt/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:39.409Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"c429cbc01247a7d9fcb23e166e3cd8bf\"",
+            "cache": "miss",
+            "contentSha256": "53b84928af87664a1a0756d0fe8605de7a9eb7ebec64349515f8bbc0ca284e53",
+            "excerpt": "Releases · RobaireTH/pckt Releases · RobaireTH/pckt"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:39.409Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-05-06T13:42:09Z",
+            "cache": "miss",
+            "contentSha256": "51f9cca65d2f35c45da07d64a5454cc03d53245faa072a06d2a969276a47c43d",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects pckt: A friendly way to send CKB OPEN ## Project Summary pckt is a red-packet style application built on CKB. A sender seals an amount of CKB into a single live packet cell governed by a custom Rust lock script, then shares a claim link. Recipients open the link and each claim consumes the packet cell and produces its next version, so the chain itself is the source of truth for who has claimed and how much is left. If all slots are claimed the packet terminates; if it expires first, the sender can reclaim the remainder. Three modes are supported: **fixed** (every recipient gets the same amount), **lucky split** (random non-last payouts with a contract-enforced 63 CKB minimum so no slot goes below cell-rent), and **timed unlock** (sealed until a wall-clock time, then everyone can claim). ## Tools used - **Contract**: Rust + `ckb-std` 0.18, `molecule`, `blake2b-ref`, `k256` (compiled to `riscv64imac-unknown-none-elf`) - **Frontend**: React 18 + TypeScript + Vite, `@ckb-ccc/connector-react` for wallet connect and transaction building, `@noble/secp256k1` for claim-secret signing - **Backend**: Rust + Axum + SQLite indexer, deployed on Fly.io (single shared-CPU machine + persistent volume) - **Hosting**: Vercel (frontend), Fly.io (backend), CKB testnet (Pudge) RPC + indexer - **CLI / deploy**: `ckb-cli` for keystore-signed contract deploys ## Current features - Seal a packet on-chain in fixed, lucky-split, or timed-unlock mode (2–50 slots) - Claim by link — the claim secret lives in the URL fragment so it never touches the backend - Lucky split with on-chain enforced 63 CKB per-slot minimum (just redeployed on testnet) - Timed-unlock packets that reject claims before the unlock timestamp - Reclaim flow for expired packets, wired into the sender UI - Sender-side dashboard: active packets, claimed activity, expired and reclaimable - Sender profile labels (backend-stored, convenience naming) - In-app notifications feed for claim "
+          },
+          {
+            "url": "https://github.com/search?q=pckt%20-%20Distribution%3A%20where%20does%20a%20CKB-native%20app%20actually%20find%20users%20today%2C%20and%20what's%20the%20bar%20to%20graduate%20from%20%22demo%20on%20testnet%22%20to%20%22people%20send%20each%20other%20pckts%20because%20they%20want%20to%22%3F&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:39.409Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"dc198c8ce90f1c024cc540db3073db3a\"",
+            "cache": "miss",
+            "contentSha256": "a1aa2b8115b45efbacd6270e762bdef85000cff3dc0142d93bf0e5b0889af06b",
+            "excerpt": "Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=pckt%20-%20Distribution%3A%20where%20does%20a%20CKB-native%20app%20actually%20find%20users%20today%2C%20and%20what's%20the%20bar%20to%20graduate%20from%20%22demo%20on%20test&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:39.409Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"607bf6a2f395c09c86da193bbaa7785b\"",
+            "cache": "miss",
+            "contentSha256": "a1aa2b8115b45efbacd6270e762bdef85000cff3dc0142d93bf0e5b0889af06b",
+            "excerpt": "Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=-%20Distribution%3A%20where%20does%20a%20CKB-native%20app%20actually%20find%20users%20today%2C%20and%20what's%20the%20bar%20to%20graduate%20from%20%22demo%20on%20test&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:39.409Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"d132300feb406dd6c5f7d19280630e10\"",
+            "cache": "miss",
+            "contentSha256": "a1aa2b8115b45efbacd6270e762bdef85000cff3dc0142d93bf0e5b0889af06b",
+            "excerpt": "Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=ckb%20human%20distribution&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:39.409Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"4d61ff8ceeb4cc7861457721594f4fbe\"",
+            "cache": "miss",
+            "contentSha256": "b2b1d1b56b1404a7ea6d4b061cfd22f64fc7c6409f355dda45e820683fca4868",
+            "excerpt": "open open open open open open open open open open Issue search results Issue search results"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "16d0f2e0b32d432023006fb12d09816c102e7d7235a13ce40c4fbeec23f6609f",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+            "revision": "2026-05-06T13:42:09Z",
+            "checkedAt": "2026-11-17T12:49:39.409Z",
+            "evidenceType": "status_update",
+            "excerpt": "- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "Imported atomic need; automated category and explicit-offer interpretation; source claim unverified",
+            "sourceSha256": "3cd427a237aac0781feb5aa958ebbbc0859fa93db680f61d642a16da24ac34ae"
+          },
+          {
+            "id": "572647ace9fc3fa4cf295ecf83c323fbe6a7a8c7498d6876098f7c462cb11c45",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+            "publishedAt": "2026-05-06T13:42:09.000Z",
+            "checkedAt": "2026-11-17T12:49:39.409Z",
+            "evidenceType": "status_update",
+            "excerpt": "check before doing the rewrite. 2. **Lucky split's last-slot windfall is structural, not stylistic.** The final claimer drains the cell, which means they receive the cell-rent floor on top of the random remainder. This is a property of CKB's cell model rather than something the lock script chose, but it does surprise users. I'd like input on whether masking it (e.g. capping the last slot to the same distribution as earlier slots and burning the dust) is worth the cost. ### Review I'm asking reviewers to assess: - **Contract design**: is the single-cell model the right choice for this use case? Particular interest in claim-path edge cases (script reuse across claims, cell-dep stability across redeploys, witness-layout choices). - **Backend non-authority boundary**: is the line between \"UX helper\" and \"trust anchor\" actually clean in the current code, or are there places where the frontend silently relies on the backend in a way that would break if it were swapped out? - **Concept viability**: does the red-packet UX translate cleanly to CKB's strengths, and does the implementation mak",
+            "conclusion": "relevant current source material",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "51f9cca65d2f35c45da07d64a5454cc03d53245faa072a06d2a969276a47c43d"
+          }
+        ]
+      }
+    },
+    {
+      "candidateId": "qualification-4128d2b72b6740b31703dd60ac217ab9",
+      "needItemId": "e11caee636359e016e49e6a035886edf0bb7c642b7309f2867e0a91e8ec416c2",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/54",
+      "sourceRevision": "2026-11-12T12:58:29Z",
+      "engineDisposition": "no_supported_provider",
+      "checkedPair": null,
+      "check": {
+        "checkedAt": "2026-11-17T12:49:41.986Z",
+        "result": "complete",
+        "freshness": "current",
+        "lifecycleState": "demonstrated_in_wild",
+        "compatibilityState": "unknown",
+        "summary": "A current relevant source reports a scoped execution or demonstration.",
+        "uncertainty": "The report does not establish independent reproduction, production readiness, or adoption.",
+        "nextAction": "Preserve the dated report and run an independent check against the exact environment and release.",
+        "queries": [
+          "CKBolt 2. What should the path to mainnet look like in terms of audit scope and the Fiber 0.10 features to adopt first?",
+          "2. What should the path to mainnet look like in terms of audit scope and the Fiber 0.10 features to adopt first?",
+          "ckb human security review",
+          "human"
+        ],
+        "limitations": [
+          "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+          "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+          "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility."
+        ],
+        "sources": [
+          {
+            "url": "https://github.com/Tech-Expansion/CKBolt/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:41.986Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "344e8501c70ded5f2617160454092db4ac8157ae",
+            "publishedAt": "2026-11-12T05:34:01Z",
+            "etag": "\"a0707eb40fcc8c73f8e526447a7a134d\"",
+            "cache": "miss",
+            "contentSha256": "d8944b4ebaa55d6c0a60b1522fa46e99dd96b62150132f6f3379a955009902e5",
+            "excerpt": "344e8501c70ded5f2617160454092db4ac8157ae 2026-11-12T05:34:01Z Recent Commits to CKBolt:344e8501c70ded5f2617160454092db4ac8157ae"
+          },
+          {
+            "url": "https://github.com/Tech-Expansion/CKBolt/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:41.986Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-11T02:43:28Z",
+            "etag": "W/\"238eccb98ae475256fdd4edb4dbd68fe\"",
+            "cache": "miss",
+            "contentSha256": "72ea5ae1a2853f5d7c70073cef4b667812df29c7ac021237dface7fee514ae9f",
+            "excerpt": "Pull requests · Tech-Expansion/CKBolt Pull requests · Tech-Expansion/CKBolt"
+          },
+          {
+            "url": "https://github.com/Tech-Expansion/CKBolt/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:41.986Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"c61b8e88c88d784caca7c3224deae13e\"",
+            "cache": "miss",
+            "contentSha256": "46d7157a675511f40ae9b56814464b5679aed3c6459f48d75234f7bfc08fa36d",
+            "excerpt": "Releases · Tech-Expansion/CKBolt Releases · Tech-Expansion/CKBolt"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/54",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:41.986Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-12T12:58:29Z",
+            "cache": "miss",
+            "contentSha256": "644598eaaa09a8d04a19e83c16dd87acc35b06f6d739c645b52cc7dd95ff68e4",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects CKBolt: Bitcoin Lightning ↔ CKB Fiber swaps, pay and get paid, both legs locked to one SHA-256 hash OPEN **Project Summary:** CKBolt links Bitcoin's Lightning Network and CKB's Fiber Network, so anyone can swap, pay and get paid between BTC and assets on CKB (native CKB, RUSD and cWBTC on testnet). A CKBolt hub runs an LND node and a Fiber node (fnn), quotes a price for each route, and locks both legs of every swap to one SHA-256 payment hash with hold invoices on both sides. Either the recipient is paid and the hub settles, or the payer is refunded; the hub cannot keep a payer's money without paying out. Users do not need their own Lightning or Fiber node: the web app runs a Fiber node in the browser (fiber-js), and any Lightning wallet can pay by QR code. Compared with Fiber's Cross-Chain Hub (CCH), which swaps one wrapped-BTC token at 1:1, CKBolt prices each route, so native CKB and CKB stablecoins work in both directions. The hub is also a public Fiber node that opens inbound channels to new users, so a browser node can receive its first payment without arranging liquidity first. **Tools used:** - fnn v0.9.1 — the hub's Fiber node over JSON-RPC (hold invoices, send_payment, channel management, UDT whitelist) - `@nervosnetwork/fiber-js` 0.9.1 — the Fiber node that runs in the user's browser - `@ckb-ccc/core` and `@ckb-ccc/connector-react` — funding the browser node from JoyID and other CKB wallets, and withdrawals back on chain - LND v0.21.4 hold invoices through the `lightning` npm package, on Bitcoin Mutinynet (signet); tested with Alby Hub over NWC and with WebLN wallets - NestJS, TypeScript, SQLite and Docker Compose for the hub; a local devnet (bitcoind regtest, two LND, a CKB dev chain, two fnn) for end-to-end tests - Next.js, React and Playwright for the web app **Current features:** - Swap in both directions between BTC on Lightning and CKB, RUSD or cWBTC on Fiber, with firm signed quotes (median of exchange pr"
+          },
+          {
+            "url": "https://github.com/search?q=CKBolt%202.%20What%20should%20the%20path%20to%20mainnet%20look%20like%20in%20terms%20of%20audit%20scope%20and%20the%20Fiber%200.10%20features%20to%20adopt%20first%3F&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:41.986Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"1bc44f2482601a4cbb5a46da2cd910b7\"",
+            "cache": "miss",
+            "contentSha256": "89ae84113e3315ee3514fe1cd0fb305d93f21d62a713b8b26b995ed56896e09c",
+            "excerpt": "open Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=2.%20What%20should%20the%20path%20to%20mainnet%20look%20like%20in%20terms%20of%20audit%20scope%20and%20the%20Fiber%200.10%20features%20to%20adopt%20first%3F&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:41.986Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"306c60e255256d17ea01dbd7ad99a292\"",
+            "cache": "miss",
+            "contentSha256": "ec0fe0d071d5a3aa95c04cbd9db921b988836cf2899c6326a2ef9d9bb04d29e6",
+            "excerpt": "open open Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=ckb%20human%20security%20review&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:41.986Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"9d41e001a3f0ac0440b4b0912d30f09a\"",
+            "cache": "miss",
+            "contentSha256": "b2b1d1b56b1404a7ea6d4b061cfd22f64fc7c6409f355dda45e820683fca4868",
+            "excerpt": "open open open open open open open open open open Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=human&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:41.986Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"e520ed8fed98b6f2f79d5198aa57b73e\"",
+            "cache": "miss",
+            "contentSha256": "b2b1d1b56b1404a7ea6d4b061cfd22f64fc7c6409f355dda45e820683fca4868",
+            "excerpt": "open open open open open open open open open open Issue search results Issue search results"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "5d60f29b1d93e7c4a5354cf01fccd15891d34ae0c9033c2295abd36fa0934a7c",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/54",
+            "revision": "2026-11-12T12:58:29Z",
+            "checkedAt": "2026-11-17T12:49:41.986Z",
+            "evidenceType": "status_update",
+            "excerpt": "2. What should the path to mainnet look like in terms of audit scope and the Fiber 0.10 features to adopt first?",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "Imported atomic need; automated category and explicit-offer interpretation; source claim unverified",
+            "sourceSha256": "a4f51d4e875e0d10eb48288cc13d1c97775e2634e819e405af183319a240f77c"
+          },
+          {
+            "id": "4bd52a26c7d17cedd3edcdd8ee4e05825e0d156a68ae7787b7472b61258a9afa",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/54",
+            "publishedAt": "2026-11-12T12:58:29.000Z",
+            "checkedAt": "2026-11-17T12:49:41.986Z",
+            "evidenceType": "maintainer_report",
+            "excerpt": "0.10 - Token channels opened by the user's own node (built, but disabled on the public hub until short commitment delays are covered; see Problems below) - More public liquidity, monitoring and alerts, clearer error messages and guided onboarding - Merchant payments, then Ethereum through Perun channels - An external security audit before any mainnet use **Deployed on:** Testnet only — Bitcoin Mutinynet (signet) and CKB testnet. The project has not been audited and has never been used with mainnet funds. **Link to repository:** https://github.com/Tech-Expansion/CKBolt (hub in `ckbolt-hub/`, web app in `ckbolt-web/`) **Suggested review path:** 1. README.md — how a swap works, where to start, known limitations 2. ckbolt-hub/docs/phase-3-plan.md, section 3 — the safety rules for settling, cancelling, refunding and resending 3. ckbolt-hub/src/application/swaps/ — the two swap flows and the processor that follows payouts 4. ckbolt-hub/src/domain/timing/ — hold expiries, payout budgets and Fiber commitment delays 5. ckbolt-hub/test/e2e/payout-guard.e2e-spec.ts — the payout guard against r",
+            "conclusion": "maintainer-reported scoped demonstration",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "644598eaaa09a8d04a19e83c16dd87acc35b06f6d739c645b52cc7dd95ff68e4"
+          }
+        ]
+      }
+    },
+    {
+      "candidateId": "qualification-5af815487d93aff4501551509c579eca",
+      "needItemId": "410d0ec4bb9668ba0b892f240cf0780a6e4d827d1e6996f35304a3f061ae0da9",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/39",
+      "sourceRevision": "2026-11-03T12:46:24Z",
+      "engineDisposition": "no_supported_provider",
+      "checkedPair": null,
+      "check": {
+        "checkedAt": "2026-11-17T12:49:44.119Z",
+        "result": "partial",
+        "freshness": "partial",
+        "lifecycleState": "proposed",
+        "compatibilityState": "unknown",
+        "summary": "Relevant current source material discusses the scoped capability, but does not demonstrate completion.",
+        "uncertainty": "The source does not establish implementation or compatible runtime behavior. Source refresh was incomplete; unavailable sources are not negative evidence: github.com: HTTP 429.",
+        "nextAction": "Inspect the cited code and record a reproducible compatibility check before promotion.",
+        "queries": [
+          "Cellula.id - **Review:** authorization is delegated to the owner's lock: an owner action needs any input under the owner's lock hash, and the contract refuses only its own always-success lock",
+          "Cellula.id - **Review:** authorization is delegated to the owner's lock: an owner action needs any input under the owner's lock has",
+          "- **Review:** authorization is delegated to the owner's lock: an owner action needs any input under the owner's lock has",
+          "ckb human technical review"
+        ],
+        "limitations": [
+          "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+          "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+          "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility.",
+          "Unavailable sources leave freshness unresolved and are not treated as evidence that prior work does not exist."
+        ],
+        "sources": [
+          {
+            "url": "https://github.com/LusoCryptoLabs/cells-contracts/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "6d29dab2770fa0980e13b9cbeefff0c844ef4101",
+            "publishedAt": "2026-11-06T21:07:00Z",
+            "etag": "\"8c14c6255941b9950052100877621f7a\"",
+            "cache": "miss",
+            "contentSha256": "f54af060f6cdea94cf0a89e625bd0bdb209960077bc0ab74d126f9b4e604c028",
+            "excerpt": "6d29dab2770fa0980e13b9cbeefff0c844ef4101 2026-11-06T21:07:00Z Recent Commits to cells-contracts:6d29dab2770fa0980e13b9cbeefff0c844ef4101"
+          },
+          {
+            "url": "https://github.com/LusoCryptoLabs/cells-resolver/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "b63292873b791979b5ae26df1e2d6833f0101451",
+            "publishedAt": "2026-11-02T17:37:37Z",
+            "etag": "\"26088ecc7dd271ae3bb18757e23d0ece\"",
+            "cache": "miss",
+            "contentSha256": "18bbd74ca6a2ac1aa4faea36a5a574a120b7c260bc77062f597ffe47ca7182a1",
+            "excerpt": "b63292873b791979b5ae26df1e2d6833f0101451 2026-11-02T17:37:37Z Recent Commits to cells-resolver:b63292873b791979b5ae26df1e2d6833f0101451"
+          },
+          {
+            "url": "https://github.com/LusoCryptoLabs/ckb-script-pitfalls/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "5f59e1987548e80417782052018e252af1e2d3c2",
+            "publishedAt": "2026-11-09T03:42:19Z",
+            "etag": "\"ac89cc6d1da231c97976367d31d773fb\"",
+            "cache": "miss",
+            "contentSha256": "b57a49c8e24a57667ebb0ce1090214d1ae1e855bc347881b9d5878152941ad7e",
+            "excerpt": "5f59e1987548e80417782052018e252af1e2d3c2 2026-11-09T03:42:19Z Recent Commits to ckb-script-pitfalls:5f59e1987548e80417782052018e252af1e2d3c2"
+          },
+          {
+            "url": "https://github.com/LusoCryptoLabs/cells-contracts/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-06T21:07:04Z",
+            "etag": "W/\"9d18e06503546b5b2b1f42d4459b30cb\"",
+            "cache": "miss",
+            "contentSha256": "31fef33e462f34bfea082e5548c3091e664caa8c628041eead4e2ce2ab2ec79f",
+            "excerpt": "REPO_PULL_REQUEST_STATE_MERGED fix(contracts): count only plain cells as payments REPO_PULL_REQUEST_STATE_MERGED ci: bump actions/checkout from 4 to 7 REPO_PULL_REQUEST_STATE_MERGED ci: bump actions/cache from 4 to 6 REPO_PULL_REQUEST_STATE_MERGED build(deps): bump xxhash-rust from 0.8.15 to 0.8.19 in /tests REPO_PULL_REQUEST_STATE_MERGED ci: check pull requests and keep actions updated Pull requests · LusoCryptoLabs/cells-contracts Pull requests · LusoCryptoLabs/cells-contracts"
+          },
+          {
+            "url": "https://github.com/LusoCryptoLabs/cells-contracts/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"fd7e37a1a13ab7650ae05eb9c776c12e\"",
+            "cache": "miss",
+            "contentSha256": "5071433cefff60533ad3d738459e37cbec993781aee53e1df7593e271416710a",
+            "excerpt": "Releases · LusoCryptoLabs/cells-contracts Releases · LusoCryptoLabs/cells-contracts"
+          },
+          {
+            "url": "https://github.com/LusoCryptoLabs/cells-resolver/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-02T17:37:40Z",
+            "etag": "W/\"d9bafd9ea7e891171955085df52fdd7b\"",
+            "cache": "miss",
+            "contentSha256": "00f4f86b6e98747f62a38dc5f49a0726e9fd6c2299341cd88ea934080f9a6fab",
+            "excerpt": "REPO_PULL_REQUEST_STATE_MERGED ci: bump actions/setup-node from 4 to 7 REPO_PULL_REQUEST_STATE_MERGED ci: bump actions/checkout from 4 to 7 REPO_PULL_REQUEST_STATE_MERGED ci: check pull requests and keep actions updated REPO_PULL_REQUEST_STATE_MERGED chore: move ccc core to 1.23.0 Pull requests · LusoCryptoLabs/cells-resolver Pull requests · LusoCryptoLabs/cells-resolver"
+          },
+          {
+            "url": "https://github.com/LusoCryptoLabs/cells-resolver/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"0bdc9e724d9f16b5383b5d0bc7b76c12\"",
+            "cache": "miss",
+            "contentSha256": "c1c83ab94d0c2edf531ffa15c020837cf8b8bcc755855bedf2f0b2b15537445a",
+            "excerpt": "Releases · LusoCryptoLabs/cells-resolver Releases · LusoCryptoLabs/cells-resolver"
+          },
+          {
+            "url": "https://github.com/LusoCryptoLabs/ckb-script-pitfalls/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-09T03:42:22Z",
+            "etag": "W/\"189d67bee84652460112573ac6f2b3e9\"",
+            "cache": "miss",
+            "contentSha256": "3097b1ebe08d7e928a41889a3aa3760c3bb919dfcd41385b16b85508d5cbecf7",
+            "excerpt": "REPO_PULL_REQUEST_STATE_MERGED docs(01): the exactly-one form and the leading-input fix REPO_PULL_REQUEST_STATE_MERGED docs(skill): add the content, supply and id binding question REPO_PULL_REQUEST_STATE_MERGED feat: add pitfall 17, epoch since fraction compared unnormalized REPO_PULL_REQUEST_STATE_MERGED fix(code): pin vault and bump locks, refuse paid data REPO_PULL_REQUEST_STATE_MERGED ci: bump actions/checkout from 4 to 7 REPO_PULL_REQUEST_STATE_MERGED ci: bump actions/cache from 4 to 6 REPO_PULL_REQUEST_STATE_MERGED ci: check pull requests and keep actions updated Pull requests · LusoCryptoLabs/ckb-script-pitfalls Pull requests · LusoCryptoLabs/ckb-script-pitfalls"
+          },
+          {
+            "url": "https://github.com/LusoCryptoLabs/ckb-script-pitfalls/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"fbe59e019b7ec2e05922f82eac1f4688\"",
+            "cache": "miss",
+            "contentSha256": "9b5694c25ff23e2fd6f90f3b4709fa36373f4fa7cbd4abada2165b43eb44ff24",
+            "excerpt": "Releases · LusoCryptoLabs/ckb-script-pitfalls Releases · LusoCryptoLabs/ckb-script-pitfalls"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/39",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-03T12:46:24Z",
+            "cache": "miss",
+            "contentSha256": "91c8918d690c77b17cd8f8fcba4cf68e3bc612495d633974a9e773de99677ca2",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects Cells (cellula.id): .cell names on CKB that can be paid, contracts public and reproducible OPEN **Project Summary:** Cells is a permissionless naming protocol on CKB. A `.cell` name is one live cell under a fixed type script; its records ride in the witness and the cell commits to their hash. What it adds over a lookup: the name can be paid. It publishes addresses per chain, a Lightning Address (`name@cellula.id`, forwarded unchanged to the wallet the name publishes), a Fiber node endpoint, and signed payment requests that carry bank details (SEPA, Pix, UPI) without putting them on chain. Ownership is a lock hash in the cell's data, proven by co-spending a cell under that lock, so any lock CKB has or gets later works without a release. Live on mainnet since 21 September 2026. **Tools used:** `ckb-std` and `ckb-testtool` for the four scripts (Rust, reproducible builds); `@ckb-ccc/core` and `@ckb-ccc/connector-react` for the SDK and the app (JoyID, MetaMask, OKX, UniSat, UTXO Global); the `AddressResolver` hook in `@ckb-ccc/core` 1.23.0, which we contributed (ckb-devrel/ccc#575); `ckbfs` for the app's own bytes on chain; `@noble/post-quantum` for the SPHINCS+ owner path; `fnn` for the Fiber payment tests on testnet. **Current features:** - Permissionless registration with commit-reveal enforced by the type script, and a predecessor preserved byte for byte except its `next` pointer. - Records with a published layout, addresses per SLIP-44 coin, Lightning Address forwarding, Fiber endpoint, avatar and cover in the witness. - Signed payment requests in CKB, sats, EUR, BRL, INR and USDC on three chains. - Owner and manager split, sub-names (a fifth of the parent's fee), transfer, and a sale lock with the fee fixed in the contract. - A post-quantum owner through `sphincs-all-in-one-lock`, live on mainnet. - A public read API with a proof in every answer, sign-in with a name, `/verify` against the published build, and the app's o"
+          },
+          {
+            "url": "https://github.com/search?q=Cellula.id%20-%20**Review%3A**%20authorization%20is%20delegated%20to%20the%20owner's%20lock%3A%20an%20owner%20action%20needs%20any%20input%20under%20the%20owner's%20lock%20hash%2C%20and%20the%20contract%20refuses%20only%20its%20own%20always-success%20lock&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"9bf79db9188a987bc2b26f32e021e901\"",
+            "cache": "miss",
+            "contentSha256": "a1aa2b8115b45efbacd6270e762bdef85000cff3dc0142d93bf0e5b0889af06b",
+            "excerpt": "Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=Cellula.id%20-%20**Review%3A**%20authorization%20is%20delegated%20to%20the%20owner's%20lock%3A%20an%20owner%20action%20needs%20any%20input%20under%20the%20owner's%20lock%20has&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"ce92ced9f5956a5d1db4c87f47723ef0\"",
+            "cache": "miss",
+            "contentSha256": "a1aa2b8115b45efbacd6270e762bdef85000cff3dc0142d93bf0e5b0889af06b",
+            "excerpt": "Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=-%20**Review%3A**%20authorization%20is%20delegated%20to%20the%20owner's%20lock%3A%20an%20owner%20action%20needs%20any%20input%20under%20the%20owner's%20lock%20has&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=ckb%20human%20technical%20review&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"f7d475e7e68d6b73206d16963037b8b9\"",
+            "cache": "miss",
+            "contentSha256": "b2b1d1b56b1404a7ea6d4b061cfd22f64fc7c6409f355dda45e820683fca4868",
+            "excerpt": "open open open open open open open open open open Issue search results Issue search results"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "089440d53b862fd413332c9755ce0826f16391f2ff9535a4ed4bc99c06c79e6a",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/39",
+            "revision": "2026-11-03T12:46:24Z",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "evidenceType": "status_update",
+            "excerpt": "- **Review:** authorization is delegated to the owner's lock: an owner action needs any input under the owner's lock hash, and the contract refuses only its own always-success lock. A lock that lets a third party spend its cells, such as anyone-can-pay or Omnilock in ACP mode, would therefore let anyone act as the owner. We plan to refuse such locks as owners in the SDK rather than in the contract. Which lock code hashes and flags would you put on that list?",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "Imported atomic need; automated category and explicit-offer interpretation; source claim unverified",
+            "sourceSha256": "21868a7175be2a8cd8ffcb914b88016ae5072bbdbbe9465f591e78138498c7ff"
+          },
+          {
+            "id": "91a21571c4e0d901fa9888485adcc40c911622d9b8152c0dd683b1fea1f41fc8",
+            "sourceUrl": "https://github.com/LusoCryptoLabs/ckb-script-pitfalls/pulls?q=is%3Apr+is%3Amerged",
+            "publishedAt": "2026-11-09T03:42:22.000Z",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "evidenceType": "status_update",
+            "excerpt": "REPO_PULL_REQUEST_STATE_MERGED docs(01): the exactly-one form and the leading-input fix REPO_PULL_REQUEST_STATE_MERGED docs(skill): add the content, supply and id binding question REPO_PULL_REQUEST_STATE_MERGED feat: add pitfall 17, epoch since fraction compared unnormalized REPO_PULL_REQUEST_STATE_MERGED fix(code): pin vault and bump locks, refuse paid data REPO_PULL_REQUEST_STATE_MERGED ci: bump actions/checkout from 4 to 7 REPO_PULL_REQUEST_STATE_MERGED ci: bump actions/cache from 4 to 6 REPO_PULL_REQUEST_STATE_MERGED ci: check pull requests and keep actions updated Pull requests · LusoCryptoLabs/ckb-script-pitfalls Pull requests · LusoCryptoLabs/ckb-script-pitfalls",
+            "conclusion": "relevant current source material",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "3097b1ebe08d7e928a41889a3aa3760c3bb919dfcd41385b16b85508d5cbecf7"
+          },
+          {
+            "id": "1d7a0d21b37012b42c3eb370eb73b72b30763f886638d300285e8df49998f39e",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/39",
+            "publishedAt": "2026-11-03T12:46:24.000Z",
+            "checkedAt": "2026-11-17T12:49:44.119Z",
+            "evidenceType": "status_update",
+            "excerpt": "ts to their hash. What it adds over a lookup: the name can be paid. It publishes addresses per chain, a Lightning Address (`name@cellula.id`, forwarded unchanged to the wallet the name publishes), a Fiber node endpoint, and signed payment requests that carry bank details (SEPA, Pix, UPI) without putting them on chain. Ownership is a lock hash in the cell's data, proven by co-spending a cell under that lock, so any lock CKB has or gets later works without a release. Live on mainnet since 21 September 2026. **Tools used:** `ckb-std` and `ckb-testtool` for the four scripts (Rust, reproducible builds); `@ckb-ccc/core` and `@ckb-ccc/connector-react` for the SDK and the app (JoyID, MetaMask, OKX, UniSat, UTXO Global); the `AddressResolver` hook in `@ckb-ccc/core` 1.23.0, which we contributed (ckb-devrel/ccc#575); `ckbfs` for the app's own bytes on chain; `@noble/post-quantum` for the SPHINCS+ owner path; `fnn` for the Fiber payment tests on testnet. **Current features:** - Permissionless registration with commit-reveal enforced by the type script, and a predecessor preserved byte for byte",
+            "conclusion": "relevant current source material",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "91c8918d690c77b17cd8f8fcba4cf68e3bc612495d633974a9e773de99677ca2"
+          }
+        ]
+      }
+    },
+    {
+      "candidateId": "qualification-5db069c63c472920fd6a97105371e939",
+      "needItemId": "ffbf06804d614a01b008c8fd697d348df1f3ef8c389337be01793c5b4917047f",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+      "sourceRevision": "2026-11-11T17:18:35Z",
+      "engineDisposition": "rejected_alternative:offer_type_mismatch",
+      "checkedPair": {
+        "consumer": {
+          "id": "ckbuilder-issue-6",
+          "name": "CKB Kickstarter"
+        },
+        "alternativeProvider": {
+          "id": "ckbuilder-cellora-22",
+          "name": "Cellora"
+        }
+      },
+      "check": {
+        "checkedAt": "2026-11-17T12:49:46.799Z",
+        "result": "partial",
+        "freshness": "partial",
+        "lifecycleState": "proposed",
+        "compatibilityState": "unknown",
+        "summary": "A relevant source records a human collaboration offer.",
+        "uncertainty": "The offer is not evidence of a code capability, accepted introduction, or completed work. Source refresh was incomplete; unavailable sources are not negative evidence: github.com: redirect 301 requires a separate allowlisted source check; github.com: redirect 301 requires a separate allowlisted source check; github.com: redirect 301 requires a separate allowlisted source check; github.com: HTTP 429; github.com: HTTP 429; github.com: HTTP 429.",
+        "nextAction": "Ask the builder to reconfirm the offer and agree on scope before recording an introduction.",
+        "queries": [
+          "CKB Kickstarter 4. **Indexer infrastructure for production** — Currently the indexer runs locally and is exposed via ngrok. For production, what's the recommended approach?",
+          "CKB Kickstarter 4. **Indexer infrastructure for production** — Currently the indexer runs locally and is exposed via ngrok. For producti",
+          "Cellora 4. **Indexer infrastructure for production** — Currently the indexer runs locally and is exposed via ngrok. For production, what's the recommended approach?",
+          "Cellora 4. **Indexer infrastructure for production** — Currently the indexer runs locally and is exposed via ngrok. For producti"
+        ],
+        "limitations": [
+          "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+          "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+          "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility.",
+          "Unavailable sources leave freshness unresolved and are not treated as evidence that prior work does not exist."
+        ],
+        "sources": [
+          {
+            "url": "https://github.com/alesfer001/decentralized-kickstarter/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "unavailable",
+            "error": "redirect 301 requires a separate allowlisted source check",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/Antismart/cellora/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "a534c38f248c0406eeafee94adadb8c2c9072f8a",
+            "publishedAt": "2026-07-30T14:09:32Z",
+            "etag": "\"f12f92d305d103e235f19a222e93eab9\"",
+            "cache": "miss",
+            "contentSha256": "241455e2652dc55b2733ad092791e3daaca65c9795e3d6613ca28da0e2957c0b",
+            "excerpt": "a534c38f248c0406eeafee94adadb8c2c9072f8a 2026-07-30T14:09:32Z Recent Commits to cellora:a534c38f248c0406eeafee94adadb8c2c9072f8a"
+          },
+          {
+            "url": "https://github.com/alesfer001/decentralized-kickstarter/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "unavailable",
+            "error": "redirect 301 requires a separate allowlisted source check",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/alesfer001/decentralized-kickstarter/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "unavailable",
+            "error": "redirect 301 requires a separate allowlisted source check",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/Antismart/cellora/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-04-17T12:45:01Z",
+            "etag": "W/\"3e49923a38147567a5b763d8cc7656d8\"",
+            "cache": "miss",
+            "contentSha256": "91ffe1fb2468744ecbdaee61ef2afe17fb9077b4d162e0fbc9a4fa7ea8751248",
+            "excerpt": "Pull requests · Antismart/cellora Pull requests · Antismart/cellora"
+          },
+          {
+            "url": "https://github.com/Antismart/cellora/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"b2fbc24c7403a9bed7bb364bd7aff677\"",
+            "cache": "miss",
+            "contentSha256": "6edb55e79fcaeb636c1a44407aa3ecae61721db857c2b73e1594dd29dadaf9e4",
+            "excerpt": "Releases · Antismart/cellora Releases · Antismart/cellora"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-11T17:18:35Z",
+            "cache": "miss",
+            "contentSha256": "428dfbf8e3b4cd1eb79f2535e65ffb031373a8e95237a629f3e711f1687a2dcd",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects CKB Kickstarter — Decentralized Crowdfunding Platform on Nervos CKB OPEN # CKB Kickstarter — Decentralized Crowdfunding Platform on Nervos CKB --- **Project Summary:** CKB Kickstarter is a decentralized crowdfunding platform built on the Nervos CKB blockchain, enabling trustless campaign creation, pledging, and fund distribution based on campaign success or failure. It follows an all-or-nothing funding model (Kickstarter-style): pledges are locked until the campaign deadline, and funds are either released to the creator (if the goal is met) or refunded to backers (if it isn't). All campaign and pledge data lives on-chain as CKB cells, with a lightweight off-chain indexer for querying and a Next.js frontend for the user interface. A working MVP is deployed on CKB testnet with full lifecycle support: create → pledge → finalize → release/refund → destroy. > Live Deployment: https://decentralized-kickstarter-kappa.vercel.app/ > GitHub Repository: https://github.com/alesfer001/decentralized-kickstarter --- ## Tools Used - **@ckb-ccc/core** v1.12.2 — transaction building, cell querying, RPC interaction - **@ckb-ccc/connector-react** v1.0.30 — wallet connection (JoyID, MetaMask Snap) - **ckb-std** v1.0 — on-chain contract runtime (Rust, RISC-V target) - **Next.js** 16.0.7 + **React** 19 + **TypeScript** — frontend framework - **Tailwind CSS** v4 — UI styling - **Express** 5.2.1 — indexer REST API - **better-sqlite3** 12.6.2 — persistent indexer storage - **Vercel** — frontend hosting - **ngrok** — indexer tunnel for testnet (temporary) --- ## Current Features ### On-Chain Contracts (Rust, RISC-V) - **Campaign Type Script** (`contracts/campaign/src/main.rs`) - Creation validation: funding_goal > 0, deadline_block > 0, status == Active, total_pledged == 0 - Finalization validation: Active → Success/Failed state transition, immutable field preservation (creator_lock_hash, funding_goal, deadline_block) - Destruction: allowed (lock s"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-04-28T05:42:11Z",
+            "cache": "miss",
+            "contentSha256": "1bf4876042e1905e894f97fd6390244b22cbd34104f264ab0b3acabf9c6abf02",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects Cellora: a multi-tenant indexing and query service for CKB OPEN **Project Summary:** Cellora is a managed indexing and query layer for CKB, designed as a production data backbone for DApps that would rather not run their own full node, indexer and database stack. It normalizes blocks, transactions and cells into a PostgreSQL store with indexes tuned for the dominant access patterns (by lock hash, type hash, outpoint), exposes REST and GraphQL surfaces behind API-key auth and per-key rate limiting, and treats reorgs as a first-class case rather than an edge case. **Tools used:** Rust (Axum, async-graphql, SQLx), PostgreSQL, Redis, `ckb-jsonrpc-types`, `reqwest`, Docker / Kubernetes, OpenTelemetry + Prometheus. **Current features:** - Block polling loop against a CKB JSON-RPC endpoint (`get_tip_block_number`, `get_block_by_number`, `get_blockchain_info`) - Parser and writer that normalize blocks → transactions → cells - Live/dead cell accounting via `consumed_*` columns - One-transaction-per-block write path — the database never observes a partial block - Indexer-state tracking for tip recovery across restarts - Graceful shutdown on `SIGINT` / `SIGTERM` **Planned features:** - REST API (blocks, cells, stats, health, cursor pagination) - GraphQL endpoint via `async-graphql` - API-key authentication (Argon2-hashed) with tiered rate limits backed by a Redis token bucket - Reorg detection and transactional rollback with an audit log - Range partitioning on the `cells` table by block number - Webhook delivery with HMAC signatures and retry queue - GraphQL subscriptions for live cell updates - Grafana dashboards and OpenTelemetry tracing - Dashboard for API-key management, usage charts, and a query explorer **Deployed on:** Dev chain today. Testnet is the next milestone, mainnet after reorg handling lands. **Link to repository:** https://github.com/Antismart/cellora **Link to hosted version of project:** Not yet hosted publicly —"
+          },
+          {
+            "url": "https://github.com/search?q=CKB%20Kickstarter%204.%20**Indexer%20infrastructure%20for%20production**%20%E2%80%94%20Currently%20the%20indexer%20runs%20locally%20and%20is%20exposed%20via%20ngrok.%20For%20production%2C%20what's%20the%20recommended%20approach%3F&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"05a22de14090ed900a6b3af4bc51ed30\"",
+            "cache": "miss",
+            "contentSha256": "a1aa2b8115b45efbacd6270e762bdef85000cff3dc0142d93bf0e5b0889af06b",
+            "excerpt": "Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=CKB%20Kickstarter%204.%20**Indexer%20infrastructure%20for%20production**%20%E2%80%94%20Currently%20the%20indexer%20runs%20locally%20and%20is%20exposed%20via%20ngrok.%20For%20producti&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=Cellora%204.%20**Indexer%20infrastructure%20for%20production**%20%E2%80%94%20Currently%20the%20indexer%20runs%20locally%20and%20is%20exposed%20via%20ngrok.%20For%20production%2C%20what's%20the%20recommended%20approach%3F&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=Cellora%204.%20**Indexer%20infrastructure%20for%20production**%20%E2%80%94%20Currently%20the%20indexer%20runs%20locally%20and%20is%20exposed%20via%20ngrok.%20For%20producti&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          }
+        ],
+        "evidence": [
+          {
+            "id": "2c14611c0ee9b42cefadf914c4a5ebd02fc7b034a42dc84c33bff7a06ed81d41",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+            "revision": "2026-11-11T17:18:35Z",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "evidenceType": "status_update",
+            "excerpt": "4. **Indexer infrastructure for production** — Currently the indexer runs locally and is exposed via ngrok. For production, what's the recommended approach?",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "Imported atomic need; automated interpretation; source claim unverified",
+            "sourceSha256": "0d4e2d1ec4a42f0a4ef39fd95c3ea7e0d4a6541fa5e0deef28981d0976a7651b"
+          },
+          {
+            "id": "d73c9d67a2833f9ab816c129e8233eb8e8ed18d4960343c366f3040c1427f111",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+            "revision": "2026-04-28T05:42:11Z",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "evidenceType": "human_offer",
+            "excerpt": "No blockers right now — this issue is specifically to\ncollect community input before the API and reorg-handling work lands.\n\nHappy to jump on a 20-minute call with anyone whose app has non-trivial\nindexing needs. The architecture document in the repo has more detail for\nreviewers who want to dig in.",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "Same-scope offer rejected by matcher as offer_type_mismatch; live availability is not yet checked.",
+            "sourceSha256": "7c10e0341c5a06bc61f5c927c9a07767604939ac8a90108ce343755921ac561d"
+          },
+          {
+            "id": "88c0df332d3918aa563cd4ae318055296d9e6d40290505a7d5b85ea176097ae6",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+            "publishedAt": "2026-11-11T17:18:35.000Z",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "evidenceType": "human_offer",
+            "excerpt": "cess or failure. It follows an all-or-nothing funding model (Kickstarter-style): pledges are locked until the campaign deadline, and funds are either released to the creator (if the goal is met) or refunded to backers (if it isn't). All campaign and pledge data lives on-chain as CKB cells, with a lightweight off-chain indexer for querying and a Next.js frontend for the user interface. A working MVP is deployed on CKB testnet with full lifecycle support: create → pledge → finalize → release/refund → destroy. > Live Deployment: https://decentralized-kickstarter-kappa.vercel.app/ > GitHub Repository: https://github.com/alesfer001/decentralized-kickstarter --- ## Tools Used - **@ckb-ccc/core** v1.12.2 — transaction building, cell querying, RPC interaction - **@ckb-ccc/connector-react** v1.0.30 — wallet connection (JoyID, MetaMask Snap) - **ckb-std** v1.0 — on-chain contract runtime (Rust, RISC-V target) - **Next.js** 16.0.7 + **React** 19 + **TypeScript** — frontend framework - **Tailwind CSS** v4 — UI styling - **Express** 5.2.1 — indexer REST API - **better-sqlite3** 12.6.2 — persisten",
+            "conclusion": "human offer reported",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "428dfbf8e3b4cd1eb79f2535e65ffb031373a8e95237a629f3e711f1687a2dcd"
+          },
+          {
+            "id": "2b9028b08fa0380079bf8ace89769c80d43aa71101eaaf6bd5aba7f56d66808c",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+            "publishedAt": "2026-04-28T05:42:11.000Z",
+            "checkedAt": "2026-11-17T12:49:46.799Z",
+            "evidenceType": "human_offer",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects Cellora: a multi-tenant indexing and query service for CKB OPEN **Project Summary:** Cellora is a managed indexing and query layer for CKB, designed as a production data backbone for DApps that would rather not run their own full node, indexer and database stack. It normalizes blocks, transactions and cells into a PostgreSQL store with indexes tuned for the dominant access patterns (by lock hash, type hash, outpoint), exposes REST and GraphQL surfaces behind API-key auth and per-key rate limiting, and treats reorgs as a first-class case rather than an edge case. **Tools used:** Rust (Axum, async-graphql, SQLx), PostgreSQL, Redis, `ckb-jsonrpc-types`, `reqwest`, Docker / Kubernetes, OpenTelemetry + Prometheus. **Current features:** - Block polling loop against a CKB JSON-RPC endpoint (`get_tip_block_number`, `get_block_by_number`, `get_blockchain_info`) - Parser and writer that normalize blocks → transactions → cells - Live/dead cell accounting via `consumed_*` columns - One-transaction-per-block write path — the database never observes a p",
+            "conclusion": "human offer reported",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "1bf4876042e1905e894f97fd6390244b22cbd34104f264ab0b3acabf9c6abf02"
+          }
+        ]
+      }
+    },
+    {
+      "candidateId": "qualification-6a29b1f4b8d330de019ac3f7610225ae",
+      "needItemId": "95fb89802635e4f14f9ba3f7e2cca37d1c661c53aef2d5e50af6ad7dd0c5561b",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26",
+      "sourceRevision": "2026-08-03T05:35:01Z",
+      "engineDisposition": "surfaced_match",
+      "checkedPair": {
+        "consumer": {
+          "id": "ckbuilder-issue-26",
+          "name": "CKB Escrow"
+        },
+        "alternativeProvider": {
+          "id": "ckbuilder-cellora-22",
+          "name": "Cellora"
+        }
+      },
+      "check": {
+        "checkedAt": "2026-11-17T12:49:49.122Z",
+        "result": "partial",
+        "freshness": "partial",
+        "lifecycleState": "stale_offer",
+        "compatibilityState": "unknown",
+        "summary": "A public human collaboration offer is still visible, but its last recorded update is older than 90 days.",
+        "uncertainty": "Age and lack of a newer confirmation do not prove the offer was withdrawn or remains available. Source refresh was incomplete; unavailable sources are not negative evidence: github.com: HTTP 429; github.com: HTTP 429; github.com: HTTP 429.",
+        "nextAction": "Reconfirm the offer before presenting it as available; do not contact the project automatically.",
+        "queries": [
+          "CKB Escrow - What is the recommended production architecture for indexing escrow cells and terminal transaction history?",
+          "Cellora - What is the recommended production architecture for indexing escrow cells and terminal transaction history?",
+          "- What is the recommended production architecture for indexing escrow cells and terminal transaction history?",
+          "ckb indexing architecture"
+        ],
+        "limitations": [
+          "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+          "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+          "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility.",
+          "Unavailable sources leave freshness unresolved and are not treated as evidence that prior work does not exist."
+        ],
+        "sources": [
+          {
+            "url": "https://github.com/kayceeDev/ckb-escrow-studio/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "eed20bc30bdde02cb4cd1a7e7e518941fd1a1591",
+            "publishedAt": "2026-10-28T08:26:56Z",
+            "etag": "\"9c03126899cad5c3dd5166824cb5860f\"",
+            "cache": "miss",
+            "contentSha256": "590562184805bba1938419868feb2ea3dbfc90e3e1f278d66f3d4bc583790b5a",
+            "excerpt": "eed20bc30bdde02cb4cd1a7e7e518941fd1a1591 2026-10-28T08:26:56Z Recent Commits to ckb-escrow-studio:eed20bc30bdde02cb4cd1a7e7e518941fd1a1591"
+          },
+          {
+            "url": "https://github.com/kayceeDev/ckb-escrow/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "d5cfee14e26785ec2b3ca89aab8440bf6b5d63ad",
+            "publishedAt": "2026-09-01T07:11:03Z",
+            "etag": "\"13ba4d641c44b70429a540d4808601c7\"",
+            "cache": "miss",
+            "contentSha256": "f583d3ffab81c3a3e3430ffd3cfe7b7f593a2e7227d750fe296517b3f765e9a0",
+            "excerpt": "d5cfee14e26785ec2b3ca89aab8440bf6b5d63ad 2026-09-01T07:11:03Z Recent Commits to ckb-escrow:d5cfee14e26785ec2b3ca89aab8440bf6b5d63ad"
+          },
+          {
+            "url": "https://github.com/Antismart/cellora/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "a534c38f248c0406eeafee94adadb8c2c9072f8a",
+            "publishedAt": "2026-07-30T14:09:32Z",
+            "etag": "\"f12f92d305d103e235f19a222e93eab9\"",
+            "cache": "hit",
+            "contentSha256": "241455e2652dc55b2733ad092791e3daaca65c9795e3d6613ca28da0e2957c0b",
+            "excerpt": "a534c38f248c0406eeafee94adadb8c2c9072f8a 2026-07-30T14:09:32Z Recent Commits to cellora:a534c38f248c0406eeafee94adadb8c2c9072f8a"
+          },
+          {
+            "url": "https://github.com/kayceeDev/ckb-escrow-studio/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-04-02T17:33:09Z",
+            "etag": "W/\"a8e7851d47d4acade01a6e8988d174d7\"",
+            "cache": "miss",
+            "contentSha256": "50a2523b633fb1add2ceb47d0ddec3ccae20a5dffd4d425441caa7f323534c54",
+            "excerpt": "Pull requests · kayceeDev/ckb-escrow-studio Pull requests · kayceeDev/ckb-escrow-studio"
+          },
+          {
+            "url": "https://github.com/kayceeDev/ckb-escrow-studio/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"84c1343a67d65b10bb13fa408988e028\"",
+            "cache": "miss",
+            "contentSha256": "d2e33b8c051c587e0aa3f18637b3af8fdf28f0b76a0002169a0751049d0c59c3",
+            "excerpt": "Releases · kayceeDev/ckb-escrow-studio Releases · kayceeDev/ckb-escrow-studio"
+          },
+          {
+            "url": "https://github.com/kayceeDev/ckb-escrow/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-03-18T12:03:39Z",
+            "etag": "W/\"69effe246707bcff4951c4a504355dbd\"",
+            "cache": "miss",
+            "contentSha256": "28171d48748471348f2dda023dccab9c6921cf34a08806fbdba7c2a477cfaa5d",
+            "excerpt": "Pull requests · kayceeDev/ckb-escrow Pull requests · kayceeDev/ckb-escrow"
+          },
+          {
+            "url": "https://github.com/kayceeDev/ckb-escrow/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"6d80864a0161915b2ceb2d9aebfc361c\"",
+            "cache": "miss",
+            "contentSha256": "59d72359e9625e789c07d8be9547753be23aa7ebd23b90164b7b452f7b5b48a0",
+            "excerpt": "Releases · kayceeDev/ckb-escrow Releases · kayceeDev/ckb-escrow"
+          },
+          {
+            "url": "https://github.com/Antismart/cellora/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-04-17T12:45:01Z",
+            "etag": "W/\"3e49923a38147567a5b763d8cc7656d8\"",
+            "cache": "hit",
+            "contentSha256": "91ffe1fb2468744ecbdaee61ef2afe17fb9077b4d162e0fbc9a4fa7ea8751248",
+            "excerpt": "Pull requests · Antismart/cellora Pull requests · Antismart/cellora"
+          },
+          {
+            "url": "https://github.com/Antismart/cellora/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"b2fbc24c7403a9bed7bb364bd7aff677\"",
+            "cache": "hit",
+            "contentSha256": "6edb55e79fcaeb636c1a44407aa3ecae61721db857c2b73e1594dd29dadaf9e4",
+            "excerpt": "Releases · Antismart/cellora Releases · Antismart/cellora"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-08-03T05:35:01Z",
+            "cache": "miss",
+            "contentSha256": "35f1c4016fc0f365128c29f2b6d44943d8bdc315671609f74e84ea441561f7d4",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects CKB Escrow: decentralized escrow for goods and services on Nervos CKB OPEN **Project Summary:** CKB Escrow is a standalone decentralized escrow app for goods and services between known parties on Nervos CKB. A buyer can create and fund an escrow for a known seller, the seller can mark the work or goods as delivered, the buyer can release funds or open a dispute, and an arbitrator can resolve disputed escrows to either party. The project is not a marketplace or storefront; it focuses on the escrow workflow itself, with wallet-first identity, role-aware actions, indexer-backed escrow history, and a product UI supported by a separate protocol/studio interface. **Tools used:** - Rust for CKB script development - CKB RISC-V VM contract model - `ckb-std` - `ckb-testtool` - Docker reproducible contract builds - `@offckb/cli` for deployment tooling - CCC / CKB wallet integration - TypeScript - Next.js - React - Tailwind CSS - shadcn-style UI primitives - Postgres-ready escrow indexer storage - Neon/Postgres planned for hosted production history - Vercel planned for frontend hosting **Current features:** - Buyer-first escrow product UI - Wallet-first identity, no email/password registration - Testnet/mainnet network selection in the frontend - Buyer can create and fund escrow for a known seller - Seller can discover escrows they belong to and mark delivered - Buyer can release funds, cancel where allowed, dispute, or refund after deadline - Arbitrator can review disputed escrows and resolve to buyer or seller - Role-aware escrow discovery for buyer, seller, and arbitrator - Active and past escrow views - Terminal escrow history through indexer-backed recovery design - Escrow detail “deal room” with timeline, status, parties, actions, and receipt mode - Dispute evidence flow using off-chain evidence metadata and hashes - `/studio` route for protocol/debug/deployment workflows - Contract documentation, frontend documentation, and de"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-04-28T05:42:11Z",
+            "cache": "hit",
+            "contentSha256": "1bf4876042e1905e894f97fd6390244b22cbd34104f264ab0b3acabf9c6abf02",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects Cellora: a multi-tenant indexing and query service for CKB OPEN **Project Summary:** Cellora is a managed indexing and query layer for CKB, designed as a production data backbone for DApps that would rather not run their own full node, indexer and database stack. It normalizes blocks, transactions and cells into a PostgreSQL store with indexes tuned for the dominant access patterns (by lock hash, type hash, outpoint), exposes REST and GraphQL surfaces behind API-key auth and per-key rate limiting, and treats reorgs as a first-class case rather than an edge case. **Tools used:** Rust (Axum, async-graphql, SQLx), PostgreSQL, Redis, `ckb-jsonrpc-types`, `reqwest`, Docker / Kubernetes, OpenTelemetry + Prometheus. **Current features:** - Block polling loop against a CKB JSON-RPC endpoint (`get_tip_block_number`, `get_block_by_number`, `get_blockchain_info`) - Parser and writer that normalize blocks → transactions → cells - Live/dead cell accounting via `consumed_*` columns - One-transaction-per-block write path — the database never observes a partial block - Indexer-state tracking for tip recovery across restarts - Graceful shutdown on `SIGINT` / `SIGTERM` **Planned features:** - REST API (blocks, cells, stats, health, cursor pagination) - GraphQL endpoint via `async-graphql` - API-key authentication (Argon2-hashed) with tiered rate limits backed by a Redis token bucket - Reorg detection and transactional rollback with an audit log - Range partitioning on the `cells` table by block number - Webhook delivery with HMAC signatures and retry queue - GraphQL subscriptions for live cell updates - Grafana dashboards and OpenTelemetry tracing - Dashboard for API-key management, usage charts, and a query explorer **Deployed on:** Dev chain today. Testnet is the next milestone, mainnet after reorg handling lands. **Link to repository:** https://github.com/Antismart/cellora **Link to hosted version of project:** Not yet hosted publicly —"
+          },
+          {
+            "url": "https://github.com/search?q=CKB%20Escrow%20-%20What%20is%20the%20recommended%20production%20architecture%20for%20indexing%20escrow%20cells%20and%20terminal%20transaction%20history%3F&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"9e789daca36dab8a195ff740f7df1853\"",
+            "cache": "miss",
+            "contentSha256": "89ae84113e3315ee3514fe1cd0fb305d93f21d62a713b8b26b995ed56896e09c",
+            "excerpt": "open Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=Cellora%20-%20What%20is%20the%20recommended%20production%20architecture%20for%20indexing%20escrow%20cells%20and%20terminal%20transaction%20history%3F&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=-%20What%20is%20the%20recommended%20production%20architecture%20for%20indexing%20escrow%20cells%20and%20terminal%20transaction%20history%3F&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=ckb%20indexing%20architecture&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          }
+        ],
+        "evidence": [
+          {
+            "id": "56f1e0d81a0461aa08b5669107ff6613b653640364e2f57b59cd0f2f9a2cff26",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26",
+            "revision": "2026-08-03T05:35:01Z",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "evidenceType": "status_update",
+            "excerpt": "- What is the recommended production architecture for indexing escrow cells and terminal transaction history?",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "Imported atomic need; automated interpretation; source claim unverified",
+            "sourceSha256": "8fedf8fce4c6158ca89611dc4806bac4a0201449d71cacedf3216e298de4035e"
+          },
+          {
+            "id": "37d4a9f5c4e0f51e1da0d7d432806aa05bb18be41d23dddd891e669131ffb8ee",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+            "revision": "2026-04-28T05:42:11Z",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "evidenceType": "human_offer",
+            "excerpt": "Happy to jump on a 20-minute call with anyone whose app has non-trivial\nindexing needs. The architecture document in the repo has more detail for\nreviewers who want to dig in.",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "automated interpretation; source claim unverified",
+            "sourceSha256": "3e33f7956a599b947daf386032126bbaae89e1b9e2f0ebb1f4194e865c3dfbd7"
+          },
+          {
+            "id": "47b3decdcc44470aaa919d191479de6261dede37263dfe5f47adbf259bde4da7",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26",
+            "publishedAt": "2026-08-03T05:35:01.000Z",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "evidenceType": "maintainer_report",
+            "excerpt": "itoring are ready. **Link to repository:** Frontend / product app: https://github.com/kayceeDev/ckb-escrow-studio Contract / Rust CKB scripts: https://github.com/kayceeDev/ckb-escrow **Link to hosted version of project:** https://ckb-escrow-studio-frontend.vercel.app/ **Screenshots:** **Request for feedback:** **Problems:** I am looking for feedback on the best production direction for escrow history and dispute evidence. The frontend now has an indexer/API direction because completed, cancelled, refunded, and resolved escrows are no longer live cells, so the product needs a persistent history layer. I would like feedback on whether this indexer-backed design is the right approach for CKB escrow applications, and what edge cases I should handle before testnet/mainnet hardening. **Review:** Please review whether the project concept and implementation approach are viable on CKB. I would especially appreciate review of: - the escrow state machine design - the buyer/seller/arbitrator role model - the contract/frontend separation - the indexer-backed history recovery approach - the disput",
+            "conclusion": "maintainer-reported scoped demonstration",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "35f1c4016fc0f365128c29f2b6d44943d8bdc315671609f74e84ea441561f7d4"
+          },
+          {
+            "id": "9546b70f94cb9b44b5638348fdcc5d19f9b612b24f02ebcbfb2ffe2aa616a629",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+            "publishedAt": "2026-04-28T05:42:11.000Z",
+            "checkedAt": "2026-11-17T12:49:49.122Z",
+            "evidenceType": "human_offer",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects Cellora: a multi-tenant indexing and query service for CKB OPEN **Project Summary:** Cellora is a managed indexing and query layer for CKB, designed as a production data backbone for DApps that would rather not run their own full node, indexer and database stack. It normalizes blocks, transactions and cells into a PostgreSQL store with indexes tuned for the dominant access patterns (by lock hash, type hash, outpoint), exposes REST and GraphQL surfaces behind API-key auth and per-key rate limiting, and treats reorgs as a first-class case rather than an edge case. **Tools used:** Rust (Axum, async-graphql, SQLx), PostgreSQL, Redis, `ckb-jsonrpc-types`, `reqwest`, Docker / Kubernetes, OpenTelemetry + Prometheus. **Current features:** - Block polling loop against a CKB JSON-RPC endpoint (`get_tip_block_number`, `get_block_by_number`, `get_blockchain_info`) - Parser and writer that normalize blocks → transactions → cells - Live/dead cell accounting via `consumed_*` columns - One-transaction-per-block write path — the database never observes a p",
+            "conclusion": "offer requires reconfirmation",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "1bf4876042e1905e894f97fd6390244b22cbd34104f264ab0b3acabf9c6abf02"
+          }
+        ]
+      }
+    },
+    {
+      "candidateId": "qualification-8a33a154eb4ce03a2fd422e94a7ed150",
+      "needItemId": "2d9fc46f38133a79cb70b3ca42e7002e23c5b9146e63eeb36e3def4551d72a20",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/42",
+      "sourceRevision": "2026-11-13T15:51:53Z",
+      "engineDisposition": "no_supported_provider",
+      "checkedPair": null,
+      "check": {
+        "checkedAt": "2026-11-17T12:49:51.271Z",
+        "result": "partial",
+        "freshness": "partial",
+        "lifecycleState": "proposed",
+        "compatibilityState": "unknown",
+        "summary": "Relevant current source material discusses the scoped capability, but does not demonstrate completion.",
+        "uncertainty": "The source does not establish implementation or compatible runtime behavior. Source refresh was incomplete; unavailable sources are not negative evidence: github.com: HTTP 429; github.com: HTTP 429.",
+        "nextAction": "Inspect the cited code and record a reproducible compatibility check before promotion.",
+        "queries": [
+          "Freight on Nervos - **CKB names and wallet adoption.** Let users obtain CKB names as human-readable identities for profiles, mentions, and recipients. Wallets that adopt the naming scheme could let ",
+          "Freight on Nervos - **CKB names and wallet adoption.** Let users obtain CKB names as human-readable identities for profiles, mentions, and",
+          "- **CKB names and wallet adoption.** Let users obtain CKB names as human-readable identities for profiles, mentions, and",
+          "ckb human technical review"
+        ],
+        "limitations": [
+          "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+          "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+          "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility.",
+          "Unavailable sources leave freshness unresolved and are not treated as evidence that prior work does not exist."
+        ],
+        "sources": [
+          {
+            "url": "https://github.com/Birdmannn/fon/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:51.271Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "57222e83668baed71297c66476882556a7168a98",
+            "publishedAt": "2026-11-01T11:16:27Z",
+            "etag": "\"7c009f9c1df2616311a94bd9efd04fde\"",
+            "cache": "miss",
+            "contentSha256": "f07af253fb4f0e4aff47551850a636a9ce470bfc479b2006040983c41a6722fe",
+            "excerpt": "57222e83668baed71297c66476882556a7168a98 2026-11-01T11:16:27Z Recent Commits to fon:57222e83668baed71297c66476882556a7168a98"
+          },
+          {
+            "url": "https://github.com/Birdmannn/fon/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:51.271Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-01T11:16:28Z",
+            "etag": "W/\"364b04373b701afc5aa64b6bcfab83f2\"",
+            "cache": "miss",
+            "contentSha256": "c657e46eb253bad18b6c5028e256a5eb9de133fb88cefd21374a8af66f1e3034",
+            "excerpt": "REPO_PULL_REQUEST_STATE_MERGED V3 REPO_PULL_REQUEST_STATE_MERGED policies update REPO_PULL_REQUEST_STATE_MERGED updated pilot and fixed contracts REPO_PULL_REQUEST_STATE_MERGED fixed histroy on pilot REPO_PULL_REQUEST_STATE_MERGED fix(tree): fixed linked freights on pilot created freights REPO_PULL_REQUEST_STATE_MERGED V3 REPO_PULL_REQUEST_STATE_MERGED minor ui fix REPO_PULL_REQUEST_STATE_MERGED V3 REPO_PULL_REQUEST_STATE_MERGED fixed integration REPO_PULL_REQUEST_STATE_MERGED owner pilot account REPO_PULL_REQUEST_STATE_MERGED updated pilot integration REPO_PULL_REQUEST_STATE_MERGED updated pilot REPO_PULL_REQUEST_STATE_MERGED V3 REPO_PULL_REQUEST_STATE_MERGED V3 REPO_PULL_REQUEST_STATE_MERGED wallet connection update REPO_PULL_REQUEST_STATE_MERGED V3 REPO_PULL_REQUEST_STATE_MERGED update REPO_PULL_REQUEST_STATE_MERGED consumed and redeployed REPO_PULL_REQUEST_STATE_MERGED V3 REPO_PULL_REQUEST_STATE_MERGED feat(deployment): cron job disabling REPO_PULL_REQUEST_STATE_MERGED readme REPO_PULL_REQUEST_STATE_MERGED V3 REPO_PULL_REQUEST_STATE_MERGED V3 REPO_PULL_REQUEST_STATE_MERGED V3 REPO_PULL_REQUEST_STATE_MERGED V3 Pull requests · Birdmannn/fon Pull requests · Birdmannn/fon"
+          },
+          {
+            "url": "https://github.com/Birdmannn/fon/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:51.271Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"1dbc77e3ef0ba26bc86c27a00dd8f195\"",
+            "cache": "miss",
+            "contentSha256": "e1dab9691da8e22b45d4123c6412e06ae163c7efdddb2eefccefd9669773345b",
+            "excerpt": "Releases · Birdmannn/fon Releases · Birdmannn/fon"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/42",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:51.271Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-16T16:03:58Z",
+            "cache": "miss",
+            "contentSha256": "6981b8f818301f812b71bc0c7df70bb7731b964d8651f7e4e5b7b7675ed28948",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects FreightOnNervos (FON) or Freight43: a CKB-native deliverables network, open for feedback OPEN ## Project Summary Freight on Nervos (FON) is a social application for creating, funding, participating in, and delivering \"freights\": work, gifts, and raffles with explicit rules for who may participate and when value can be released. **Every proposed transaction can be a deliverable.** A freight can be a simple post that someone tips, a funded task with a defined recipient, a giveaway with verifiable winner selection, or a task whose eligibility depends on actions in another app. The aim is to let a creator state the work and its conditions, let other people contribute funds or participate, and make the important money-moving rules enforceable by a CKB script. The social layer and external-app verification live in FON's web application; they are not presented as on-chain facts when they are not. This is a live testnet demo, not a claim that every edge case is finished or audited. ## Tools Used - **CKB and Rust:** a freight type script for campaign state, escrow transitions, raffle settlement, approvals, and gift-claim rules. - **CCC and JoyID:** wallet connection and signing; the Checkbox Demo also uses JoyID so its activity belongs to a connected CKB address. - **Next.js, React, and TypeScript:** the FON interface, API, SDK integration, and separately deployed demo app. - **MongoDB:** profiles, freight metadata, registered mountable apps, off-chain participation and completion, and demo state. - **FON SDK and webhooks:** the server-side integration surface through which hosted apps register principles and exchange freight events. ## Current Features ### Freights, funding, and tipping FON has simple tasks, funded tasks/gifts, crowdfunding and timed-challenge types, ordinary raffles, and recurring raffles. Creators can write a post, add images, set the relevant timing and funding arguments, attach conditions, save a draft, previ"
+          },
+          {
+            "url": "https://github.com/search?q=Freight%20on%20Nervos%20-%20**CKB%20names%20and%20wallet%20adoption.**%20Let%20users%20obtain%20CKB%20names%20as%20human-readable%20identities%20for%20profiles%2C%20mentions%2C%20and%20recipients.%20Wallets%20that%20adopt%20the%20naming%20scheme%20could%20let%20&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:51.271Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"4e61b21e852640b1958773249215ed74\"",
+            "cache": "miss",
+            "contentSha256": "a1aa2b8115b45efbacd6270e762bdef85000cff3dc0142d93bf0e5b0889af06b",
+            "excerpt": "Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=Freight%20on%20Nervos%20-%20**CKB%20names%20and%20wallet%20adoption.**%20Let%20users%20obtain%20CKB%20names%20as%20human-readable%20identities%20for%20profiles%2C%20mentions%2C%20and&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:51.271Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=-%20**CKB%20names%20and%20wallet%20adoption.**%20Let%20users%20obtain%20CKB%20names%20as%20human-readable%20identities%20for%20profiles%2C%20mentions%2C%20and&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:51.271Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"9d80f675ec4b3b0d31950280cd007ebf\"",
+            "cache": "miss",
+            "contentSha256": "89ae84113e3315ee3514fe1cd0fb305d93f21d62a713b8b26b995ed56896e09c",
+            "excerpt": "open Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=ckb%20human%20technical%20review&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:51.271Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          }
+        ],
+        "evidence": [
+          {
+            "id": "b42e33d248f7d5eec8334971176169499ead2cc11b11effc7ed0e816b5551b72",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/42",
+            "revision": "2026-11-13T15:51:53Z",
+            "checkedAt": "2026-11-17T12:49:51.271Z",
+            "evidenceType": "status_update",
+            "excerpt": "- **CKB names and wallet adoption.** Let users obtain CKB names as human-readable identities for profiles, mentions, and recipients. Wallets that adopt the naming scheme could let someone send CKB to a verified name instead of manually entering an address. I have not settled the right naming or resolution approach, or received a go-ahead from people with deeper Nervos ecosystem context; I am seeking that guidance before committing to a design. Name resolution must still lead to a verified wallet destination before a transaction is signed.",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "Imported atomic need; automated category and explicit-offer interpretation; source claim unverified",
+            "sourceSha256": "2134583fc8d3bc4faf4c86eae2520d019d97f6da1b4b8501426a88a72697c4d3"
+          },
+          {
+            "id": "45b9f8b1399623a3b1f6a73ba4f06f60181dcb26f9cb9494a82ef7e83a814b4e",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/42",
+            "publishedAt": "2026-11-16T16:03:58.000Z",
+            "checkedAt": "2026-11-17T12:49:51.271Z",
+            "evidenceType": "status_update",
+            "excerpt": "ion; they are not presented as on-chain facts when they are not. This is a live testnet demo, not a claim that every edge case is finished or audited. ## Tools Used - **CKB and Rust:** a freight type script for campaign state, escrow transitions, raffle settlement, approvals, and gift-claim rules. - **CCC and JoyID:** wallet connection and signing; the Checkbox Demo also uses JoyID so its activity belongs to a connected CKB address. - **Next.js, React, and TypeScript:** the FON interface, API, SDK integration, and separately deployed demo app. - **MongoDB:** profiles, freight metadata, registered mountable apps, off-chain participation and completion, and demo state. - **FON SDK and webhooks:** the server-side integration surface through which hosted apps register principles and exchange freight events. ## Current Features ### Freights, funding, and tipping FON has simple tasks, funded tasks/gifts, crowdfunding and timed-challenge types, ordinary raffles, and recurring raffles. Creators can write a post, add images, set the relevant timing and funding arguments, attach conditions, sa",
+            "conclusion": "relevant current source material",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "6981b8f818301f812b71bc0c7df70bb7731b964d8651f7e4e5b7b7675ed28948"
+          }
+        ]
+      }
+    },
+    {
+      "candidateId": "qualification-c4ad5aac62f1ec64a979498469eca981",
+      "needItemId": "654832acebbcc62c80d2d8d2feb0e732e8ca23973a922ab67e1ab6089398a0f1",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/40",
+      "sourceRevision": "2026-10-29T17:19:11Z",
+      "engineDisposition": "no_supported_provider",
+      "checkedPair": null,
+      "check": {
+        "checkedAt": "2026-11-17T12:49:53.117Z",
+        "result": "partial",
+        "freshness": "partial",
+        "lifecycleState": "proposed",
+        "compatibilityState": "unknown",
+        "summary": "Relevant current source material discusses the scoped capability, but does not demonstrate completion.",
+        "uncertainty": "The source does not establish implementation or compatible runtime behavior. Source refresh was incomplete; unavailable sources are not negative evidence: github.com: HTTP 429; github.com: HTTP 429; github.com: HTTP 429.",
+        "nextAction": "Inspect the cited code and record a reproducible compatibility check before promotion.",
+        "queries": [
+          "EventMesh The main guidance I am looking for is what the next validation milestone should be.",
+          "The main guidance I am looking for is what the next validation milestone should be.",
+          "ckb human validation",
+          "human"
+        ],
+        "limitations": [
+          "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+          "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+          "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility.",
+          "Unavailable sources leave freshness unresolved and are not treated as evidence that prior work does not exist."
+        ],
+        "sources": [
+          {
+            "url": "https://github.com/tydeptrai21042004/eventmesh/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:53.117Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "a0f4c910feba6f95ddba25cc53c5fd5a3fa6eb0d",
+            "publishedAt": "2026-10-29T17:09:49Z",
+            "etag": "\"6bfbf4950c9ed875bb610d9aa9315a5b\"",
+            "cache": "miss",
+            "contentSha256": "5f8a292b11bcf868311e762c568714c4a72c1731e443d536d8f7d9dbf3e1fd9a",
+            "excerpt": "a0f4c910feba6f95ddba25cc53c5fd5a3fa6eb0d 2026-10-29T17:09:49Z Recent Commits to eventmesh:a0f4c910feba6f95ddba25cc53c5fd5a3fa6eb0d"
+          },
+          {
+            "url": "https://github.com/tydeptrai21042004/eventmesh/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:53.117Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-09-29T02:43:35Z",
+            "etag": "W/\"bdd67cf1765a7a9401c6c08771770a9a\"",
+            "cache": "miss",
+            "contentSha256": "0802ebf824cc6ab8df7f547eafd804727713ddc4b2604d0fbadbff6e607dabd0",
+            "excerpt": "Pull requests · tydeptrai21042004/eventmesh Pull requests · tydeptrai21042004/eventmesh"
+          },
+          {
+            "url": "https://github.com/tydeptrai21042004/eventmesh/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:53.117Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"b6a4d3fcd361ee1d4d8bee0edb70ccbb\"",
+            "cache": "miss",
+            "contentSha256": "0bfec6021fcd32db195ba5d80df67617b95beeba293723e8326cdfaf37c4d387",
+            "excerpt": "Releases · tydeptrai21042004/eventmesh Releases · tydeptrai21042004/eventmesh"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/40",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:53.117Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-10-29T17:19:11Z",
+            "cache": "miss",
+            "contentSha256": "c5539ef8e15cf0bf4580962ab9751e4d81535569da5c66446c3f7221a6286b31",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects EventMesh: bilateral signed reconciliation for CKB/Fiber application events OPEN ## Project Summary EventMesh is a bilateral reconciliation layer for applications using CKB and Fiber where two independently operated systems may disagree about the application state associated with a payment after a timeout, retry, crash, lost response, or restart. Instead of treating a sender-side payment-success response as sufficient proof, EventMesh records a signed, hash-linked application transcript between two operators, requires explicit acknowledgement of exact events, can bind receiver-verified Fiber payment evidence to the transcript, and lets both operators sign the same final commitment. That commitment can then optionally be checkpointed to CKB. EventMesh is intended to complement Fiber rather than replace it: **Fiber answers whether value moved, while EventMesh records which application state both operators accepted.** ## Tools used - TypeScript - Node.js 22 - React 19 - Vite 7 - `@ckb-ccc/shell` for CKB integration - Fiber JSON-RPC integration - `@noble/curves` for secp256k1 cryptography - Fastify - Zod - Vitest - Vercel serverless deployment - CKB Testnet RPC - SHA-256 hash-linked transcripts and deterministic commitments - No Postgres / Neon / Blob / SQLite dependency for the Vercel preview ## Current features - Two distinct operator identities: requester/payer and provider/receiver. - Signed bilateral sessions with bounded expiration. - Domain-separated secp256k1 signatures for sessions, events, acknowledgements, and final commitments. - Hash-linked event transcript using previous-hash references. - Explicit ACK/REJECT of exact signed event hashes. - Service reconciliation state machine: 1. request service; 2. accept request; 3. commit result; 4. complete service; 5. close with dual signatures. - Deterministic final-state commitment. - Dual-signed close proving both operators agreed to the same final transcript. - Portabl"
+          },
+          {
+            "url": "https://github.com/search?q=EventMesh%20The%20main%20guidance%20I%20am%20looking%20for%20is%20what%20the%20next%20validation%20milestone%20should%20be.&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:53.117Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=The%20main%20guidance%20I%20am%20looking%20for%20is%20what%20the%20next%20validation%20milestone%20should%20be.&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:53.117Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=ckb%20human%20validation&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:53.117Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=human&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:53.117Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"e520ed8fed98b6f2f79d5198aa57b73e\"",
+            "cache": "miss",
+            "contentSha256": "b2b1d1b56b1404a7ea6d4b061cfd22f64fc7c6409f355dda45e820683fca4868",
+            "excerpt": "open open open open open open open open open open Issue search results Issue search results"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "541c7aeb77bcbd6bfe3581393a1d01cc750c5db7412d5630deaf0e7a2070ff00",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/40",
+            "revision": "2026-10-29T17:19:11Z",
+            "checkedAt": "2026-11-17T12:49:53.117Z",
+            "evidenceType": "status_update",
+            "excerpt": "The main guidance I am looking for is what the next validation milestone should be.",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "Imported atomic need; automated category and explicit-offer interpretation; source claim unverified",
+            "sourceSha256": "f1f32ce3309c9bc4305ce4ebdf33e363c3f345e13a56987c4af77fc3d81750d9"
+          },
+          {
+            "id": "b7d7ec16e58318e530c5dbe2c2ee01cc2af484a1d8b160b0336596ba400f6374",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/40",
+            "publishedAt": "2026-10-29T17:19:11.000Z",
+            "checkedAt": "2026-11-17T12:49:53.117Z",
+            "evidenceType": "status_update",
+            "excerpt": "ess deployment - CKB Testnet RPC - SHA-256 hash-linked transcripts and deterministic commitments - No Postgres / Neon / Blob / SQLite dependency for the Vercel preview ## Current features - Two distinct operator identities: requester/payer and provider/receiver. - Signed bilateral sessions with bounded expiration. - Domain-separated secp256k1 signatures for sessions, events, acknowledgements, and final commitments. - Hash-linked event transcript using previous-hash references. - Explicit ACK/REJECT of exact signed event hashes. - Service reconciliation state machine: 1. request service; 2. accept request; 3. commit result; 4. complete service; 5. close with dual signatures. - Deterministic final-state commitment. - Dual-signed close proving both operators agreed to the same final transcript. - Portable JSON evidence export. - Portable verifier for session signatures, event signatures, hashes, chain links, acknowledgements, and final commitments. - Import and recovery of previously exported signed evidence. - Optimistic concurrency protection using expected event count and expected ch",
+            "conclusion": "relevant current source material",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "c5539ef8e15cf0bf4580962ab9751e4d81535569da5c66446c3f7221a6286b31"
+          }
+        ]
+      }
+    },
+    {
+      "candidateId": "qualification-e5c07bebbbe196a96a2db855b37c9e82",
+      "needItemId": "80e594e7d261ae6422b83fc0a4ad104836e71e8d00ce2ff18a3975b262cc71e8",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+      "sourceRevision": "2026-11-07T02:57:19Z",
+      "engineDisposition": "no_supported_provider",
+      "checkedPair": null,
+      "check": {
+        "checkedAt": "2026-11-17T12:49:54.672Z",
+        "result": "partial",
+        "freshness": "partial",
+        "lifecycleState": "proposed",
+        "compatibilityState": "unknown",
+        "summary": "Relevant current source material discusses the scoped capability, but does not demonstrate completion.",
+        "uncertainty": "The source does not establish implementation or compatible runtime behavior. Source refresh was incomplete; unavailable sources are not negative evidence: github.com: HTTP 429; github.com: HTTP 429; github.com: HTTP 429.",
+        "nextAction": "Inspect the cited code and record a reproducible compatibility check before promotion.",
+        "queries": [
+          "ckb-cycle-tools - The PR Action has no outside user yet, so I do not know if `cycles.json` is easy enough to write for someone else's contracts. Mock transactions keep CI offline, but each project",
+          "ckb-cycle-tools - The PR Action has no outside user yet, so I do not know if `cycles.json` is easy enough to write for someone else's co",
+          "- The PR Action has no outside user yet, so I do not know if `cycles.json` is easy enough to write for someone else's co",
+          "ckb human adoption"
+        ],
+        "limitations": [
+          "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+          "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+          "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility.",
+          "Unavailable sources leave freshness unresolved and are not treated as evidence that prior work does not exist."
+        ],
+        "sources": [
+          {
+            "url": "https://github.com/luongthanhtung03/ckb-cycle-tools/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+            "publishedAt": "2026-11-07T05:50:30Z",
+            "etag": "\"e46a0b38452d0aa13b53d961bbeca555\"",
+            "cache": "miss",
+            "contentSha256": "dee58b353aa46d8f2ea924d137313ff423092aeff4537f130649bf9ccdf72eae",
+            "excerpt": "23182e2abce64d0574cae7acd3229bc87424d0d0 2026-11-07T05:50:30Z Recent Commits to ckb-cycle-tools:23182e2abce64d0574cae7acd3229bc87424d0d0"
+          },
+          {
+            "url": "https://github.com/luongthanhtung03/CKB_Luong_Thanh_Tung/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "a665717b5136cae7de13bf3d668484c350c1a765",
+            "publishedAt": "2026-11-07T04:01:55Z",
+            "etag": "\"d1bf0af61212995306b11c2a05b77777\"",
+            "cache": "miss",
+            "contentSha256": "c8633108b8ca21d28992ddd48c2e1d4187e7f9a8a3f634fde5b9723ab8967c4f",
+            "excerpt": "a665717b5136cae7de13bf3d668484c350c1a765 2026-11-07T04:01:55Z Recent Commits to CKB_Luong_Thanh_Tung:a665717b5136cae7de13bf3d668484c350c1a765"
+          },
+          {
+            "url": "https://github.com/luongthanhtung03/ckb-cycle-tools/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-09-16T17:17:26Z",
+            "etag": "W/\"84c542eaa0c7b4c65ec757f537c682de\"",
+            "cache": "miss",
+            "contentSha256": "755f9295d944260d4ad9f3f49058b6a91b00e6087e0c37769e9209a62b1fb3bf",
+            "excerpt": "Pull requests · luongthanhtung03/ckb-cycle-tools Pull requests · luongthanhtung03/ckb-cycle-tools"
+          },
+          {
+            "url": "https://github.com/luongthanhtung03/ckb-cycle-tools/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"419d581fbb3744e86e0d1151aa2ff82e\"",
+            "cache": "miss",
+            "contentSha256": "4fa6b26b592d9c9f323b988131d573b7067aeaff1b3df85427184630ecbef40e",
+            "excerpt": "Releases · luongthanhtung03/ckb-cycle-tools Releases · luongthanhtung03/ckb-cycle-tools"
+          },
+          {
+            "url": "https://github.com/luongthanhtung03/CKB_Luong_Thanh_Tung/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-08-26T14:20:05Z",
+            "etag": "W/\"286acfe1101b1811d28e9480a99ce269\"",
+            "cache": "miss",
+            "contentSha256": "c116c0b300bda8385d87083836f3ec3fc995f6b6ee66f0efb47f4940a2344d33",
+            "excerpt": "Pull requests · luongthanhtung03/CKB_Luong_Thanh_Tung Pull requests · luongthanhtung03/CKB_Luong_Thanh_Tung"
+          },
+          {
+            "url": "https://github.com/luongthanhtung03/CKB_Luong_Thanh_Tung/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"494669b692d53ceff63cc82dc31ff65b\"",
+            "cache": "miss",
+            "contentSha256": "df4287214adddb5dc585d97545b83d1814118934768d8142a6c2d3bb84a8281f",
+            "excerpt": "Releases · luongthanhtung03/CKB_Luong_Thanh_Tung Releases · luongthanhtung03/CKB_Luong_Thanh_Tung"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-07T02:57:19Z",
+            "cache": "miss",
+            "contentSha256": "334ad3bf62123217f6fe762555a0a08735140fe7127557c3dd30dbad2b7f1614",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects ckb-cycle-tools: per-script cycle profiling, flamegraphs and PR cycle reports for CKB Scripts OPEN ## Project Summary Tools to answer two questions about a CKB Script: how many cycles it uses on the transactions it will really see (failure paths included), and where inside the script they go. `ckb-cycles` rebuilds any committed transaction (or one not yet on chain) as a ckb-debugger mock, runs each script group once, and checks that the groups add up to exactly what the node reported. The same replay runs in the browser through ckb-debugger's WebAssembly build. On top of that: flamegraphs per script, a GitHub Action that posts a cycle diff on every pull request, and a like-for-like benchmark of the same lock written in Rust and for ckb-js-vm. ## Tools used - TypeScript, `@ckb-ccc/core`, CKB JSON-RPC - `ckb-debugger` (native 1.1.1 for the CLI, the 0.200.1 WebAssembly build shipped in `ckb-testtool` for the browser) - `ckb-testtool`, `ckb-js-vm`, `@ckb-js-std/core` for the benchmark - Next.js on Vercel for the web inspector, Vitest, GitHub Actions (a composite Action for the PR report) ## Current features - `ckb-cycles `: per-script-group cycles, with the sum checked against the node. Matches exactly on the testnet transactions in the README, including a Type ID deployment, a ckb-js-vm counter update and a Nervos DAO withdrawal (input headers are replayed). Older transactions replay on the CKB-VM version of their block, taken from the node's hardfork epochs. - Failure path: `--file` profiles a transaction that is not on chain and shows which script refuses it, its exit code and its cost. CI replays a real session-lock spend edited to overspend by one shannon and requires the lock's code 12. - Clear exit codes: 0 accepted and matching, 1 a script rejects or the sum differs, 2 environment error (so a test cannot pass because the node was down). - `ckb-cycles flame`: flamegraph per script group (SVG and folded stacks), with th"
+          },
+          {
+            "url": "https://github.com/search?q=ckb-cycle-tools%20-%20The%20PR%20Action%20has%20no%20outside%20user%20yet%2C%20so%20I%20do%20not%20know%20if%20%60cycles.json%60%20is%20easy%20enough%20to%20write%20for%20someone%20else's%20contracts.%20Mock%20transactions%20keep%20CI%20offline%2C%20but%20each%20project&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"1a21cfba7915a1899a7f490fcf5639e1\"",
+            "cache": "miss",
+            "contentSha256": "a1aa2b8115b45efbacd6270e762bdef85000cff3dc0142d93bf0e5b0889af06b",
+            "excerpt": "Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=ckb-cycle-tools%20-%20The%20PR%20Action%20has%20no%20outside%20user%20yet%2C%20so%20I%20do%20not%20know%20if%20%60cycles.json%60%20is%20easy%20enough%20to%20write%20for%20someone%20else's%20co&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=-%20The%20PR%20Action%20has%20no%20outside%20user%20yet%2C%20so%20I%20do%20not%20know%20if%20%60cycles.json%60%20is%20easy%20enough%20to%20write%20for%20someone%20else's%20co&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=ckb%20human%20adoption&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          }
+        ],
+        "evidence": [
+          {
+            "id": "b9257e25b3fa7853ef4998847a3a124277e22fdbd339317346bd102391ce7878",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+            "revision": "2026-11-07T02:57:19Z",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "evidenceType": "status_update",
+            "excerpt": "- The PR Action has no outside user yet, so I do not know if `cycles.json` is easy enough to write for someone else's contracts. Mock transactions keep CI offline, but each project has to produce them.",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "Imported atomic need; automated category and explicit-offer interpretation; source claim unverified",
+            "sourceSha256": "8c81045785f3469ccc25a042d273b9f686f47106800b0d57ec51ecb63ec8f8f4"
+          },
+          {
+            "id": "58d92d5f8c45152705b2ac01af70f9f05bad78b1db0ccca685e271ed5254cedd",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+            "publishedAt": "2026-11-07T02:57:19.000Z",
+            "checkedAt": "2026-11-17T12:49:54.672Z",
+            "evidenceType": "status_update",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects ckb-cycle-tools: per-script cycle profiling, flamegraphs and PR cycle reports for CKB Scripts OPEN ## Project Summary Tools to answer two questions about a CKB Script: how many cycles it uses on the transactions it will really see (failure paths included), and where inside the script they go. `ckb-cycles` rebuilds any committed transaction (or one not yet on chain) as a ckb-debugger mock, runs each script group once, and checks that the groups add up to exactly what the node reported. The same replay runs in the browser through ckb-debugger's WebAssembly build. On top of that: flamegraphs per script, a GitHub Action that posts a cycle diff on every pull request, and a like-for-like benchmark of the same lock written in Rust and for ckb-js-vm. ## Tools used - TypeScript, `@ckb-ccc/core`, CKB JSON-RPC - `ckb-debugger` (native 1.1.1 for the CLI, the 0.200.1 WebAssembly build shipped in `ckb-testtool` for the browser) - `ckb-testtool`, `ckb-js-vm`, `@ckb-js-std/core` for the benchmark - Next.js on Vercel for the web inspector, Vitest, GitHub A",
+            "conclusion": "relevant current source material",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "334ad3bf62123217f6fe762555a0a08735140fe7127557c3dd30dbad2b7f1614"
+          }
+        ]
+      }
+    },
+    {
+      "candidateId": "qualification-e63114f81d8ea3d7913e04f323a49dcc",
+      "needItemId": "beedb5695c35a7c45675c44a53bda43df9d878b3a896d9ca43331847645ede80",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/51",
+      "sourceRevision": "2026-11-11T17:47:51Z",
+      "engineDisposition": "no_supported_provider",
+      "checkedPair": null,
+      "check": {
+        "checkedAt": "2026-11-17T12:49:56.467Z",
+        "result": "partial",
+        "freshness": "partial",
+        "lifecycleState": "demonstrated_in_wild",
+        "compatibilityState": "unknown",
+        "summary": "A current relevant source reports a scoped execution or demonstration.",
+        "uncertainty": "The report does not establish independent reproduction, production readiness, or adoption. Source refresh was incomplete; unavailable sources are not negative evidence: github.com: HTTP 429; github.com: HTTP 429.",
+        "nextAction": "Preserve the dated report and run an independent check against the exact environment and release.",
+        "queries": [
+          "Owl Pilot - **User experience:** Is it clear which address owns the account, which account spends app funds, what the allowance means, and what disconnecting versus revoking does?",
+          "Owl Pilot - **User experience:** Is it clear which address owns the account, which account spends app funds, what the allowance me",
+          "- **User experience:** Is it clear which address owns the account, which account spends app funds, what the allowance me",
+          "ckb human product feedback"
+        ],
+        "limitations": [
+          "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+          "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+          "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility.",
+          "Unavailable sources leave freshness unresolved and are not treated as evidence that prior work does not exist."
+        ],
+        "sources": [
+          {
+            "url": "https://github.com/Birdmannn/owl/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:56.467Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "239221c60b798063ed2fbce19a3526372ca9110f",
+            "publishedAt": "2026-11-01T10:59:54Z",
+            "etag": "\"ad91fe8de216cc47f634ce4d76e1dbd9\"",
+            "cache": "miss",
+            "contentSha256": "c3e611d6f27904a6ded2f660a5ca654155664c1d84b7fcab418726719081d9a8",
+            "excerpt": "239221c60b798063ed2fbce19a3526372ca9110f 2026-11-01T10:59:54Z Recent Commits to owl:239221c60b798063ed2fbce19a3526372ca9110f"
+          },
+          {
+            "url": "https://github.com/Birdmannn/owl/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:56.467Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-10-11T19:16:13Z",
+            "etag": "W/\"7eacc9cce880c3f1c7501a325aaddc75\"",
+            "cache": "miss",
+            "contentSha256": "7c344b47caa316149890bfb9e23d35ce1219b7c6713bd91608d98350289818dc",
+            "excerpt": "Pull requests · Birdmannn/owl Pull requests · Birdmannn/owl"
+          },
+          {
+            "url": "https://github.com/Birdmannn/owl/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:56.467Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"d7d42c64cd83f806a4c4a05a0a5c9567\"",
+            "cache": "miss",
+            "contentSha256": "7a18ee9b4662c2dc4148ba77caf9d4b6ea169d9181c1d043617212f8841c139b",
+            "excerpt": "Releases · Birdmannn/owl Releases · Birdmannn/owl"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/51",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:56.467Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-16T16:01:52Z",
+            "cache": "miss",
+            "contentSha256": "2ddf1f71ddfaeb89dcce2273f65fa057011fe0c2b9bda50c285dfac3835140dc",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects Owl Pilot & Owl Paymaster: automatic signing and sponsored fees for CKB apps OPEN ## Project Summary I'm building **Owl Pilot and Owl Paymaster**, two complementary pieces of infrastructure for CKB apps: Pilot reduces repeated signing prompts, while Paymaster sponsors eligible network transaction fees. Inspired by the experience of Cartridge Controller, Pilot lets users create or sign in to a passkey account inside an SDK modal, select app permissions and approve a spending allowance. A session key then signs matching transactions and scoped messages without repeated owner prompts. Developers describe permitted transaction effects through explicit templates. Owl Paymaster provides a fee pool, a quote-and-submit API, transaction validation, spending limits and durable retry/accounting records; it adds its own funds to each sponsored transaction without paying for the user's purchases or storage. Together, they aim to make CKB apps easier to use while retaining explicit consent, passkey-authorized recovery and clear boundaries between user funds and sponsored fees. The developer-facing goal is straightforward: **define the messages and state transitions your app needs, with explicit verification rules and transaction builders; let users choose which of those actions they trust Pilot to sign on their behalf.** Pilot handles the permission and signing flow, and Owl Paymaster handles eligible fee sponsorship. Developers still implement their app contracts, message verification and business rules; Pilot does not infer safe transitions from a human-readable name alone. ## Tools used - **TypeScript / Node.js**, with wallet SDK APIs, React components and the paymaster HTTP service/client. - **CCC (`@ckb-ccc/core` and the React connector)** for CKB transaction construction and existing-wallet integrations. - **Rust and CKB-VM** for the passkey owner, session account and sponsored transaction locks. - **WebAuthn / P-256 passkeys** f"
+          },
+          {
+            "url": "https://github.com/search?q=Owl%20Pilot%20-%20**User%20experience%3A**%20Is%20it%20clear%20which%20address%20owns%20the%20account%2C%20which%20account%20spends%20app%20funds%2C%20what%20the%20allowance%20means%2C%20and%20what%20disconnecting%20versus%20revoking%20does%3F&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:56.467Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"1545c0605692ea89a4f4bfa356b8de7f\"",
+            "cache": "miss",
+            "contentSha256": "89ae84113e3315ee3514fe1cd0fb305d93f21d62a713b8b26b995ed56896e09c",
+            "excerpt": "open Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=Owl%20Pilot%20-%20**User%20experience%3A**%20Is%20it%20clear%20which%20address%20owns%20the%20account%2C%20which%20account%20spends%20app%20funds%2C%20what%20the%20allowance%20me&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:56.467Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"9325f8115a73c193b9130ef13037d241\"",
+            "cache": "miss",
+            "contentSha256": "6e4517040f96fd1b01ab022c9a7c3b742f441a4515340a952eda162be0e25c95",
+            "excerpt": "open open open open Issue search results Issue search results"
+          },
+          {
+            "url": "https://github.com/search?q=-%20**User%20experience%3A**%20Is%20it%20clear%20which%20address%20owns%20the%20account%2C%20which%20account%20spends%20app%20funds%2C%20what%20the%20allowance%20me&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:56.467Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=ckb%20human%20product%20feedback&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:56.467Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          }
+        ],
+        "evidence": [
+          {
+            "id": "7ccab33f35eb2efde38480d23b274c37695fc6fb578085adb2d8556eeda90d40",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/51",
+            "revision": "2026-11-11T17:47:51Z",
+            "checkedAt": "2026-11-17T12:49:56.467Z",
+            "evidenceType": "status_update",
+            "excerpt": "- **User experience:** Is it clear which address owns the account, which account spends app funds, what the allowance means, and what disconnecting versus revoking does?",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "Imported atomic need; automated category and explicit-offer interpretation; source claim unverified",
+            "sourceSha256": "269fe2b9b25dbd90875d67fbd7f0c64687325fdf7e8d5df6302baadcd150b587"
+          },
+          {
+            "id": "9e4b144c34eba436ba7e3253e394159b3f98e82c9d305f5f74584182db362fe9",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/51",
+            "publishedAt": "2026-11-16T16:01:52.000Z",
+            "checkedAt": "2026-11-17T12:49:56.467Z",
+            "evidenceType": "maintainer_report",
+            "excerpt": "Owl Pilot & Owl Paymaster: automatic signing and sponsored fees for CKB apps OPEN ## Project Summary I'm building **Owl Pilot and Owl Paymaster**, two complementary pieces of infrastructure for CKB apps: Pilot reduces repeated signing prompts, while Paymaster sponsors eligible network transaction fees. Inspired by the experience of Cartridge Controller, Pilot lets users create or sign in to a passkey account inside an SDK modal, select app permissions and approve a spending allowance. A session key then signs matching transactions and scoped messages without repeated owner prompts. Developers describe permitted transaction effects through explicit templates. Owl Paymaster provides a fee pool, a quote-and-submit API, transaction validation, spending limits and durable retry/accounting records; it adds its own funds to each sponsored transaction without paying for the user's purchases or storage. Together, they aim to make CKB apps easier to use while retaining explicit consent, passkey-authorized recovery and clear boundaries between user funds and sponsored fees. The developer-facing",
+            "conclusion": "maintainer-reported scoped demonstration",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "2ddf1f71ddfaeb89dcce2273f65fa057011fe0c2b9bda50c285dfac3835140dc"
+          }
+        ]
+      }
+    },
+    {
+      "candidateId": "qualification-f1d67b34aac1d4dbf40440d9fbd1d98a",
+      "needItemId": "2635c46c5596842d26963581b11592a06fd7ab4cd333e92a84d12ad9e75a31e7",
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/43",
+      "sourceRevision": "2026-11-11T16:15:59Z",
+      "engineDisposition": "no_supported_provider",
+      "checkedPair": null,
+      "check": {
+        "checkedAt": "2026-11-17T12:49:58.708Z",
+        "result": "partial",
+        "freshness": "partial",
+        "lifecycleState": "proposed",
+        "compatibilityState": "unknown",
+        "summary": "A relevant source records a human collaboration offer.",
+        "uncertainty": "The offer is not evidence of a code capability, accepted introduction, or completed work. Source refresh was incomplete; unavailable sources are not negative evidence: github.com: HTTP 429; github.com: HTTP 429; github.com: HTTP 429; github.com: HTTP 429.",
+        "nextAction": "Ask the builder to reconfirm the offer and agree on scope before recording an introduction.",
+        "queries": [
+          "CKAutomata - Which contracts and transitions should receive the deepest independent review first?",
+          "- Which contracts and transitions should receive the deepest independent review first?",
+          "ckb human technical review",
+          "human"
+        ],
+        "limitations": [
+          "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+          "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+          "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility.",
+          "Unavailable sources leave freshness unresolved and are not treated as evidence that prior work does not exist."
+        ],
+        "sources": [
+          {
+            "url": "https://github.com/Hallab7/ckb-automata/commits/HEAD.atom",
+            "kind": "github-current-ref",
+            "checkedAt": "2026-11-17T12:49:58.708Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "revision": "8eec44406667627cd60c0c1ee8346e27220f94a2",
+            "publishedAt": "2026-11-13T23:36:45Z",
+            "etag": "\"743ce54b3bed4b435a1231a907849521\"",
+            "cache": "miss",
+            "contentSha256": "b60086297d8ab3207a3c28df0355d1184e03d972e65c565461e55274b48e96fb",
+            "excerpt": "8eec44406667627cd60c0c1ee8346e27220f94a2 2026-11-13T23:36:45Z Recent Commits to ckb-automata:8eec44406667627cd60c0c1ee8346e27220f94a2"
+          },
+          {
+            "url": "https://github.com/Hallab7/ckb-automata/pulls?q=is%3Apr+is%3Amerged",
+            "kind": "github-pulls",
+            "checkedAt": "2026-11-17T12:49:58.708Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-09-21T17:24:36Z",
+            "etag": "W/\"531d11746c60cd5a40d6d84bbc0bc792\"",
+            "cache": "miss",
+            "contentSha256": "a260030ec308263c5d9bac269ce2f20de918430a51412b74775a3c04ef6c172c",
+            "excerpt": "Pull requests · Hallab7/ckb-automata Pull requests · Hallab7/ckb-automata"
+          },
+          {
+            "url": "https://github.com/Hallab7/ckb-automata/releases",
+            "kind": "github-releases",
+            "checkedAt": "2026-11-17T12:49:58.708Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "etag": "W/\"46445de50cd72198031cb6d50e959897\"",
+            "cache": "miss",
+            "contentSha256": "ae143439e0530c11ea452d4b5b2caf06ff5a650d471fdd32db5625879c1f2590",
+            "excerpt": "Releases · Hallab7/ckb-automata Releases · Hallab7/ckb-automata"
+          },
+          {
+            "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/43",
+            "kind": "github-source",
+            "checkedAt": "2026-11-17T12:49:58.708Z",
+            "fetchStatus": "available",
+            "httpStatus": 200,
+            "publishedAt": "2026-11-11T16:15:59Z",
+            "cache": "miss",
+            "contentSha256": "ad5aca9a689717202d9003ea29d9dcded94d1f20f6adbbaa5e464cb0bb838dd7",
+            "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects CKAutomata: payment automation and Nervos DAO Harvest on CKB CLOSED COMPLETED ## Project Summary CKAutomata is a non-custodial payment automation application for Nervos CKB. Its main feature, Nervos DAO Harvest, helps a user collect earned DAO compensation and place the original CKB amount into a new DAO deposit without manually tracking each withdrawal step. It also supports one-time scheduled payments and finite recurring payments. Users approve fixed rules through their wallet, while off-chain executors watch for eligible actions and submit transactions. CKB scripts enforce the approved amount, destination, timing, executor reward, number of runs, and owner recovery path; the executor does not receive the user's wallet key or permission to change those terms. ## Tools Used - **CKB contracts:** Rust, `ckb-std`, `ckb-testtool`, CKB-VM, and Molecule schemas. - **Wallet and transaction tooling:** CCC (`@ckb-ccc/connector-react` and `@ckb-ccc/shell`). - **Frontend:** Next.js, React, TypeScript, Tailwind CSS, Manrope, and Lucide icons. - **Backend:** NestJS with Fastify, TypeScript, PostgreSQL, Drizzle ORM, Redis, and BullMQ. - **Infrastructure:** Vercel for the frontend and Render for the API and executor services. - **Testing:** Native CKB contract tests, Node test runner, Playwright, accessibility checks, transaction fixtures, reproducible contract builds, and public-runtime verification. ## Current Features ### Nervos DAO Harvest - Creates a new Nervos DAO deposit protected by a Harvest Vault Lock and a matching funded Job Cell. - Preserves the exact original amount through withdrawal preparation and re-deposit. - Sends only the earned DAO compensation to the user's chosen compensation address. - Supports one harvest or a fixed number of repeated harvests; the executor cannot add more cycles. - Restricts the time-sensitive preparation step to a committed set of approved executors. - Allows a compatible executor to comple"
+          },
+          {
+            "url": "https://github.com/search?q=CKAutomata%20-%20Which%20contracts%20and%20transitions%20should%20receive%20the%20deepest%20independent%20review%20first%3F&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:58.708Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=-%20Which%20contracts%20and%20transitions%20should%20receive%20the%20deepest%20independent%20review%20first%3F&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:58.708Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=ckb%20human%20technical%20review&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:58.708Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          },
+          {
+            "url": "https://github.com/search?q=human&type=issues",
+            "kind": "github-search",
+            "checkedAt": "2026-11-17T12:49:58.708Z",
+            "fetchStatus": "unavailable",
+            "httpStatus": 429,
+            "error": "HTTP 429",
+            "cache": "miss",
+            "contentSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "excerpt": ""
+          }
+        ],
+        "evidence": [
+          {
+            "id": "dc30ff959857d6ad10965c4e2fa3789e6414694fbafd59a61a7ef9aa1018b0c5",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/43",
+            "revision": "2026-11-11T16:15:59Z",
+            "checkedAt": "2026-11-17T12:49:58.708Z",
+            "evidenceType": "status_update",
+            "excerpt": "- Which contracts and transitions should receive the deepest independent review first?",
+            "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+            "verification": "Imported atomic need; automated category and explicit-offer interpretation; source claim unverified",
+            "sourceSha256": "29af7b63a8d5583d8d9aa1bbf3f7b8c47f92d6d9e0c94218476f54fea2c5f11f"
+          },
+          {
+            "id": "e3912958d78edccc474ddbc26a2bd9868cdcea69fe1c993cb39c110c1ca04fc6",
+            "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/43",
+            "publishedAt": "2026-11-11T16:15:59.000Z",
+            "checkedAt": "2026-11-17T12:49:58.708Z",
+            "evidenceType": "human_offer",
+            "excerpt": "del is also unusually explicit about the remaining trust assumptions. I didn't spot an obvious principal-redirection path in the code I reviewed, although that isn't a substitute for an independent security audit. A couple of design issues stood out, both in DAO Harvest. **1. `min_compensation` can make a harvest cycle unable to progress automatically.** DAO compensation is fixed by the deposit and prepare inclusion headers, so it doesn't keep accumulating once phase one has completed. However, `validate_roll` rejects any claim where the calculated compensation falls below `min_compensation`. This means a late or otherwise poorly timed prepare by an approved executor, or a minimum calculated from overly optimistic yield assumptions, can leave the job unable to complete its normal roll transition. The owner can still recover the funds through the separate recovery path after maturity, so this isn't permanent loss of principal. But it is a liveness failure in the automated state machine. I'd consider either treating `min_compensation` as an off-chain scheduling constraint or introducin",
+            "conclusion": "human offer reported",
+            "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+            "sourceSha256": "ad5aca9a689717202d9003ea29d9dcded94d1f20f6adbbaa5e464cb0bb838dd7"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -17,7 +17,7 @@ export const CandidateSpecSchema=z.object({
  opportunityId:z.string().min(1).max(160),
  capability:z.object({key:z.string().regex(/^[a-z0-9][a-z0-9._-]{1,100}$/),label:z.string().min(4).max(240),terms:z.array(z.string().min(2).max(100)).min(2).max(12)}).strict(),
  consumer:z.object({id:z.string().min(1),name:z.string().min(1),aliases:z.array(z.string().min(1).max(100)).max(8),repositories:z.array(Repository).max(5)}).strict(),
- provider:z.object({id:z.string().min(1),name:z.string().min(1),aliases:z.array(z.string().min(1).max(100)).max(8),repositories:z.array(Repository).max(5)}).strict(),
+ provider:z.object({id:z.string().min(1),name:z.string().min(1),aliases:z.array(z.string().min(1).max(100)).max(8),repositories:z.array(Repository).max(5)}).strict().optional(),
  sourceUrls:z.array(HttpsUrl).max(12),
  knownUnavailableSources:z.array(z.object({url:HttpsUrl,checkedAt:z.string().datetime({offset:true}),reason:z.string().min(4).max(240)}).strict()).max(8).default([]),
  codeTouchpoints:z.array(z.object({projectId:z.string().min(1),repository:Repository,path:z.string().regex(/^[A-Za-z0-9_./-]{1,240}$/)}).strict()).max(12),
@@ -28,8 +28,8 @@ export const CandidateSpecSchema=z.object({
  priorLifecycle:z.enum(LIFECYCLE_STATES).default('unknown'),
  priorCompatibility:z.enum(['unknown','compatible','partially_compatible','incompatible']).default('unknown'),
 }).strict().superRefine((value,ctx)=>{
- if(value.consumer.id===value.provider.id)ctx.addIssue({code:'custom',path:['provider','id'],message:'A candidate must contain distinct projects'});
- if(value.codeTouchpoints.some(x=>![value.consumer.id,value.provider.id].includes(x.projectId)))ctx.addIssue({code:'custom',path:['codeTouchpoints'],message:'Code touchpoints must belong to one of the candidate projects'});
+ if(value.provider&&value.consumer.id===value.provider.id)ctx.addIssue({code:'custom',path:['provider','id'],message:'A candidate must contain distinct projects'});
+ if(value.codeTouchpoints.some(x=>![value.consumer.id,...(value.provider?[value.provider.id]:[])].includes(x.projectId)))ctx.addIssue({code:'custom',path:['codeTouchpoints'],message:'Code touchpoints must belong to one of the candidate projects'});
 });
 export type CandidateSpec=z.infer<typeof CandidateSpecSchema>;
 
@@ -58,7 +58,7 @@ function repositoryRoot(raw:string):string {
 }
 
 export function buildVerificationPlan(candidate:CandidateSpec):{queries:string[];requests:{url:string;kind:SourceKind}[];codeTouchpoints:CandidateSpec['codeTouchpoints']} {
- const repositories=uniq([...candidate.consumer.repositories,...candidate.provider.repositories].map(repositoryRoot));
+ const repositories=uniq([...candidate.consumer.repositories,...(candidate.provider?.repositories??[])].map(repositoryRoot));
  const requests:{url:string;kind:SourceKind}[]=[];
  for(const repo of repositories)requests.push({url:`${repo}/commits/HEAD.atom`,kind:'github-current-ref'});
  for(const repo of repositories.slice(0,4)){
@@ -71,7 +71,7 @@ export function buildVerificationPlan(candidate:CandidateSpec):{queries:string[]
    const base=u.href.replace(/\.json$/,'').replace(/\/$/,'');requests.push({url:`${base}.json`,kind:'discourse-topic'});
   }else requests.push({url:u.href,kind:u.hostname==='teapaw.org'?'announcement':'github-source'});
  }
- const aliases=[...candidate.consumer.aliases,candidate.consumer.name,...candidate.provider.aliases,candidate.provider.name];
+ const aliases=[...candidate.consumer.aliases,candidate.consumer.name,...(candidate.provider?.aliases??[]),...(candidate.provider?[candidate.provider.name]:[])];
  const concepts=[candidate.capability.label,...candidate.searchConcepts];
  const queryBases=uniq([
   ...aliases.flatMap(alias=>concepts.slice(0,2).map(concept=>`${alias} ${concept}`)),

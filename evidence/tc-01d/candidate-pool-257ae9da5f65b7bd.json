@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "ebeb8cc08c40ada51b11b28e4fa0fa4e9a30ea25",
+  "selectionAlgorithm": "qualification-pool-v1: retain all engine candidates first; then select the newest active actionable need per intent class from a distinct source issue; then fill remaining slots by source revision recency; cap 10; stable ids break ties.",
+  "inputSnapshot": {
+    "path": "evidence/tc-01d/source-snapshot-257ae9da5f65b7bd.json.gz",
+    "sha256": "257ae9da5f65b7bd309b0f6b009eece769da5d8937e525bd8f022dd28624009e",
+    "compressedSha256": "0386eb95ae14574aa387608177af5cfc8c6c83ba38ef181dc060cfe9897b2f99",
+    "byteLength": 32091002,
+    "compressedByteLength": 6155440
+  },
+  "corpus": {
+    "projectCount": 231,
+    "signalCount": 385,
+    "activeNeedItemCount": 856,
+    "needBearingProjects": 49,
+    "latestFootprintCount": 23,
+    "observationCount": 42049,
+    "actionableNeedCount": 78,
+    "actionableNeedClassCounts": {
+      "adoption": 1,
+      "distribution": 1,
+      "product-feedback": 8,
+      "security-review": 20,
+      "technical-integration": 3,
+      "technical-review": 40,
+      "validation": 5
+    },
+    "needRejections": {
+      "non_actionable_stance": 502,
+      "no_bounded_scope": 142,
+      "unknown_category": 132
+    },
+    "providerIntentCount": 15,
+    "structuredCandidateCount": 1,
+    "codeObservationCandidateCount": 0,
+    "codeObservationRejections": {
+      "missingNeed": 20690,
+      "missingProvider": 0,
+      "invalidEvidence": 0
+    },
+    "sourceClaimCurrentDiscoverySummary": {
+      "candidateCount": 1,
+      "sourceCorpusCandidateCount": 0
+    }
+  },
+  "coverage": {
+    "userTestingNeeds": 0,
+    "adoptionNeeds": 1,
+    "distributionNeeds": 1,
+    "productFeedbackNeeds": 8,
+    "securityReviewNeeds": 20,
+    "validationNeeds": 5,
+    "technicalReviewNeeds": 40,
+    "technicalIntegrationNeeds": 3
+  },
+  "candidates": [
+    {
+      "id": "qualification-259687514edd36a88df2ddcaa7e993ec",
+      "source": "unmatched_need",
+      "selectionReason": "Selected as the most recent active actionable need for the distribution class; the current engine produced no supported match. The ten-entry cap allows up to two distinct atomic needs from one source issue.",
+      "scope": "ckb-human-distribution",
+      "intentType": "distribution",
+      "relation": null,
+      "need": {
+        "needItemId": "428f8089c355e615bca7d7adc1dc9d829e1c533d7c2dd810b80f6931b161f073",
+        "lineageKey": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15#need#1407c00ffb6054aded844fc734113ac5#0",
+        "projectId": "ckbuilder-pckt-27",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "revision": "2026-05-06T13:42:09Z",
+        "sourceClaim": "I'd appreciate concrete advice on:\n- The right path from testnet to a credible mainnet deployment . What hardening would *you* want to see before signing a real-funds packet?\n- Whether the planned data-layout redesign (Merkle commitment for claimed locks) is worth the contract complexity given the current floor, or whether there's a simpler shape I'm missing.\n- Whether decentralized sender identity should be a wallet-level concern (e.g. a signed-attestation pattern the wallet provides) or whether pckt should ship its own primitive and if so, what minimum primitive would be useful to other CKB apps too (DID).\n- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+        "excerpt": "- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+        "category": "distribution",
+        "stance": "explicit-request",
+        "interpretationMethod": "explicit-human-category-v1",
+        "startOffset": 616,
+        "endOffset": 796,
+        "verification": "automated category and explicit-offer interpretation; source claim unverified",
+        "unresolvedContext": [
+          "Automated lexical interpretation; builder intent and current applicability are unverified.",
+          "The exact source atom may omit surrounding context; inspect the parent source claim before action."
+        ]
+      },
+      "provider": null,
+      "rejectedAlternatives": []
+    },
+    {
+      "id": "qualification-4128d2b72b6740b31703dd60ac217ab9",
+      "source": "unmatched_need",
+      "selectionReason": "Selected as the most recent active actionable need for the security review class; the current engine produced no supported match. The ten-entry cap allows up to two distinct atomic needs from one source issue.",
+      "scope": "ckb-human-security-review",
+      "intentType": "security-review",
+      "relation": null,
+      "need": {
+        "needItemId": "e11caee636359e016e49e6a035886edf0bb7c642b7309f2867e0a91e8ec416c2",
+        "lineageKey": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/54#need#121fbda56c4e716a72b8fa547f7ba912#0",
+        "projectId": "ckbuilder-ckbolt-70",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/54",
+        "revision": "2026-11-12T12:58:29Z",
+        "sourceClaim": "1. Should CKBolt remain a separate priced hub alongside CCH, or should part of this work be contributed upstream to Fiber?\n2. What should the path to mainnet look like in terms of audit scope and the Fiber 0.10 features to adopt first?\n3. Liquidity is the main limit today: the hub funds every payout and every inbound channel from its own balances on both networks, and swaps in one direction slowly move its funds from one side to the other. For the future, which direction would you recommend: outside liquidity providers who supply capital to the hub for a share of the fees, partnerships with public Fiber routing nodes and Lightning service providers, several independent hubs that compete on price, or periodic rebalancing between BTC and CKB? Are there Fiber liquidity efforts, such as public routing nodes or LSP-style services, that CKBolt should build on rather than run alone?\n4. Which integrations would bring the most value to the ecosystem: wallets, merchant tools, or other Fiber applications that need a Lightning on-ramp?\n\nNot claimed: production or mainnet readiness, a completed audit, or deep liquidity. The hub is run by a single operator and handles test funds only.",
+        "excerpt": "2. What should the path to mainnet look like in terms of audit scope and the Fiber 0.10 features to adopt first?",
+        "category": "security",
+        "stance": "explicit-request",
+        "interpretationMethod": "explicit-human-category-v1",
+        "startOffset": 123,
+        "endOffset": 235,
+        "verification": "automated category and explicit-offer interpretation; source claim unverified",
+        "unresolvedContext": [
+          "Automated lexical interpretation; builder intent and current applicability are unverified.",
+          "The exact source atom may omit surrounding context; inspect the parent source claim before action."
+        ]
+      },
+      "provider": null,
+      "rejectedAlternatives": []
+    },
+    {
+      "id": "qualification-5af815487d93aff4501551509c579eca",
+      "source": "unmatched_need",
+      "selectionReason": "Selected after class coverage to fill the bounded ten-entry review cap; it is an actionable imported need, not a provider recommendation. Distinct needs from one issue remain separately traceable.",
+      "scope": "ckb-human-technical-review",
+      "intentType": "technical-review",
+      "relation": null,
+      "need": {
+        "needItemId": "410d0ec4bb9668ba0b892f240cf0780a6e4d827d1e6996f35304a3f061ae0da9",
+        "lineageKey": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/39#need#071907400aaf399b325ea68a092f8d10#0",
+        "projectId": "cellula",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/39",
+        "revision": "2026-11-03T12:46:24Z",
+        "sourceClaim": "- **Problems:** none blocking. One open ask elsewhere: script labels on the explorer (`ckb-explorer-frontend#2140`).\n- **Review:** authorization is delegated to the owner's lock: an owner action needs any input under the owner's lock hash, and the contract refuses only its own always-success lock. A lock that lets a third party spend its cells, such as anyone-can-pay or Omnilock in ACP mode, would therefore let anyone act as the owner. We plan to refuse such locks as owners in the SDK rather than in the contract. Which lock code hashes and flags would you put on that list?\n- **Guidance:** for builders whose apps take a CKB address, would you accept `.cell` names there through the CCC resolver, and what is missing before you would?\n\nProduct story and technical detail: https://talk.nervos.org/t/cellula-id-cell-names-on-ckb-with-the-contracts-public-and-reproducible/10753",
+        "excerpt": "- **Review:** authorization is delegated to the owner's lock: an owner action needs any input under the owner's lock hash, and the contract refuses only its own always-success lock. A lock that lets a third party spend its cells, such as anyone-can-pay or Omnilock in ACP mode, would therefore let anyone act as the owner. We plan to refuse such locks as owners in the SDK rather than in the contract. Which lock code hashes and flags would you put on that list?",
+        "category": "technical-review",
+        "stance": "explicit-request",
+        "interpretationMethod": "explicit-human-category-v1",
+        "startOffset": 117,
+        "endOffset": 579,
+        "verification": "automated category and explicit-offer interpretation; source claim unverified",
+        "unresolvedContext": [
+          "Automated lexical interpretation; builder intent and current applicability are unverified.",
+          "The exact source atom may omit surrounding context; inspect the parent source claim before action."
+        ]
+      },
+      "provider": null,
+      "rejectedAlternatives": []
+    },
+    {
+      "id": "qualification-5db069c63c472920fd6a97105371e939",
+      "source": "unmatched_need",
+      "selectionReason": "Selected as the most recent active actionable need for the technical integration class; the current engine produced no supported match. The ten-entry cap allows up to two distinct atomic needs from one source issue.",
+      "scope": "ckb-indexing-architecture",
+      "intentType": "technical-integration",
+      "relation": null,
+      "need": {
+        "needItemId": "ffbf06804d614a01b008c8fd697d348df1f3ef8c389337be01793c5b4917047f",
+        "lineageKey": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6#need#3445fca6ecc43e0244cd8addb9c9f2e5#0",
+        "projectId": "ckbuilder-issue-6",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+        "revision": "2026-11-11T17:18:35Z",
+        "sourceClaim": "1. **Custom Pledge Lock Script design** — For v1.1, we plan to replace the backer's secp256k1 lock on pledge cells with a custom lock script that reads the campaign cell's status via cell deps to determine whether funds go to the creator or back to the backer. The key question: how should the lock script reliably locate and verify the campaign cell in cell deps? We're considering matching by type script args, but want to ensure this is robust against spoofing (e.g., someone providing a fake campaign cell with Success status).\n\n2. **On-chain deadline enforcement** — Currently, finalization doesn't verify on-chain that the deadline block has passed (it's checked off-chain). Should we use the `since` field on the finalization transaction input to enforce this? If so, what's the correct way to set `since` for an absolute block height check via CCC?\n\n3. **Campaign cell identity across finalization** — When a campaign is finalized, the old cell is consumed and a new one is created (new outPoint). This means `campaign_id` in pledge cells (which is the hash of the original campaign cell) no longer matches the live campaign cell's outPoint. We track this via `originalTxHash` in the indexer, but for the custom lock script, how should pledge cells reference their campaign in a way that survives finalization? Options we're considering: TypeID, or storing the type script hash as the reference.\n\n4. **Indexer infrastructure for production** — Currently the indexer runs locally and is exposed via ngrok. For production, what's the recommended approach? Run our own CKB node + indexer, or is there a reliable public indexer service for mainnet?",
+        "excerpt": "4. **Indexer infrastructure for production** — Currently the indexer runs locally and is exposed via ngrok. For production, what's the recommended approach?",
+        "category": "infrastructure",
+        "stance": "explicit-request",
+        "interpretationMethod": "bounded-scope-v2",
+        "startOffset": 1405,
+        "endOffset": 1562,
+        "verification": "automated interpretation; source claim unverified",
+        "unresolvedContext": [
+          "Automated lexical interpretation; builder intent and current applicability are unverified.",
+          "The exact source atom may omit surrounding context; inspect the parent source claim before action."
+        ]
+      },
+      "provider": null,
+      "rejectedAlternatives": [
+        {
+          "providerProjectId": "ckbuilder-cellora-22",
+          "providerClaim": "No blockers right now — this issue is specifically to\ncollect community input before the API and reorg-handling work lands.\n\nHappy to jump on a 20-minute call with anyone whose app has non-trivial\nindexing needs. The architecture document in the repo has more detail for\nreviewers who want to dig in.",
+          "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+          "revision": "2026-04-28T05:42:11Z",
+          "reason": "offer_type_mismatch"
+        },
+        {
+          "providerProjectId": "ckbuilder-cellora-22",
+          "providerClaim": "Happy to jump on a 20-minute call with anyone whose app has non-trivial\nindexing needs. The architecture document in the repo has more detail for\nreviewers who want to dig in.",
+          "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+          "revision": "2026-04-28T05:42:11Z",
+          "reason": "offer_type_mismatch"
+        }
+      ]
+    },
+    {
+      "id": "qualification-6a29b1f4b8d330de019ac3f7610225ae",
+      "source": "structured_match",
+      "selectionReason": "Surfaced by the existing structured need/provider or code-observation matcher against the imported corpus; qualification and current availability remain unverified.",
+      "scope": "ckb-indexing-architecture",
+      "intentType": "technical-review",
+      "relation": "explicit-offer",
+      "need": {
+        "needItemId": "95fb89802635e4f14f9ba3f7e2cca37d1c661c53aef2d5e50af6ad7dd0c5561b",
+        "lineageKey": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26#need#9522081b0d1f5820cb6595792afe6659#0",
+        "projectId": "ckbuilder-issue-26",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26",
+        "revision": "2026-08-03T05:35:01Z",
+        "sourceClaim": "I would like advice on how best to move this project forward. Specifically:\n- What should be improved before public testnet testing?\n- Should dispute evidence eventually be anchored on-chain through evidence cells, or is off-chain evidence with hash anchoring enough for v1?\n- What is the recommended production architecture for indexing escrow cells and terminal transaction history?\n- What wallet/CCC integration practices should I improve?\n- What security checks should be added before considering mainnet?\n- Are there CKB-specific transaction or cell-model edge cases I may be missing?",
+        "excerpt": "- What is the recommended production architecture for indexing escrow cells and terminal transaction history?",
+        "category": "technical-review",
+        "stance": "explicit-request",
+        "interpretationMethod": "bounded-scope-v2",
+        "startOffset": 275,
+        "endOffset": 384,
+        "verification": "automated interpretation; source claim unverified",
+        "unresolvedContext": [
+          "Automated lexical interpretation; builder intent and current applicability are unverified.",
+          "The exact source atom may omit surrounding context; inspect the parent source claim before action."
+        ]
+      },
+      "provider": {
+        "projectId": "ckbuilder-cellora-22",
+        "direction": "offer",
+        "intentType": "technical-review",
+        "scope": "ckb-indexing-architecture",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+        "revision": "2026-04-28T05:42:11Z",
+        "claim": "Happy to jump on a 20-minute call with anyone whose app has non-trivial\nindexing needs. The architecture document in the repo has more detail for\nreviewers who want to dig in.",
+        "verification": "automated interpretation; source claim unverified"
+      },
+      "rejectedAlternatives": []
+    },
+    {
+      "id": "qualification-8a33a154eb4ce03a2fd422e94a7ed150",
+      "source": "unmatched_need",
+      "selectionReason": "Selected as the most recent active actionable need for the technical review class; the current engine produced no supported match. The ten-entry cap allows up to two distinct atomic needs from one source issue.",
+      "scope": "ckb-human-technical-review",
+      "intentType": "technical-review",
+      "relation": null,
+      "need": {
+        "needItemId": "2d9fc46f38133a79cb70b3ca42e7002e23c5b9146e63eeb36e3def4551d72a20",
+        "lineageKey": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/42#need#04aa2df418ff751dbf155686d2942ad8#0",
+        "projectId": "ckbuilder-freightonnervos-44",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/42",
+        "revision": "2026-11-13T15:51:53Z",
+        "sourceClaim": "- **Secure developer onboarding.** Authenticate who owns an app registration, prove control of its callback origin, prevent first-claim `appId` squatting and duplicate records, add safe credential rotation/recovery, and harden outbound URL fetching. The current registered demo is controlled; the first-registration API is not yet a public developer marketplace.\n- **V4 participant cells.** Introduce a dedicated participant type script and stable campaign identity for first-class, queryable on-chain participant records. Today participant cells are recognized largely by lock and data shape, which makes discovery and settlement harder. Multi-ticket purchases and a configured ticket cap already exist; V4 is about clearer participant discovery, refund paths, and lifecycle validation without depending on mutable campaign outpoints.\n- **`#Stocks` prediction markets.** Explore fully collateralized binary YES/NO markets, not actual equity stocks or leveraged short selling. A user could buy either outcome, potentially sell a position before resolution, and redeem a winning share against transparent collateral after an agreed oracle/resolution process. Order-book, AMM, and pari-mutuel constructions are still design choices; this is not a live market.\n- **NDAO / DAO-yield raffle mountable.** The `NDAO.md` concept combines NervosDAO-generated yield, iCKB's more liquid access to DAO-backed value, and FON's existing round-based raffle UX. Participants would opt to pool **yield**, receive tickets according to a disclosed deposit formula, and choose to exit or stay after a round. Principal treatment, fees, yield accounting, winner tapering, and exit semantics must be explicit before implementation. This is a proposed extension, **not** current DAO integration or a claim that principal is risk-free.\n- **CKB names and wallet adoption.** Let users obtain CKB names as human-readable identities for profiles, mentions, and recipients. Wallets that adopt the naming scheme could let someone send CKB to a verified name instead of manually entering an address. I have not settled the right naming or resolution approach, or received a go-ahead from people with deeper Nervos ecosystem context; I am seeking that guidance before committing to a design. Name resolution must still lead to a verified wallet destination before a transaction is signed.\n- **Complete currently restricted integrations.** Finish and enable the Google Forms mountable, add clear reference-only freight `refs`, and revisit currently unavailable `@receive` streaming only with enforceable payout semantics. Expand hosted-app examples and test webhook retries, expiry, and recovery end to end.\n- **Deeper review and operational hardening.** Audit contract payout and approval invariants, raffle reveal liveness and fairness, participant discovery, the off-chain/on-chain completion boundary, and deployment/monitoring. Keep push webhooks as the default; enable polling only with an appropriate scheduler and cost model.",
+        "excerpt": "- **CKB names and wallet adoption.** Let users obtain CKB names as human-readable identities for profiles, mentions, and recipients. Wallets that adopt the naming scheme could let someone send CKB to a verified name instead of manually entering an address. I have not settled the right naming or resolution approach, or received a go-ahead from people with deeper Nervos ecosystem context; I am seeking that guidance before committing to a design. Name resolution must still lead to a verified wallet destination before a transaction is signed.",
+        "category": "technical-review",
+        "stance": "explicit-request",
+        "interpretationMethod": "explicit-human-category-v1",
+        "startOffset": 1811,
+        "endOffset": 2355,
+        "verification": "automated category and explicit-offer interpretation; source claim unverified",
+        "unresolvedContext": [
+          "Automated lexical interpretation; builder intent and current applicability are unverified.",
+          "The exact source atom may omit surrounding context; inspect the parent source claim before action."
+        ]
+      },
+      "provider": null,
+      "rejectedAlternatives": []
+    },
+    {
+      "id": "qualification-c4ad5aac62f1ec64a979498469eca981",
+      "source": "unmatched_need",
+      "selectionReason": "Selected as the most recent active actionable need for the validation class; the current engine produced no supported match. The ten-entry cap allows up to two distinct atomic needs from one source issue.",
+      "scope": "ckb-human-validation",
+      "intentType": "validation",
+      "relation": null,
+      "need": {
+        "needItemId": "654832acebbcc62c80d2d8d2feb0e732e8ca23973a922ab67e1ab6089398a0f1",
+        "lineageKey": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/40#need#c9a060bda51149c8a5e3608eb7474b33#0",
+        "projectId": "ckbuilder-issue-40",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/40",
+        "revision": "2026-10-29T17:19:11Z",
+        "sourceClaim": "The main guidance I am looking for is what the next validation milestone should be.\n\nMy current proposed milestone is:\n\n```text\nindependent Operator A\n        |\n        | signed application event\n        v\nindependent Operator B\n        |\n        | receiver-verified real Fiber Testnet payment\n        v\ndual-signed EventMesh close\n        |\n        | compact commitment\n        v\nCKB Testnet transaction\n        |\n        v\nindependent transcript + Fiber + CKB verification\n```\n\nI would especially appreciate advice on whether this is the right next proof, what evidence CKBuilders would expect from it, and which parts of the protocol should be simplified or strengthened before adding more features.",
+        "excerpt": "The main guidance I am looking for is what the next validation milestone should be.",
+        "category": "validation",
+        "stance": "explicit-request",
+        "interpretationMethod": "explicit-human-category-v1",
+        "startOffset": 0,
+        "endOffset": 83,
+        "verification": "automated category and explicit-offer interpretation; source claim unverified",
+        "unresolvedContext": [
+          "Automated lexical interpretation; builder intent and current applicability are unverified.",
+          "The exact source atom may omit surrounding context; inspect the parent source claim before action."
+        ]
+      },
+      "provider": null,
+      "rejectedAlternatives": []
+    },
+    {
+      "id": "qualification-e5c07bebbbe196a96a2db855b37c9e82",
+      "source": "unmatched_need",
+      "selectionReason": "Selected as the most recent active actionable need for the adoption class; the current engine produced no supported match. The ten-entry cap allows up to two distinct atomic needs from one source issue.",
+      "scope": "ckb-human-adoption",
+      "intentType": "adoption",
+      "relation": null,
+      "need": {
+        "needItemId": "80e594e7d261ae6422b83fc0a4ad104836e71e8d00ce2ff18a3975b262cc71e8",
+        "lineageKey": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46#need#2f36b0e2f07411a92685c4374b4e655f#0",
+        "projectId": "ckbuilder-ckbcycletools-62",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "revision": "2026-11-07T02:57:19Z",
+        "sourceClaim": "- The PR Action has no outside user yet, so I do not know if `cycles.json` is easy enough to write for someone else's contracts. Mock transactions keep CI offline, but each project has to produce them.\n- The CLI and the browser use two ckb-debugger builds (1.1.1 native, 0.200.1 WebAssembly). They agree on everything I checked, but a future CKB-VM change could reach one first.",
+        "excerpt": "- The PR Action has no outside user yet, so I do not know if `cycles.json` is easy enough to write for someone else's contracts. Mock transactions keep CI offline, but each project has to produce them.",
+        "category": "adoption",
+        "stance": "reported-obstacle",
+        "interpretationMethod": "explicit-human-category-v1",
+        "startOffset": 0,
+        "endOffset": 201,
+        "verification": "automated category and explicit-offer interpretation; source claim unverified",
+        "unresolvedContext": [
+          "Automated lexical interpretation; builder intent and current applicability are unverified.",
+          "The exact source atom may omit surrounding context; inspect the parent source claim before action."
+        ]
+      },
+      "provider": null,
+      "rejectedAlternatives": []
+    },
+    {
+      "id": "qualification-e63114f81d8ea3d7913e04f323a49dcc",
+      "source": "unmatched_need",
+      "selectionReason": "Selected as the most recent active actionable need for the product feedback class; the current engine produced no supported match. The ten-entry cap allows up to two distinct atomic needs from one source issue.",
+      "scope": "ckb-human-product-feedback",
+      "intentType": "product-feedback",
+      "relation": null,
+      "need": {
+        "needItemId": "beedb5695c35a7c45675c44a53bda43df9d878b3a896d9ca43331847645ede80",
+        "lineageKey": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/51#need#03244acaf0de1c7098f8328b9f0e373b#0",
+        "projectId": "ckbuilder-owlpilot-67",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/51",
+        "revision": "2026-11-11T17:47:51Z",
+        "sourceClaim": "- **Security model:** Please review the owner/session separation, authority-cell continuity, cumulative CKB allowance, sponsor-fee isolation and recovery paths. Which attack cases or assumptions are missing, especially with stolen keys, conflicting devices and uncertain submissions?\n- **Paymaster correctness and operations:** Please review quote integrity, pool input/change conservation, owner attribution, daily caps, input leases and PostgreSQL coordination. Can a client exhaust or double-allocate the pool, evade a quota, obtain an unintended signature or turn fee sponsorship into spendable funds? What happens after a timeout or service restart?\n- **Sponsor experience:** Are the distinction between an operator-controlled pool contribution and a future app-specific sponsorship campaign, the fee-only scope, and the absence of automatic refunds clear? Which campaign controls and reporting would sponsors need?\n- **Template design:** Can the role, script, identity, witness and repeated-entry rules describe your app's transactions? Where are they too permissive or too restrictive? Small example transactions that the current schema cannot safely express would be particularly useful.\n- **User experience:** Is it clear which address owns the account, which account spends app funds, what the allowance means, and what disconnecting versus revoking does? Please try connection, permission selection, an automatic action, a one-time approval and receipt inspection where available, and report your browser and the public transaction hash for failures.\n- **Integration:** Is the installation and account-before-policy handoff usable from an existing CKB app? Please distinguish changes needed in an app's transaction builder from cases that genuinely require contract changes.",
+        "excerpt": "- **User experience:** Is it clear which address owns the account, which account spends app funds, what the allowance means, and what disconnecting versus revoking does?",
+        "category": "product-feedback",
+        "stance": "explicit-request",
+        "interpretationMethod": "explicit-human-category-v1",
+        "startOffset": 1196,
+        "endOffset": 1366,
+        "verification": "automated category and explicit-offer interpretation; source claim unverified",
+        "unresolvedContext": [
+          "Automated lexical interpretation; builder intent and current applicability are unverified.",
+          "The exact source atom may omit surrounding context; inspect the parent source claim before action."
+        ]
+      },
+      "provider": null,
+      "rejectedAlternatives": []
+    },
+    {
+      "id": "qualification-f1d67b34aac1d4dbf40440d9fbd1d98a",
+      "source": "unmatched_need",
+      "selectionReason": "Selected after class coverage to fill the bounded ten-entry review cap; it is an actionable imported need, not a provider recommendation. Distinct needs from one issue remain separately traceable.",
+      "scope": "ckb-human-technical-review",
+      "intentType": "technical-review",
+      "relation": null,
+      "need": {
+        "needItemId": "2635c46c5596842d26963581b11592a06fd7ab4cd333e92a84d12ad9e75a31e7",
+        "lineageKey": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/43#need#fa410a9e4d4501f35ee031902fb622ac#0",
+        "projectId": "ckbuilder-ckautomata-73",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/43",
+        "revision": "2026-11-11T16:15:59Z",
+        "sourceClaim": "- Which contracts and transitions should receive the deepest independent review first?\n- What testnet soak period and public evidence would be credible before discussing mainnet?\n- Should executor software remain one general service with policy adapters, or should the\n  time-sensitive Harvest preparation worker be isolated from ordinary payment execution?\n- What executor reward or tip model would encourage independent operation without making user costs\n  confusing or allowing reward redirection?\n- Which additional payment automation workflow would provide the strongest evidence that the Job Cell\n  model is reusable beyond CKAutomata's current interface?\n- What is the best way to package the SDK and operator tooling so another CKB developer can reproduce\n  the full flow with minimal trust in CKAutomata's hosted services?\n\nThank you for reviewing CKAutomata. Detailed criticism, failure scenarios, and practical suggestions\nfor strengthening the contracts, executor model, recovery paths, and user experience are welcome.",
+        "excerpt": "- Which contracts and transitions should receive the deepest independent review first?",
+        "category": "technical-review",
+        "stance": "explicit-request",
+        "interpretationMethod": "explicit-human-category-v1",
+        "startOffset": 0,
+        "endOffset": 86,
+        "verification": "automated category and explicit-offer interpretation; source claim unverified",
+        "unresolvedContext": [
+          "Automated lexical interpretation; builder intent and current applicability are unverified.",
+          "The exact source atom may omit surrounding context; inspect the parent source claim before action."
+        ]
+      },
+      "provider": null,
+      "rejectedAlternatives": []
+    }
+  ]
+}

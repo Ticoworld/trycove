@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-11-17T13:22:49.832Z",
+  "artifactPath": "evidence/tc-01d/qualification-review-3b32928287de878a.json",
+  "artifactSha256": "6ac6f89baa79a76ff18fbb8ea79e3eafd886d742da849ac0fcf81d2c357aadc4",
+  "reviewInputSha256": "3b32928287de878a2694555a0ca5eb45bda5282ac1053e4a34b98eb6eac9ef6e",
+  "opportunityId": "need-53135c9a7743cd070658f7756be90c5b",
+  "workspaceStatus": "no-qualified-pilot",
+  "selectedNeedItemId": "ffbf06804d614a01b008c8fd697d348df1f3ef8c389337be01793c5b4917047f",
+  "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+  "sourceRevision": "2026-11-11T17:18:35Z",
+  "sourceEvidenceCount": 3,
+  "qualificationReviewHistoryCount": 3,
+  "uniqueReviewSnapshots": true,
+  "followUpCount": 0,
+  "actionStatus": "NO_QUALIFIED_PILOT",
+  "contentMatchesArtifact": true,
+  "externalActionSent": false
+}

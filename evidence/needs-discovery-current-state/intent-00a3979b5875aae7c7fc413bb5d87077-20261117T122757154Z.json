@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "selection": "Highest-ranked source-backed candidate from this discovery run; explicit offer first, then explicit request, then stable candidate id.",
+  "candidate": {
+    "opportunityId": "intent-00a3979b5875aae7c7fc413bb5d87077",
+    "capabilityKey": "ckb-indexing-architecture",
+    "consumer": "CKB Escrow",
+    "provider": "Cellora",
+    "needItemId": "95fb89802635e4f14f9ba3f7e2cca37d1c661c53aef2d5e50af6ad7dd0c5561b",
+    "need": "- What is the recommended production architecture for indexing escrow cells and terminal transaction history?",
+    "providerClaim": "Happy to jump on a 20-minute call with anyone whose app has non-trivial\nindexing needs. The architecture document in the repo has more detail for\nreviewers who want to dig in.",
+    "relation": "explicit-offer"
+  },
+  "verification": {
+    "capabilityId": "candidate-cap-01a7d7279e294969f40e85d235a5",
+    "runId": "lifecycle-c2ac35329ea427c83a0a1ad6e6ee",
+    "checkedAt": "2026-11-17T12:27:57.154Z",
+    "lifecycleState": "stale_offer",
+    "compatibilityState": "unknown",
+    "freshness": "current",
+    "result": "complete",
+    "sourceCount": 15,
+    "availableSourceCount": 15,
+    "evidenceCount": 4,
+    "nextAction": "Reconfirm the offer before presenting it as available; do not contact the project automatically.",
+    "limitations": [
+      "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+      "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+      "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility."
+    ],
+    "queries": [
+      "CKB Escrow Technical review for indexing architecture",
+      "Cellora Technical review for indexing architecture",
+      "Technical review for indexing architecture",
+      "ckb indexing architecture"
+    ],
+    "sources": [
+      {
+        "url": "https://github.com/kayceeDev/ckb-escrow-studio/commits/HEAD.atom",
+        "kind": "github-current-ref",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-10-28T08:26:56Z",
+        "revision": "eed20bc30bdde02cb4cd1a7e7e518941fd1a1591",
+        "etag": "\"9c03126899cad5c3dd5166824cb5860f\"",
+        "excerpt": "eed20bc30bdde02cb4cd1a7e7e518941fd1a1591 2026-10-28T08:26:56Z Recent Commits to ckb-escrow-studio:eed20bc30bdde02cb4cd1a7e7e518941fd1a1591",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/kayceeDev/ckb-escrow/commits/HEAD.atom",
+        "kind": "github-current-ref",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-09-01T07:11:03Z",
+        "revision": "d5cfee14e26785ec2b3ca89aab8440bf6b5d63ad",
+        "etag": "\"13ba4d641c44b70429a540d4808601c7\"",
+        "excerpt": "d5cfee14e26785ec2b3ca89aab8440bf6b5d63ad 2026-09-01T07:11:03Z Recent Commits to ckb-escrow:d5cfee14e26785ec2b3ca89aab8440bf6b5d63ad",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/Antismart/cellora/commits/HEAD.atom",
+        "kind": "github-current-ref",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-07-30T14:09:32Z",
+        "revision": "a534c38f248c0406eeafee94adadb8c2c9072f8a",
+        "etag": "\"f12f92d305d103e235f19a222e93eab9\"",
+        "excerpt": "a534c38f248c0406eeafee94adadb8c2c9072f8a 2026-07-30T14:09:32Z Recent Commits to cellora:a534c38f248c0406eeafee94adadb8c2c9072f8a",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/kayceeDev/ckb-escrow-studio/pulls?q=is%3Apr+is%3Amerged",
+        "kind": "github-pulls",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-04-02T17:33:09Z",
+        "etag": "W/\"d878ec6a81e406b03cd6dfe3819cc576\"",
+        "excerpt": "Pull requests · kayceeDev/ckb-escrow-studio Pull requests · kayceeDev/ckb-escrow-studio",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/kayceeDev/ckb-escrow-studio/releases",
+        "kind": "github-releases",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "etag": "W/\"89482dd2b69b042d142ac162ce99328e\"",
+        "excerpt": "Releases · kayceeDev/ckb-escrow-studio Releases · kayceeDev/ckb-escrow-studio",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/kayceeDev/ckb-escrow/pulls?q=is%3Apr+is%3Amerged",
+        "kind": "github-pulls",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-03-18T12:03:39Z",
+        "etag": "W/\"ee19455317383e25d4f6ad243b24a480\"",
+        "excerpt": "Pull requests · kayceeDev/ckb-escrow Pull requests · kayceeDev/ckb-escrow",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/kayceeDev/ckb-escrow/releases",
+        "kind": "github-releases",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "etag": "W/\"f0093848a445a82736f9da8a35ea2603\"",
+        "excerpt": "Releases · kayceeDev/ckb-escrow Releases · kayceeDev/ckb-escrow",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/Antismart/cellora/pulls?q=is%3Apr+is%3Amerged",
+        "kind": "github-pulls",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-04-17T12:45:01Z",
+        "etag": "W/\"0666d538ac98cd68ee8026aae3f15232\"",
+        "excerpt": "Pull requests · Antismart/cellora Pull requests · Antismart/cellora",
+        "cache": "miss"
+      },
+      {
+        "url": "https://github.com/Antismart/cellora/releases",
+        "kind": "github-releases",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "etag": "W/\"0ed2a7918a3c6521d3e6a3578b5661b1\"",
+        "excerpt": "Releases · Antismart/cellora Releases · Antismart/cellora",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-08-03T05:35:01Z",
+        "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects CKB Escrow: decentralized escrow for goods and services on Nervos CKB OPEN **Project Summary:** CKB Escrow is a standalone decentralized escrow app for goods and services between known parties on Nervos CKB. A buyer can create and fund an escrow for a known seller, the seller can mark the work or goods as delivered, the buyer can release funds or open a dispute, and an arbitrator can resolve disputed escrows to either party. The project is not a marketplace or storefront; it focuses on the escrow workflow itself, with wallet-first identity, role-aware actions, indexer-backed escrow history, and a product UI supported by a separate protocol/studio interface. **Tools used:** - Rust for CKB script development - CKB RISC-V VM contract model - `ckb-std` - `ckb-testtool` - Docker reproducible contract builds - `@offckb/cli` for deployment tooling - CCC / CKB wallet integration - TypeScript - Next.js - React - Tailwind CSS - shadcn-style UI primitives - Postgres-ready escrow indexer storage - Neon/Postgres planned for hosted production history - Vercel planned for frontend hosting **Current features:** - Buyer-first escrow product UI - Wallet-first identity, no email/password registration - Testnet/mainnet network selection in the frontend - Buyer can create and fund escrow for a known seller - Seller can discover escrows they belong to and mark delivered - Buyer can release funds, cancel where allowed, dispute, or refund after deadline - Arbitrator can review disputed escrows and resolve to buyer or seller - Role-aware escrow discovery for buyer, seller, and arbitrator - Active and past escrow views - Terminal escrow history through indexer-backed recovery design - Escrow detail “deal room” with timeline, status, parties, actions, and receipt mode - Dispute evidence flow using off-chain evidence metadata and hashes - `/studio` route for protocol/debug/deployment workflows - Contract documentation, frontend documentation, and deployment notes - Reproducible build/checksum workflow for the contract - OffCKB deployment tooling support **Planned features:** - Complete full hosted testnet end-to-end validation: - buyer creates and funds escrow - seller marks delivered - buyer releases funds - buyer cancels before delivery - buyer refunds after deadline - buyer/seller opens dispute - arbitrator resolves to buyer or seller - Improve the hosted indexer so escrow history syncs continuously instead of only through API-triggered",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-04-28T05:42:11Z",
+        "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects Cellora: a multi-tenant indexing and query service for CKB OPEN **Project Summary:** Cellora is a managed indexing and query layer for CKB, designed as a production data backbone for DApps that would rather not run their own full node, indexer and database stack. It normalizes blocks, transactions and cells into a PostgreSQL store with indexes tuned for the dominant access patterns (by lock hash, type hash, outpoint), exposes REST and GraphQL surfaces behind API-key auth and per-key rate limiting, and treats reorgs as a first-class case rather than an edge case. **Tools used:** Rust (Axum, async-graphql, SQLx), PostgreSQL, Redis, `ckb-jsonrpc-types`, `reqwest`, Docker / Kubernetes, OpenTelemetry + Prometheus. **Current features:** - Block polling loop against a CKB JSON-RPC endpoint (`get_tip_block_number`, `get_block_by_number`, `get_blockchain_info`) - Parser and writer that normalize blocks → transactions → cells - Live/dead cell accounting via `consumed_*` columns - One-transaction-per-block write path — the database never observes a partial block - Indexer-state tracking for tip recovery across restarts - Graceful shutdown on `SIGINT` / `SIGTERM` **Planned features:** - REST API (blocks, cells, stats, health, cursor pagination) - GraphQL endpoint via `async-graphql` - API-key authentication (Argon2-hashed) with tiered rate limits backed by a Redis token bucket - Reorg detection and transactional rollback with an audit log - Range partitioning on the `cells` table by block number - Webhook delivery with HMAC signatures and retry queue - GraphQL subscriptions for live cell updates - Grafana dashboards and OpenTelemetry tracing - Dashboard for API-key management, usage charts, and a query explorer **Deployed on:** Dev chain today. Testnet is the next milestone, mainnet after reorg handling lands. **Link to repository:** https://github.com/Antismart/cellora **Link to hosted version of project:** Not yet hosted publicly — happy to stand up a testnet-backed preview for reviewers who want to kick the tires. **Screenshots:** Not applicable at this stage — Cellora is backend infrastructure with no UI yet. Architecture overview with diagrams is at [`docs/architecture-overview.md`](https://github.com/Antismart/cellora/blob/main/docs/architecture-overview.md) in the repo. **Request for feedback:** I'd value both design-review input and product-market input from this community. *On the design (review):* - The data model",
+        "cache": "miss"
+      },
+      {
+        "url": "https://github.com/search?q=CKB%20Escrow%20Technical%20review%20for%20indexing%20architecture&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "etag": "W/\"a6933305387d9a23c113c9d5adee50e8\"",
+        "excerpt": "open Issue search results Issue search results",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/search?q=Cellora%20Technical%20review%20for%20indexing%20architecture&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "etag": "W/\"2cf479a4ccd13751149a8017e1ef22d7\"",
+        "excerpt": "Issue search results Issue search results",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/search?q=Technical%20review%20for%20indexing%20architecture&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "etag": "W/\"aa907a278593cbe7bf8355df46af7735\"",
+        "excerpt": "open open open open open open open open open open Issue search results Issue search results",
+        "cache": "hit"
+      },
+      {
+        "url": "https://github.com/search?q=ckb%20indexing%20architecture&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "etag": "W/\"97beca40fd3da85ca1f21452c8d59217\"",
+        "excerpt": "open open open open open open open open open open Issue search results Issue search results",
+        "cache": "hit"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "1c24013308a03fa10891595828084d1aa4c2e34a076416df7cd99be391f2f0de",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "evidenceType": "status_update",
+        "excerpt": "- What is the recommended production architecture for indexing escrow cells and terminal transaction history?",
+        "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+        "verification": "Imported atomic builder need; current applicability unverified.",
+        "sourceSha256": "8fedf8fce4c6158ca89611dc4806bac4a0201449d71cacedf3216e298de4035e"
+      },
+      {
+        "id": "0ae0e2a6eba87907b780ea7118557784b90836539fd50b8c1af819f0c24807b7",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "evidenceType": "human_offer",
+        "excerpt": "Happy to jump on a 20-minute call with anyone whose app has non-trivial\nindexing needs. The architecture document in the repo has more detail for\nreviewers who want to dig in.",
+        "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+        "verification": "automated interpretation; source claim unverified",
+        "sourceSha256": "3e33f7956a599b947daf386032126bbaae89e1b9e2f0ebb1f4194e865c3dfbd7"
+      },
+      {
+        "id": "b2820d3be9c902649a5ae2a16511e6ec47da48cb32c2c514218cba2ed956fdc8",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26",
+        "publishedAt": "2026-08-03T05:35:01.000Z",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "evidenceType": "maintainer_report",
+        "excerpt": "ance:** I would like advice on how best to move this project forward. Specifically: - What should be improved before public testnet testing? - Should dispute evidence eventually be anchored on-chain through evidence cells, or is off-chain evidence with hash anchoring enough for v1? - What is the recommended production architecture for indexing escrow cells and terminal transaction history? - What wallet/CCC integration practices should I improve? - What security checks should be added before considering mainnet? - Are there CKB-specific transaction or cell-model edge cases I may be missing? Project Summary: CKB Escrow is a standalone decentralized escrow app for goods and services between known parties on Nervos CKB. A buyer can create and fund an escrow for a known seller, the seller can mark the work or goods as delivered, the buyer can release funds or open a dispute, and an arbitrator can resolve disputed escrows to either party. The project is not a marketplace or storefront; it focuses on the escrow workflow itself, with wallet-first identity, role-aware actions, indexer-backed",
+        "conclusion": "maintainer-reported scoped demonstration",
+        "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+        "sourceSha256": "35f1c4016fc0f365128c29f2b6d44943d8bdc315671609f74e84ea441561f7d4"
+      },
+      {
+        "id": "20852bbff4eea92b7fd38cab2e12dbc6e18fd7fd6130030874d74f5be3b18c64",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+        "publishedAt": "2026-04-28T05:42:11.000Z",
+        "checkedAt": "2026-11-17T12:27:57.154Z",
+        "evidenceType": "human_offer",
+        "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects Cellora: a multi-tenant indexing and query service for CKB OPEN **Project Summary:** Cellora is a managed indexing and query layer for CKB, designed as a production data backbone for DApps that would rather not run their own full node, indexer and database stack. It normalizes blocks, transactions and cells into a PostgreSQL store with indexes tuned for the dominant access patterns (by lock hash, type hash, outpoint), exposes REST and GraphQL surfaces behind API-key auth and per-key rate limiting, and treats reorgs as a first-class case rather than an edge case. **Tools used:** Rust (Axum, async-graphql, SQLx), PostgreSQL, Redis, `ckb-jsonrpc-types`, `reqwest`, Docker / Kubernetes, OpenTelemetry + Prometheus. **Current features:** - Block polling loop against a CKB JSON-RPC endpoint (`get_tip_block_number`, `get_block_by_number`, `get_blockchain_info`) - Parser and writer that normalize blocks → transactions → cells - Live/dead cell accounting via `consumed_*` columns - One-transaction-per-block write path — the database never observes a p",
+        "conclusion": "offer requires reconfirmation",
+        "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+        "sourceSha256": "1bf4876042e1905e894f97fd6390244b22cbd34104f264ab0b3acabf9c6abf02"
+      }
+    ]
+  }
+}

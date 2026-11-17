@@ -1,0 +1,460 @@
+{
+  "schemaVersion": 1,
+  "reviewMethod": "Principal-engineer source review of the deterministic 10-candidate shortlist. Candidate IDs and needs come from the frozen imported-data pool; outcomes are reviewer assessments constrained by the generic evidence gates. No project pair was inserted into the discovery pipeline. Public current-state reads are recorded separately. No builder was contacted.",
+  "selectedSupplyGapCandidateId": "qualification-5db069c63c472920fd6a97105371e939",
+  "selectionRationale": "The CKB Kickstarter production-indexer question is the clearest still-open, operationally bounded problem in the reviewed pool: its current public issue still describes a locally run indexer exposed through ngrok and asks whether production should use its own node/indexer or a public service. It has an observable result (a documented production architecture decision and deployment checklist) and one plausible but unconfirmed community architecture-review lead. This does not mean the builder still needs help, Cellora is available, or Cellora provides production infrastructure. The other current human-feedback and review requests have no evidenced, available provider in the imported shortlist; the CKAutomata review request has already received public review and follow-up.",
+  "supplyGap": {
+    "result": "NO_QUALIFIED_PILOT",
+    "title": "Production indexer architecture guidance for CKB Kickstarter",
+    "problem": "The builder's exact request is: “4. **Indexer infrastructure for production** — Currently the indexer runs locally and is exposed via ngrok. For production, what's the recommended approach? Run our own CKB node + indexer, or is there a reliable public indexer service for mainnet?” The current public issue still contains this statement and remains open, but that does not establish that the builder still wants outside help.",
+    "proposedConnection": "No collaborator qualifies today. Cellora's public issue records an offer of a 20-minute architecture call for apps with non-trivial indexing needs. It is a plausible review lead, not evidence of a production indexer endpoint. The offer was last updated April 28, 2026, is more than 90 days old, and has not been reconfirmed. Trycove's current-state check is partial because several repository/search requests were rate-limited or redirected. The matcher also correctly kept a human review offer separate from a technical integration capability.",
+    "expectedBenefit": "If the need remains active and a qualified reviewer participates, a bounded architecture review could leave the builder with a documented choice of operating model, explicit node/indexer ownership, reorganization and availability responsibilities, and a production deployment checklist. It does not promise reliability, mainnet suitability, or lower cost by itself.",
+    "requiredParticipation": [
+      "The builder confirms that the production-indexer decision is still open and shares the current indexer repository/configuration plus intended production constraints (network, uptime, query patterns, operator and cost limits).",
+      "A reviewer with relevant CKB node/indexer operations experience confirms availability and reviews the actual implementation and deployment design.",
+      "The reviewer returns a short written architecture decision and lists unresolved risks; no production change is made without the builder's approval."
+    ],
+    "smallestUsefulExperiment": "Only after both parties separately confirm interest: a bounded 20-minute review of the current indexer and its data/reorg assumptions, followed by a one-page comparison of self-hosted CKB node plus indexer, a named public service if one is independently verified, and deferring production exposure. No credentials, deployment, or mainnet transaction are required.",
+    "successCriteria": [
+      "The builder confirms the need is still active.",
+      "A specific reviewer confirms relevant experience and availability for this scope.",
+      "The builder receives a written operating-model decision with node, indexer, data persistence, reorg, monitoring and recovery responsibilities identified.",
+      "Any named public service is checked for current mainnet support and its actual API/operational limits before it is recommended."
+    ],
+    "alternatives": [
+      {
+        "name": "Self-host a CKB node and indexer",
+        "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+        "finding": "This is one of the builder's own stated options. The source does not establish its required operating cost, staffing, availability, or reorg-recovery burden for this application."
+      },
+      {
+        "name": "Use a public mainnet indexer",
+        "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+        "finding": "Also raised by the builder. The reviewed evidence identifies no specific current service with verified mainnet coverage, data semantics, limits, or uptime for the required queries."
+      },
+      {
+        "name": "Defer the production decision",
+        "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+        "finding": "Doing nothing avoids making an unsupported vendor or deployment recommendation, but leaves the publicly described ngrok-based test setup without a verified production plan."
+      },
+      {
+        "name": "Cellora architecture review",
+        "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+        "finding": "Closest imported human offer by scope. It is an old, unconfirmed review offer, not evidence that Cellora currently accepts reviews or supplies a production service."
+      }
+    ],
+    "missingEvidence": [
+      "Builder confirmation that this exact production architecture question remains open after the November 11 issue update.",
+      "Cellora confirmation that the April 28 review offer remains available and covers this specific indexer design.",
+      "A current, independently verified mainnet service alternative or detailed operational comparison for self-hosting.",
+      "Current source refresh for several repositories and issue-search queries; HTTP 429 and redirect responses are retained as incomplete checks, not negative evidence."
+    ],
+    "nextHumanAction": "A human may first decide whether to ask the CKB Kickstarter builder whether the need is still active. If confirmed, separately ask Cellora whether its old architecture-review offer still applies. Neither question has been sent. Do not make an introduction or describe Cellora as available unless that confirmation is received.",
+    "actionStatus": "NO_QUALIFIED_PILOT",
+    "externalActionSent": false
+  },
+  "candidates": [
+    {
+      "candidateId": "qualification-259687514edd36a88df2ddcaa7e993ec",
+      "assessment": {
+        "proposedOutcome": "NEEDS_CONFIRMATION",
+        "currentNeed": "unknown",
+        "fit": "unknown",
+        "providerKind": "none",
+        "providerAvailability": "not_applicable",
+        "priorWork": "unknown",
+        "rationale": "The pckt issue asks where a CKB-native app can find users and what evidence would show use beyond a testnet demo. This is a concrete distribution question, but the source is dated May 6 and an open issue does not confirm that the builder still wants help. No distribution partner or measured channel capability was surfaced in the imported provider inventory. The current checker found the issue and repository pages but did not establish an appropriate partner or adoption. The engine's proposed lifecycle label is not adoption evidence.",
+        "value": "A useful result would identify one measurable path to recurring recipient-to-recipient use, rather than generic ecosystem promotion.",
+        "participation": "The builder would confirm the target user and desired usage signal; a distribution partner would need to demonstrate access to that audience. No such partner is identified.",
+        "experiment": "If the need is reconfirmed, agree one audience and one observable repeat-use measure, then test a small opt-in distribution channel without claiming adoption in advance.",
+        "successCriteria": [
+          "The builder confirms the question remains active",
+          "A specific audience and repeat-use event are defined",
+          "A real channel owner confirms access before any campaign is proposed"
+        ],
+        "alternatives": [
+          {
+            "name": "Define a direct repeat-use experiment first",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+            "finding": "This could clarify the audience and value proposition before seeking distribution, but the current source does not supply a channel partner."
+          },
+          {
+            "name": "Do nothing",
+            "finding": "Avoids inventing a distributor, but leaves the builder's distribution question unanswered."
+          }
+        ],
+        "unknowns": [
+          "Whether pckt still seeks this advice",
+          "Which audience or repeat-use behavior is the priority",
+          "Whether an ecosystem channel is willing and suitable"
+        ],
+        "nextAction": "Keep as an unresolved source-backed need; first verify current builder interest, then search specifically for an evidenced distribution channel owner.",
+        "evidence": []
+      }
+    },
+    {
+      "candidateId": "qualification-4128d2b72b6740b31703dd60ac217ab9",
+      "assessment": {
+        "proposedOutcome": "NEEDS_CONFIRMATION",
+        "currentNeed": "unknown",
+        "fit": "unknown",
+        "providerKind": "none",
+        "providerAvailability": "not_applicable",
+        "priorWork": "unknown",
+        "rationale": "CKBolt asks what security-audit scope and Fiber 0.10 features should precede a possible mainnet path. The issue is open and recently updated, but it explicitly says the hub is single-operator and uses test funds; no independent reviewer or audit provider is evidenced in this shortlist. The current-state check's broad demonstration label does not establish an independent audit, mainnet readiness, or a suitable reviewer.",
+        "value": "A qualified review could expose contract, liquidity, or operational risks before a mainnet decision; the cost of a weak or absent review is meaningful because the product handles cross-network swaps.",
+        "participation": "The builder would scope the contracts and threat model; an independently qualified CKB/Fiber security reviewer would need to confirm their expertise and review scope. No reviewer is currently identified.",
+        "experiment": "After the need and reviewer are confirmed, perform a bounded threat-model review of one selected mainnet-blocking component and return findings with severity, reproduction path, and residual assumptions.",
+        "successCriteria": [
+          "A reviewer with relevant CKB and Fiber security experience is identified",
+          "The review scope and excluded areas are written down",
+          "Findings include reproducible evidence and do not imply a full audit unless one is performed"
+        ],
+        "alternatives": [
+          {
+            "name": "Keep the test-funds-only boundary",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/54",
+            "finding": "The source already states that production/mainnet readiness and a completed audit are not claimed; continuing that boundary is safer than inferring readiness."
+          },
+          {
+            "name": "Adopt a documented Fiber 0.10 subset",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/54",
+            "finding": "The builder asks which features to adopt, but no compatibility or value evidence for a specific feature is in the candidate record."
+          }
+        ],
+        "unknowns": [
+          "Whether the builder currently seeks a review",
+          "Reviewer identity and qualifications",
+          "Audit scope, Fiber version compatibility, and liquidity/operational assumptions"
+        ],
+        "nextAction": "Do not offer a reviewer or mainnet recommendation from this pool; identify a qualified security-review source only after confirming the builder's current scope.",
+        "evidence": []
+      }
+    },
+    {
+      "candidateId": "qualification-5af815487d93aff4501551509c579eca",
+      "assessment": {
+        "proposedOutcome": "BLOCKED",
+        "currentNeed": "unknown",
+        "fit": "unknown",
+        "providerKind": "none",
+        "providerAvailability": "not_applicable",
+        "priorWork": "unknown",
+        "rationale": "Cellula's issue asks which lock code hashes and flags should be rejected as owner locks because third-party-spendable locks can break the assumed authority model. The current source is still open, but repository/search refresh is partial and no independent security reviewer was found in the pool. The source itself says the planned refusal is in the SDK rather than the contract; this is a design statement, not proof that the proposed allowlist is complete or safe.",
+        "value": "A scoped review could help prevent an unsafe owner-lock assumption from reaching an SDK release, but the appropriate reviewer and exact supported-lock policy remain unknown.",
+        "participation": "The builder would provide the SDK and contract assumptions; a CKB lock-script security reviewer would need to inspect the relevant code and threat model. No such offer is evidenced.",
+        "experiment": "Once a reviewer is available, construct positive and negative lock-policy cases for the supported owner-lock set and check the SDK behavior against the contract authorization assumptions.",
+        "successCriteria": [
+          "The review distinguishes SDK filtering from on-chain enforcement",
+          "The supported lock set and flags are explicit",
+          "A negative case demonstrates rejection of a third-party-spendable owner lock"
+        ],
+        "alternatives": [
+          {
+            "name": "Keep the proposed SDK restriction provisional",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/39",
+            "finding": "The issue says the SDK restriction is planned. Without review, it should not be described as independently validated or contract-enforced."
+          },
+          {
+            "name": "Defer wider lock support",
+            "finding": "This avoids an unsupported compatibility claim but may limit supported owner wallets; the current evidence does not quantify that impact."
+          }
+        ],
+        "unknowns": [
+          "Current applicability of this exact review request",
+          "Supported code hashes and flags",
+          "Whether the SDK-only boundary is sufficient for the product's threat model"
+        ],
+        "nextAction": "Retain the need as blocked until a specific reviewer and the exact source revision are agreed; do not infer reviewer capability from broad security keywords.",
+        "evidence": []
+      }
+    },
+    {
+      "candidateId": "qualification-5db069c63c472920fd6a97105371e939",
+      "assessment": {
+        "proposedOutcome": "NEEDS_CONFIRMATION",
+        "currentNeed": "confirmed_unresolved",
+        "fit": "partial",
+        "providerKind": "human_offer",
+        "providerAvailability": "unconfirmed",
+        "priorWork": "unknown",
+        "rationale": "The current CKB Kickstarter issue is open and still contains the exact statement that the indexer runs locally through ngrok and asks whether production should use a self-hosted CKB node/indexer or a public mainnet service. This is a specific and measurable architecture question. The same-scope Cellora offer is for a 20-minute review, not a deployed indexer service; the offer is dated April 28 and has not been reconfirmed. The engine correctly rejects it as a technical-integration match because its structured type is human technical review. The JIT source set is partial, so absence of another prior-art result is not evidence that none exists.",
+        "value": "A bounded review could yield a concrete operating-model decision and checklist before the builder replaces the current test setup with a production service.",
+        "participation": "The builder confirms the need and shares the current indexer and operational constraints. Only a reviewer who confirms current availability and relevant CKB indexer experience participates. Cellora is not assumed to be that reviewer or service provider.",
+        "experiment": "If both sides opt in, review the current query/event model and deployment configuration in a bounded session, then return a written comparison of self-hosting, a specifically verified public service, and deferring the decision. No code or deployment change is implied.",
+        "successCriteria": [
+          "The builder confirms the decision is still open",
+          "A reviewer confirms relevant experience and availability",
+          "A written decision identifies indexer ownership, data persistence, reorg handling, monitoring, recovery, and unresolved costs"
+        ],
+        "alternatives": [
+          {
+            "name": "Cellora architecture-review offer",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+            "finding": "Directly relevant historical human offer, but last updated April 28, 2026; it must be reconfirmed, and it does not show that a public mainnet service is currently available."
+          },
+          {
+            "name": "Self-host node plus indexer",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+            "finding": "The builder explicitly raised this option. Required cost, uptime, data/reorg semantics, and operator burden are not established in the reviewed evidence."
+          },
+          {
+            "name": "Public mainnet indexer",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+            "finding": "Also raised by the builder; no named service was verified for current mainnet support and the exact query needs."
+          },
+          {
+            "name": "Do nothing",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+            "finding": "Avoids an unsupported recommendation but does not resolve the production architecture question."
+          }
+        ],
+        "unknowns": [
+          "Whether the builder still wants outside help",
+          "Whether Cellora's old review offer remains available",
+          "Whether any public service meets the application's mainnet queries and operational requirements",
+          "The complete current state of source repositories and prior-art search because some requests returned 301 or 429"
+        ],
+        "nextAction": "Do not send an introduction. A user may first approve asking the builder whether the need remains active; only after that confirmation should Cellora's offer be reconfirmed.",
+        "evidence": []
+      }
+    },
+    {
+      "candidateId": "qualification-6a29b1f4b8d330de019ac3f7610225ae",
+      "assessment": {
+        "proposedOutcome": "NEEDS_CONFIRMATION",
+        "currentNeed": "unknown",
+        "fit": "partial",
+        "providerKind": "human_offer",
+        "providerAvailability": "unconfirmed",
+        "priorWork": "unknown",
+        "rationale": "CKB Escrow asks for a production architecture for indexing escrow cells and terminal transaction history; its source is still open but was last updated August 3. Cellora's offer mentions non-trivial indexing needs but is a dated invitation to discuss, not a delivered production indexer or confirmation of present availability. The current refresh was partial, so this lead cannot be treated as actionable. The project's recent repository revisions show activity but do not confirm this need or the offer.",
+        "value": "If still needed, a specific review could reduce uncertainty about persistent escrow history and operational recovery after cells are spent.",
+        "participation": "The builder would confirm the history requirements and share the current API/indexer design; an available reviewer would inspect that exact architecture. Cellora is only a possible lead pending confirmation.",
+        "experiment": "Reconfirm the request and offer before considering a small review of historical-cell tracking, API consistency, and recovery cases; do not presume current compatibility.",
+        "successCriteria": [
+          "The builder confirms the need remains",
+          "Reviewer availability is confirmed",
+          "The review covers terminal cells and history reconstruction with explicit failure cases"
+        ],
+        "alternatives": [
+          {
+            "name": "Current first-party indexer direction",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26",
+            "finding": "The issue describes an indexer/API direction for history recovery; its adequacy for production is not independently established here."
+          },
+          {
+            "name": "Cellora review",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+            "finding": "Relevant by indexing scope, but the old offer requires reconfirmation and does not prove a service integration."
+          }
+        ],
+        "unknowns": [
+          "Whether the August request remains active",
+          "Whether the Cellora offer remains available",
+          "Current API/indexer behavior and exact historical queries",
+          "Whether any prior public implementation already addressed the same design"
+        ],
+        "nextAction": "Keep the existing CKB Escrow × Cellora record as a provisional review lead; do not promote or present it as an available collaboration.",
+        "evidence": []
+      }
+    },
+    {
+      "candidateId": "qualification-8a33a154eb4ce03a2fd422e94a7ed150",
+      "assessment": {
+        "proposedOutcome": "BLOCKED",
+        "currentNeed": "confirmed_unresolved",
+        "fit": "unknown",
+        "providerKind": "none",
+        "providerAvailability": "not_applicable",
+        "priorWork": "unknown",
+        "rationale": "Freight on Nervos's latest public issue asks for ecosystem guidance on CKB names and wallet adoption, says the naming/resolution approach is unsettled, and says it lacks a go-ahead from experienced ecosystem participants before committing to a design. The issue is open and was updated November 16; the exact extracted statement remains in the refreshed issue body. This is a real current human-review need, but no specific naming/resolution expert or willing wallet integration partner appears in the imported provider pool. The existing projects mentioning CKB names do not prove they can meet this requirement.",
+        "value": "Relevant guidance could prevent premature identity-resolution choices and clarify what a wallet must verify before signing to a named recipient.",
+        "participation": "The builder would share naming and resolution constraints; a reviewer with specific CKB naming and wallet integration experience would need to confirm interest. No such reviewer is identified.",
+        "experiment": "After confirming the requested scope, compare one or more evidenced name-resolution flows against wallet verification and signing requirements; do not recommend a scheme based on name overlap alone.",
+        "successCriteria": [
+          "A qualified reviewer or wallet team is identified",
+          "Name resolution is traced to a verified address before signing",
+          "Tradeoffs and unresolved identity assumptions are recorded"
+        ],
+        "alternatives": [
+          {
+            "name": "Wait for ecosystem guidance before committing",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/42",
+            "finding": "This matches the builder's stated current posture and avoids a speculative naming design, but does not locate the needed reviewer."
+          },
+          {
+            "name": "Adopt an existing naming service",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/42",
+            "finding": "The evidence does not establish which service satisfies the builder's unresolved resolver and wallet requirements."
+          }
+        ],
+        "unknowns": [
+          "Which name system and resolver are acceptable",
+          "Which wallet maintainers could integrate or review it",
+          "Whether the builder wants an introduction despite asking for guidance"
+        ],
+        "nextAction": "Preserve this as an unresolved no-provider human-review need; locate source-backed naming/wallet expertise before proposing a collaboration.",
+        "evidence": []
+      }
+    },
+    {
+      "candidateId": "qualification-c4ad5aac62f1ec64a979498469eca981",
+      "assessment": {
+        "proposedOutcome": "BLOCKED",
+        "currentNeed": "unknown",
+        "fit": "unknown",
+        "providerKind": "none",
+        "providerAvailability": "not_applicable",
+        "priorWork": "unknown",
+        "rationale": "EventMesh asks whether its proposed two-operator, receiver-verified Fiber Testnet payment and CKB commitment is the right next proof. This is a specific validation question with observable outputs. No independent tester, second operator, or Fiber/CKB test partner was identified in the imported provider pool. The issue is open but the last update is October 29, and current source checks were partial; the proposal is not evidence that the test has run.",
+        "value": "A successful independently operated proof could validate a meaningful cross-network reconciliation claim; a failed run could expose the boundary that still needs work.",
+        "participation": "The project owner would provide a pinned build and test instructions; an independent operator and receiver would need to confirm they can run the flow. No participant is recorded.",
+        "experiment": "After builder and tester confirmation, execute one bounded test-funds Fiber Testnet payment, verify receiver receipt, inspect both signatures and the CKB commitment, and preserve failures without claiming mainnet validity.",
+        "successCriteria": [
+          "An independent operator completes the documented setup",
+          "The receiver independently verifies the testnet payment",
+          "The close and CKB commitment reconcile with the same application event",
+          "Logs and hashes are reproducible and explicitly testnet-only"
+        ],
+        "alternatives": [
+          {
+            "name": "Use the project's proposed next milestone",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/40",
+            "finding": "The source describes the milestone, but this review did not find evidence it has executed."
+          },
+          {
+            "name": "Keep the claim at protocol design level",
+            "finding": "This avoids claiming proof before execution but leaves the central independent-operation assumption untested."
+          }
+        ],
+        "unknowns": [
+          "Current builder interest",
+          "Availability of independent operators and receiver",
+          "Current Fiber Testnet and CKB Testnet conditions",
+          "Whether a compatible complete end-to-end environment is available"
+        ],
+        "nextAction": "Do not schedule or imply an experiment until a real independent operator and receiver are identified and the current test instructions are checked.",
+        "evidence": []
+      }
+    },
+    {
+      "candidateId": "qualification-e5c07bebbbe196a96a2db855b37c9e82",
+      "assessment": {
+        "proposedOutcome": "BLOCKED",
+        "currentNeed": "unknown",
+        "fit": "unknown",
+        "providerKind": "none",
+        "providerAvailability": "not_applicable",
+        "priorWork": "unknown",
+        "rationale": "The ckb-cycle-tools author reports that the PR Action has no outside user and asks whether another project can produce its cycles.json input. This is direct evidence of an adoption/usability unknown, not evidence that a suitable adopter or tester has volunteered. The exact statement is present in the current issue body, but source searches were partial and there is no external usage evidence in the reviewed sources.",
+        "value": "A real external repository successfully producing a fixture would establish that the input workflow is usable beyond the author's own project; a failure would show where setup friction lies.",
+        "participation": "A separate CKB project would need to opt in, supply its own reviewed transaction fixture and use the action. No such outside user is identified.",
+        "experiment": "With a willing project, ask it to run the documented action against one existing safe fixture and record setup steps, failure points, and whether cycles.json can be produced without author intervention.",
+        "successCriteria": [
+          "An unrelated project author opts in",
+          "The action runs using that project's own reviewed fixture",
+          "The author can generate the input without private help",
+          "No claim of adoption follows from one trial"
+        ],
+        "alternatives": [
+          {
+            "name": "Keep CI offline with project-authored mock transactions",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+            "finding": "This is the current approach described by the builder; it remains useful but does not prove another project's input workflow is clear."
+          },
+          {
+            "name": "Ask for one external usability run",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+            "finding": "This is a possible bounded experiment only if a real project opts in; none is evidenced here."
+          }
+        ],
+        "unknowns": [
+          "Whether the author still seeks outside usage",
+          "Which external CKB project is willing to test",
+          "Whether fixture creation is the main barrier or merely one concern"
+        ],
+        "nextAction": "Keep as an adoption-validation need; identify an opted-in external project before calling it a user-test or adoption opportunity.",
+        "evidence": []
+      }
+    },
+    {
+      "candidateId": "qualification-e63114f81d8ea3d7913e04f323a49dcc",
+      "assessment": {
+        "proposedOutcome": "BLOCKED",
+        "currentNeed": "confirmed_unresolved",
+        "fit": "unknown",
+        "providerKind": "none",
+        "providerAvailability": "not_applicable",
+        "priorWork": "unknown",
+        "rationale": "Owl Pilot's current issue explicitly asks a user to try connection, permission selection, automatic action, one-time approval and receipt inspection, and report browser and public-transaction evidence for failures. The issue is open and was updated November 16. It is a specific human testing and product-feedback request, but the imported corpus has no explicit user-testing need class and the provider pool contains no evidenced volunteer tester or testing room. The lifecycle label ‘demonstrated_in_wild’ describes broad project execution signals; it does not mean this usability test or external feedback has happened.",
+        "value": "A structured outside-user run could expose confusing account ownership, allowances, revocation, and app/owner spend boundaries before wider use.",
+        "participation": "The builder supplies a safe testnet walkthrough and defines what test funds and data are acceptable; each volunteer tester opts in and reports observed outcomes. No tester is currently available in the imported pool.",
+        "experiment": "After identifying willing testers, run one guided testnet session with a checklist that records steps, misunderstandings, browser, and only public testnet transaction references; do not fabricate user feedback.",
+        "successCriteria": [
+          "At least one real tester opts in",
+          "The tester completes the listed account and permission flows",
+          "Findings distinguish observed behavior from interpretation",
+          "No private key or mainnet funds are requested"
+        ],
+        "alternatives": [
+          {
+            "name": "Builder-run walkthrough",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/51",
+            "finding": "Can catch obvious gaps but is not independent usability evidence."
+          },
+          {
+            "name": "Defer outreach",
+            "finding": "Avoids inventing testers but leaves the explicit user-experience questions unanswered."
+          }
+        ],
+        "unknowns": [
+          "Whether the builder still wants testers",
+          "Who can test safely on the stated environment",
+          "Whether the current issue's transaction and revocation flows still match the posted description"
+        ],
+        "nextAction": "Record this as a no-provider human-testing need; do not describe project demonstrations or repository activity as user testing.",
+        "evidence": []
+      }
+    },
+    {
+      "candidateId": "qualification-f1d67b34aac1d4dbf40440d9fbd1d98a",
+      "assessment": {
+        "proposedOutcome": "ALREADY_ADDRESSED",
+        "currentNeed": "already_addressed",
+        "fit": "specific",
+        "providerKind": "none",
+        "providerAvailability": "not_applicable",
+        "priorWork": "partial",
+        "rationale": "This exact atomic need asks which CKAutomata contracts and transitions should receive the deepest independent review first. Public comments from accounts distinct from the project author include detailed technical reviews of DAO Harvest liveness, executor rotation, transaction flow, operator incentives and independent operation. The maintainer replied with changes and reported redeployment on testnet; the issue was later closed. This is sufficient to mark the original request for initial review guidance as addressed, not to claim a formal audit, verified implementation, mainnet readiness, or adoption. The separate broad current-state detector's ‘demonstrated_in_wild’ label is project-level and is not used as proof of this review outcome.",
+        "value": "The requested review feedback was delivered and the maintainer reports acting on it; repeating the same initial review introduction would be redundant.",
+        "participation": "Public reviewers posted findings and the maintainer responded. Public account separation is observable; reviewer qualifications and independent verification of every claimed fix remain unknown.",
+        "experiment": "Do not repeat the original reviewer-introduction request. If the builder later asks for a new audit, define a new, narrow contract/release scope and verify the current implementation against the review findings.",
+        "successCriteria": [
+          "The original request for review guidance is not re-offered as untouched",
+          "Any future audit need is separately scoped",
+          "Maintainer-reported fixes remain attributed and are not presented as independently verified"
+        ],
+        "alternatives": [
+          {
+            "name": "Repeat the same review introduction",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/43",
+            "finding": "Not justified: dated review comments and the maintainer's follow-up already address the narrow original request."
+          },
+          {
+            "name": "Independent audit of a current release",
+            "evidenceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/43",
+            "finding": "This is a distinct future activity. Neither the posted review nor testnet redeployment constitutes a formal security audit."
+          }
+        ],
+        "unknowns": [
+          "Whether every maintainer-reported change is present in the current repository revision",
+          "The reviewer accounts' qualifications and independence beyond their distinct public usernames",
+          "Whether a formal audit is planned or needed before mainnet"
+        ],
+        "nextAction": "Mark this exact initial review-request scope already addressed and suppress duplicate outreach; retain formal audit and current-release verification as separate unresolved needs.",
+        "evidence": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "repositoriesProcessed": 23,
+  "projectIds": [
+    "bitkeep",
+    "ccc",
+    "cellguard",
+    "cellscript",
+    "cellula",
+    "chainpress",
+    "ckb-ai",
+    "ckb-cinnabar",
+    "ckb-connect-wallet-kit",
+    "ckb-node-probe",
+    "ckbuilder-cellora-22",
+    "ckbuilder-ckautomata-73",
+    "ckbuilder-ckbcycletools-62",
+    "ckbuilder-ckbdevnetexplorer-65",
+    "ckbuilder-ckbgeowars-38",
+    "ckbuilder-ckbgovernance-29",
+    "ckbuilder-dripfund-4",
+    "ckbuilder-issue-26",
+    "ckbuilder-issue-38",
+    "ckbuilder-pckt-27",
+    "crowdcell"
+  ],
+  "footprints": [
+    {
+      "projectId": "bitkeep",
+      "repository": "https://github.com/bitgetwallet/download",
+      "revision": "725ff4f0a6fd1ac1c1c4440a58dd4fbad89ae5c1",
+      "status": "partial"
+    },
+    {
+      "projectId": "ccc",
+      "repository": "https://github.com/ckb-devrel/ccc",
+      "revision": "f4295dc9c650bffedfb9f603cbd3b9ce36bcf369",
+      "status": "partial"
+    },
+    {
+      "projectId": "cellguard",
+      "repository": "https://github.com/tydeptrai21042004/CellGuard",
+      "revision": "2bb3182adb1a5d00bca24e2068f790a50e8e2d70",
+      "status": "partial"
+    },
+    {
+      "projectId": "cellscript",
+      "repository": "https://github.com/CellScript-Labs/CellScript",
+      "revision": "54eb2220a58f2ebcb62995491c8470527a188250",
+      "status": "partial"
+    },
+    {
+      "projectId": "cellula",
+      "repository": "https://github.com/LusoCryptoLabs/cells-contracts",
+      "revision": "6d29dab2770fa0980e13b9cbeefff0c844ef4101",
+      "status": "partial"
+    },
+    {
+      "projectId": "cellula",
+      "repository": "https://github.com/LusoCryptoLabs/cells-resolver",
+      "revision": "b63292873b791979b5ae26df1e2d6833f0101451",
+      "status": "partial"
+    },
+    {
+      "projectId": "chainpress",
+      "repository": "https://github.com/chetanchauhan64/CKB-Academy-Progress",
+      "revision": "9bda098f4c50cfb8f1051d981fe92aecaa2fb2bd",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckb-ai",
+      "repository": "https://github.com/sonami-tech/ckb-mcp",
+      "revision": "de66053c4a83ffedbafe98d20e5a061f4ebe5edf",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckb-cinnabar",
+      "repository": "https://github.com/ashuralyk/ckb-cinnabar",
+      "revision": "66dbd9a4e1d3d94c9d6f8c5c08ecab700a0f026e",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckb-connect-wallet-kit",
+      "repository": "https://github.com/Victor-Okenwa/revamp-ckb-connect-wallet",
+      "revision": "52dcaaf492fad8fd4e3a482a79968e8205309265",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckb-node-probe",
+      "repository": "https://github.com/nervosnetwork/ckb-node-probe-frontend",
+      "revision": "b733b0f1a40e43fd9ef64c8e43d2bbd26d305a7b",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-cellora-22",
+      "repository": "https://github.com/Antismart/cellora",
+      "revision": "a534c38f248c0406eeafee94adadb8c2c9072f8a",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-ckautomata-73",
+      "repository": "https://github.com/Hallab7/ckb-automata",
+      "revision": "8eec44406667627cd60c0c1ee8346e27220f94a2",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-ckbcycletools-62",
+      "repository": "https://github.com/luongthanhtung03/ckb-cycle-tools",
+      "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-ckbdevnetexplorer-65",
+      "repository": "https://github.com/wildanrhmn/ckb-devnet-explorer",
+      "revision": "b6aef5571bbe5a112b4809881a1b6229095f6da7",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-ckbgeowars-38",
+      "repository": "https://github.com/Felabs1/ckb-geo-wars",
+      "revision": "9e8424d0a857ef80799070ff44071c72363cfc57",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-ckbgovernance-29",
+      "repository": "https://github.com/anihdev/ckb-voting-dapp",
+      "revision": "2af7bafb9e579de56b0103bad2dc1eab7eee4662",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-dripfund-4",
+      "repository": "https://github.com/adisuyash/ckb-notes",
+      "revision": "34241019e35f4e4f00f505f5b6aac24619a1f400",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-issue-26",
+      "repository": "https://github.com/kayceeDev/ckb-escrow",
+      "revision": "d5cfee14e26785ec2b3ca89aab8440bf6b5d63ad",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-issue-26",
+      "repository": "https://github.com/kayceeDev/ckb-escrow-studio",
+      "revision": "eed20bc30bdde02cb4cd1a7e7e518941fd1a1591",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-issue-38",
+      "repository": "https://github.com/tydeptrai21042004/CellFlow",
+      "revision": "027ce1c4202a3e62ae504bc9aa0f14169b2ca085",
+      "status": "partial"
+    },
+    {
+      "projectId": "ckbuilder-pckt-27",
+      "repository": "https://github.com/RobaireTH/pckt",
+      "revision": "f351c6c2eea531814e78d557b8a23c2695df292d",
+      "status": "partial"
+    },
+    {
+      "projectId": "crowdcell",
+      "repository": "https://github.com/alesfer001/CrowdCell",
+      "revision": "0835ad42decf2c9594fa92a185eea4cee9eba622",
+      "status": "partial"
+    }
+  ],
+  "observationCount": 42049,
+  "activeNeedItemCount": 856,
+  "interpretedNeedCount": 78,
+  "providerOfferCount": 4,
+  "providerCapabilityCount": 11,
+  "needRejections": {
+    "non_actionable_stance": 502,
+    "no_bounded_scope": 142,
+    "unknown_category": 132
+  },
+  "candidateCount": 1,
+  "structuredIntentCount": 115,
+  "structuredIntentCandidateCount": 1,
+  "rejected": {
+    "missingNeed": 20690,
+    "missingProvider": 0,
+    "invalidEvidence": 0
+  },
+  "limitations": [
+    "Atomic need items are now direct inputs; category and stance are automated interpretations, not human-verified intent.",
+    "Human review/testing candidates require an explicit source offer and do not require code footprints.",
+    "Static source observations do not prove runtime compatibility.",
+    "Rust control flow, deployment identity, signer behavior and adoption may remain unknown."
+  ],
+  "typedCandidates": [
+    {
+      "id": "intent-00a3979b5875aae7c7fc413bb5d87077",
+      "consumer": "CKB Escrow",
+      "provider": "Cellora",
+      "scope": "ckb-indexing-architecture",
+      "relation": "explicit-offer",
+      "conclusion": "unknown",
+      "need": "- What is the recommended production architecture for indexing escrow cells and terminal transaction history?",
+      "needItemId": "95fb89802635e4f14f9ba3f7e2cca37d1c661c53aef2d5e50af6ad7dd0c5561b",
+      "providerClaim": "Happy to jump on a 20-minute call with anyone whose app has non-trivial\nindexing needs. The architecture document in the repo has more detail for\nreviewers who want to dig in.",
+      "providerSource": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12"
+    }
+  ],
+  "currentStateVerification": {
+    "capabilityId": "candidate-cap-01a7d7279e294969f40e85d235a5",
+    "runId": "lifecycle-c2ac35329ea427c83a0a1ad6e6ee",
+    "checkedAt": "2026-11-17T12:27:57.154Z",
+    "lifecycleState": "stale_offer",
+    "compatibilityState": "unknown",
+    "freshness": "current",
+    "result": "complete",
+    "sourceCount": 15,
+    "availableSourceCount": 15,
+    "evidenceCount": 4,
+    "nextAction": "Reconfirm the offer before presenting it as available; do not contact the project automatically.",
+    "limitations": [
+      "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+      "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+      "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility."
+    ],
+    "report": "evidence/needs-discovery-current-state/intent-00a3979b5875aae7c7fc413bb5d87077-20261117T122757154Z.json",
+    "reportSha256": "49a0cb7f4a0191cb1c7d92e2a6899b0779806cbc850a61ae79df83c8ee8794e6"
+  },
+  "retiredCandidates": [],
+  "sourceCorpusCandidates": [],
+  "noMatchDecision": {
+    "id": "need-5c0dc83ff899b28c01242ce0aa3f8dc5",
+    "consumer": "CellFlow",
+    "needItemId": "a0da3dfade63b9ab3459c8e47adc0d3b3fdd77f166d4c17b5ab7e9b37bd19431",
+    "category": "technical-review",
+    "stance": "explicit-request",
+    "claim": "3. **CKB correctness:** Please review canonical-chain observation, confirmation-depth handling, reorg detection, and expected/live-Cell verification.",
+    "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/38",
+    "revision": "2026-10-29T16:37:36Z",
+    "scope": "ckb-human-technical-review",
+    "intentType": "technical-review",
+    "nextAction": "Write the precise review question and expected output, then identify and invite an appropriate reviewer through a human-controlled process. No offer or response is recorded.",
+    "selectionRule": "unmatched actionable need; explicit requests first; then review/security/validation/testing before other classes; newest source observation; stable item id tie-break",
+    "evidenceBackedProviderMatches": 0,
+    "status": "needs-provider"
+  }
+}

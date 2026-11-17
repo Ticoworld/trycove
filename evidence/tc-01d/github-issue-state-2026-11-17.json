@@ -1,0 +1,188 @@
+{
+  "checkedAt": "2026-11-17T12:55:05Z",
+  "method": "Authenticated GitHub CLI REST GET issue metadata; read-only; exact source issues in the generated pool plus Cellora offer #12",
+  "issues": [
+    {
+      "closed_at": null,
+      "html_url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+      "number": 6,
+      "state": "open",
+      "title": "CKB Kickstarter — Decentralized Crowdfunding Platform on Nervos CKB",
+      "updated_at": "2026-11-11T17:18:35Z"
+    },
+    {
+      "closed_at": null,
+      "html_url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+      "number": 12,
+      "state": "open",
+      "title": "Cellora: a multi-tenant indexing and query service for CKB",
+      "updated_at": "2026-04-28T05:42:11Z"
+    },
+    {
+      "closed_at": null,
+      "html_url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+      "number": 15,
+      "state": "open",
+      "title": "pckt: A friendly way to send CKB",
+      "updated_at": "2026-05-06T13:42:09Z"
+    },
+    {
+      "closed_at": null,
+      "html_url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26",
+      "number": 26,
+      "state": "open",
+      "title": "CKB Escrow: decentralized escrow for goods and services on Nervos CKB",
+      "updated_at": "2026-08-03T05:35:01Z"
+    },
+    {
+      "closed_at": null,
+      "html_url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/39",
+      "number": 39,
+      "state": "open",
+      "title": "Cells (cellula.id): .cell names on CKB that can be paid, contracts public and reproducible",
+      "updated_at": "2026-11-03T12:46:24Z"
+    },
+    {
+      "closed_at": null,
+      "html_url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/40",
+      "number": 40,
+      "state": "open",
+      "title": "EventMesh: bilateral signed reconciliation for CKB/Fiber application events",
+      "updated_at": "2026-10-29T17:19:11Z"
+    },
+    {
+      "closed_at": null,
+      "html_url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/42",
+      "number": 42,
+      "state": "open",
+      "title": "FreightOnNervos (FON) or Freight43: a CKB-native deliverables network, open for feedback",
+      "updated_at": "2026-11-16T16:03:58Z"
+    },
+    {
+      "closed_at": "2026-11-11T16:15:59Z",
+      "html_url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/43",
+      "number": 43,
+      "state": "closed",
+      "title": "CKAutomata: payment automation and Nervos DAO Harvest on CKB",
+      "updated_at": "2026-11-11T16:15:59Z",
+      "authorLogin": "Hallab7"
+    },
+    {
+      "closed_at": null,
+      "html_url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+      "number": 46,
+      "state": "open",
+      "title": "ckb-cycle-tools: per-script cycle profiling, flamegraphs and PR cycle reports for CKB Scripts",
+      "updated_at": "2026-11-07T02:57:19Z"
+    },
+    {
+      "closed_at": null,
+      "html_url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/51",
+      "number": 51,
+      "state": "open",
+      "title": "Owl Pilot & Owl Paymaster: automatic signing and sponsored fees for CKB apps",
+      "updated_at": "2026-11-16T16:01:52Z"
+    },
+    {
+      "closed_at": null,
+      "html_url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/54",
+      "number": 54,
+      "state": "open",
+      "title": "CKBolt: Bitcoin Lightning ↔ CKB Fiber swaps, pay and get paid, both legs locked to one SHA-256 hash",
+      "updated_at": "2026-11-12T12:58:29Z"
+    }
+  ],
+  "bodyChecks": [
+    {
+      "candidateId": "qualification-259687514edd36a88df2ddcaa7e993ec",
+      "issueNumber": 15,
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+      "exactNeedStillInBody": true,
+      "bodySha256": "f7c03a32d5cdff77a94518a0dab64f4a6b39f6c645e0e8aee241b0c128e6cc3c",
+      "checkedAt": "2026-11-17T13:05:46Z"
+    },
+    {
+      "candidateId": "qualification-4128d2b72b6740b31703dd60ac217ab9",
+      "issueNumber": 54,
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/54",
+      "exactNeedStillInBody": true,
+      "bodySha256": "e7c592e9ec65726a0957096cd060e312198097d1d08284150259098c6d915f5c",
+      "checkedAt": "2026-11-17T13:05:46Z"
+    },
+    {
+      "candidateId": "qualification-5af815487d93aff4501551509c579eca",
+      "issueNumber": 39,
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/39",
+      "exactNeedStillInBody": true,
+      "bodySha256": "55641b07a82e83d758823004cfc032152b751fa9b5ebc3f90cd724ca95013894",
+      "checkedAt": "2026-11-17T13:05:46Z"
+    },
+    {
+      "candidateId": "qualification-5db069c63c472920fd6a97105371e939",
+      "issueNumber": 6,
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/6",
+      "exactNeedStillInBody": true,
+      "bodySha256": "b1a1d98a62c4f8b4b82c5a43803058f9d3288844a48b598c695904d38e267235",
+      "checkedAt": "2026-11-17T13:05:46Z"
+    },
+    {
+      "candidateId": "qualification-6a29b1f4b8d330de019ac3f7610225ae",
+      "issueNumber": 26,
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/26",
+      "exactNeedStillInBody": true,
+      "bodySha256": "8e87d2241459107a86015692333cb0e8646aac5482d94000de5e02b7b1fb461e",
+      "checkedAt": "2026-11-17T13:05:46Z"
+    },
+    {
+      "candidateId": "qualification-8a33a154eb4ce03a2fd422e94a7ed150",
+      "issueNumber": 42,
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/42",
+      "exactNeedStillInBody": true,
+      "bodySha256": "c35bd58494f5ea4e91a4e3443b57f4b9cb9c36cdba5a9bb8ccd86f14de0e9fac",
+      "checkedAt": "2026-11-17T13:05:46Z"
+    },
+    {
+      "candidateId": "qualification-c4ad5aac62f1ec64a979498469eca981",
+      "issueNumber": 40,
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/40",
+      "exactNeedStillInBody": true,
+      "bodySha256": "e3f6766b72b0dba75d90e8978257f670c6e62d1be0fe50e81aa75a9f484dbea1",
+      "checkedAt": "2026-11-17T13:05:46Z"
+    },
+    {
+      "candidateId": "qualification-e5c07bebbbe196a96a2db855b37c9e82",
+      "issueNumber": 46,
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+      "exactNeedStillInBody": true,
+      "bodySha256": "ccfe983c954f11276db6f2210a2593116b0184a1a85b127b1562446311a16f97",
+      "checkedAt": "2026-11-17T13:05:46Z"
+    },
+    {
+      "candidateId": "qualification-e63114f81d8ea3d7913e04f323a49dcc",
+      "issueNumber": 51,
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/51",
+      "exactNeedStillInBody": true,
+      "bodySha256": "14713e21b6ec20796f43694426fcda37f3f3a3cf214a2c4453e67caf24c2582a",
+      "checkedAt": "2026-11-17T13:05:46Z"
+    },
+    {
+      "candidateId": "qualification-f1d67b34aac1d4dbf40440d9fbd1d98a",
+      "issueNumber": 43,
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/43",
+      "exactNeedStillInBody": true,
+      "bodySha256": "078ae176e40716e6509537ede6e8da9bd66ab4692a2600cd45f94840f6c90547",
+      "checkedAt": "2026-11-17T13:05:46Z"
+    },
+    {
+      "providerOfferForCandidateIds": [
+        "qualification-5db069c63c472920fd6a97105371e939",
+        "qualification-6a29b1f4b8d330de019ac3f7610225ae"
+      ],
+      "issueNumber": 12,
+      "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+      "exactOfferStillInBody": true,
+      "bodySha256": "6653a71e34eb0e01d4e89c7c3fa07e69aceb1e35ae1b0c744b2ce7f60f50dcc5",
+      "checkedAt": "2026-11-17T13:05:46Z"
+    }
+  ]
+}

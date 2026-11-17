@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {PGlite} from '@electric-sql/pglite';
 import {join} from 'node:path';
 
-const files=['0001_initial.sql','0002_connections.sql','0003_footprints.sql','0004_intelligence.sql','0005_trial_evidence.sql','0006_project_repositories.sql','0007_signal_intents.sql','0008_candidate_lifecycle.sql'];
+const files=['0001_initial.sql','0002_connections.sql','0003_footprints.sql','0004_intelligence.sql','0005_trial_evidence.sql','0006_project_repositories.sql','0007_signal_intents.sql','0008_candidate_lifecycle.sql','0009_need_items.sql','0010_need_taxonomy.sql','0011_need_lineage_and_decisions.sql','0012_opportunity_qualification.sql'];
 async function migrate(db:PGlite){for(const file of files)await db.exec(await readFile(join(process.cwd(),'migrations',file),'utf8'))}
 
 describe('candidate lifecycle persistence migration',()=>{
@@ -21,6 +21,10 @@ describe('candidate lifecycle persistence migration',()=>{
    const history=await db.query("SELECT id,evaluated_lifecycle FROM lifecycle_verification_runs WHERE capability_id='invoice' ORDER BY checked_at");
    const evidence=await db.query("SELECT id FROM lifecycle_evidence WHERE capability_id='invoice' ORDER BY checked_at");
    expect(history.rows).toEqual([{id:'run-1',evaluated_lifecycle:'demonstrated_in_wild'},{id:'run-2',evaluated_lifecycle:'in_progress'}]);expect(evidence.rows).toHaveLength(2);
+   const snapshot='a'.repeat(64);
+   for(let i=0;i<2;i++)await db.exec(`INSERT INTO opportunity_qualification_reviews(id,opportunity_id,input_snapshot_sha256,outcome,action_status,review,created_at) VALUES ('review-1','pair','${snapshot}','NO_QUALIFIED_PILOT','NO_QUALIFIED_PILOT','{}',now()) ON CONFLICT (opportunity_id,input_snapshot_sha256) DO NOTHING`);
+   const reviews=await db.query("SELECT id,outcome,action_status FROM opportunity_qualification_reviews WHERE opportunity_id='pair'");
+   expect(reviews.rows).toEqual([{id:'review-1',outcome:'NO_QUALIFIED_PILOT',action_status:'NO_QUALIFIED_PILOT'}]);
    await expect(db.exec("INSERT INTO candidate_capabilities(id,opportunity_id,capability_key,capability,consumer_project_id,provider_project_id,lifecycle_state,compatibility_state,freshness,summary,uncertainty,next_action,created_at,updated_at) VALUES ('duplicate','pair','invoice-route','duplicate','left','right','proposed','unknown','unresolved','x','x','x',now(),now())")).rejects.toThrow();
    await expect(db.exec("INSERT INTO candidate_capabilities(id,opportunity_id,capability_key,capability,consumer_project_id,provider_project_id,lifecycle_state,compatibility_state,freshness,summary,uncertainty,next_action,created_at,updated_at) VALUES ('orphan','missing','orphan','orphan','left','right','unknown','unknown','unresolved','x','x','x',now(),now())")).rejects.toThrow();
   }finally{await db.close()}

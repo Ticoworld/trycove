@@ -31,6 +31,7 @@
     "opportunity:verify": "NODE_USE_ENV_PROXY=1 tsx scripts/qualification-current-checks.ts",
     "opportunity:qualify": "tsx scripts/qualify-opportunities.ts",
     "opportunity:verify-record": "tsx scripts/verify-qualification-record.ts",
+    "tc01e:freeze": "tsx scripts/tc01e/freeze-baseline.ts",
     "prior-work:select-control": "tsx scripts/select-prior-work-control.ts",
     "prior-work:collect": "NODE_USE_ENV_PROXY=1 tsx scripts/collect-prior-work.ts",
     "prior-work:reconcile": "tsx scripts/reconcile-prior-work.ts",

@@ -2,8 +2,8 @@ import {createHash} from 'node:crypto';
 
 export type SignalInput={id:string;projectId:string;kind:string;concept:string;claim:string;sourceUrl:string;revision:string;verification:string;observedAt?:Date};
 export type IntentDirection='need'|'capability'|'offer';
-export type IntentType='technical-integration'|'validation'|'technical-review'|'user-testing'|'distribution';
-export type SignalIntent={id:string;signalId?:string;observationId?:string;projectId:string;direction:IntentDirection;intentType:IntentType;scope:string;extractionRule:string;verification:string;sourceUrl:string;revision:string;observedAt?:Date;claim:string;signalKind:string};
+export type IntentType='technical-integration'|'validation'|'technical-review'|'user-testing'|'distribution'|'adoption'|'product-feedback'|'security-review';
+export type SignalIntent={id:string;signalId?:string;needItemId?:string;observationId?:string;projectId:string;direction:IntentDirection;intentType:IntentType;scope:string;extractionRule:string;verification:string;sourceUrl:string;revision:string;observedAt?:Date;claim:string;signalKind:string;sourceClaim?:string;category?:string;stance?:string;startOffset?:number;endOffset?:number;interpretationMethod?:'bounded-scope-v2'|'explicit-human-category-v1';unresolvedContext?:string[]};
 export type IntentCandidate={id:string;need:SignalIntent;relatedNeeds:SignalIntent[];provider:SignalIntent;relation:'documented-need'|'explicit-offer';scope:string;intentType:IntentType};
 export type IntentPairRejection='self_match'|'scope_mismatch'|'need_requires_explicit_offer'|'offer_type_mismatch';
 
@@ -18,24 +18,31 @@ const scopes:[string,RegExp][]=[
  // Sender-profile identity differs from resolving a DID recipient to a lock script.
  ['ckb-sender-profile-identity',/\b(?:decentralized sender identity|backend[- ]stored profile labels|sender profile labels)\b/i],
  ['ckb-did-recipient-resolution',/\bdid:ckb\b[^\n]{0,100}\b(?:recipient|lock script|resolution)\b|\b(?:resolve|resolution)[^\n]{0,100}\bdid:ckb\b/i],
- ['ckb-transaction-submission-recovery',/\b(?:ambiguous (?:rpc )?(?:broadcast|submission)|(?:broadcast|submission)[^\n]{0,80}(?:recovery|uncertain|ambiguous)|(?:recovery|uncertain|ambiguous)[^\n]{0,80}(?:broadcast|submission))\b/i],
+ ['ckb-transaction-submission-recovery',/\b(?:ambiguous (?:rpc )?(?:broadcast|submission)(?: (?:result|outcome|response|recovery|handling))?|(?:broadcast|submission)(?: (?:result|outcome|response))? (?:recovery|uncertain|ambiguous|unknown)|(?:ambiguous|uncertain|unknown) (?:rpc )?(?:broadcast|submission) (?:result|outcome|response)|(?:reconcile|reconciles|reconciled|reconciling|track|tracks|tracked|tracking)[^\n]{0,50}(?:transaction|submission|broadcast|tx hash)|transaction hash[^\n]{0,50}(?:recover|reconcile|track))\b/i],
  ['ckb-session-lock-application-integration',/\b(?:real app using (?:ckb )?(?:sessions?|subscriptions?)|session[- ]lock integration|application sessions? on ckb)\b/i],
  ['ckb-contract-transaction-policy-review',/\b(?:application[- ]level transaction polic(?:y|ies)|pre[- ]sign(?:ing)? transaction polic(?:y|ies)|transaction polic(?:y|ies) review|typed[- ]cell preservation)\b/i],
  ['ckb-external-user-testing',/\b(?:looking for|need|want|seeking) (?:external )?testers? (?:for|to test) (?:my|our|the) (?:ckb )?(?:app|dapp|tool|project)\b|\b(?:happy to test|can test) (?:your|a) (?:ckb )?(?:app|dapp|tool|project)\b|\boutside user (?:for|of) (?:a|the) (?:ckb )?(?:app|dapp|tool|project)\b/i],
  ['ckb-developer-tool-adoption',/\b(?:first real use|real app using|first (?:one|two) (?:apps?|projects?|repositories?)|first outside user|outside user for (?:the )?(?:pr action|tool))\b/i],
  ['ckb-public-demo-distribution',/\b(?:hosted read[- ]only demo|public devnet demo|distribution channel for ckb|list(?:ing)? in (?:a )?ckb marketplace)\b/i],
 ];
-const explicitOffer=/\b(?:happy to (?:jump on|help|set up|pair|test|host)|i would set it up (?:with them|for the first (?:one|two)(?: (?:apps?|projects?|repositories?|repos?))? (?:myself|with them)?)|i can (?:set up|help|review|run|test)|we can (?:set up|help|review|run|test)|offering to|available to (?:review|help|test)|i(?:'| a)m willing to)\b/i;
+const explicitOffer=/\b(?:happy to (?:jump on|help|set up|pair|test|host|review|audit|validate|give feedback)|i would set it up (?:with them|for the first (?:one|two)(?: (?:apps?|projects?|repositories?|repos?))? (?:myself|with them)?)|i can (?:set up|help|review|run|test|audit|validate)|we can (?:set up|help|review|run|test|audit|validate)|offering to|available to (?:review|help|test|audit)|i(?:'| a)m willing to(?:\s+(?:review|help|test|audit|validate))?)\b/i;
 const validSource=(raw:string)=>{try{const u=new URL(raw);return u.protocol==='https:'&&u.hostname==='github.com'&&!u.username&&!u.password&&u.pathname.split('/').filter(Boolean).length>=4}catch{return false}};
 const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
 
 function paragraphContaining(claim:string,index:number){const start=claim.lastIndexOf('\n\n',index),end=claim.indexOf('\n\n',index);return claim.slice(start<0?0:start+2,end<0?claim.length:end).trim()}
 function signalType(scope:string,direction:IntentDirection,concept:string,context:string,claim:string):IntentType {
+ if(scope==='ckb-external-user-testing')return 'user-testing';
  if(scope==='ckb-public-demo-distribution')return 'distribution';
- if(scope==='ckb-developer-tool-adoption'||scope==='ckb-external-user-testing'||/\b(?:real app using|first real use|outside user)\b/i.test(context))return 'user-testing';
+ if(scope==='ckb-developer-tool-adoption'||/\b(?:real app using|first real use|outside user)\b/i.test(context))return 'adoption';
+ // Asking which evidence would persuade reviewers is a validation request,
+ // even when the sentence mentions a concrete implementation technique.
+ if(direction==='need'&&/\b(?:which|what)\b[^\n]{0,120}\b(?:proof|test|evidence|case)\b[^\n]{0,100}\b(?:convincing|persuasive)\b/i.test(context))return 'validation';
  if(direction==='capability')return 'technical-integration';
- if(direction==='offer'&&/\b(?:call|pair|review|feedback|guidance|advice)\b/i.test(context))return 'technical-review';
+ if(direction==='offer'&&/\b(?:call|pair|review|guidance|advice)\b/i.test(context))return 'technical-review';
+ if(direction==='offer'&&/\b(?:ux|user experience|product feedback|feature feedback)\b/i.test(context))return 'product-feedback';
  if(direction==='need'&&concept==='feedback-request'&&/\b(?:considering next|considering (?:adding|building|implementing)|planned feature|feature proposal)\b/i.test(context))return 'technical-integration';
+ if(direction==='need'&&concept==='feedback-request'&&/\b(?:security|audit|threat model|attack|exploit)\b/i.test(context+'\n'+claim))return 'security-review';
+ if(direction==='need'&&concept==='feedback-request'&&/\b(?:ux|user experience|usability|what(?:'s| is) missing|feature feedback)\b/i.test(context+'\n'+claim))return 'product-feedback';
  if(/\b(?:review|audit|guidance|feedback|advice|reviewer)\b/i.test(context+'\n'+claim))return 'technical-review';
  if(direction==='need'&&concept==='feedback-request')return 'technical-review';
  if(/\b(?:tester|testers|user testing|real users|first outside user|first real use)\b/i.test(context))return 'user-testing';
@@ -80,7 +87,9 @@ export function explainIntentPair(need:SignalIntent,provider:SignalIntent):Inten
  return null;
 }
 export function discoverIntentCandidates(intents:SignalIntent[]):IntentCandidate[]{
- const needs=intents.filter(x=>x.direction==='need');const providers=intents.filter(x=>x.direction==='capability'||x.direction==='offer');const found=new Map<string,IntentCandidate>();
+ const needs=intents.filter(x=>x.direction==='need');const providerRows=intents.filter(x=>x.direction==='capability'||x.direction==='offer');const providerMap=new Map<string,SignalIntent>();
+ for(const provider of providerRows){const key=[provider.projectId,provider.scope,provider.direction,provider.intentType,provider.sourceUrl].join('\0');const previous=providerMap.get(key);if(!previous||(provider.needItemId&&!previous.needItemId)||(Boolean(provider.needItemId)===Boolean(previous.needItemId)&&provider.claim.length<previous.claim.length))providerMap.set(key,provider)}
+ const providers=[...providerMap.values()],found=new Map<string,IntentCandidate>();
  for(const need of needs)for(const provider of providers){
   if(explainIntentPair(need,provider))continue;
   const explicit=provider.direction==='offer';

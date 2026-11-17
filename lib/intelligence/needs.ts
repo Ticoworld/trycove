@@ -1,15 +1,16 @@
 import {createHash} from 'node:crypto';
 
 export type NeedCategory='user-testing'|'validation'|'adoption'|'technical-review'|'security'|'product-feedback'|'integration'|'feature-request'|'infrastructure'|'distribution'|'unknown';
-export type NeedStance='explicit-request'|'reported-obstacle'|'roadmap'|'status-update'|'ambiguous';
+export type NeedStance='explicit-request'|'reported-obstacle'|'explicit-offer'|'roadmap'|'status-update'|'ambiguous';
 export type NeedSignal={id:string;projectId:string;kind:string;claim:string;sourceUrl:string;revision:string;observedAt:Date;verification:string};
-export type NeedItem={id:string;signalId:string;projectId:string;sourceUrl:string;revision:string;observedAt:Date;excerpt:string;category:NeedCategory;stance:NeedStance;verification:string;rule:string;startOffset:number;endOffset:number};
+export type NeedItem={id:string;lineageKey:string;signalId:string;projectId:string;sourceUrl:string;revision:string;sourceClaim:string;observedAt:Date;excerpt:string;category:NeedCategory;stance:NeedStance;verification:string;rule:string;startOffset:number;endOffset:number};
 
 const hash=(value:string)=>createHash('sha256').update(value).digest('hex');
 const request=/\b(?:please|would you|could you|can you|anyone (?:able|willing)|looking for|seeking|we need|i need|need help|would appreciate|i'd appreciate|feedback (?:is )?welcome|try (?:it|this|the)|run it against|who would|which .* would|any suggestions|any advice|happy to (?:receive|hear))\b|\?(?:\s|$)/i;
 const obstacle=/\b(?:not implemented|no (?:outside|external|real) (?:user|adoption|deployment)|does(?:n't| not) (?:yet )?(?:support|work|handle|verify)|cannot|can't|unable to|fails? (?:at|when|because)|blocked by|missing (?:a |the )?(?:capability|feature|support)|unsure whether|haven't been able to|not yet (?:available|supported|verified|tested)|challenge is|currently (?:runs|uses|lacks))\b/i;
 const roadmap=/\b(?:roadmap|for v\d|planned feature|plan to|planning to|would like to|would (?:make|allow|enable)|want to|should (?:we|i|it)|considering (?:adding|building|implementing)|next (?:we|i|step|phase)|future (?:support|version)|we hope to|goal is to|first (?:real|outside) (?:user|use|adoption))\b/i;
 const progress=/\b(?:released|shipped|implemented|added|completed|deployed|settled|works with)\b/i;
+const humanOffer=/\b(?:happy to (?:jump on|help|set up|pair|test|review|audit)|i would set it up|i can (?:set up|help|review|run|test|audit|validate)|we can (?:set up|help|review|run|test|audit|validate)|offering to|available to (?:review|help|test|audit|validate)|i(?:'m| am) willing to (?:review|help|test|audit|validate))\b/i;
 
 function splitQuestions(line:string,base:number){
  const parts=line.match(/[^?]+\?(?:\s|$)|[^?]+$/g);if(!parts||parts.length<2)return null;
@@ -54,7 +55,10 @@ function categoryOf(text:string):NeedCategory{
  return 'unknown';
 }
 function stanceOf(text:string):NeedStance{
- if(request.test(text))return 'explicit-request';
+ const asks=request.test(text),offers=humanOffer.test(text);
+ if(asks&&offers)return 'ambiguous';
+ if(offers)return 'explicit-offer';
+ if(asks)return 'explicit-request';
  if(obstacle.test(text))return 'reported-obstacle';
  if(roadmap.test(text))return 'roadmap';
  if(progress.test(text))return 'status-update';
@@ -64,10 +68,23 @@ function stanceOf(text:string):NeedStance{
 /** Extracts literal, independently reviewable statements from imported need/obstacle claims. */
 export function decomposeNeedSignal(signal:NeedSignal):NeedItem[]{
  if(!['need','obstacle'].includes(signal.kind))return [];
+ const occurrences=new Map<string,number>();
  return fragments(signal.claim).map(fragment=>{
   const category=categoryOf(fragment.text),stance=stanceOf(fragment.text),rule='needs-v1:literal-fragments;bounded-lexical-taxonomy';
-  const id=hash([signal.id,String(fragment.start),fragment.text,rule].join('\0'));
-  return{id,signalId:signal.id,projectId:signal.projectId,sourceUrl:signal.sourceUrl,revision:signal.revision,observedAt:signal.observedAt,excerpt:fragment.text,category,stance,verification:`automated classification only; source claim remains unverified`,rule,startOffset:fragment.start,endOffset:fragment.end};
+  const occurrence=occurrences.get(fragment.text)??0;occurrences.set(fragment.text,occurrence+1);
+  // The lineage follows a verbatim statement across source revisions; the row id
+  // additionally identifies the revision and source span so history is append-only.
+  const lineageKey=`${signal.sourceUrl}#need#${createHash('md5').update(fragment.text).digest('hex')}#${occurrence}`;
+  const id=hash([lineageKey,signal.revision,String(fragment.start),String(fragment.end),rule].join('\0'));
+  return{id,lineageKey,signalId:signal.id,projectId:signal.projectId,sourceUrl:signal.sourceUrl,revision:signal.revision,sourceClaim:signal.claim,observedAt:signal.observedAt,excerpt:fragment.text,category,stance,verification:`automated classification only; source claim remains unverified`,rule,startOffset:fragment.start,endOffset:fragment.end};
  });
 }
-export function decomposeNeedSignals(signals:NeedSignal[]):NeedItem[]{return signals.flatMap(decomposeNeedSignal).sort((a,b)=>a.projectId.localeCompare(b.projectId)||a.sourceUrl.localeCompare(b.sourceUrl)||a.startOffset-b.startOffset)}
+export function decomposeNeedSignals(signals:NeedSignal[]):NeedItem[]{
+ const rows=signals.flatMap(decomposeNeedSignal).sort((a,b)=>a.sourceUrl.localeCompare(b.sourceUrl)||a.startOffset-b.startOffset||a.signalId.localeCompare(b.signalId)||a.id.localeCompare(b.id));
+ const occurrences=new Map<string,number>();
+ return rows.map(item=>{
+  const key=`${item.sourceUrl}#need#${createHash('md5').update(item.excerpt).digest('hex')}`,occurrence=occurrences.get(key)??0;occurrences.set(key,occurrence+1);
+  const lineageKey=`${key}#${occurrence}`;const id=hash([lineageKey,item.revision,String(item.startOffset),String(item.endOffset),item.rule].join('\0'));
+  return{...item,id,lineageKey};
+ });
+}

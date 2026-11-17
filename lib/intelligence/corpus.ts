@@ -12,7 +12,7 @@ export type CorpusObservation = {
   fact: string;
 };
 
-export type CorpusNeed = { projectId: string; claim: string; sourceUrl: string; revision: string };
+export type CorpusNeed = { projectId: string; claim: string; sourceUrl: string; revision: string; needItemId?:string; sourceClaim?:string; category?:string; stance?:string; startOffset?:number; endOffset?:number };
 export type CorpusCandidate = PlannedConnection & {
   need: CorpusNeed;
   relatedNeeds?: CorpusNeed[];
@@ -112,18 +112,25 @@ function addTransactionRecoveryCandidates(
   observations: CorpusObservation[], needs: CorpusNeed[], out: Map<string, CorpusCandidate>, rejected: { missingNeed: number; missingProvider: number; invalidEvidence: number },
 ) {
   const production = observations.filter(isProductionObservation);
+  const byProject = new Map<string, CorpusObservation[]>(), byProjectRepo = new Map<string, CorpusObservation[]>(), byProjectRepoPath = new Map<string, CorpusObservation[]>();
+  for (const observation of production) {
+    const projectKey=observation.projectId,repoKey=`${observation.projectId}\0${observation.repository}`,pathKey=`${repoKey}\0${observation.path}`;
+    byProject.set(projectKey,[...(byProject.get(projectKey)??[]),observation]);
+    byProjectRepo.set(repoKey,[...(byProjectRepo.get(repoKey)??[]),observation]);
+    byProjectRepoPath.set(pathKey,[...(byProjectRepoPath.get(pathKey)??[]),observation]);
+  }
   const providers = production.filter(o => o.kind === 'function' &&
     /^Exported function (?:prepare|track|monitor|submit)\w*Transaction\b/i.test(o.fact));
   for (const need of needs.filter(n => validNeed(n) && isTransactionRecoveryNeed(n.claim))) {
-    const signings = production.filter(o => o.projectId === need.projectId && o.kind === 'signing' && /Calls signTransaction\b/.test(o.fact));
-    const relayCalls = production.filter(o => o.projectId === need.projectId && ['broadcast', 'local_call'].includes(o.kind) &&
+    const consumerRows=byProject.get(need.projectId)??[];
+    const signings = consumerRows.filter(o => o.kind === 'signing' && /Calls signTransaction\b/.test(o.fact));
+    const relayCalls = consumerRows.filter(o => ['broadcast', 'local_call'].includes(o.kind) &&
       /(?:Calls (?:relay|broadcast|send)\w*Transaction\b|Calls sendTransaction\b)/i.test(o.fact));
     const consumerPairs = signings.flatMap(signing => relayCalls.filter(relay => signing.repository === relay.repository &&
       signing.path === relay.path && Math.abs(signing.startLine - relay.startLine) <= 30).map(relay => ({ signing, relay })));
     if (!consumerPairs.length) { rejected.missingNeed++; continue; }
     const candidates = providers.flatMap(provider => {
-      const ambiguityMarkers = production.filter(o => o.projectId === provider.projectId && o.repository === provider.repository &&
-        o.path === provider.path && ['local_call', 'function'].includes(o.kind) &&
+      const ambiguityMarkers = (byProjectRepoPath.get(`${provider.projectId}\0${provider.repository}\0${provider.path}`)??[]).filter(o => ['local_call', 'function'].includes(o.kind) &&
         /(?:Calls|(?:Exported function|Method)) (?:markAmbiguous|markSubmission|recordSubmissionUnknown|reconcile)\b/i.test(o.fact) &&
         o.startLine >= provider.startLine && o.endLine <= provider.endLine);
       return ambiguityMarkers.map(marker => ({ provider, marker }));
@@ -141,16 +148,12 @@ function addTransactionRecoveryCandidates(
           networks: networkLabels(observations, provider.projectId, provider.repository), sdkVersions: cccVersions(observations, provider.projectId, provider.repository) });
       const result = assess(consumer, providing);
       if (!result) { rejected.invalidEvidence++; continue; }
-      const relayBoundary = production.filter(o => o.projectId === relay.projectId && o.repository === relay.repository &&
-        o.kind === 'cell_dep_guard' && /packet-lock cell dep/i.test(o.fact));
-      const providerSubmission = production.filter(o => o.projectId === provider.projectId && o.repository === provider.repository &&
-        o.path === provider.path && ['broadcast', 'local_call'].includes(o.kind) && /Calls sendTransaction\b/.test(o.fact) &&
+      const relayBoundary = (byProjectRepo.get(`${relay.projectId}\0${relay.repository}`)??[]).filter(o => o.kind === 'cell_dep_guard' && /packet-lock cell dep/i.test(o.fact));
+      const providerSubmission = (byProjectRepoPath.get(`${provider.projectId}\0${provider.repository}\0${provider.path}`)??[]).filter(o => ['broadcast', 'local_call'].includes(o.kind) && /Calls sendTransaction\b/.test(o.fact) &&
         o.startLine >= provider.startLine && o.endLine <= provider.endLine);
-      const boundaryObservations = production.filter(o =>
-        ((o.projectId === relay.projectId && o.repository === relay.repository) ||
-          (o.projectId === provider.projectId && o.repository === provider.repository)) &&
-        (['client_network', 'declared_network', 'ckb_rpc_broadcast'].includes(o.kind) ||
-          (['locked_dependency', 'dependency'].includes(o.kind) && /@ckb-ccc\/core/.test(o.fact))));
+      const boundaryObservations = [...(byProjectRepo.get(`${relay.projectId}\0${relay.repository}`)??[]),...(byProjectRepo.get(`${provider.projectId}\0${provider.repository}`)??[])].filter(o =>
+        ['client_network', 'declared_network', 'ckb_rpc_broadcast'].includes(o.kind) ||
+        (['locked_dependency', 'dependency'].includes(o.kind) && /@ckb-ccc\/core/.test(o.fact)));
       const supportObservations = [signing, marker, ...relayBoundary, ...providerSubmission, ...boundaryObservations].filter((o, i, all) =>
         all.findIndex(x => `${x.repository}:${x.path}:${x.startLine}:${x.fact}` === `${o.repository}:${o.path}:${o.startLine}:${o.fact}`) === i);
       const findings = [...result.findings, {
@@ -175,18 +178,32 @@ export function discoverCorpus(
   const production = observations.filter(isProductionObservation);
   const calls = production.filter(o => callKinds.has(o.kind) && /^Calls [A-Za-z_$][\w$]*/.test(o.fact));
   const exports = production.filter(o => o.kind === 'function' && /^Exported function [A-Za-z_$][\w$]*/.test(o.fact));
+  const needsByProject = new Map<string, CorpusNeed[]>();
+  for (const need of needs) needsByProject.set(need.projectId, [...(needsByProject.get(need.projectId) ?? []), need]);
+  const exportsByName = new Map<string, CorpusObservation[]>();
+  for (const observation of exports) {
+    const name = observation.fact.match(/^Exported function ([\w$]+)/)?.[1];
+    if (name) exportsByName.set(name, [...(exportsByName.get(name) ?? []), observation]);
+  }
+  const signatures = new Map<string, CorpusObservation>();
+  for (const observation of production) {
+    if (observation.kind !== 'call_signature') continue;
+    const match = observation.fact.match(/^Resolved call ([\w$]+):/);
+    if (!match) continue;
+    const key = `${observation.projectId}\0${observation.repository}\0${observation.path}\0${observation.startLine}\0${match[1]}`;
+    if (!signatures.has(key)) signatures.set(key, observation);
+  }
   const out = new Map<string, CorpusCandidate>();
   const rejected = { missingNeed: 0, missingProvider: 0, invalidEvidence: 0 };
   for (const call of calls) {
     const name = call.fact.match(/^Calls ([\w$]+)/)?.[1];
     if (!name || name.length < 8 || !(/[a-z][A-Z]|_/.test(name))) { rejected.missingNeed++; continue; }
     const word = new RegExp(`(^|[^A-Za-z0-9_$])${name.replace(/[$]/g, '\\$&')}([^A-Za-z0-9_$]|$)`, 'i');
-    const need = needs.find(n => n.projectId === call.projectId && validNeed(n) && word.test(n.claim));
+    const need = (needsByProject.get(call.projectId) ?? []).find(n => validNeed(n) && word.test(n.claim));
     if (!need) { rejected.missingNeed++; continue; }
-    const signature = production.find(o => o.projectId === call.projectId && o.repository === call.repository &&
-      o.path === call.path && o.startLine === call.startLine && o.kind === 'call_signature' && o.fact.startsWith(`Resolved call ${name}:`));
-    const providers = exports.filter(o => o.projectId !== call.projectId && o.repository !== call.repository &&
-      o.fact.match(/^Exported function ([\w$]+)/)?.[1] === name && signature && exactSignature(signature, o, name));
+    const signature = signatures.get(`${call.projectId}\0${call.repository}\0${call.path}\0${call.startLine}\0${name}`);
+    const providers = (exportsByName.get(name) ?? []).filter(o => o.projectId !== call.projectId && o.repository !== call.repository &&
+      signature && exactSignature(signature, o, name));
     if (!providers.length) { rejected.missingProvider++; continue; }
     for (const provider of providers) {
       const result = assess(

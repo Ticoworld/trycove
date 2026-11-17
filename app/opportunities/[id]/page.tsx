@@ -2,7 +2,7 @@ import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {and,desc,eq,inArray} from 'drizzle-orm';
 import {db} from '../../../lib/db';
-import {candidateCapabilities,evidence,followUps,intelligenceAssessments,lifecycleEvidence,lifecycleVerificationRuns,opportunities,projects,technicalFootprints,trialEvidenceRecords,trialRuns} from '../../../lib/schema';
+import {candidateCapabilities,evidence,followUps,intelligenceAssessments,lifecycleEvidence,lifecycleVerificationRuns,needItems,opportunities,projects,technicalFootprints,trialEvidenceRecords,trialRuns} from '../../../lib/schema';
 import {FootprintLink} from '../../components/footprint';
 import {IntelligenceAssessment} from '../../components/assessment';
 import {LifecycleVerification} from '../../components/lifecycle-verification';
@@ -32,20 +32,22 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
   db.select().from(trialRuns).where(eq(trialRuns.opportunityId,id)),
   db.select().from(followUps).where(eq(followUps.opportunityId,id)).orderBy(desc(followUps.createdAt)),
   db.select().from(technicalFootprints).where(eq(technicalFootprints.projectId,opportunity.projectA)).orderBy(desc(technicalFootprints.analyzedAt)).limit(1),
-  db.select().from(technicalFootprints).where(eq(technicalFootprints.projectId,opportunity.projectB)).orderBy(desc(technicalFootprints.analyzedAt)).limit(1),
+  opportunity.projectB?db.select().from(technicalFootprints).where(eq(technicalFootprints.projectId,opportunity.projectB)).orderBy(desc(technicalFootprints.analyzedAt)).limit(1):Promise.resolve([]),
   db.select().from(intelligenceAssessments).where(eq(intelligenceAssessments.opportunityId,id)).orderBy(desc(intelligenceAssessments.createdAt)).limit(1),
   db.select({id:trialEvidenceRecords.id,mode:trialEvidenceRecords.mode,result:trialEvidenceRecords.result,evidenceLevel:trialEvidenceRecords.evidenceLevel,createdAt:trialEvidenceRecords.createdAt}).from(trialEvidenceRecords).where(eq(trialEvidenceRecords.opportunityId,id)).orderBy(desc(trialEvidenceRecords.createdAt)).limit(20),
  ]);
  const assessment=assessments[0];
- const [usedConsumer,usedProvider]=assessment?await Promise.all([
+ const [usedConsumer,usedProvider]=assessment&&opportunity.projectB?await Promise.all([
   db.select().from(technicalFootprints).where(and(eq(technicalFootprints.id,assessment.consumerFootprintId),eq(technicalFootprints.projectId,opportunity.projectA))).limit(1),
   db.select().from(technicalFootprints).where(and(eq(technicalFootprints.id,assessment.providerFootprintId),eq(technicalFootprints.projectId,opportunity.projectB))).limit(1),
  ]):[[],[]];
+ const linkedNeedIds=sourceEvidence.map(item=>item.needItemId).filter((x):x is string=>Boolean(x));
+ const linkedNeeds=linkedNeedIds.length?await db.select().from(needItems).where(inArray(needItems.id,linkedNeedIds)):[];
 
  return <>
   <section className="hero">
    <Link href="/opportunities" className="eyebrow">← Opportunities</Link>
-   <h1>{consumer?.name} <span className="arrow">×</span> {provider?.name}</h1>
+   <h1>{consumer?.name} <span className="arrow">{provider?'×':'→'}</span> {provider?.name??'No provider found'}</h1>
    <p>{opportunity.problem}</p>
    <div className="tag">{opportunity.kind} / {opportunity.status} / not an adoption claim</div>
   </section>
@@ -53,7 +55,8 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
    <div className="prose">
     <div className="eyebrow">Opportunity workspace / 机会工作区</div>
     <h2>Why these projects?</h2><p>{opportunity.reasoning}</p>
-    <h2>Compatibility & unknowns</h2><p>{opportunity.requirements}</p>
+    <h2>{provider?'Compatibility & unknowns':'Search decision and unknowns'}</h2><p>{opportunity.requirements}</p>
+    {linkedNeeds.length>0&&<><h2>Atomic builder need</h2>{linkedNeeds.map(item=><article className="card" key={item.id}><span className="tag">{item.category.replaceAll('-',' ')} · {item.stance.replaceAll('-',' ')} · automated interpretation</span><blockquote><p>{item.excerpt}</p></blockquote><p>Source revision {item.revision} · character offsets {item.startOffset}–{item.endOffset} · lineage {item.lineageKey.slice(-12)}</p><p>Parent source claim: {item.sourceClaim}</p><p>{item.verification}</p></article>)}</>}
     <h2>Engine assessment</h2>
     {assessment?<IntelligenceAssessment assessment={assessment} consumer={usedConsumer[0]} provider={usedProvider[0]}/>:<p className="muted">No structured intelligence assessment has been recorded for this opportunity.</p>}
     <LifecycleVerification claims={capabilities} runs={lifecycleRuns} evidence={lifecycleItems}/>
@@ -75,7 +78,7 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
    <aside className="stack">
     <div className="card"><span className="tag">Source evidence / 证据</span>{sourceEvidence.map(item=>{const href=safeExternalUrl(item.sourceUrl);return <div key={item.id}><p>{item.claim}</p>{href&&<a className="source" href={href} target="_blank" rel="noreferrer">Inspect source ↗</a>}<p>{item.verification} · {item.observedAt.toISOString().slice(0,10)}</p></div>})}</div>
     <div className="card"><span className="tag">Project technical footprints</span><p>Latest stored source scans for these projects; observations may not be specific to this opportunity.</p>{consumerFootprints[0]&&<FootprintLink footprint={consumerFootprints[0]} projectName={consumer?.name}/>} {providerFootprints[0]&&<FootprintLink footprint={providerFootprints[0]} projectName={provider?.name}/>} {!consumerFootprints.length&&!providerFootprints.length&&<p>No technical footprints have been recorded for these projects.</p>}</div>
-    <div className="card"><span className="tag">Important distinction</span><p>Offline script execution and synthetic fixtures do not prove fresh chain acceptance, a live deployment, maintainer approval or adoption.</p><Link className="source" href={`/projects/${opportunity.projectA}`}>{consumer?.name} profile →</Link><br/><Link className="source" href={`/projects/${opportunity.projectB}`}>{provider?.name} profile →</Link></div>
+    <div className="card"><span className="tag">Important distinction</span><p>{provider?'Offline script execution and synthetic fixtures do not prove fresh chain acceptance, a live deployment, maintainer approval or adoption.':'No suitable provider was supported by the source evidence searched; this is an explicit no-match decision, not proof that no provider exists.'}</p><Link className="source" href={`/projects/${opportunity.projectA}`}>{consumer?.name} profile →</Link>{opportunity.projectB&&<><br/><Link className="source" href={`/projects/${opportunity.projectB}`}>{provider?.name} profile →</Link></>}</div>
    </aside>
   </div>
  </>;

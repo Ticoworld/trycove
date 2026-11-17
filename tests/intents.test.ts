@@ -72,11 +72,23 @@ describe('structured signal intents',()=>{
   const provider=classifySignal(signal({id:'recovery-cap',projectId:'provider',kind:'capability',claim:'The product handles ambiguous broadcast recovery.'}));
   expect(need?.intentType).toBe('technical-review');expect(discoverIntentCandidates([need!,provider!])).toHaveLength(0);
  });
+ it('does not turn a question about convincing proof into a request to integrate the named technique',()=>{
+  const need=classifySignal(signal({id:'proof-question',projectId:'cellflow',concept:'missing-capability',claim:'Which real Testnet proof would be most convincing for reviewers: ambiguous broadcast recovery, server restart recovery, RPC failover, or reorg simulation?'}));
+  const provider=classifySignal(signal({id:'recovery-provider',projectId:'eventmesh',kind:'capability',claim:'The product tracks transaction broadcast outcomes and recovers ambiguous results by transaction hash.'}));
+  expect(need?.scope).toBe('ckb-transaction-submission-recovery');expect(need?.intentType).toBe('validation');
+  expect(discoverIntentCandidates([need!,provider!])).toHaveLength(0);
+  expect(explainIntentPair(need!,provider!)).toBe('need_requires_explicit_offer');
+ });
  it('rejects DID recipient resolution as a substitute for sender profile identity',()=>{
   const need=classifySignal(signal({id:'profile',projectId:'pckt',claim:'Decentralized sender identity: replace backend-stored profile labels with on-chain or signed-attestation identity so naming is portable.'}));
   const provider=classifySignal(signal({id:'did-recipient',projectId:'credora',kind:'capability',claim:'did:ckb and address recipient resolution to a lock script is supported for certificate issuance.'}));
   expect(need?.scope).toBe('ckb-sender-profile-identity');expect(provider?.scope).toBe('ckb-did-recipient-resolution');
   expect(discoverIntentCandidates([need!,provider!])).toHaveLength(0);
+ });
+ it('does not infer transaction submission recovery from unrelated deposit-note recovery and broadcast keywords',()=>{
+  const precise=classifySignal(signal({id:'provider-eventmesh',projectId:'eventmesh',kind:'capability',claim:'CKB transaction identity is determined before broadcast so an ambiguous broadcast result can be recovered by transaction hash.'}));
+  const superficial=classifySignal(signal({id:'provider-wallet',projectId:'obscell',kind:'capability',claim:'Pending recovery note shown before deposit submission. Advanced direct broadcast option with a privacy warning.'}));
+  expect(precise?.scope).toBe('ckb-transaction-submission-recovery');expect(superficial).toBeNull();
  });
  it('can match a CKB app testing need with an explicit tester offer without code integration',()=>{
   const need=classifySignal(signal({id:'test-need',projectId:'app',concept:'missing-capability',claim:'Looking for testers for my CKB dapp before testnet release.'}));

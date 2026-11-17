@@ -1,8 +1,20 @@
 {
   "schemaVersion": 1,
   "mode": "baseline",
-  "createdAt": "2026-11-17T06:43:10.908Z",
-  "evaluatorRevision": "16601aa790df0d5587dc8192a02dfad5c4a6313a",
+  "createdAt": "2026-11-17T07:44:14.222Z",
+  "repositoryHeadAtExecution": "3dfa527113afeb14cfcb0d4aa9fecb53a159920f",
+  "evaluationCode": {
+    "files": [
+      "scripts/evaluate-need-discovery.ts",
+      "scripts/legacy-intents-baseline.ts",
+      "lib/intelligence/needs.ts",
+      "lib/intelligence/need-discovery.ts",
+      "lib/intelligence/intents.ts",
+      "lib/intelligence/corpus.ts",
+      "lib/intelligence/planner.ts"
+    ],
+    "sha256": "bede232017f05d949d85616afad886649c3db68a7546f68d1a5e142906bc573e"
+  },
   "snapshot": {
     "path": "evidence/needs-discovery-input-2026-11-17.json.gz",
     "inputSha256": "6760396705df2247cc86a225173b30fb56555f1080350490b6069192dced3fa0",
@@ -42,9 +54,39 @@
     "storedIntentCount": 38
   },
   "oldBehavior": {
+    "baselineMatcherRevision": "16601aa790df0d5587dc8192a02dfad5c4a6313a",
     "atomicNeedItemsConsumed": false,
     "heldoutSourceSignals": 17,
     "classifiedHeldoutNeedIntents": 3,
+    "classifiedNeedDetails": [
+      {
+        "signalId": "issue-46-1c6f31bdcc80c8e1",
+        "projectId": "ckbuilder-ckbcycletools-62",
+        "scope": "ckb-developer-tool-adoption",
+        "intentType": "user-testing",
+        "claim": "- Released: 1.0.0 is on npm (npm install -g ckb-cycle-tools), and the Action posted its first public comment: https://github.com/luongthanhtung03/ckb-cycle-tools/pull/1\n- First real use of the PR Action on another project's contracts\n- The comparison harness generalised beyond the session lock",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "revision": "2026-11-07T02:57:19Z"
+      },
+      {
+        "signalId": "issue-15-1e61dd50e8f8e0dd",
+        "projectId": "ckbuilder-pckt-27",
+        "scope": "ckb-sender-profile-identity",
+        "intentType": "technical-integration",
+        "claim": "- **Decentralized sender identity**: replace backend-stored profile labels with on-chain or signed-attestation identity so naming is portable and self-sovereign\n- **Multi-code-hash indexer**: track multiple historical contract code hashes so packet redeploys don't strand in-flight packets in the UI\n- **Lower cell-rent floor**: redesign the packet's data layout (likely a Merkle commitment for `claimed_locks` instead of an inline array) to reduce the minimum capacity each packet needs to occupy\n- **Mainnet readiness pass**: dust-attack analysis, fee-rate adaptation, signed-relay auditing\n- **Better recipient UX for heavy locks**: contract-side or frontend-side adaptation of the per-slot minimum based on the recipient's actual lock script (multisig / type-script-bearing wallets need more than 63 CKB)\n- **Group / event mode**: time-bounded events where multiple senders fund a shared pool and recipients claim once across the whole event",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "revision": "2026-05-06T13:42:09Z"
+      },
+      {
+        "signalId": "issue-15-859d016e1e0b46f8",
+        "projectId": "ckbuilder-pckt-27",
+        "scope": "ckb-sender-profile-identity",
+        "intentType": "technical-review",
+        "claim": "I'd appreciate concrete advice on:\n- The right path from testnet to a credible mainnet deployment . What hardening would *you* want to see before signing a real-funds packet?\n- Whether the planned data-layout redesign (Merkle commitment for claimed locks) is worth the contract complexity given the current floor, or whether there's a simpler shape I'm missing.\n- Whether decentralized sender identity should be a wallet-level concern (e.g. a signed-attestation pattern the wallet provides) or whether pckt should ship its own primitive and if so, what minimum primitive would be useful to other CKB apps too (DID).\n- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "revision": "2026-05-06T13:42:09Z"
+      }
+    ],
     "unclassifiedHeldoutSignals": 14,
     "availableProviderIntents": 12,
     "typedCandidateCount": 0,
@@ -110,11 +152,12 @@
       }
     ]
   },
+  "newBehavior": null,
   "limitations": [
     "This held-out comparison is at whole source-issue URL level; all statements and signal rows from a selected issue are excluded from provider signal matching.",
     "No user-testing item exists in the frozen source snapshot; technical validation is the available testing-related stratum.",
     "Need categories are provisional automated interpretations, not human ground-truth labels.",
     "A candidate is not proof of compatibility, current availability, maintainer approval, or adoption.",
-    "The old intent path does not consult candidate-scoped lifecycle state when generating candidates."
+    "Current-state live verification is a separate candidate-scoped action; this read-only corpus evaluator does not claim freshness."
   ]
 }

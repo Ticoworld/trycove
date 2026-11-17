@@ -95,8 +95,8 @@ async function safeCacheDir(path:string){
  await mkdir(path,{recursive:true,mode:0o700});const st=await lstat(path);if(st.isSymbolicLink()||!st.isDirectory())throw new Error('Verification cache must be a regular directory');
  const resolved=await import('node:fs/promises').then(fs=>fs.realpath(path));if(!resolved)throw new Error('Cannot resolve verification cache');
 }
-async function cacheRead(dir:string,url:string):Promise<CacheRecord|null>{
- const path=join(dir,`${sha(url)}.json`);try{const st=await lstat(path);if(st.isSymbolicLink()||!st.isFile()||st.size>MAX_BODY_BYTES+4096)return null;const v=JSON.parse(await readFile(path,'utf8')) as CacheRecord;if(v.url!==url||Date.now()-Date.parse(v.storedAt)>CACHE_MAX_AGE_MS)return null;return v}catch{return null}
+async function cacheRead(dir:string,url:string,checkedAt:string):Promise<CacheRecord|null>{
+ const path=join(dir,`${sha(url)}.json`);try{const st=await lstat(path);if(st.isSymbolicLink()||!st.isFile()||st.size>MAX_BODY_BYTES+4096)return null;const v=JSON.parse(await readFile(path,'utf8')) as CacheRecord;if(v.url!==url||Date.parse(checkedAt)-Date.parse(v.storedAt)>CACHE_MAX_AGE_MS)return null;return v}catch{return null}
 }
 async function cacheWrite(dir:string,value:CacheRecord){
  const path=join(dir,`${sha(value.url)}.json`);await writeFile(path,JSON.stringify(value),{mode:0o600});
@@ -105,7 +105,7 @@ async function cacheWrite(dir:string,value:CacheRecord){
 }
 
 async function requestOne(url:string,kind:SourceKind,cacheDir:string,fetcher:typeof fetch,checkedAt:string):Promise<RetrievedSource>{
- const current=await cacheRead(cacheDir,url);const fresh=current&&(current.failure?Date.now()<Date.parse(current.retryUntil??new Date(Date.parse(current.storedAt)+CACHE_TTL_MS).toISOString()):Date.now()-Date.parse(current.storedAt)<CACHE_TTL_MS);
+ const current=await cacheRead(cacheDir,url,checkedAt);const now=Date.parse(checkedAt);const fresh=current&&(current.failure?now<Date.parse(current.retryUntil??new Date(Date.parse(current.storedAt)+CACHE_TTL_MS).toISOString()):now-Date.parse(current.storedAt)<CACHE_TTL_MS);
  if(fresh&&current.failure)return{url,kind,checkedAt:current.storedAt,fetchStatus:'unavailable',httpStatus:current.status||undefined,content:'',excerpt:'',error:`Previously unavailable; refresh suppressed until ${current.retryUntil??'the cache expires'}. ${current.failure}`,cache:'hit'};
  if(fresh)return parseSource(url,kind,current.content,checkedAt,current.status,current.etag,current.lastModified,'hit');
  const headers:Record<string,string>={Accept:kind==='discourse-topic'?'application/json, text/html':'text/html, application/atom+xml, application/json;q=0.9, */*;q=0.5','User-Agent':USER_AGENT};

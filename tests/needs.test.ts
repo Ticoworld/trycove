@@ -58,4 +58,14 @@ describe('source-backed builder need decomposition',()=>{
    ['technical-review','explicit-request'],['product-feedback','explicit-request'],
   ]);
  });
+ it('keeps an explicit collaboration offer distinct from a need',()=>{
+  const items=decomposeNeedSignal(signal({claim:'Happy to review the CKB recovery design for a builder preparing a testnet release.'}));
+  expect(items).toMatchObject([{category:'technical-review',stance:'explicit-offer'}]);
+ });
+ it('keeps lineage stable across revisions while assigning revision-specific row ids',()=>{
+  const first=decomposeNeedSignal(signal({revision:'a'.repeat(40)}))[0];
+  const next=decomposeNeedSignal(signal({revision:'b'.repeat(40),observedAt:new Date('2026-11-17T00:00:00Z')}))[0];
+  expect(first.lineageKey).toBe(next.lineageKey);expect(first.id).not.toBe(next.id);
+  expect(first.sourceClaim).toBe(signal().claim);
+ });
 });

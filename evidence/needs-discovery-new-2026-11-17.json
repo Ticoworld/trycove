@@ -1,0 +1,664 @@
+{
+  "schemaVersion": 1,
+  "mode": "new",
+  "createdAt": "2026-11-17T07:44:29.180Z",
+  "repositoryHeadAtExecution": "3dfa527113afeb14cfcb0d4aa9fecb53a159920f",
+  "evaluationCode": {
+    "files": [
+      "scripts/evaluate-need-discovery.ts",
+      "scripts/legacy-intents-baseline.ts",
+      "lib/intelligence/needs.ts",
+      "lib/intelligence/need-discovery.ts",
+      "lib/intelligence/intents.ts",
+      "lib/intelligence/corpus.ts",
+      "lib/intelligence/planner.ts"
+    ],
+    "sha256": "bede232017f05d949d85616afad886649c3db68a7546f68d1a5e142906bc573e"
+  },
+  "snapshot": {
+    "path": "evidence/needs-discovery-input-2026-11-17.json.gz",
+    "inputSha256": "6760396705df2247cc86a225173b30fb56555f1080350490b6069192dced3fa0",
+    "codeRevision": "16601aa790df0d5587dc8192a02dfad5c4a6313a"
+  },
+  "holdout": {
+    "path": "evidence/needs-discovery-heldout-2026-11-17.json",
+    "seed": "trycove-2b1-heldout-v1",
+    "selectedIssueCount": 4,
+    "selectedIssueUrls": [
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3"
+    ],
+    "excludedIssueUrlsFromProviderSearch": [
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3"
+    ],
+    "selectedProjectCount": 4,
+    "selectedProjectsWithCodeObservations": 2,
+    "selectedProjectsWithoutCodeObservations": [
+      "ckbuilder-issue-41",
+      "ckbuilder-inheritvault-7"
+    ]
+  },
+  "corpus": {
+    "projects": 231,
+    "signals": 385,
+    "needItems": 856,
+    "eligibleNeedProjects": 49,
+    "eligibleNeedSignals": 164,
+    "latestFootprints": 23,
+    "latestCodeObservationCount": 42049,
+    "storedIntentCount": 38
+  },
+  "oldBehavior": {
+    "baselineMatcherRevision": "16601aa790df0d5587dc8192a02dfad5c4a6313a",
+    "atomicNeedItemsConsumed": false,
+    "heldoutSourceSignals": 17,
+    "classifiedHeldoutNeedIntents": 3,
+    "classifiedNeedDetails": [
+      {
+        "signalId": "issue-46-1c6f31bdcc80c8e1",
+        "projectId": "ckbuilder-ckbcycletools-62",
+        "scope": "ckb-developer-tool-adoption",
+        "intentType": "user-testing",
+        "claim": "- Released: 1.0.0 is on npm (npm install -g ckb-cycle-tools), and the Action posted its first public comment: https://github.com/luongthanhtung03/ckb-cycle-tools/pull/1\n- First real use of the PR Action on another project's contracts\n- The comparison harness generalised beyond the session lock",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "revision": "2026-11-07T02:57:19Z"
+      },
+      {
+        "signalId": "issue-15-1e61dd50e8f8e0dd",
+        "projectId": "ckbuilder-pckt-27",
+        "scope": "ckb-sender-profile-identity",
+        "intentType": "technical-integration",
+        "claim": "- **Decentralized sender identity**: replace backend-stored profile labels with on-chain or signed-attestation identity so naming is portable and self-sovereign\n- **Multi-code-hash indexer**: track multiple historical contract code hashes so packet redeploys don't strand in-flight packets in the UI\n- **Lower cell-rent floor**: redesign the packet's data layout (likely a Merkle commitment for `claimed_locks` instead of an inline array) to reduce the minimum capacity each packet needs to occupy\n- **Mainnet readiness pass**: dust-attack analysis, fee-rate adaptation, signed-relay auditing\n- **Better recipient UX for heavy locks**: contract-side or frontend-side adaptation of the per-slot minimum based on the recipient's actual lock script (multisig / type-script-bearing wallets need more than 63 CKB)\n- **Group / event mode**: time-bounded events where multiple senders fund a shared pool and recipients claim once across the whole event",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "revision": "2026-05-06T13:42:09Z"
+      },
+      {
+        "signalId": "issue-15-859d016e1e0b46f8",
+        "projectId": "ckbuilder-pckt-27",
+        "scope": "ckb-sender-profile-identity",
+        "intentType": "technical-review",
+        "claim": "I'd appreciate concrete advice on:\n- The right path from testnet to a credible mainnet deployment . What hardening would *you* want to see before signing a real-funds packet?\n- Whether the planned data-layout redesign (Merkle commitment for claimed locks) is worth the contract complexity given the current floor, or whether there's a simpler shape I'm missing.\n- Whether decentralized sender identity should be a wallet-level concern (e.g. a signed-attestation pattern the wallet provides) or whether pckt should ship its own primitive and if so, what minimum primitive would be useful to other CKB apps too (DID).\n- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "revision": "2026-05-06T13:42:09Z"
+      }
+    ],
+    "unclassifiedHeldoutSignals": 14,
+    "availableProviderIntents": 12,
+    "typedCandidateCount": 0,
+    "sourceCorpusCandidateCount": 0,
+    "candidateRelationshipCount": 0,
+    "sameScopeRejections": {},
+    "corpusRejections": {
+      "missingNeed": 20688,
+      "missingProvider": 0,
+      "invalidEvidence": 0
+    },
+    "unmatchedNeedScopes": [
+      {
+        "projectId": "ckbuilder-ckbcycletools-62",
+        "scope": "ckb-developer-tool-adoption",
+        "claim": "- Released: 1.0.0 is on npm (npm install -g ckb-cycle-tools), and the Action posted its first public comment: https://github.com/luongthanhtung03/ckb-cycle-tools/pull/1\n- First real use of the PR Action on another project's contracts\n- The comparison harness generalised beyond the session lock",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46"
+      },
+      {
+        "projectId": "ckbuilder-pckt-27",
+        "scope": "ckb-sender-profile-identity",
+        "claim": "- **Decentralized sender identity**: replace backend-stored profile labels with on-chain or signed-attestation identity so naming is portable and self-sovereign\n- **Multi-code-hash indexer**: track multiple historical contract code hashes so packet redeploys don't strand in-flight packets in the UI\n- **Lower cell-rent floor**: redesign the packet's data layout (likely a Merkle commitment for `claimed_locks` instead of an inline array) to reduce the minimum capacity each packet needs to occupy\n- **Mainnet readiness pass**: dust-attack analysis, fee-rate adaptation, signed-relay auditing\n- **Better recipient UX for heavy locks**: contract-side or frontend-side adaptation of the per-slot minimum based on the recipient's actual lock script (multisig / type-script-bearing wallets need more than 63 CKB)\n- **Group / event mode**: time-bounded events where multiple senders fund a shared pool and recipients claim once across the whole event",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15"
+      },
+      {
+        "projectId": "ckbuilder-pckt-27",
+        "scope": "ckb-sender-profile-identity",
+        "claim": "I'd appreciate concrete advice on:\n- The right path from testnet to a credible mainnet deployment . What hardening would *you* want to see before signing a real-funds packet?\n- Whether the planned data-layout redesign (Merkle commitment for claimed locks) is worth the contract complexity given the current floor, or whether there's a simpler shape I'm missing.\n- Whether decentralized sender identity should be a wallet-level concern (e.g. a signed-attestation pattern the wallet provides) or whether pckt should ship its own primitive and if so, what minimum primitive would be useful to other CKB apps too (DID).\n- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15"
+      }
+    ],
+    "candidates": [],
+    "existingLifecycle": [
+      {
+        "capability": "Cellula LSP invoice parsing and Fiber trampoline routing",
+        "consumerId": "twine",
+        "providerId": "cellula",
+        "lifecycleState": "demonstrated_in_wild",
+        "compatibilityState": "unknown",
+        "freshness": "current",
+        "lastVerifiedAt": "2026-11-17T03:53:01.366Z",
+        "nextAction": "Preserve the dated report and run an independent check against the exact environment and release."
+      },
+      {
+        "capability": "Cellora human architecture-review offer for applications with indexing needs",
+        "consumerId": "ckbuilder-issue-26",
+        "providerId": "ckbuilder-cellora-22",
+        "lifecycleState": "stale_offer",
+        "compatibilityState": "unknown",
+        "freshness": "current",
+        "lastVerifiedAt": "2026-11-17T03:54:10.747Z",
+        "nextAction": "Reconfirm the offer before presenting it as available; do not contact the project automatically."
+      },
+      {
+        "capability": "Per-script-group cycle analysis in the Explorer transaction view",
+        "consumerId": "ckbuilder-ckbdevnetexplorer-65",
+        "providerId": "ckbuilder-ckbcycletools-62",
+        "lifecycleState": "in_progress",
+        "compatibilityState": "partially_compatible",
+        "freshness": "partial",
+        "lastVerifiedAt": null,
+        "nextAction": "Assess release, chain-state, signer, and end-to-end submission requirements before claiming live compatibility."
+      }
+    ]
+  },
+  "newBehavior": {
+    "atomicNeedItemsConsumed": true,
+    "heldoutNeedItems": 70,
+    "actionableNeedIntents": 9,
+    "actionableNeedDetails": [
+      {
+        "needItemId": "d7f7083c59934f1033c109b9492942fea57051bb187661297cf71d811f92651a",
+        "projectId": "ckbuilder-inheritvault-7",
+        "category": "technical-review",
+        "stance": "explicit-request",
+        "scope": "ckb-human-technical-review",
+        "intentType": "technical-review",
+        "excerpt": "- Please review whether the **cell data codec** ([src/lib/codec.ts](src/lib/codec.ts)) — magic bytes `IVLT` + version + compact JSON — is a reasonable on-chain data format for this use case, or whether a more structured binary encoding (e.g., molecule) would be significantly better for interoperability.",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "revision": "2026-04-26T23:04:49Z"
+      },
+      {
+        "needItemId": "72a74d0d7a9983535034a5264add7e17e41c81ffe13179bbf150d902e701c722",
+        "projectId": "ckbuilder-inheritvault-7",
+        "category": "technical-review",
+        "stance": "explicit-request",
+        "scope": "ckb-human-technical-review",
+        "intentType": "technical-review",
+        "excerpt": "- The current timelock enforcement is **soft** — it lives entirely in the frontend claim logic (`isUnlockConditionSatisfied`) and the beneficiary's lock script on the cell. There is nothing preventing an owner (who controls the beneficiary key) or a technically sophisticated party from constructing a raw transaction and spending the cell before the time is up. I need guidance on which CKB native script (e.g., the `since` field / `anyone_can_pay`, or a dedicated timelock type script) is the right primitive to use here, and how to integrate it via CCC.",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "revision": "2026-04-26T23:04:49Z"
+      },
+      {
+        "needItemId": "b4fa08913009f5bbb1edfbb3f82f00b50841aa316b84b1a45bf7da9125457d56",
+        "projectId": "ckbuilder-pckt-27",
+        "category": "product-feedback",
+        "stance": "explicit-request",
+        "scope": "ckb-human-product-feedback",
+        "intentType": "product-feedback",
+        "excerpt": "- **Concept viability**: does the red-packet UX translate cleanly to CKB's strengths, and does the implementation make those strengths visible to a user, or is the cell model an implementation detail nobody can see?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "revision": "2026-05-06T13:42:09Z"
+      },
+      {
+        "needItemId": "774bec8ba8ef87d5d1eb756fbc1a54355f5600545f60d6ba67e7c2e63615fa7d",
+        "projectId": "ckbuilder-ckbcycletools-62",
+        "category": "adoption",
+        "stance": "reported-obstacle",
+        "scope": "ckb-human-adoption",
+        "intentType": "adoption",
+        "excerpt": "- The PR Action has no outside user yet, so I do not know if `cycles.json` is easy enough to write for someone else's contracts. Mock transactions keep CI offline, but each project has to produce them.",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "revision": "2026-11-07T02:57:19Z"
+      },
+      {
+        "needItemId": "c97daa6a430eb1badd1f3f6bd792427cdefe5e84a14d718090f3966960029541",
+        "projectId": "ckbuilder-inheritvault-7",
+        "category": "security",
+        "stance": "explicit-request",
+        "scope": "ckb-human-security-review",
+        "intentType": "security-review",
+        "excerpt": "Are there security considerations specific to CKB cell model inheritance dApps that I should address first?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "revision": "2026-04-26T23:04:49Z"
+      },
+      {
+        "needItemId": "37148f075b3c7c606c2b5fb6bfd7d8ef1cc6382e75625a9189f5e11579eb28e4",
+        "projectId": "ckbuilder-ckbcycletools-62",
+        "category": "product-feedback",
+        "stance": "explicit-request",
+        "scope": "ckb-human-product-feedback",
+        "intentType": "product-feedback",
+        "excerpt": "What is missing from the comment?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "revision": "2026-11-07T02:57:19Z"
+      },
+      {
+        "needItemId": "6cb30a5e85fcab213c28498c0071aafcc36f51cb008946979ec83297d38567cf",
+        "projectId": "ckbuilder-inheritvault-7",
+        "category": "product-feedback",
+        "stance": "explicit-request",
+        "scope": "ckb-human-product-feedback",
+        "intentType": "product-feedback",
+        "excerpt": "- Are there any **UX improvements** that reviewers think would make the beneficiary experience clearer — e.g., a shareable vault link the owner can send to the beneficiary without requiring them to know the transaction hash upfront?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "revision": "2026-04-26T23:04:49Z"
+      },
+      {
+        "needItemId": "b13bf2ca4e6c26ec4edda5e1504a6c5a6c2b9c33d656e8c55374adec640890e3",
+        "projectId": "ckbuilder-pckt-27",
+        "category": "distribution",
+        "stance": "explicit-request",
+        "scope": "ckb-human-distribution",
+        "intentType": "distribution",
+        "excerpt": "- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "revision": "2026-05-06T13:42:09Z"
+      },
+      {
+        "needItemId": "ace96553e85ff37c38348cafd5b4b4fc9a492a69948e5a500aa5701d32fd212d",
+        "projectId": "ckbuilder-pckt-27",
+        "category": "product-feedback",
+        "stance": "explicit-request",
+        "scope": "ckb-human-product-feedback",
+        "intentType": "product-feedback",
+        "excerpt": "- **Backend non-authority boundary**: is the line between \"UX helper\" and \"trust anchor\" actually clean in the current code, or are there places where the frontend silently relies on the backend in a way that would break if it were swapped out?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "revision": "2026-05-06T13:42:09Z"
+      }
+    ],
+    "providerInventory": {
+      "sourceProviderIntents": 10,
+      "atomicProviderOffers": 0,
+      "codeObservationIntents": 1,
+      "projectsWithoutCode": 2
+    },
+    "rejections": {
+      "non_actionable_stance": 40,
+      "unknown_category": 7,
+      "no_bounded_scope": 14
+    },
+    "typedCandidateCount": 0,
+    "sourceCorpusCandidateCount": 0,
+    "candidateRelationshipCount": 0,
+    "typedCandidates": [],
+    "sourceCorpusCandidates": [],
+    "legacyScopeAudit": [
+      {
+        "projectId": "ckbuilder-ckbcycletools-62",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "legacyScope": "ckb-developer-tool-adoption",
+        "legacyClaim": "- Released: 1.0.0 is on npm (npm install -g ckb-cycle-tools), and the Action posted its first public comment: https://github.com/luongthanhtung03/ckb-cycle-tools/pull/1\n- First real use of the PR Action on another project's contracts\n- The comparison harness generalised beyond the session lock",
+        "atomicStatementCount": 3,
+        "actionableAtomsOnSameScope": [],
+        "nonActionableOrUnscopedAtoms": [
+          {
+            "needItemId": "04e4c551f182ff89efd8aca28e3cf235d3e4ef284c774a3b778940b047698b89",
+            "excerpt": "- The comparison harness generalised beyond the session lock",
+            "category": "unknown",
+            "stance": "ambiguous"
+          },
+          {
+            "needItemId": "a8a2127a84ef10d345a95228987add69d596d38b2885641e2c8aecfe0d9d85c2",
+            "excerpt": "- Released: 1.0.0 is on npm (npm install -g ckb-cycle-tools), and the Action posted its first public comment: https://github.com/luongthanhtung03/ckb-cycle-tools/pull/1",
+            "category": "unknown",
+            "stance": "status-update"
+          },
+          {
+            "needItemId": "b9c8e8ee43b3fc3cf816b20e7f87f2a972cea026f4fb65d556b69f2fcdbd9e26",
+            "excerpt": "- First real use of the PR Action on another project's contracts",
+            "category": "adoption",
+            "stance": "roadmap"
+          }
+        ],
+        "decisionChange": "legacy scope abstained; no same-scope actionable atom was produced",
+        "reviewStatus": "provisional source interpretation; not independently human-annotated"
+      },
+      {
+        "projectId": "ckbuilder-pckt-27",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "legacyScope": "ckb-sender-profile-identity",
+        "legacyClaim": "- **Decentralized sender identity**: replace backend-stored profile labels with on-chain or signed-attestation identity so naming is portable and self-sovereign\n- **Multi-code-hash indexer**: track multiple historical contract code hashes so packet redeploys don't strand in-flight packets in the UI\n- **Lower cell-rent floor**: redesign the packet's data layout (likely a Merkle commitment for `claimed_locks` instead of an inline array) to reduce the minimum capacity each packet needs to occupy\n- **Mainnet readiness pass**: dust-attack analysis, fee-rate adaptation, signed-relay auditing\n- **Better recipient UX for heavy locks**: contract-side or frontend-side adaptation of the per-slot minimum based on the recipient's actual lock script (multisig / type-script-bearing wallets need more than 63 CKB)\n- **Group / event mode**: time-bounded events where multiple senders fund a shared pool and recipients claim once across the whole event",
+        "atomicStatementCount": 6,
+        "actionableAtomsOnSameScope": [],
+        "nonActionableOrUnscopedAtoms": [
+          {
+            "needItemId": "0a7bed66c3fcc27854ad5c514b67085a7efb5e338577e2bdc3119e6acbed0735",
+            "excerpt": "- **Group / event mode**: time-bounded events where multiple senders fund a shared pool and recipients claim once across the whole event",
+            "category": "unknown",
+            "stance": "ambiguous"
+          },
+          {
+            "needItemId": "0bad39bf999bc05406fc5c82a4293ded778421e7f7fd6b23ab3fa58744a723f9",
+            "excerpt": "- **Lower cell-rent floor**: redesign the packet's data layout (likely a Merkle commitment for `claimed_locks` instead of an inline array) to reduce the minimum capacity each packet needs to occupy",
+            "category": "feature-request",
+            "stance": "ambiguous"
+          },
+          {
+            "needItemId": "679c42bd94337b1eebf462ba218bc1d79f3dbd8a516dea8af831790781d59a05",
+            "excerpt": "- **Multi-code-hash indexer**: track multiple historical contract code hashes so packet redeploys don't strand in-flight packets in the UI",
+            "category": "infrastructure",
+            "stance": "ambiguous"
+          },
+          {
+            "needItemId": "71d1c86f412b7e20e46718af01e8a33417c38fd25641fd713744a23b8970ab39",
+            "excerpt": "- **Better recipient UX for heavy locks**: contract-side or frontend-side adaptation of the per-slot minimum based on the recipient's actual lock script (multisig / type-script-bearing wallets need more than 63 CKB)",
+            "category": "product-feedback",
+            "stance": "ambiguous"
+          },
+          {
+            "needItemId": "93c5c029ff63a68d480c90313c9bb27016f70e3255b07aa5fb9d34e998085b4e",
+            "excerpt": "- **Mainnet readiness pass**: dust-attack analysis, fee-rate adaptation, signed-relay auditing",
+            "category": "security",
+            "stance": "ambiguous"
+          },
+          {
+            "needItemId": "aa9c6a25a08bcef2b17a15d2bbbbf5f917164101675d072657b9ad826a2bb306",
+            "excerpt": "- **Decentralized sender identity**: replace backend-stored profile labels with on-chain or signed-attestation identity so naming is portable and self-sovereign",
+            "category": "feature-request",
+            "stance": "ambiguous"
+          }
+        ],
+        "decisionChange": "legacy scope abstained; no same-scope actionable atom was produced",
+        "reviewStatus": "provisional source interpretation; not independently human-annotated"
+      },
+      {
+        "projectId": "ckbuilder-pckt-27",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "legacyScope": "ckb-sender-profile-identity",
+        "legacyClaim": "I'd appreciate concrete advice on:\n- The right path from testnet to a credible mainnet deployment . What hardening would *you* want to see before signing a real-funds packet?\n- Whether the planned data-layout redesign (Merkle commitment for claimed locks) is worth the contract complexity given the current floor, or whether there's a simpler shape I'm missing.\n- Whether decentralized sender identity should be a wallet-level concern (e.g. a signed-attestation pattern the wallet provides) or whether pckt should ship its own primitive and if so, what minimum primitive would be useful to other CKB apps too (DID).\n- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+        "atomicStatementCount": 4,
+        "actionableAtomsOnSameScope": [],
+        "nonActionableOrUnscopedAtoms": [
+          {
+            "needItemId": "2e925891e5360efc59bb256666b8ca6536ea00df27dc2e154d01cbdb96e17f29",
+            "excerpt": "- Whether the planned data-layout redesign (Merkle commitment for claimed locks) is worth the contract complexity given the current floor, or whether there's a simpler shape I'm missing.",
+            "category": "feature-request",
+            "stance": "ambiguous"
+          },
+          {
+            "needItemId": "adc3a42b9c5cdb4199a35e27ab275a5df2238664ada44f3b890ba7a57e6b6f4d",
+            "excerpt": "- Whether decentralized sender identity should be a wallet-level concern (e.g. a signed-attestation pattern the wallet provides) or whether pckt should ship its own primitive and if so, what minimum primitive would be useful to other CKB apps too (DID).",
+            "category": "feature-request",
+            "stance": "ambiguous"
+          },
+          {
+            "needItemId": "b13bf2ca4e6c26ec4edda5e1504a6c5a6c2b9c33d656e8c55374adec640890e3",
+            "excerpt": "- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+            "category": "distribution",
+            "stance": "explicit-request"
+          },
+          {
+            "needItemId": "cbf1d399f3265d068090014875300592f45371484263e576d98d07051346bfd2",
+            "excerpt": "- The right path from testnet to a credible mainnet deployment . What hardening would *you* want to see before signing a real-funds packet?",
+            "category": "infrastructure",
+            "stance": "explicit-request"
+          }
+        ],
+        "decisionChange": "legacy scope abstained; no same-scope actionable atom was produced",
+        "reviewStatus": "provisional source interpretation; not independently human-annotated"
+      }
+    ],
+    "actionableUnmatchedNeeds": [
+      {
+        "needItemId": "d7f7083c59934f1033c109b9492942fea57051bb187661297cf71d811f92651a",
+        "projectId": "ckbuilder-inheritvault-7",
+        "category": "technical-review",
+        "stance": "explicit-request",
+        "scope": "ckb-human-technical-review",
+        "intentType": "technical-review",
+        "excerpt": "- Please review whether the **cell data codec** ([src/lib/codec.ts](src/lib/codec.ts)) — magic bytes `IVLT` + version + compact JSON — is a reasonable on-chain data format for this use case, or whether a more structured binary encoding (e.g., molecule) would be significantly better for interoperability.",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "revision": "2026-04-26T23:04:49Z",
+        "reason": "No imported provider capability or explicit human offer passed the exact-scope/type check."
+      },
+      {
+        "needItemId": "72a74d0d7a9983535034a5264add7e17e41c81ffe13179bbf150d902e701c722",
+        "projectId": "ckbuilder-inheritvault-7",
+        "category": "technical-review",
+        "stance": "explicit-request",
+        "scope": "ckb-human-technical-review",
+        "intentType": "technical-review",
+        "excerpt": "- The current timelock enforcement is **soft** — it lives entirely in the frontend claim logic (`isUnlockConditionSatisfied`) and the beneficiary's lock script on the cell. There is nothing preventing an owner (who controls the beneficiary key) or a technically sophisticated party from constructing a raw transaction and spending the cell before the time is up. I need guidance on which CKB native script (e.g., the `since` field / `anyone_can_pay`, or a dedicated timelock type script) is the right primitive to use here, and how to integrate it via CCC.",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "revision": "2026-04-26T23:04:49Z",
+        "reason": "No imported provider capability or explicit human offer passed the exact-scope/type check."
+      },
+      {
+        "needItemId": "b4fa08913009f5bbb1edfbb3f82f00b50841aa316b84b1a45bf7da9125457d56",
+        "projectId": "ckbuilder-pckt-27",
+        "category": "product-feedback",
+        "stance": "explicit-request",
+        "scope": "ckb-human-product-feedback",
+        "intentType": "product-feedback",
+        "excerpt": "- **Concept viability**: does the red-packet UX translate cleanly to CKB's strengths, and does the implementation make those strengths visible to a user, or is the cell model an implementation detail nobody can see?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "revision": "2026-05-06T13:42:09Z",
+        "reason": "No imported provider capability or explicit human offer passed the exact-scope/type check."
+      },
+      {
+        "needItemId": "774bec8ba8ef87d5d1eb756fbc1a54355f5600545f60d6ba67e7c2e63615fa7d",
+        "projectId": "ckbuilder-ckbcycletools-62",
+        "category": "adoption",
+        "stance": "reported-obstacle",
+        "scope": "ckb-human-adoption",
+        "intentType": "adoption",
+        "excerpt": "- The PR Action has no outside user yet, so I do not know if `cycles.json` is easy enough to write for someone else's contracts. Mock transactions keep CI offline, but each project has to produce them.",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "revision": "2026-11-07T02:57:19Z",
+        "reason": "No imported provider capability or explicit human offer passed the exact-scope/type check."
+      },
+      {
+        "needItemId": "c97daa6a430eb1badd1f3f6bd792427cdefe5e84a14d718090f3966960029541",
+        "projectId": "ckbuilder-inheritvault-7",
+        "category": "security",
+        "stance": "explicit-request",
+        "scope": "ckb-human-security-review",
+        "intentType": "security-review",
+        "excerpt": "Are there security considerations specific to CKB cell model inheritance dApps that I should address first?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "revision": "2026-04-26T23:04:49Z",
+        "reason": "No imported provider capability or explicit human offer passed the exact-scope/type check."
+      },
+      {
+        "needItemId": "37148f075b3c7c606c2b5fb6bfd7d8ef1cc6382e75625a9189f5e11579eb28e4",
+        "projectId": "ckbuilder-ckbcycletools-62",
+        "category": "product-feedback",
+        "stance": "explicit-request",
+        "scope": "ckb-human-product-feedback",
+        "intentType": "product-feedback",
+        "excerpt": "What is missing from the comment?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "revision": "2026-11-07T02:57:19Z",
+        "reason": "No imported provider capability or explicit human offer passed the exact-scope/type check."
+      },
+      {
+        "needItemId": "6cb30a5e85fcab213c28498c0071aafcc36f51cb008946979ec83297d38567cf",
+        "projectId": "ckbuilder-inheritvault-7",
+        "category": "product-feedback",
+        "stance": "explicit-request",
+        "scope": "ckb-human-product-feedback",
+        "intentType": "product-feedback",
+        "excerpt": "- Are there any **UX improvements** that reviewers think would make the beneficiary experience clearer — e.g., a shareable vault link the owner can send to the beneficiary without requiring them to know the transaction hash upfront?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "revision": "2026-04-26T23:04:49Z",
+        "reason": "No imported provider capability or explicit human offer passed the exact-scope/type check."
+      },
+      {
+        "needItemId": "b13bf2ca4e6c26ec4edda5e1504a6c5a6c2b9c33d656e8c55374adec640890e3",
+        "projectId": "ckbuilder-pckt-27",
+        "category": "distribution",
+        "stance": "explicit-request",
+        "scope": "ckb-human-distribution",
+        "intentType": "distribution",
+        "excerpt": "- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "revision": "2026-05-06T13:42:09Z",
+        "reason": "No imported provider capability or explicit human offer passed the exact-scope/type check."
+      },
+      {
+        "needItemId": "ace96553e85ff37c38348cafd5b4b4fc9a492a69948e5a500aa5701d32fd212d",
+        "projectId": "ckbuilder-pckt-27",
+        "category": "product-feedback",
+        "stance": "explicit-request",
+        "scope": "ckb-human-product-feedback",
+        "intentType": "product-feedback",
+        "excerpt": "- **Backend non-authority boundary**: is the line between \"UX helper\" and \"trust anchor\" actually clean in the current code, or are there places where the frontend silently relies on the backend in a way that would break if it were swapped out?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "revision": "2026-05-06T13:42:09Z",
+        "reason": "No imported provider capability or explicit human offer passed the exact-scope/type check."
+      }
+    ],
+    "missedOrUnclassified": [
+      {
+        "needItemId": "0a64362c414e5f1f352010d4fd33a7c37b0c789012ca0447b7d52dfb0df00d3b",
+        "category": "unknown",
+        "excerpt": "- **Compatibility:** What network and runtime-version checks would reviewers require before allowing a recovery across Fiber versions or environments?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+        "reason": "unknown_category"
+      },
+      {
+        "needItemId": "119457480d26247244ac97a8a0460ad320f8f0bb5eccc157b32fe9f4b1c2808e",
+        "category": "feature-request",
+        "excerpt": "Should I author a custom type script, or is there an existing audited script on Testnet I can reference (similar to the DAO lock scripts)?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "2712e332348d77966b56981063cb7ad7256946d04a5c61bc3457505ba2f62bdb",
+        "category": "unknown",
+        "excerpt": "4. Which Scripts would make the most useful public Rust vs ckb-js-vm benchmark, and would the results be worth a Nervos Talk post?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "reason": "unknown_category"
+      },
+      {
+        "needItemId": "46a80c5bcd72b75a4a8d7fe84a2472d3fdd109882da7ef9c981f1bc9b4b27d0a",
+        "category": "feature-request",
+        "excerpt": "Is there a supported approach for browser-oriented Fiber applications?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "5145177829be4d1ec61836dc0c013ae1a342c7ff227e001b671d26dc973bfd1d",
+        "category": "unknown",
+        "excerpt": "How should missing payment/invoice history or unavailable peers be represented without creating false confidence?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+        "reason": "unknown_category"
+      },
+      {
+        "needItemId": "6d2b2028881c8670aae7be3cc02eb5ede431e4064164b3cb5ece0fca2a706863",
+        "category": "unknown",
+        "excerpt": "- **Post-restore verification:** What peer/chain/channel signals are authoritative enough to establish that recovery succeeded?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+        "reason": "unknown_category"
+      },
+      {
+        "needItemId": "7b1c7294930561ad8b26023c0b61a04dc55462d3c3d1327c034b2d9ff0898c72",
+        "category": "unknown",
+        "excerpt": "2. Are there cycle-profiling tools I have missed?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "reason": "unknown_category"
+      },
+      {
+        "needItemId": "89e3cfaa5cfb5eb378a1cce0e53ea29e64fb187d5b4ed1c01d105bfc5e18cce6",
+        "category": "integration",
+        "excerpt": "Which **smallest real-testnet integration milestone** would be most valuable to the Fiber/CKB ecosystem, and which upstream interfaces or maintainers should I coordinate with?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "91474cd7b118de69fe8eefb35ca758103daa4c6723b4d13158dca695e6cc60c6",
+        "category": "feature-request",
+        "excerpt": "2. Is the `cycles.json` format and the PR comment what you would want on your own contract repo?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "99b7d9b2e791a9509354970bedcd1c97723529545b0f93febe7870438374226f",
+        "category": "validation",
+        "excerpt": "4. Try the unsafe scenarios (newer target state, foreign node, and network mismatch) and check that restore is blocked or requires review.",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "ade3def594e58c30f8fd556e4cfca6abe7ef117a8932ed9d3af3f90a2557edff",
+        "category": "technical-review",
+        "excerpt": "I would appreciate a technical review of the overall approach, particularly the **adapter boundary, fail-closed preflight, destructive-operation safety, and post-recovery verification model**. I would also welcome feedback on whether the UI accurately communicates the limits of a deterministic demo and the distinction between authenticated backups and safe channel recovery.",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "afc0a574f4eee0dfc1f4b4520d2f8dbd7d7e5d8c02437667c53c43efdbc41a7d",
+        "category": "unknown",
+        "excerpt": "3. Would the Windows `.cmd` fix be better upstream in ckb-testtool or offckb?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "reason": "unknown_category"
+      },
+      {
+        "needItemId": "b016720cc6c73b6bcba7a3d35e1f3324dbc5f811267da9f240787d121fa65887",
+        "category": "adoption",
+        "excerpt": "1. Which contract repos would try the PR Action?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "c40f50a61d31579f657138a4615054c988f17f71916ff8325a16ae2c7eb64be5",
+        "category": "feature-request",
+        "excerpt": "- Any suggestions for reducing the **250 CKB minimum vault size** — is there a way to pack the metadata more efficiently (perhaps storing it as a Type script args rather than output_data) to lower the capacity floor?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "cbf1d399f3265d068090014875300592f45371484263e576d98d07051346bfd2",
+        "category": "infrastructure",
+        "excerpt": "- The right path from testnet to a credible mainnet deployment . What hardening would *you* want to see before signing a real-funds packet?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "d16cc49922d15aebe090d23a0548b7ecfac60fda7bc7fb6645cc9e19d2fc7658",
+        "category": "feature-request",
+        "excerpt": "- What is the recommended path to move this from a soft-lock to a **provable on-chain timelock**?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "d6cc83af976dd17f962212116818adfd3467f7568354e74b60a9ea13cecd0c88",
+        "category": "feature-request",
+        "excerpt": "- **Contract design**: is the single-cell model the right choice for this use case?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "e8bff1a8b2d046dfd6ce92a7c792d86a46f227c40d03f0a4d992583097895c7d",
+        "category": "unknown",
+        "excerpt": "- How best should the project progress toward **Mainnet readiness**?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3",
+        "reason": "unknown_category"
+      },
+      {
+        "needItemId": "f0288919048618cca73810636265f028cb6f89f7408fe0f204a5ee250867d36c",
+        "category": "infrastructure",
+        "excerpt": "- **Channel-state safety:** Which conditions must be checked before restoring channel state, especially when the original node may still be active, the target has newer commitments, or peers have advanced independently?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "f5d1aeff9ea2be13435226d71564aa91b0798cc4d8cb0096220feb5196ae1796",
+        "category": "infrastructure",
+        "excerpt": "- **Supported recovery primitives:** What is the recommended upstream Fiber/FNN API or integration point for obtaining an atomic, restorable checkpoint and safely applying it to a stopped or isolated node?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+        "reason": "no_bounded_scope"
+      },
+      {
+        "needItemId": "fa623a50f421543741c899495f0994b8ea2a7b56a23f8bd41ba8eae29b1992af",
+        "category": "infrastructure",
+        "excerpt": "1. Try `npx ckb-cycles <tx hash>` on a transaction of your own, testnet or mainnet. Does the per-group sum match the node?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "reason": "no_bounded_scope"
+      }
+    ],
+    "interpretationLimits": [
+      "Provisional source interpretation; no independent human labels or precision/recall estimate.",
+      "Exact scope matches and explicit offer classification still require current-state verification before promotion.",
+      "The old and new pipelines both abstain when provider evidence is absent; the new report preserves an explicit per-atom reason rather than treating unknown as incompatibility."
+    ]
+  },
+  "limitations": [
+    "This held-out comparison is at whole source-issue URL level; all statements and signal rows from a selected issue are excluded from provider signal matching.",
+    "No user-testing item exists in the frozen source snapshot; technical validation is the available testing-related stratum.",
+    "Need categories are provisional automated interpretations, not human ground-truth labels.",
+    "A candidate is not proof of compatibility, current availability, maintainer approval, or adoption.",
+    "Current-state live verification is a separate candidate-scoped action; this read-only corpus evaluator does not claim freshness."
+  ]
+}

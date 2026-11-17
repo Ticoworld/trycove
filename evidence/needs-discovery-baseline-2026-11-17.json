@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "mode": "baseline",
+  "createdAt": "2026-11-17T06:43:10.908Z",
+  "evaluatorRevision": "16601aa790df0d5587dc8192a02dfad5c4a6313a",
+  "snapshot": {
+    "path": "evidence/needs-discovery-input-2026-11-17.json.gz",
+    "inputSha256": "6760396705df2247cc86a225173b30fb56555f1080350490b6069192dced3fa0",
+    "codeRevision": "16601aa790df0d5587dc8192a02dfad5c4a6313a"
+  },
+  "holdout": {
+    "path": "evidence/needs-discovery-heldout-2026-11-17.json",
+    "seed": "trycove-2b1-heldout-v1",
+    "selectedIssueCount": 4,
+    "selectedIssueUrls": [
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3"
+    ],
+    "excludedIssueUrlsFromProviderSearch": [
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/41",
+      "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/3"
+    ],
+    "selectedProjectCount": 4,
+    "selectedProjectsWithCodeObservations": 2,
+    "selectedProjectsWithoutCodeObservations": [
+      "ckbuilder-issue-41",
+      "ckbuilder-inheritvault-7"
+    ]
+  },
+  "corpus": {
+    "projects": 231,
+    "signals": 385,
+    "needItems": 856,
+    "eligibleNeedProjects": 49,
+    "eligibleNeedSignals": 164,
+    "latestFootprints": 23,
+    "latestCodeObservationCount": 42049,
+    "storedIntentCount": 38
+  },
+  "oldBehavior": {
+    "atomicNeedItemsConsumed": false,
+    "heldoutSourceSignals": 17,
+    "classifiedHeldoutNeedIntents": 3,
+    "unclassifiedHeldoutSignals": 14,
+    "availableProviderIntents": 12,
+    "typedCandidateCount": 0,
+    "sourceCorpusCandidateCount": 0,
+    "candidateRelationshipCount": 0,
+    "sameScopeRejections": {},
+    "corpusRejections": {
+      "missingNeed": 20688,
+      "missingProvider": 0,
+      "invalidEvidence": 0
+    },
+    "unmatchedNeedScopes": [
+      {
+        "projectId": "ckbuilder-ckbcycletools-62",
+        "scope": "ckb-developer-tool-adoption",
+        "claim": "- Released: 1.0.0 is on npm (npm install -g ckb-cycle-tools), and the Action posted its first public comment: https://github.com/luongthanhtung03/ckb-cycle-tools/pull/1\n- First real use of the PR Action on another project's contracts\n- The comparison harness generalised beyond the session lock",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46"
+      },
+      {
+        "projectId": "ckbuilder-pckt-27",
+        "scope": "ckb-sender-profile-identity",
+        "claim": "- **Decentralized sender identity**: replace backend-stored profile labels with on-chain or signed-attestation identity so naming is portable and self-sovereign\n- **Multi-code-hash indexer**: track multiple historical contract code hashes so packet redeploys don't strand in-flight packets in the UI\n- **Lower cell-rent floor**: redesign the packet's data layout (likely a Merkle commitment for `claimed_locks` instead of an inline array) to reduce the minimum capacity each packet needs to occupy\n- **Mainnet readiness pass**: dust-attack analysis, fee-rate adaptation, signed-relay auditing\n- **Better recipient UX for heavy locks**: contract-side or frontend-side adaptation of the per-slot minimum based on the recipient's actual lock script (multisig / type-script-bearing wallets need more than 63 CKB)\n- **Group / event mode**: time-bounded events where multiple senders fund a shared pool and recipients claim once across the whole event",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15"
+      },
+      {
+        "projectId": "ckbuilder-pckt-27",
+        "scope": "ckb-sender-profile-identity",
+        "claim": "I'd appreciate concrete advice on:\n- The right path from testnet to a credible mainnet deployment . What hardening would *you* want to see before signing a real-funds packet?\n- Whether the planned data-layout redesign (Merkle commitment for claimed locks) is worth the contract complexity given the current floor, or whether there's a simpler shape I'm missing.\n- Whether decentralized sender identity should be a wallet-level concern (e.g. a signed-attestation pattern the wallet provides) or whether pckt should ship its own primitive and if so, what minimum primitive would be useful to other CKB apps too (DID).\n- Distribution: where does a CKB-native app actually find users today, and what's the bar to graduate from \"demo on testnet\" to \"people send each other pckts because they want to\"?",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/15"
+      }
+    ],
+    "candidates": [],
+    "existingLifecycle": [
+      {
+        "capability": "Cellula LSP invoice parsing and Fiber trampoline routing",
+        "consumerId": "twine",
+        "providerId": "cellula",
+        "lifecycleState": "demonstrated_in_wild",
+        "compatibilityState": "unknown",
+        "freshness": "current",
+        "lastVerifiedAt": "2026-11-17T03:53:01.366Z",
+        "nextAction": "Preserve the dated report and run an independent check against the exact environment and release."
+      },
+      {
+        "capability": "Cellora human architecture-review offer for applications with indexing needs",
+        "consumerId": "ckbuilder-issue-26",
+        "providerId": "ckbuilder-cellora-22",
+        "lifecycleState": "stale_offer",
+        "compatibilityState": "unknown",
+        "freshness": "current",
+        "lastVerifiedAt": "2026-11-17T03:54:10.747Z",
+        "nextAction": "Reconfirm the offer before presenting it as available; do not contact the project automatically."
+      },
+      {
+        "capability": "Per-script-group cycle analysis in the Explorer transaction view",
+        "consumerId": "ckbuilder-ckbdevnetexplorer-65",
+        "providerId": "ckbuilder-ckbcycletools-62",
+        "lifecycleState": "in_progress",
+        "compatibilityState": "partially_compatible",
+        "freshness": "partial",
+        "lastVerifiedAt": null,
+        "nextAction": "Assess release, chain-state, signer, and end-to-end submission requirements before claiming live compatibility."
+      }
+    ]
+  },
+  "limitations": [
+    "This held-out comparison is at whole source-issue URL level; all statements and signal rows from a selected issue are excluded from provider signal matching.",
+    "No user-testing item exists in the frozen source snapshot; technical validation is the available testing-related stratum.",
+    "Need categories are provisional automated interpretations, not human ground-truth labels.",
+    "A candidate is not proof of compatibility, current availability, maintainer approval, or adoption.",
+    "The old intent path does not consult candidate-scoped lifecycle state when generating candidates."
+  ]
+}

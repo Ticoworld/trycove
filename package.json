@@ -20,6 +20,7 @@
     "investigate:relays": "tsx scripts/investigate-relays.ts",
     "intelligence:footprints": "tsx scripts/footprints.ts",
     "intelligence:intents": "tsx scripts/structure-intents.ts",
+    "intelligence:needs": "tsx scripts/structure-needs.ts",
     "intelligence:discover": "tsx scripts/intelligence-discover.ts",
     "intelligence:blind": "tsx scripts/evaluate-blind-corpus.ts",
     "intelligence:run": "pnpm intelligence:footprints && pnpm intelligence:discover",

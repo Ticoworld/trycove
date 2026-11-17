@@ -5,6 +5,7 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 import {join, resolve} from 'node:path';
 import {brotliDecompressSync} from 'node:zlib';
 import {isDeepStrictEqual} from 'node:util';
+import {captureMissingDependencyFailure} from './missing-dependencies.ts';
 
 const sha256=(data:Buffer|Uint8Array|string)=>createHash('sha256').update(data).digest('hex');
 const roots=process.env.TRYCOVE_UPSTREAM_ROOT;
@@ -80,13 +81,9 @@ try{
 
  const incomplete=structuredClone(record.mock);
  incomplete.mock_info.cell_deps=[];
- let dependencyFailure:{rejected:boolean;groups?:unknown[];error?:string};
- try{
-  const run=await replayGroups(makePlan(incomplete),runFor(incomplete),{txFile:WASM_TX_FILE,debugger:debuggerVersion});
-  const failed=run.groups.filter((g:any)=>g.result!==0||g.error);
-  if(!failed.length)throw new Error('debugger returned success with the required CellDeps removed');
-  dependencyFailure={rejected:true,groups:failed.map((g:any)=>({selector:g.selector,result:g.result,error:g.error??null,cycles:String(g.cycles)}))};
- }catch(e){dependencyFailure={rejected:true,error:e instanceof Error?e.message:String(e)}}
+ const dependencyFailure=await captureMissingDependencyFailure(
+  ()=>replayGroups(makePlan(incomplete),runFor(incomplete),{txFile:WASM_TX_FILE,debugger:debuggerVersion}),
+ );
 
  const result={
   schemaVersion:1,

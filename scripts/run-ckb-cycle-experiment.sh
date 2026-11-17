@@ -21,9 +21,10 @@ cleanup() { rm -rf "$STAGE"; }
 trap cleanup EXIT
 mkdir "$STAGE/fixtures"
 cp "$ROOT/experiments/ckb-explorer-cycle/run.mts" "$STAGE/run.mts"
+cp "$ROOT/experiments/ckb-explorer-cycle/missing-dependencies.ts" "$STAGE/missing-dependencies.ts"
 cp "$ROOT/experiments/ckb-explorer-cycle/fixtures/replay-testnet.json.br" "$STAGE/fixtures/replay-testnet.json.br"
 chmod 755 "$STAGE" "$STAGE/fixtures"
-chmod 644 "$STAGE/run.mts" "$STAGE/fixtures/replay-testnet.json.br"
+chmod 644 "$STAGE/run.mts" "$STAGE/missing-dependencies.ts" "$STAGE/fixtures/replay-testnet.json.br"
 
 OUT_DIR="$ROOT/evidence/ckb-explorer-cycle"
 mkdir -p "$OUT_DIR"

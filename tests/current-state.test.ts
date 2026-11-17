@@ -1,8 +1,8 @@
 import {describe,it,expect} from 'vitest';
-import {mkdtemp,rm} from 'node:fs/promises';
+import {mkdtemp,readFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {buildVerificationPlan,verifyCandidateCurrentState,type CandidateSpec} from '../lib/intelligence/current-state';
+import {buildVerificationPlan,CandidateSpecSchema,verifyCandidateCurrentState,type CandidateSpec} from '../lib/intelligence/current-state';
 
 const sha='a'.repeat(40);
 const currentCode=`https://raw.githubusercontent.com/example/provider/${sha}/src/fiber/hint.rs`;
@@ -11,7 +11,7 @@ const base:CandidateSpec={
  capability:{key:'invoice-route',label:'Cellula LSP invoice routing through trampoline hints',terms:['Cellula','LSP','invoice','trampoline']},
  consumer:{id:'consumer',name:'Consumer App',aliases:['consumer-app'],repositories:['https://github.com/example/consumer']},
  provider:{id:'provider',name:'Provider Wallet',aliases:['provider-wallet'],repositories:['https://github.com/example/provider']},
- sourceUrls:['https://github.com/example/provider/issues/12'],knownUnavailableSources:[],
+ sourceUrls:['https://github.com/example/provider/issues/12'],knownUnavailableSources:[],priorEvidence:[],lifecycleBaseline:'stored',
  codeTouchpoints:[{projectId:'provider',repository:'https://github.com/example/provider',path:'src/fiber/hint.rs'}],
  searchConcepts:['LSP invoice trampoline route'],priorLifecycle:'unknown',priorCompatibility:'unknown',
 };
@@ -21,6 +21,23 @@ function mockFetch(byUrl:Record<string,string|number>){return(async(input:Reques
 async function withCache(fn:(cache:string)=>Promise<void>){const cache=await mkdtemp(join(tmpdir(),'trycove-current-state-'));try{await fn(cache)}finally{await rm(cache,{recursive:true,force:true})}}
 
 describe('candidate-scoped current-state verifier',()=>{
+ it('starts the Twine prior-art regression from an unknown state',async()=>{
+  const fixture=JSON.parse(await readFile(join(process.cwd(),'fixtures/current-state/twine-cellula.json'),'utf8'));
+  expect(fixture.priorLifecycle).toBe('unknown');expect(fixture.priorCompatibility).toBe('unknown');
+ });
+ it('derives the scoped reported demonstration from source-linked evidence, preserving that it was reviewer supplied',async()=>withCache(async cache=>{
+  const fixture=CandidateSpecSchema.parse(JSON.parse(await readFile(join(process.cwd(),'fixtures/current-state/twine-cellula.json'),'utf8')));
+  const currentCode=`https://raw.githubusercontent.com/chukwuma619/twine/${sha}/src/fiber/hint.rs`;
+  const talk='https://talk.nervos.org/t/twine-buy-and-sell-ckb-without-depositing-on-an-exchange-fiber-p2p-poc/10741.json';
+  const announcement='https://teapaw.org/twineckb/status/2121412115718181181';
+  const result=await verifyCandidateCurrentState(fixture,{cacheDir:cache,now:new Date('2026-11-17T04:00:00Z'),fetcher:mockFetch({
+   'https://github.com/chukwuma619/twine/commits/HEAD.atom':atom('chukwuma619','twine'),
+   [currentCode]:'Cellula LSP invoice parsing uses the TrampolineRouteHint field and explicit trampoline hops.',
+   [talk]:403,[announcement]:403,
+  })});
+  expect(result.priorLifecycle).toBe('unknown');expect(result.lifecycleState).toBe('demonstrated_in_wild');expect(result.compatibilityState).toBe('unknown');expect(result.freshness).toBe('partial');
+  const supplied=result.evidence.find(item=>item.sourceUrl===talk.replace(/\.json$/,''));expect(supplied?.evidenceType).toBe('maintainer_report');expect(supplied?.verification).toContain('not a verbatim excerpt');expect(supplied?.sourceSha256).toMatch(/^[a-f0-9]{64}$/);
+ }));
  it('plans bounded current-ref, capability, alias and source-code checks without exact pair-only search',()=>{
   const plan=buildVerificationPlan(base);expect(plan.requests.some(x=>x.url==='https://github.com/example/provider/commits/HEAD.atom')).toBe(true);expect(plan.requests.some(x=>x.url==='https://github.com/example/provider/pulls?q=is%3Apr+is%3Amerged')).toBe(true);expect(plan.requests.some(x=>x.url==='https://github.com/example/provider/releases')).toBe(true);expect(plan.codeTouchpoints).toContainEqual(expect.objectContaining({path:'src/fiber/hint.rs'}));expect(plan.queries.some(q=>q.includes('Cellula LSP invoice routing'))).toBe(true);expect(plan.queries.some(q=>q.includes('trampoline route'))).toBe(true);expect(plan.requests.length).toBeLessThanOrEqual(16);
  });
@@ -33,6 +50,13 @@ describe('candidate-scoped current-state verifier',()=>{
    [currentCode]:html({title:'hint parser',body:'Cellula LSP invoice parsing uses TrampolineRouteHint and explicit trampoline hops.',updatedAt:'2026-11-14T10:00:00Z'}),
   })});
   expect(result.lifecycleState).toBe('demonstrated_in_wild');expect(result.compatibilityState).toBe('unknown');expect(result.freshness).toBe('current');expect(result.evidence.some(x=>x.evidenceType==='maintainer_report')).toBe(true);expect(result.evidence.every(x=>/^[a-f0-9]{64}$/.test(x.sourceSha256))).toBe(true);
+ }));
+ it('reads Discourse cooked post bodies and dates before deriving scoped completion',async()=>withCache(async cache=>{
+  const topic='https://talk.nervos.org/t/example-prior-art/10741';const topicJson=`${topic}.json`;
+  const result=await verifyCandidateCurrentState({...base,sourceUrls:[topic],codeTouchpoints:[],consumer:{...base.consumer,repositories:[]},provider:{...base.provider,repositories:[]}},{cacheDir:cache,now:new Date('2026-11-17T01:00:00Z'),fetcher:mockFetch({
+   [topicJson]:JSON.stringify({title:'Prior art update',post_stream:{posts:[{created_at:'2026-11-13T12:02:55.764Z',cooked:'<p>A Cellula-to-Cellula trade settled on testnet after parsing a Cellula LSP invoice with Fiber trampoline routing.</p>'}]}}),
+  })});
+  const source=result.sources.find(x=>x.url===topicJson);expect(source?.content).toContain('Cellula LSP invoice');expect(source?.publishedAt).toBe('2026-11-13T12:02:55.764Z');expect(result.lifecycleState).toBe('demonstrated_in_wild');expect(result.evidence.some(x=>x.evidenceType==='maintainer_report'&&x.publishedAt==='2026-11-13T12:02:55.764Z'&&x.excerpt.includes('Cellula-to-Cellula trade settled on testnet'))).toBe(true);
  }));
  it('marks an old collaboration offer for reconfirmation without treating age as withdrawal',async()=>withCache(async cache=>{
   const source='https://github.com/example/provider/issues/12';const candidate:CandidateSpec={...base,capability:{key:'indexing-review',label:'Cellora indexing architecture review offer',terms:['indexing','architecture review','20-minute call']},sourceUrls:[source],codeTouchpoints:[],searchConcepts:['indexing architecture call'],consumer:{...base.consumer,repositories:[]},provider:{...base.provider,repositories:[]}};

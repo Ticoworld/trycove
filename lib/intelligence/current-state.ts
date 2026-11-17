@@ -22,7 +22,9 @@ export const CandidateSpecSchema=z.object({
  knownUnavailableSources:z.array(z.object({url:HttpsUrl,checkedAt:z.string().datetime({offset:true}),reason:z.string().min(4).max(240)}).strict()).max(8).default([]),
  codeTouchpoints:z.array(z.object({projectId:z.string().min(1),repository:Repository,path:z.string().regex(/^[A-Za-z0-9_./-]{1,240}$/)}).strict()).max(12),
  searchConcepts:z.array(z.string().min(3).max(120)).max(8),
+ priorEvidence:z.array(z.object({sourceUrl:HttpsUrl,revision:z.string().min(7).max(128).optional(),publishedAt:z.string().max(40).optional(),evidenceType:z.enum(['maintainer_report','code_observed','executed_demo','independent_verification','external_adoption','human_offer','status_update']),excerpt:z.string().min(1).max(2000),verification:z.string().min(8).max(500)}).strict()).max(8).default([]),
  executionReceipt:z.string().regex(/^evidence\/[A-Za-z0-9_./-]{1,220}\.json$/).optional(),
+ lifecycleBaseline:z.enum(['stored','provided']).default('stored'),
  priorLifecycle:z.enum(LIFECYCLE_STATES).default('unknown'),
  priorCompatibility:z.enum(['unknown','compatible','partially_compatible','incompatible']).default('unknown'),
 }).strict().superRefine((value,ctx)=>{
@@ -98,7 +100,7 @@ async function cacheRead(dir:string,url:string):Promise<CacheRecord|null>{
 }
 async function cacheWrite(dir:string,value:CacheRecord){
  const path=join(dir,`${sha(value.url)}.json`);await writeFile(path,JSON.stringify(value),{mode:0o600});
- const files=(await readdir(dir)).filter(x=>/^[a-f0-9]{64}\.json$/.test(x));const entries=await Promise.all(files.map(async name=>({name,mtime:(await stat(join(dir,name))).mtimeMs})));entries.sort((a,b)=>a.mtime-b.mtime);
+ const files=(await readdir(dir)).filter(x=>/^[a-f0-9]{64}\.json$/.test(x));const entries=(await Promise.all(files.map(async name=>{try{return{name,mtime:(await stat(join(dir,name))).mtimeMs}}catch(error){if(error&&typeof error==='object'&&'code'in error&&error.code==='ENOENT')return null;throw error}}))).filter((entry):entry is {name:string;mtime:number}=>entry!==null);entries.sort((a,b)=>a.mtime-b.mtime);
  for(const old of entries.slice(0,Math.max(0,entries.length-MAX_CACHE_ENTRIES)))await unlink(join(dir,old.name)).catch(()=>{});
 }
 
@@ -136,7 +138,7 @@ function parseSource(url:string,kind:SourceKind,raw:string,checkedAt:string,http
   const link=raw.match(/<link[^>]*>([\s\S]*?)<\/link>/i)?.[1];const date=raw.match(/<updated>([^<]+)<\/updated>/i)?.[1];revision=(link??'').match(/([a-f0-9]{40})/i)?.[1]??raw.match(/\/commits\/([a-f0-9]{40})/i)?.[1];publishedAt=date;content=[revision,date,raw.match(/<title>([^<]+)<\/title>/i)?.[1]].filter(Boolean).join(' ');
   if(!revision)content=htmlText(raw);
  }else if(kind==='discourse-topic'){
-  try{const data=JSON.parse(raw);publishedAt=data?.post_stream?.posts?.map((p:any)=>p.created_at).sort((a:string,b:string)=>Date.parse(b)-Date.parse(a))[0]??data?.created_at;content=[data.title,...(data.post_stream?.posts??[]).map((p:any)=>p.raw)].filter(Boolean).join('\n')}catch{content=htmlText(raw)}
+  try{const data=JSON.parse(raw);const posts=data?.post_stream?.posts??[];publishedAt=posts.map((p:any)=>p.created_at).filter(Boolean).sort((a:string,b:string)=>Date.parse(b)-Date.parse(a))[0]??data?.created_at;content=[data.title,...posts.map((p:any)=>typeof p.raw==='string'&&p.raw.trim()?p.raw:htmlText(typeof p.cooked==='string'?p.cooked:''))].filter(Boolean).join('\n')}catch{content=htmlText(raw)}
 }else if(new URL(url).hostname==='raw.githubusercontent.com')content=raw.trim();
  else if(raw.trimStart().startsWith('<!DOCTYPE html')||raw.includes('react-app.embeddedData')){
   const embedded=embeddedGithubText(raw);content=embedded.content;publishedAt=embedded.publishedAt;revision=embedded.revision;
@@ -150,48 +152,61 @@ function parseSource(url:string,kind:SourceKind,raw:string,checkedAt:string,http
 
 function matchCount(content:string,terms:string[]){const lower=content.toLowerCase();return terms.filter(term=>lower.includes(term.toLowerCase())).length}
 function meaningful(source:RetrievedSource,terms:string[]){return source.fetchStatus==='available'&&matchCount(source.content,terms)>=Math.min(2,terms.length)}
+const COMPLETION_PATTERN=/(?:completed|successfully (?:tested|used|integrated|executed)|demonstrated|testnet trade|working end[- ]to[- ]end|used on testnet|settled on testnet)/i;
 function sourceDate(source:RetrievedSource){const parsed=source.publishedAt?Date.parse(source.publishedAt):NaN;return Number.isFinite(parsed)?new Date(parsed):null}
 function bestExcerpt(content:string,terms:string[]){
+ const completions=[...content.matchAll(new RegExp(COMPLETION_PATTERN.source,'gi'))];
+ for(const match of completions){const at=match.index??0;const start=Math.max(0,at-480);const excerpt=content.slice(start,Math.min(content.length,at+620)).trim();if(matchCount(excerpt,terms)>=Math.min(2,terms.length))return excerpt}
  const lower=content.toLowerCase();const at=terms.map(t=>lower.indexOf(t.toLowerCase())).filter(n=>n>=0).sort((a,b)=>a-b)[0]??0;const start=Math.max(0,at-320);return content.slice(start,Math.min(content.length,start+1100)).trim();
 }
 function evidenceType(source:RetrievedSource,content:string):EvidenceType{
  if(source.kind==='github-source'&&(/\/blob\//.test(source.url)||/^https:\/\/raw\.githubusercontent\.com\//.test(source.url)||/\.atom$/.test(source.url)))return'code_observed';
  if(/happy to (?:jump on|help|review|set up)|available to (?:review|help)|offering (?:an?|to)/i.test(content)&&(/\/issues\/|talk\.nervos\.org/.test(source.url)))return'human_offer';
  if(/teapaw\.org/.test(source.url))return'maintainer_report';
- if(/completed|successfully (?:tested|used|integrated|executed)|demonstrated|testnet trade/i.test(content))return'maintainer_report';
+ if(COMPLETION_PATTERN.test(content))return'maintainer_report';
  return'status_update';
 }
 function inferLifecycle(candidate:CandidateSpec,sources:RetrievedSource[],checkedAt:string):Pick<CandidateVerification,'result'|'freshness'|'lifecycleState'|'compatibilityState'|'summary'|'uncertainty'|'nextAction'|'evidence'|'limitations'>{
  const materials=sources.filter(x=>meaningful(x,candidate.capability.terms));
+ const priorEvidence=candidate.priorEvidence.filter(x=>matchCount(x.excerpt,candidate.capability.terms)>=Math.min(2,candidate.capability.terms.length));
  const available=sources.filter(x=>x.fetchStatus==='available');const unavailable=sources.filter(x=>x.fetchStatus==='unavailable');
  const hasCurrentRef=sources.some(x=>x.kind==='github-current-ref'&&x.fetchStatus==='available'&&Boolean(x.revision));
  const freshness:Freshness=unavailable.length===0&&hasCurrentRef?'current':available.length>0?'partial':'unresolved';
- const text=materials.map(x=>x.content).join('\n').toLowerCase();
- const hasOffer=materials.some(x=>/happy to (?:jump on|help|review|set up)|available to (?:review|help)|offering (?:an?|to)/i.test(x.content));
- const hasCompletion=materials.some(x=>/(?:completed|successfully (?:tested|used|integrated|executed)|demonstrated|testnet trade|working end[- ]to[- ]end|used on testnet)/i.test(x.content));
- const asksAgain=materials.some(x=>/(?:still need|looking for|seeking|request(?:ing)?|would like (?:help|a review)|need (?:a|an) (?:review|integration|capability))/i.test(x.content));
- const hasSupersession=materials.some(x=>/(?:superseded|replaced by|deprecated in favor of|no longer supported)/i.test(x.content));
+ const allContent=[...materials.map(x=>x.content),...priorEvidence.map(x=>x.excerpt)];
+ const hasOffer=allContent.some(x=>/happy to (?:jump on|help|review|set up)|available to (?:review|help)|offering (?:an?|to)/i.test(x));
+ const suppliedCompletion=priorEvidence.some(x=>x.evidenceType==='maintainer_report'&&COMPLETION_PATTERN.test(x.excerpt));
+ const hasCurrentCompletion=materials.some(x=>COMPLETION_PATTERN.test(x.content));
+ const hasCompletion=hasCurrentCompletion||suppliedCompletion;
+ const requestPattern=/\b(?:(?:we|they|i)\s+(?:still\s+)?(?:need|require)|(?:we|they|i)\s+(?:are\s+)?(?:looking for|seeking|requesting)|(?:still\s+)?(?:need|needs|require|requires)\s+(?:a|an|the)\s+(?:capability|integration|feature|support|review))\b/i;
+ const scopedRequest=(content:string)=>content.split(/[.!?\n]+/).some(sentence=>requestPattern.test(sentence)&&matchCount(sentence,candidate.capability.terms)>=Math.min(2,candidate.capability.terms.length));
+ const requestSources=materials.filter(source=>source.kind==='discourse-topic'||/\/issues\/\d+(?:$|[?#])/.test(source.url));
+ const priorRequestEvidence=priorEvidence.filter(item=>item.evidenceType==='status_update'&&(/\/issues\/\d+(?:$|[?#])|talk\.nervos\.org/.test(item.sourceUrl)));
+ const asksAgain=requestSources.some(source=>scopedRequest(source.content))||priorRequestEvidence.some(item=>scopedRequest(item.excerpt));
+ const hasSupersession=allContent.some(x=>/(?:superseded|replaced by|deprecated in favor of|no longer supported)/i.test(x));
  const code=materials.some(x=>x.kind==='github-source'&&(/\/blob\//.test(x.url)||/^https:\/\/raw\.githubusercontent\.com\//.test(x.url)));
  const humanOfferSources=materials.filter(x=>/\/issues\/|talk\.nervos\.org/.test(x.url));
- const offerDate=humanOfferSources.map(sourceDate).filter((x):x is Date=>Boolean(x)).sort((a,b)=>b.getTime()-a.getTime())[0];
+ const offerDates=[...humanOfferSources.map(sourceDate),...priorEvidence.filter(x=>x.evidenceType==='human_offer'&&x.publishedAt).map(x=>new Date(x.publishedAt!))].filter((x):x is Date=>x instanceof Date&&!Number.isNaN(x.getTime()));
+ const offerDate=offerDates.sort((a,b)=>b.getTime()-a.getTime())[0];
  const oldOffer=hasOffer&&offerDate!==undefined&&Date.parse(checkedAt)-offerDate.getTime()>90*24*60*60*1000;
  const contradictory=hasCompletion&&asksAgain;
  let lifecycleState:LifecycleState='unknown',result:VerificationResult='unavailable',summary='',uncertainty='',nextAction='Refresh the cited public sources and inspect the relevant capability before promoting this opportunity.';
- if(materials.length){result=unavailable.length?'partial':'complete';
+ if(materials.length||priorEvidence.length){result=unavailable.length?'partial':'complete';
   if(contradictory){lifecycleState='in_progress';result='contradictory';summary='Current source text contains both completion language and a continuing request for the same scoped capability.';uncertainty='The sources may refer to different versions, environments, or deliverables; the evidence does not identify which work remains.';nextAction='Compare the dated implementation and request, then split or revise the capability scope before promoting it.'}
   else if(hasSupersession){lifecycleState='superseded';summary='A current relevant source says this capability was replaced or deprecated.';uncertainty='The replacement path and affected releases must be confirmed against the consuming project.';nextAction='Inspect the replacement interface and update the candidate to the current capability.'}
   else if(oldOffer){lifecycleState='stale_offer';summary='A public human collaboration offer is still visible, but its last recorded update is older than 90 days.';uncertainty='Age and lack of a newer confirmation do not prove the offer was withdrawn or remains available.';nextAction='Reconfirm the offer before presenting it as available; do not contact the project automatically.'}
   else if(hasOffer){lifecycleState='proposed';summary='A relevant source records a human collaboration offer.';uncertainty='The offer is not evidence of a code capability, accepted introduction, or completed work.';nextAction='Ask the builder to reconfirm the offer and agree on scope before recording an introduction.'}
-  else if(hasCompletion){lifecycleState='demonstrated_in_wild';summary='A current relevant source reports a scoped execution or demonstration.';uncertainty='The report does not establish independent reproduction, production readiness, or adoption.';nextAction='Preserve the dated report and run an independent check against the exact environment and release.'}
+  else if(hasCompletion){lifecycleState='demonstrated_in_wild';summary=suppliedCompletion&&!hasCurrentCompletion?'A preserved source-linked reviewer summary attributes a scoped testnet demonstration to the maintainer report.':'A current relevant source reports a scoped execution or demonstration.';uncertainty=suppliedCompletion&&!hasCurrentCompletion?'The underlying public report was not retrieved in this check; the supplied summary is not verbatim, and it does not establish independent reproduction, production readiness, or adoption.':'The report does not establish independent reproduction, production readiness, or adoption.';nextAction=suppliedCompletion&&!hasCurrentCompletion?'Retrieve the cited report when accessible, then independently check the exact environment and release.':'Preserve the dated report and run an independent check against the exact environment and release.'}
   else if(code){lifecycleState=candidate.priorLifecycle==='unknown'||candidate.priorLifecycle==='proposed'?'in_progress':candidate.priorLifecycle;summary=candidate.priorLifecycle==='unknown'||candidate.priorLifecycle==='proposed'?'Current source code contains relevant implementation touchpoints for this capability.':'Current source code contains relevant implementation touchpoints; the stronger previously recorded lifecycle event is retained.';uncertainty='Source presence does not prove successful end-to-end execution, deployment, maintainer readiness, or adoption. Prior reported events remain attributed to their original source.';nextAction='Run a bounded cross-project test against the exact interface and preserve positive and negative results.'}
   else{lifecycleState='proposed';summary='Relevant current source material discusses the scoped capability, but does not demonstrate completion.';uncertainty='The source does not establish implementation or compatible runtime behavior.';nextAction='Inspect the cited code and record a reproducible compatibility check before promotion.'}
  }else if(available.length){result=unavailable.length?'partial':'complete';lifecycleState=candidate.priorLifecycle;summary='Sources were fetched, but none contained enough capability-specific evidence to change the recorded lifecycle state.';uncertainty='This is not evidence that the capability is absent or that the opportunity is new.'}
   else{result='unavailable';lifecycleState=candidate.priorLifecycle;summary=candidate.priorLifecycle==='unknown'?'No targeted source could be fetched during this check.':'No targeted source could be fetched; the last recorded lifecycle state is retained without claiming it is current.';uncertainty='Freshness and current implementation status remain unresolved; an unavailable source is not negative evidence.'}
  if(unavailable.length){const failures=unavailable.map(x=>`${new URL(x.url).hostname}: ${x.error??'unavailable'}`);uncertainty=[uncertainty,`Source refresh was incomplete; unavailable sources are not negative evidence: ${failures.join('; ')}.`].filter(Boolean).join(' ');if(result==='complete')result='partial'}
- const evidence=materials.map(source=>{
-  const excerpt=bestExcerpt(source.content,candidate.capability.terms);const type=evidenceType(source,source.content);const sourceCompletion=/(?:completed|successfully (?:tested|used|integrated|executed)|demonstrated|testnet trade|working end[- ]to[- ]end|used on testnet)/i.test(source.content);const sourceOffer=/happy to (?:jump on|help|review|set up)|available to (?:review|help)|offering (?:an?|to)/i.test(source.content);const conclusion=type==='human_offer'?sourceOffer&&oldOffer?'offer requires reconfirmation':'human offer reported':sourceCompletion?'maintainer-reported scoped demonstration':type==='code_observed'?'relevant source implementation observed':'relevant current source material';
+ const sourceEvidence=materials.map(source=>{
+  const excerpt=bestExcerpt(source.content,candidate.capability.terms);const type=evidenceType(source,source.content);const sourceCompletion=COMPLETION_PATTERN.test(source.content);const sourceOffer=/happy to (?:jump on|help|review|set up)|available to (?:review|help)|offering (?:an?|to)/i.test(source.content);const conclusion=type==='human_offer'?sourceOffer&&oldOffer?'offer requires reconfirmation':'human offer reported':sourceCompletion?'maintainer-reported scoped demonstration':type==='code_observed'?'relevant source implementation observed':'relevant current source material';
   return{id:sha(`${candidate.opportunityId}\0${candidate.capability.key}\0${source.url}\0${source.revision??''}\0${source.checkedAt}`),sourceUrl:source.url,...(source.revision?{revision:source.revision}:{}),...(sourceDate(source)?{publishedAt:sourceDate(source)!.toISOString()}:{}),checkedAt:source.checkedAt,evidenceType:type,excerpt,conclusion,verification:type==='code_observed'?'Source file was retrieved; code presence is independently observable, runtime behavior is unverified.':'Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.',sourceSha256:sha(source.content)};
  });
+ const suppliedEvidence:LifecycleEvidence[]=priorEvidence.map(item=>({id:sha(`${candidate.opportunityId}\0${candidate.capability.key}\0supplied\0${item.sourceUrl}\0${item.revision??''}\0${item.excerpt}`),sourceUrl:item.sourceUrl,...(item.revision?{revision:item.revision}:{}),...(item.publishedAt?{publishedAt:item.publishedAt}:{}),checkedAt,evidenceType:item.evidenceType,excerpt:item.excerpt,conclusion:'Reviewer-supplied source summary; not presented as a verbatim source excerpt.',verification:item.verification,sourceSha256:sha(item.excerpt)}));
+ const evidence=[...suppliedEvidence,...sourceEvidence];
  const limitations=[
   'This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.',
   'Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.',

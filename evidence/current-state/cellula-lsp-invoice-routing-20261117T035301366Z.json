@@ -1,0 +1,271 @@
+{
+  "schemaVersion": 1,
+  "candidate": {
+    "opportunityId": "twine-cellula-lsp-invoice-routing",
+    "capabilityKey": "cellula-lsp-invoice-routing",
+    "lifecycleBaseline": "provided",
+    "consumer": {
+      "id": "twine",
+      "name": "Twine"
+    },
+    "provider": {
+      "id": "cellula",
+      "name": "Cellula.id"
+    },
+    "capability": "Cellula LSP invoice parsing and Fiber trampoline routing"
+  },
+  "verification": {
+    "checkedAt": "2026-11-17T03:53:01.366Z",
+    "result": "complete",
+    "freshness": "current",
+    "priorLifecycle": "unknown",
+    "lifecycleState": "demonstrated_in_wild",
+    "compatibilityState": "unknown",
+    "summary": "A current relevant source reports a scoped execution or demonstration.",
+    "uncertainty": "The report does not establish independent reproduction, production readiness, or adoption.",
+    "nextAction": "Preserve the dated report and run an independent check against the exact environment and release.",
+    "queries": [
+      "Twine CKB Cellula LSP invoice parsing and Fiber trampoline routing",
+      "Twine CKB TrampolineRouteHint LSP payment routing",
+      "Twine wallet Cellula LSP invoice parsing and Fiber trampoline routing",
+      "Twine wallet TrampolineRouteHint LSP payment routing"
+    ],
+    "limitations": [
+      "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+      "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+      "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility."
+    ],
+    "sources": [
+      {
+        "url": "https://github.com/chukwuma619/twine/commits/HEAD.atom",
+        "kind": "github-current-ref",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "274ecf42890eeff5abd60e70240240d34ac10f83",
+        "publishedAt": "2026-11-14T00:52:20Z",
+        "cache": "hit",
+        "excerpt": "274ecf42890eeff5abd60e70240240d34ac10f83 2026-11-14T00:52:20Z Recent Commits to twine:274ecf42890eeff5abd60e70240240d34ac10f83"
+      },
+      {
+        "url": "https://github.com/chukwuma619/twine/pulls?q=is%3Apr+is%3Amerged",
+        "kind": "github-pulls",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-11-13T10:44:32Z",
+        "cache": "hit",
+        "excerpt": "REPO_PULL_REQUEST_STATE_MERGED feat(fiber): pay invoices with a trampoline route hint Pull requests · chukwuma619/twine Pull requests · chukwuma619/twine"
+      },
+      {
+        "url": "https://github.com/chukwuma619/twine/releases",
+        "kind": "github-releases",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "hit",
+        "excerpt": "Releases · chukwuma619/twine Releases · chukwuma619/twine"
+      },
+      {
+        "url": "https://talk.nervos.org/t/twine-buy-and-sell-ckb-without-depositing-on-an-exchange-fiber-p2p-poc/10741.json",
+        "kind": "discourse-topic",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-11-13T12:02:55.764Z",
+        "cache": "hit",
+        "excerpt": "Twine: Buy and Sell CKB Without Depositing on an Exchange (Fiber P2P PoC)\nI use Binance P2P a lot. I have also watched people get locked out of those accounts, with their coins sitting frozen until the exchange decides to give them back. That is a bad way to buy and sell CKB with local money. Right now, onboarding into CKB via fiat has four major problems: Custodial risk and account freezes. To sell on centralized P2P desks, you must deposit your coins into the exchange hot wallet first. If the platform freezes your account, your funds are trapped. The KYC barrier. Centralized fiat ramps require heavy identity checks and frequently reject users from emerging markets where P2P trading is needed most. DEX limitations. On-chain DEXs (like UTXOSwap) excel at crypto-to-crypto swaps, but they cannot process off-chain bank transfers, payment apps, or local cash. Underutilized Fiber capabilities. The Nervos Fiber Network has cryptographic primitive (HTLC hold invoices), but no KYC-free, non-custodial fiat desk exists on CKB to use it. The solution: Twine Twine is a non-custodial peer-to-peer desk built to solve this. You post an offer in your local currency. Someone accepts it. Your CKB locks on Fiber in a conditional hold invoice until they pay you. You check the receipt, verify the money in your bank app, and click release. If they never pay, the coins return to you automatically when the lock expires. There is no Twine account. Twine coordinates the order and releases the lock only when the seller confirms the money arrived. Your CKB stays locked on Fiber the entire time. Twine never takes custody of your funds. Who is involved Each phone talks to Twine to manage the order and chat, and communicates directly with its own Fiber node to move funds. Twine never holds your private keys or Fiber channels. flowchart TB SellerApp[Seller phone] BuyerApp[Buyer phone] Twine[Twine coordinator] SellerNode[Seller Fiber node] BuyerNode[Buyer Fiber node] TwineNode[Twine Fiber node] Fiber[Fiber Network] SellerApp -->|offer, chat, release| Twine BuyerApp -->|take, receipt, chat| Twine SellerApp --> SellerNode BuyerApp --> BuyerNode Twine --> TwineNode SellerNode --- Fiber BuyerNode --- Fiber TwineNode --- Fiber Fiat stays completely off-chain. Dollars, Naira, or Pesos move directly from buyer to seller via bank transfer, payment apps, or cash. The coordinator is whoever runs the Twine daemon. They can view the active order, the trade chat, and the uploaded payment receipt. If a"
+      },
+      {
+        "url": "https://teapaw.org/twineckb/status/2121412115718181181",
+        "kind": "announcement",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-11-14T01:17:16Z",
+        "cache": "hit",
+        "excerpt": "Twine P2P (@twineckb): \"Twine works with Fiber Studio and Cellula Wallet. Lock CKB from the wallet you already run, and receive it on an invoice from that same wallet. Fiat moves outside the app. Twine never holds the coins. Fiber Studio on desktop. Cellula Wallet on your phone. @cellula_id\" | teapawt teapawt $ Twine P2P @twineckb Nov 14 Twine works with Fiber Studio and Cellula Wallet. Lock CKB from the wallet you already run, and receive it on an invoice from that same wallet. Fiat moves outside the app. Twine never holds the coins. Fiber Studio on desktop. Cellula Wallet on your phone. @cellula_id Nov 14, 2026 · 1:17 AM UTC 11 2 29 1,083"
+      },
+      {
+        "url": "https://github.com/chukwuma619/twine/commit/274ecf42890eeff5abd60e70240240d34ac10f83",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "274ecf42890eeff5abd60e70240240d34ac10f83",
+        "publishedAt": "2026-11-14T01:52:20.000+01:00",
+        "cache": "hit",
+        "excerpt": "Chukwuma Ebube Chukwuma Ebube Update README.md to clarify the coordinator fee structure, specifying… · chukwuma619/twine@274ecf4 Update README.md to clarify the coordinator fee structure, specifying… · chukwuma619/twine@274ecf4"
+      },
+      {
+        "url": "https://github.com/chukwuma619/twine/blob/274ecf42890eeff5abd60e70240240d34ac10f83/src/fiber/hint.rs",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "274ecf42890eeff5abd60e70240240d34ac10f83",
+        "publishedAt": "2026-09-12T00:45:10.000Z",
+        "cache": "hit",
+        "excerpt": "hint.rs twine/src/fiber/hint.rs at 274ecf42890eeff5abd60e70240240d34ac10f83 · chukwuma619/twine twine/src/fiber/hint.rs at 274ecf42890eeff5abd60e70240240d34ac10f83 · chukwuma619/twine"
+      },
+      {
+        "url": "https://github.com/chukwuma619/twine/blob/274ecf42890eeff5abd60e70240240d34ac10f83/src/fiber/hint.rs#L1-L55",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "274ecf42890eeff5abd60e70240240d34ac10f83",
+        "publishedAt": "2026-09-12T00:45:10.000Z",
+        "cache": "hit",
+        "excerpt": "hint.rs twine/src/fiber/hint.rs at 274ecf42890eeff5abd60e70240240d34ac10f83 · chukwuma619/twine twine/src/fiber/hint.rs at 274ecf42890eeff5abd60e70240240d34ac10f83 · chukwuma619/twine"
+      },
+      {
+        "url": "https://github.com/chukwuma619/twine/blob/274ecf42890eeff5abd60e70240240d34ac10f83/src/fiber/hint.rs#L368-L391",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "274ecf42890eeff5abd60e70240240d34ac10f83",
+        "publishedAt": "2026-09-12T00:45:10.000Z",
+        "cache": "hit",
+        "excerpt": "hint.rs twine/src/fiber/hint.rs at 274ecf42890eeff5abd60e70240240d34ac10f83 · chukwuma619/twine twine/src/fiber/hint.rs at 274ecf42890eeff5abd60e70240240d34ac10f83 · chukwuma619/twine"
+      },
+      {
+        "url": "https://github.com/chukwuma619/twine/blob/274ecf42890eeff5abd60e70240240d34ac10f83/src/fiber/payment.rs#L61-L101",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "274ecf42890eeff5abd60e70240240d34ac10f83",
+        "publishedAt": "2026-09-12T00:45:10.000Z",
+        "cache": "hit",
+        "excerpt": "payment.rs twine/src/fiber/payment.rs at 274ecf42890eeff5abd60e70240240d34ac10f83 · chukwuma619/twine twine/src/fiber/payment.rs at 274ecf42890eeff5abd60e70240240d34ac10f83 · chukwuma619/twine"
+      },
+      {
+        "url": "https://github.com/search?q=Twine%20CKB%20Cellula%20LSP%20invoice%20parsing%20and%20Fiber%20trampoline%20routing&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "hit",
+        "excerpt": "Issue search results Issue search results"
+      },
+      {
+        "url": "https://github.com/search?q=Twine%20CKB%20TrampolineRouteHint%20LSP%20payment%20routing&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "hit",
+        "excerpt": "Issue search results Issue search results"
+      },
+      {
+        "url": "https://github.com/search?q=Twine%20wallet%20Cellula%20LSP%20invoice%20parsing%20and%20Fiber%20trampoline%20routing&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "hit",
+        "excerpt": "Issue search results Issue search results"
+      },
+      {
+        "url": "https://github.com/search?q=Twine%20wallet%20TrampolineRouteHint%20LSP%20payment%20routing&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "hit",
+        "excerpt": "Issue search results Issue search results"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/chukwuma619/twine/274ecf42890eeff5abd60e70240240d34ac10f83/src/fiber/hint.rs",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "274ecf42890eeff5abd60e70240240d34ac10f83",
+        "cache": "hit",
+        "excerpt": "//! Invoices with a trampoline route hint.\n//!\n//! Wallets behind an LSP (Cellula, for one) put a `TrampolineRouteHint` attribute\n//! (union id 10, from nervosnetwork/fiber#1623) in their invoices: the public node that\n//! reaches the private payee. Fiber through 0.10.0 does not know that attribute, so\n//! `parse_invoice` and `send_payment` with the invoice both refuse it. Those builds can\n//! still pay it by fields with `trampoline_hops`, so this module reads such an invoice\n//! locally and the payment calls pay it that way.\n//!\n//! Only used after Fiber refuses an invoice with an unknown attribute. The signature is\n//! not checked here: the payee is the buyer's own wallet and a wrong one only misdirects\n//! the buyer's payout.\n//!\n//! Drop this module once Fiber past 0.10.0 parses attr 10 (fiber#1623).\n\nuse anyhow::{Result, anyhow, bail};\nuse arcode::bitbit::{BitReader, MSB};\nuse arcode::{ArithmeticDecoder, EOFKind, Model};\nuse bech32::{FromBase32, Variant};\n\n/// Fiber `SIGNATURE_U5_SIZE`.\nconst SIGNATURE_U5_SIZE: usize = 104;\n/// Fiber `MAX_INVOICE_DATA_LENGTH` is larger; an invoice needs a few hundred bytes.\nconst MAX_DATA_LENGTH: usize = 4096;\n\nconst ATTR_EXPIRY_TIME: u32 = 0;\nconst ATTR_FINAL_HTLC_MINIMUM_EXPIRY_DELTA: u32 = 3;\nconst ATTR_PAYEE_PUBLIC_KEY: u32 = 7;\nconst ATTR_HASH_ALGORITHM: u32 = 8;\nconst ATTR_TRAMPOLINE_ROUTE_HINT: u32 = 10;\n\n#[derive(Debug, Clone, PartialEq, Eq)]\npub struct HintedInvoice {\n    /// `Fibb`, `Fibt` or `Fibd`, as Fiber's `parse_invoice` names it.\n    pub currency: String,\n    pub amount: Option<u128>,\n    pub timestamp_ms: u128,\n    pub payment_hash: String,\n    pub expiry_secs: Option<u64>,\n    pub final_tlc_expiry_delta_ms: Option<u64>,\n    pub payee: String,\n    /// 0 ckb hash, 1 sha256.\n    pub hash_algorithm: u8,\n    pub trampoline_hint: String,\n}\n\n/// A Cellula wallet shares its invoice as a pay link, `https://<wallet>/pay#<invoice>`,\n/// from its copy button and its QR code. Returns the invoice inside such a link; any\n/// other input comes back trimmed.\npub fn bare_invoice(input: &str) -> &str {\n    let input = input.trim();\n    match input.rsplit_once('#') {\n        Some((_, tail)) if tail.trim_start().starts_with(\"fib\") => tail.trim(),\n        _ => input,\n    }\n}\n\n/// Reads an invoice that carries a trampoline route hint. Errors for anything else,\n/// so a plain invoice keeps going through Fiber.\npub fn decode_hinted_invoice(invoice: &str) -> Result<HintedInvoice> {\n    let invoice = bare_invoice(invoice);\n  "
+      },
+      {
+        "url": "https://raw.githubusercontent.com/chukwuma619/twine/274ecf42890eeff5abd60e70240240d34ac10f83/src/fiber/payment.rs",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "274ecf42890eeff5abd60e70240240d34ac10f83",
+        "cache": "hit",
+        "excerpt": "use super::{HttpFiber, PaymentInfo};\nuse crate::{MAX_FEE_RATE, hex_u64, hex_u128};\nuse anyhow::{Result, anyhow, bail};\nuse async_trait::async_trait;\nuse serde_json::json;\n\n#[async_trait]\npub trait PaymentRpc: Send + Sync {\n    async fn send_payment(&self, invoice: &str, tlc_expiry_limit_ms: u64) -> Result<PaymentInfo>;\n    /// Route check only. Fiber `send_payment` with `dry_run: true` builds a path,\n    /// returns `Created`, and does not store a session or send an onion, so it cannot\n    /// reveal the preimage. `build_router` is the wrong call: it requires `hops_info`.\n    async fn probe_payment(&self, invoice: &str, tlc_expiry_limit_ms: u64) -> Result<PaymentInfo>;\n    async fn get_payment(&self, payment_hash: &str) -> Result<PaymentInfo>;\n}\n\n#[async_trait]\nimpl PaymentRpc for HttpFiber {\n    async fn send_payment(&self, invoice: &str, tlc_expiry_limit_ms: u64) -> Result<PaymentInfo> {\n        let result = self\n            .call(\n                \"send_payment\",\n                Some(send_payment_params(invoice, tlc_expiry_limit_ms, false)?),\n            )\n            .await?;\n        payment_from_send(result)\n    }\n\n    async fn probe_payment(&self, invoice: &str, tlc_expiry_limit_ms: u64) -> Result<PaymentInfo> {\n        let result = self\n            .call(\n                \"send_payment\",\n                Some(probe_payment_params(invoice, tlc_expiry_limit_ms)?),\n            )\n            .await?;\n        payment_from_send(result)\n    }\n\n    async fn get_payment(&self, payment_hash: &str) -> Result<PaymentInfo> {\n        let result = self\n            .call(\"get_payment\", Some(json!({ \"payment_hash\": payment_hash })))\n            .await?;\n        Ok(PaymentInfo {\n            payment_hash: payment_hash.to_string(),\n            status: result[\"status\"]\n                .as_str()\n                .ok_or_else(|| anyhow!(\"get_payment missing status\"))?\n                .to_string(),\n            preimage: preimage_field(&result),\n            failed_error: failed_error_field(&result),\n        })\n    }\n}\n\n/// Params for Fiber `send_payment` `dry_run`. A missing path comes back as an\n/// RPC error whose message contains `Failed to build route`, not as a stored payment.\npub fn probe_payment_params(invoice: &str, tlc_expiry_limit_ms: u64) -> Result<serde_json::Value> {\n    send_payment_params(invoice, tlc_expiry_limit_ms, true)\n}\n\n/// An invoice with a trampoline route hint is paid by fields through the hinted node,\n/// which Fiber supports although it cannot parse at"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "396977d1ebfe190cf95f4aefd222081fd57e6e645afe85044038883497bebe93",
+        "sourceUrl": "https://talk.nervos.org/t/twine-buy-and-sell-ckb-without-depositing-on-an-exchange-fiber-p2p-poc/10741",
+        "publishedAt": "2026-11-13",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "evidenceType": "maintainer_report",
+        "excerpt": "Reviewer-supplied summary of the November 13 technical update: it describes Cellula LSP invoice parsing, explicit Fiber trampoline routing, and a Cellula-to-Cellula trade settled on testnet.",
+        "conclusion": "Reviewer-supplied source summary; not presented as a verbatim source excerpt.",
+        "verification": "User-supplied summary, not a verbatim excerpt. The report is a separate source reference, not proof of its own content. Use current source-refresh records for direct retrieval and attribute any reported Testnet demonstration to the maintainer, not independent execution or adoption.",
+        "sourceSha256": "7ff1b99e862b318bf32c1af61c1fc16dca670a4cce04225a99a9e0232bb18d77"
+      },
+      {
+        "id": "30dbb32289ca5605a1d38aefab0833b6533a1d19db32e94b6d581b4bb412e009",
+        "sourceUrl": "https://github.com/chukwuma619/twine/pulls?q=is%3Apr+is%3Amerged",
+        "publishedAt": "2026-11-13T10:44:32.000Z",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "evidenceType": "status_update",
+        "excerpt": "REPO_PULL_REQUEST_STATE_MERGED feat(fiber): pay invoices with a trampoline route hint Pull requests · chukwuma619/twine Pull requests · chukwuma619/twine",
+        "conclusion": "relevant current source material",
+        "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+        "sourceSha256": "69a8344e4415105c7d1814ff13c50d96d102c6d76bec0dfae542e5e5943c8eb5"
+      },
+      {
+        "id": "14e665827c4014ce05df986d38e8b9779bdb3217613fe0ad7c1af8e54b44f389",
+        "sourceUrl": "https://talk.nervos.org/t/twine-buy-and-sell-ckb-without-depositing-on-an-exchange-fiber-p2p-poc/10741.json",
+        "publishedAt": "2026-11-13T12:02:55.764Z",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "evidenceType": "maintainer_report",
+        "excerpt": "ment’s lock budget is counted into payout deadlines ( TRAMPOLINE_SLACK_MS , measured on testnet for a 24h Cellula final: ~46.9h needed from a desk one hop from the trampoline’s peer). Plain invoices keep the order’s 48h hold. Trampoline payouts mint and clock a 68h hold so a 24h final still leaves about 11h for fiat. Cellula’s copy button / QR give https://<wallet>/pay#<invoice> . Twine takes the invoice after # before parse or pay; a Cellula→Cellula trade given the pay link settled on testnet. The local decoder ( hint.rs ) is temporary and can go once Fiber past 0.10.0-rc3 parses attr 10. Keep trade deadlines at the hold’s own length A seller paying over many hops can deliver the hold with a TLC that lasts far longer than the hold asked for (132h measured on testnet for a 48h hold). Deadlines previously followed that TLC, so a failed trade kept the seller’s CKB locked for days and buyer invoices had to stay payable for ~100h. Clocks now end at min(TLC expiry, locked_at + hold) . The TLC stays claimable until its real expiry; ending earlier is always safe for refund timing.",
+        "conclusion": "maintainer-reported scoped demonstration",
+        "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+        "sourceSha256": "a5828285af63b251e5e4ed02ade7503dfb4a09211ee6c9d8f4af5c8d3fb4c321"
+      },
+      {
+        "id": "ffb11494af5c46ff096cb1a537276f49f1505348ddc6ce405f3333d4a7c66d8d",
+        "sourceUrl": "https://teapaw.org/twineckb/status/2121412115718181181",
+        "publishedAt": "2026-11-14T01:17:16.000Z",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "evidenceType": "maintainer_report",
+        "excerpt": "Twine P2P (@twineckb): \"Twine works with Fiber Studio and Cellula Wallet. Lock CKB from the wallet you already run, and receive it on an invoice from that same wallet. Fiat moves outside the app. Twine never holds the coins. Fiber Studio on desktop. Cellula Wallet on your phone. @cellula_id\" | teapawt teapawt $ Twine P2P @twineckb Nov 14 Twine works with Fiber Studio and Cellula Wallet. Lock CKB from the wallet you already run, and receive it on an invoice from that same wallet. Fiat moves outside the app. Twine never holds the coins. Fiber Studio on desktop. Cellula Wallet on your phone. @cellula_id Nov 14, 2026 · 1:17 AM UTC 11 2 29 1,083",
+        "conclusion": "relevant current source material",
+        "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+        "sourceSha256": "3f107435ae5e9b10ed8436a611d9bfd6cd4ad5578468cea6bb7dfe80b0b3b18a"
+      },
+      {
+        "id": "28aa6ca17433b33444c9d10d73df0adcfffab55eb72c6efe5d3cff1fd60871b6",
+        "sourceUrl": "https://raw.githubusercontent.com/chukwuma619/twine/274ecf42890eeff5abd60e70240240d34ac10f83/src/fiber/hint.rs",
+        "revision": "274ecf42890eeff5abd60e70240240d34ac10f83",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "evidenceType": "code_observed",
+        "excerpt": "//! Invoices with a trampoline route hint.\n//!\n//! Wallets behind an LSP (Cellula, for one) put a `TrampolineRouteHint` attribute\n//! (union id 10, from nervosnetwork/fiber#1623) in their invoices: the public node that\n//! reaches the private payee. Fiber through 0.10.0 does not know that attribute, so\n//! `parse_invoice` and `send_payment` with the invoice both refuse it. Those builds can\n//! still pay it by fields with `trampoline_hops`, so this module reads such an invoice\n//! locally and the payment calls pay it that way.\n//!\n//! Only used after Fiber refuses an invoice with an unknown attribute. The signature is\n//! not checked here: the payee is the buyer's own wallet and a wrong one only misdirects\n//! the buyer's payout.\n//!\n//! Drop this module once Fiber past 0.10.0 parses attr 10 (fiber#1623).\n\nuse anyhow::{Result, anyhow, bail};\nuse arcode::bitbit::{BitReader, MSB};\nuse arcode::{ArithmeticDecoder, EOFKind, Model};\nuse bech32::{FromBase32, Variant};\n\n/// Fiber `SIGNATURE_U5_SIZE`.\nconst SIGNATURE_U5_SIZE: usize = 104;\n/// Fiber `MAX_INVOICE_DATA_LENGTH` is larger; an invoi",
+        "conclusion": "relevant source implementation observed",
+        "verification": "Source file was retrieved; code presence is independently observable, runtime behavior is unverified.",
+        "sourceSha256": "421aa08f670d61ca24425ed5bcc901915721712ac730e9f283dd4b9c496c0bbc"
+      },
+      {
+        "id": "52bd89daef2a805be3f8692ce26f0f556e22b1588cb3f540dd8f188e115a5a74",
+        "sourceUrl": "https://raw.githubusercontent.com/chukwuma619/twine/274ecf42890eeff5abd60e70240240d34ac10f83/src/fiber/payment.rs",
+        "revision": "274ecf42890eeff5abd60e70240240d34ac10f83",
+        "checkedAt": "2026-11-17T03:53:01.366Z",
+        "evidenceType": "code_observed",
+        "excerpt": "use super::{HttpFiber, PaymentInfo};\nuse crate::{MAX_FEE_RATE, hex_u64, hex_u128};\nuse anyhow::{Result, anyhow, bail};\nuse async_trait::async_trait;\nuse serde_json::json;\n\n#[async_trait]\npub trait PaymentRpc: Send + Sync {\n    async fn send_payment(&self, invoice: &str, tlc_expiry_limit_ms: u64) -> Result<PaymentInfo>;\n    /// Route check only. Fiber `send_payment` with `dry_run: true` builds a path,\n    /// returns `Created`, and does not store a session or send an onion, so it cannot\n    /// reveal the preimage. `build_router` is the wrong call: it requires `hops_info`.\n    async fn probe_payment(&self, invoice: &str, tlc_expiry_limit_ms: u64) -> Result<PaymentInfo>;\n    async fn get_payment(&self, payment_hash: &str) -> Result<PaymentInfo>;\n}\n\n#[async_trait]\nimpl PaymentRpc for HttpFiber {\n    async fn send_payment(&self, invoice: &str, tlc_expiry_limit_ms: u64) -> Result<PaymentInfo> {\n        let result = self\n            .call(\n                \"send_payment\",\n                Some(send_payment_params(invoice, tlc_expiry_limit_ms, false)?),\n            )\n            .await?;",
+        "conclusion": "relevant source implementation observed",
+        "verification": "Source file was retrieved; code presence is independently observable, runtime behavior is unverified.",
+        "sourceSha256": "c1beea4fd7e42a84c67230edb5773183762acc9e49b7cff1ce8ec081d65e359e"
+      }
+    ]
+  },
+  "executionReceipt": null
+}

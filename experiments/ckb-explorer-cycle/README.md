@@ -13,7 +13,7 @@ scripts/prepare-ckb-cycle-experiment.sh
 scripts/run-ckb-cycle-experiment.sh
 ```
 
-The runner rejects source revision, fixture hash, debugger hash, VM version, field-preservation, valid-case, invalid-case, and missing-dependency mismatches. Its JSON receipt is written to `evidence/ckb-explorer-cycle/execution.json`.
+The runner rejects source revision, fixture hash, debugger hash, VM version, field-preservation, valid-case, and invalid-case mismatches. For the missing-CellDeps case it accepts only the expected ckb-debugger `used unprovided cell dep` failure; an unexpected returned profile or unrelated harness error aborts receipt generation. Its JSON receipt is written to `evidence/ckb-explorer-cycle/execution.json`.
 
 ## Pinned upstreams
 

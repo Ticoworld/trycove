@@ -23,10 +23,6 @@
     "https://github.com/chukwuma619/twine/commit/274ecf42890eeff5abd60e70240240d34ac10f83",
     "https://github.com/chukwuma619/twine/blob/274ecf42890eeff5abd60e70240240d34ac10f83/src/fiber/hint.rs"
   ],
-  "knownUnavailableSources": [
-    { "url": "https://talk.nervos.org/t/twine-buy-and-sell-ckb-without-depositing-on-an-exchange-fiber-p2p-poc/10741.json", "checkedAt": "2026-11-17T00:54:00Z", "reason": "Previous request through the configured proxy returned CONNECT 403; do not retry inside the six-hour backoff." },
-    { "url": "https://teapaw.org/twineckb/status/2121412115718181181", "checkedAt": "2026-11-17T00:54:00Z", "reason": "Previous request through the configured proxy returned CONNECT 403; do not retry inside the six-hour backoff." }
-  ],
   "codeTouchpoints": [
     { "projectId": "twine", "repository": "https://github.com/chukwuma619/twine", "path": "src/fiber/hint.rs" },
     { "projectId": "twine", "repository": "https://github.com/chukwuma619/twine", "path": "src/fiber/payment.rs" }
@@ -36,6 +32,16 @@
     "Cellula invoice parsing trampoline hops",
     "Fiber trampoline route hints invoice expiry"
   ],
-  "priorLifecycle": "demonstrated_in_wild",
+  "priorEvidence": [
+    {
+      "sourceUrl": "https://talk.nervos.org/t/twine-buy-and-sell-ckb-without-depositing-on-an-exchange-fiber-p2p-poc/10741",
+      "publishedAt": "2026-11-13",
+      "evidenceType": "maintainer_report",
+      "excerpt": "Reviewer-supplied summary of the November 13 technical update: it describes Cellula LSP invoice parsing, explicit Fiber trampoline routing, and a Cellula-to-Cellula trade settled on testnet.",
+      "verification": "User-supplied summary, not a verbatim excerpt. The report is a separate source reference, not proof of its own content. Use current source-refresh records for direct retrieval and attribute any reported Testnet demonstration to the maintainer, not independent execution or adoption."
+    }
+  ],
+  "lifecycleBaseline": "provided",
+  "priorLifecycle": "unknown",
   "priorCompatibility": "unknown"
 }

@@ -2,6 +2,7 @@ import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {describe,it,expect} from 'vitest';
 import {join} from 'node:path';
+import {captureMissingDependencyFailure} from '../experiments/ckb-explorer-cycle/missing-dependencies';
 
 const evidencePath=join(process.cwd(),'evidence/ckb-explorer-cycle/execution.json');
 const hash=(value:Buffer|string)=>createHash('sha256').update(value).digest('hex');
@@ -19,5 +20,11 @@ describe('pinned Explorer × cycle-tools execution receipt',()=>{
   expect(receipt.cases.modifiedOutputCapacity.groups.find((group:{role:string})=>group.role==='lock').result).toBe(-31);
   expect(receipt.cases.missingResolvedCellDeps).toMatchObject({rejected:true,measurementsTrusted:false});expect(receipt.cases.missingResolvedCellDeps.error).toContain('used unprovided cell dep');
   expect(receipt.limitations.join(' ')).toContain('not a CKB node');
+ });
+ it('records only the expected debugger CellDep error as a missing-dependency rejection',async()=>{
+  const result=await captureMissingDependencyFailure(async()=>{throw new Error('unexpected ckb-debugger output (exit 1): Error: Check Fail: json["tx"]["cell_deps"][0] used unprovided cell dep')});
+  expect(result).toMatchObject({rejected:true,measurementsTrusted:false});expect(result.error).toContain('used unprovided cell dep');
+  await expect(captureMissingDependencyFailure(async()=>({groups:[{result:0,cycles:123n}]}))).rejects.toThrow('unexpectedly returned a profile');
+  await expect(captureMissingDependencyFailure(async()=>{throw new Error('WASM initialization failed')})).rejects.toThrow('unexpected reason');
  });
 });

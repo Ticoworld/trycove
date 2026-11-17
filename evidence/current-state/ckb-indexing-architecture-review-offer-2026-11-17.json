@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "candidate": {
+    "opportunityId": "intent-e9a8513f51e82cd0dcdecf6be5da7c28",
+    "capabilityKey": "ckb-indexing-architecture-review-offer",
+    "consumer": {
+      "id": "ckbuilder-issue-26",
+      "name": "CKB Escrow"
+    },
+    "provider": {
+      "id": "ckbuilder-cellora-22",
+      "name": "Cellora"
+    },
+    "capability": "Cellora human architecture-review offer for applications with indexing needs"
+  },
+  "verification": {
+    "checkedAt": "2026-11-17T01:34:52.375Z",
+    "result": "complete",
+    "freshness": "current",
+    "priorLifecycle": "in_progress",
+    "lifecycleState": "stale_offer",
+    "compatibilityState": "unknown",
+    "summary": "A public human collaboration offer is still visible, but its last recorded update is older than 90 days.",
+    "uncertainty": "Age and lack of a newer confirmation do not prove the offer was withdrawn or remains available.",
+    "nextAction": "Reconfirm the offer before presenting it as available; do not contact the project automatically.",
+    "queries": [
+      "CKB Escrow Studio Cellora human architecture-review offer for applications with indexing needs",
+      "CKB Escrow Studio Cellora indexing architecture call reorg",
+      "escrow history Cellora human architecture-review offer for applications with indexing needs",
+      "escrow history Cellora indexing architecture call reorg"
+    ],
+    "limitations": [
+      "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+      "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+      "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility."
+    ],
+    "sources": [
+      {
+        "url": "https://github.com/kayceeDev/ckb-escrow-studio/commits/HEAD.atom",
+        "kind": "github-current-ref",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "eed20bc30bdde02cb4cd1a7e7e518941fd1a1591",
+        "publishedAt": "2026-10-28T08:26:56Z",
+        "cache": "hit",
+        "excerpt": "eed20bc30bdde02cb4cd1a7e7e518941fd1a1591 2026-10-28T08:26:56Z Recent Commits to ckb-escrow-studio:eed20bc30bdde02cb4cd1a7e7e518941fd1a1591"
+      },
+      {
+        "url": "https://github.com/kayceeDev/ckb-escrow/commits/HEAD.atom",
+        "kind": "github-current-ref",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "d5cfee14e26785ec2b3ca89aab8440bf6b5d63ad",
+        "publishedAt": "2026-09-01T07:11:03Z",
+        "cache": "hit",
+        "excerpt": "d5cfee14e26785ec2b3ca89aab8440bf6b5d63ad 2026-09-01T07:11:03Z Recent Commits to ckb-escrow:d5cfee14e26785ec2b3ca89aab8440bf6b5d63ad"
+      },
+      {
+        "url": "https://github.com/Antismart/cellora/commits/HEAD.atom",
+        "kind": "github-current-ref",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "a534c38f248c0406eeafee94adadb8c2c9072f8a",
+        "publishedAt": "2026-07-30T14:09:32Z",
+        "cache": "hit",
+        "excerpt": "a534c38f248c0406eeafee94adadb8c2c9072f8a 2026-07-30T14:09:32Z Recent Commits to cellora:a534c38f248c0406eeafee94adadb8c2c9072f8a"
+      },
+      {
+        "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-04-28T05:42:11Z",
+        "cache": "hit",
+        "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects Cellora: a multi-tenant indexing and query service for CKB OPEN **Project Summary:** Cellora is a managed indexing and query layer for CKB, designed as a production data backbone for DApps that would rather not run their own full node, indexer and database stack. It normalizes blocks, transactions and cells into a PostgreSQL store with indexes tuned for the dominant access patterns (by lock hash, type hash, outpoint), exposes REST and GraphQL surfaces behind API-key auth and per-key rate limiting, and treats reorgs as a first-class case rather than an edge case. **Tools used:** Rust (Axum, async-graphql, SQLx), PostgreSQL, Redis, `ckb-jsonrpc-types`, `reqwest`, Docker / Kubernetes, OpenTelemetry + Prometheus. **Current features:** - Block polling loop against a CKB JSON-RPC endpoint (`get_tip_block_number`, `get_block_by_number`, `get_blockchain_info`) - Parser and writer that normalize blocks → transactions → cells - Live/dead cell accounting via `consumed_*` columns - One-transaction-per-block write path — the database never observes a partial block - Indexer-state tracking for tip recovery across restarts - Graceful shutdown on `SIGINT` / `SIGTERM` **Planned features:** - REST API (blocks, cells, stats, health, cursor pagination) - GraphQL endpoint via `async-graphql` - API-key authentication (Argon2-hashed) with tiered rate limits backed by a Redis token bucket - Reorg detection and transactional rollback with an audit log - Range partitioning on the `cells` table by block number - Webhook delivery with HMAC signatures and retry queue - GraphQL subscriptions for live cell updates - Grafana dashboards and OpenTelemetry tracing - Dashboard for API-key management, usage charts, and a query explorer **Deployed on:** Dev chain today. Testnet is the next milestone, mainnet after reorg handling lands. **Link to repository:** https://github.com/Antismart/cellora **Link to hosted version of project:** Not yet hosted publicly — happy to stand up a testnet-backed preview for reviewers who want to kick the tires. **Screenshots:** Not applicable at this stage — Cellora is backend infrastructure with no UI yet. Architecture overview with diagrams is at [`docs/architecture-overview.md`](https://github.com/Antismart/cellora/blob/main/docs/architecture-overview.md) in the repo. **Request for feedback:** I'd value both design-review input and product-market input from this community. *On the design (review):* - The data model"
+      },
+      {
+        "url": "https://github.com/Antismart/cellora/blob/a534c38f248c0406eeafee94adadb8c2c9072f8a/crates/api/src/routes/cells.rs",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "a534c38f248c0406eeafee94adadb8c2c9072f8a",
+        "publishedAt": "2026-04-17T12:45:01.000Z",
+        "cache": "hit",
+        "excerpt": "cells.rs cellora/crates/api/src/routes/cells.rs at a534c38f248c0406eeafee94adadb8c2c9072f8a · Antismart/cellora cellora/crates/api/src/routes/cells.rs at a534c38f248c0406eeafee94adadb8c2c9072f8a · Antismart/cellora"
+      },
+      {
+        "url": "https://github.com/search?q=CKB%20Escrow%20Studio%20Cellora%20human%20architecture-review%20offer%20for%20applications%20with%20indexing%20needs&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "hit",
+        "excerpt": "Issue search results Issue search results"
+      },
+      {
+        "url": "https://github.com/search?q=CKB%20Escrow%20Studio%20Cellora%20indexing%20architecture%20call%20reorg&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "hit",
+        "excerpt": "Issue search results Issue search results"
+      },
+      {
+        "url": "https://github.com/search?q=escrow%20history%20Cellora%20human%20architecture-review%20offer%20for%20applications%20with%20indexing%20needs&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "hit",
+        "excerpt": "Issue search results Issue search results"
+      },
+      {
+        "url": "https://github.com/search?q=escrow%20history%20Cellora%20indexing%20architecture%20call%20reorg&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "hit",
+        "excerpt": "Issue search results Issue search results"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/kayceeDev/ckb-escrow-studio/eed20bc30bdde02cb4cd1a7e7e518941fd1a1591/packages/escrow-app/src/service.ts",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "eed20bc30bdde02cb4cd1a7e7e518941fd1a1591",
+        "cache": "hit",
+        "excerpt": "import * as ccc from \"@ckb-ccc/ccc\";\nimport {\n  buildCreateEscrowTransaction,\n  buildDeliverTransaction,\n  buildDisputeTransaction,\n  buildSettlementTransaction,\n  completeFeeBySigner,\n  completeSettlementFeeBySigner,\n  type EscrowSettlementAction,\n  type EscrowDeployment,\n} from \"@ckb-escrow/ccc-adapter\";\n\nimport type {\n  EscrowServiceCompleteParams,\n  EscrowServiceCreateParams,\n  EscrowServiceOptions,\n  EscrowServiceRefundParams,\n  EscrowServiceResolveParams,\n} from \"./types.js\";\nimport { runEscrowPreflight } from \"./preflight.js\";\n\nexport class EscrowService {\n  readonly deployment: EscrowDeployment;\n  readonly signer: ccc.Signer;\n  readonly client: ccc.Client;\n\n  constructor(options: EscrowServiceOptions) {\n    this.deployment = options.deployment;\n    this.signer = options.signer;\n    this.client = options.client ?? options.signer.client;\n  }\n\n  private async currentSignerLock(): Promise<ccc.Script> {\n    const address = await this.signer.getRecommendedAddressObj();\n    return address.script;\n  }\n\n  private async signerAuthorizationInput(): Promise<ccc.CellInputLike> {\n    for await (const cell of this.signer.findCells(\n      {\n        scriptLenRange: [0, 1],\n        outputDataLenRange: [0, 1],\n      },\n      true,\n      \"desc\",\n      1,\n    )) {\n      return {\n        previousOutput: cell.outPoint,\n        cellOutput: {\n          capacity: cell.cellOutput.capacity,\n          lock: cell.cellOutput.lock,\n          type: cell.cellOutput.type ?? null,\n        },\n        outputData: cell.outputData,\n      };\n    }\n\n    throw new Error(\"No signer cell is available to authorize this escrow action.\");\n  }\n\n  private async finalizeAndSend(\n    tx: ccc.Transaction,\n    feeRate?: ccc.NumLike,\n    escrowInput?: ccc.CellLike,\n  ): Promise<ccc.Hex> {\n    await completeFeeBySigner(\n      tx,\n      this.signer,\n      feeRate === undefined ? undefined : { feeRate },\n    );\n    await runEscrowPreflight({\n      signer: this.signer,\n      client: this.client,\n      deployment: this.deployment,\n      ...(escrowInput ? { escrowInput } : {}),\n    });\n    return this.signer.sendTransaction(tx as unknown as ccc.TransactionLike);\n  }\n\n  private async finalizeSettlementAndSend(\n    tx: ccc.Transaction,\n    context: {\n      action: EscrowSettlementAction;\n      escrowInput: ccc.CellLike;\n      recipientLock: ccc.ScriptLike;\n    },\n    feeRate?: ccc.NumLike,\n  ): Promise<ccc.Hex> {\n    await completeSettlementFeeBySigner(\n      tx,\n      this.signer,\n      context,\n      feeRate"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/Antismart/cellora/a534c38f248c0406eeafee94adadb8c2c9072f8a/crates/api/src/routes/cells.rs",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "a534c38f248c0406eeafee94adadb8c2c9072f8a",
+        "cache": "hit",
+        "excerpt": "//! Cells endpoint.\n//!\n//! `GET /v1/cells?lock_hash=0x…` and `?type_hash=0x…` list cells matching\n//! the given script hash, paginated with an opaque cursor. The caller\n//! supplies exactly one of the two filters; supplying both or neither is a\n//! 400. Optional query parameters:\n//!\n//! - `is_live=true|false` — restrict to live or consumed cells (default\n//!   returns both).\n//! - `limit` — page size, bounded by `CELLORA_API_DEFAULT_PAGE_SIZE` and\n//!   `CELLORA_API_MAX_PAGE_SIZE`.\n//! - `cursor` — opaque string returned as `next_cursor` on the previous\n//!   page.\n//! - `include_data=true` — include the `data` blob in each cell. Off by\n//!   default because cell data can be large (script binaries, proofs).\n//!\n//! Results are ordered `(block_number DESC, tx_hash DESC, output_index DESC)`\n//! so the newest cells appear first and cursor-based paging is consistent.\n\nuse axum::extract::{Query, State};\nuse axum::Json;\nuse cellora_common::config::Network;\nuse cellora_db::cells::{self, CellCursor, LivenessFilter};\nuse cellora_db::models::Cell;\nuse serde::{Deserialize, Serialize};\nuse utoipa::{IntoParams, ToSchema};\n\nuse crate::error::{ApiError, ApiResult, ErrorEnvelope};\nuse crate::hex::{self as hex_helper, Hex, Hex32};\nuse crate::pagination::{decode_cells_cursor, encode_cells_cursor};\nuse crate::scripts::registry::{self as script_registry, ScriptSlot};\nuse crate::state::AppState;\n\n/// Incoming query-string parameters for `GET /v1/cells`.\n#[derive(Debug, Deserialize, IntoParams)]\n#[into_params(parameter_in = Query)]\npub struct CellsQuery {\n    /// Script hash of the cell's lock. One of `lock_hash` or `type_hash`\n    /// must be supplied.\n    pub lock_hash: Option<String>,\n    /// Script hash of the cell's type. One of `lock_hash` or `type_hash`\n    /// must be supplied.\n    pub type_hash: Option<String>,\n    /// Filter on liveness. Omit to return both live and consumed cells.\n    pub is_live: Option<bool>,\n    /// Opaque cursor returned by the previous page.\n    pub cursor: Option<String>,\n    /// Requested page size. Capped by `CELLORA_API_MAX_PAGE_SIZE`.\n    pub limit: Option<u32>,\n    /// Include the raw `data` blob on each returned cell. Default false.\n    #[serde(default)]\n    pub include_data: bool,\n}\n\n/// Response envelope for a single page of cells.\n#[derive(Debug, Serialize, ToSchema)]\npub struct CellsPage {\n    /// Cells returned by this page, ordered newest first.\n    pub data: Vec<CellResponse>,\n    /// Opaque cursor to fetch the next page, or `Non"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "5f9cc33c61f20c4f529ea0a372c395d10fe079c8fb57eb0c0663b1d95a339d32",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+        "publishedAt": "2026-04-28T05:42:11.000Z",
+        "checkedAt": "2026-11-17T01:34:52.375Z",
+        "evidenceType": "human_offer",
+        "excerpt": "typed SDK (TS / Rust / Go), or WebSocket subscriptions? - How much engineering time does node + indexer operations cost you today, and would you pay to remove that from your stack? **Problems:** No blockers right now — this issue is specifically to collect community input before the API and reorg-handling work lands. Happy to jump on a 20-minute call with anyone whose app has non-trivial indexing needs. The architecture document in the repo has more detail for reviewers who want to dig in. Project Summary: Cellora is a managed indexing and query layer for CKB, designed as a production data backbone for DApps that would rather not run their own full node, indexer and database stack. It normalizes blocks, transactions and cells into a PostgreSQL store with indexes tuned for the dominant access patterns (by lock hash, type hash, outpoint), exposes REST and GraphQL surfaces behind API-key auth and per-key rate limiting, and treats reorgs as a first-class case rather than an edge case. Tools used: Rust (Axum, async-graphql, SQLx), PostgreSQL, Redis, ckb-jsonrpc-types , reqwest , Docker /",
+        "conclusion": "offer requires reconfirmation",
+        "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+        "sourceSha256": "1bf4876042e1905e894f97fd6390244b22cbd34104f264ab0b3acabf9c6abf02"
+      }
+    ]
+  },
+  "executionReceipt": null
+}

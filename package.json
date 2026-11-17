@@ -24,6 +24,10 @@
     "intelligence:blind": "tsx scripts/evaluate-blind-corpus.ts",
     "intelligence:run": "pnpm intelligence:footprints && pnpm intelligence:discover",
     "trial:capsule": "tsx scripts/run-trial-capsule.ts",
+    "experiment:ckb-cycle:prepare": "bash scripts/prepare-ckb-cycle-experiment.sh",
+    "experiment:ckb-cycle": "bash scripts/run-ckb-cycle-experiment.sh",
+    "prior-art:register": "tsx scripts/register-prior-art-regression.ts",
+    "prior-art:verify": "NODE_USE_ENV_PROXY=1 tsx scripts/verify-candidate.ts",
     "trial:pledge": "tsx scripts/run-pledge-record.ts",
     "trial:semantics": "tsx scripts/run-semantic-record.ts"
   },

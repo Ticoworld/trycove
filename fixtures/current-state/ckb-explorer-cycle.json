@@ -1,0 +1,39 @@
+{
+  "opportunityId": "intent-c45b8f699274cfaba7bd8eca82b29f98",
+  "capability": {
+    "key": "explorer-script-group-cycle-analysis",
+    "label": "Per-script-group cycle analysis in the Explorer transaction view",
+    "terms": ["rawTransaction", "script group", "cycles", "replayGroups"]
+  },
+  "consumer": {
+    "id": "ckbuilder-ckbdevnetexplorer-65",
+    "name": "CKB Devnet Explorer",
+    "aliases": ["CKB Explorer", "devnet explorer"],
+    "repositories": ["https://github.com/wildanrhmn/ckb-devnet-explorer"]
+  },
+  "provider": {
+    "id": "ckbuilder-ckbcycletools-62",
+    "name": "ckb-cycle-tools",
+    "aliases": ["ckb cycles", "cycle profiler"],
+    "repositories": ["https://github.com/luongthanhtung03/ckb-cycle-tools"]
+  },
+  "sourceUrls": [
+    "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+    "https://github.com/wildanrhmn/ckb-devnet-explorer/blob/b6aef5571bbe5a112b4809881a1b6229095f6da7/src/explorer.ts",
+    "https://github.com/luongthanhtung03/ckb-cycle-tools/blob/23182e2abce64d0574cae7acd3229bc87424d0d0/src/replay.ts",
+    "https://github.com/luongthanhtung03/ckb-cycle-tools/blob/23182e2abce64d0574cae7acd3229bc87424d0d0/src/wasm.ts"
+  ],
+  "codeTouchpoints": [
+    { "projectId": "ckbuilder-ckbdevnetexplorer-65", "repository": "https://github.com/wildanrhmn/ckb-devnet-explorer", "path": "src/explorer.ts" },
+    { "projectId": "ckbuilder-ckbcycletools-62", "repository": "https://github.com/luongthanhtung03/ckb-cycle-tools", "path": "src/replay.ts" },
+    { "projectId": "ckbuilder-ckbcycletools-62", "repository": "https://github.com/luongthanhtung03/ckb-cycle-tools", "path": "src/wasm.ts" }
+  ],
+  "searchConcepts": [
+    "Explorer transaction rawTransaction cycle profiling",
+    "per script group cycles replayGroups",
+    "ckb-debugger WASM script group profiling"
+  ],
+  "priorLifecycle": "proposed",
+  "priorCompatibility": "unknown",
+  "executionReceipt": "evidence/ckb-explorer-cycle/execution.json"
+}

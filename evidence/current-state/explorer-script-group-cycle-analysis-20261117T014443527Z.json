@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 1,
+  "candidate": {
+    "opportunityId": "intent-c45b8f699274cfaba7bd8eca82b29f98",
+    "capabilityKey": "explorer-script-group-cycle-analysis",
+    "consumer": {
+      "id": "ckbuilder-ckbdevnetexplorer-65",
+      "name": "CKB Devnet Explorer"
+    },
+    "provider": {
+      "id": "ckbuilder-ckbcycletools-62",
+      "name": "ckb-cycle-tools"
+    },
+    "capability": "Per-script-group cycle analysis in the Explorer transaction view"
+  },
+  "verification": {
+    "checkedAt": "2026-11-17T01:44:43.527Z",
+    "result": "partial",
+    "freshness": "partial",
+    "priorLifecycle": "in_progress",
+    "lifecycleState": "in_progress",
+    "compatibilityState": "partially_compatible",
+    "summary": "Current source code contains relevant implementation touchpoints; the stronger previously recorded lifecycle event is retained. A reproducible offline integration experiment was executed and attached.",
+    "uncertainty": "Source presence does not prove successful end-to-end execution, deployment, maintainer readiness, or adoption. Prior reported events remain attributed to their original source. Source refresh was incomplete; unavailable sources are not negative evidence: github.com: HTTP 429; github.com: HTTP 429.",
+    "nextAction": "Assess release, chain-state, signer, and end-to-end submission requirements before claiming live compatibility.",
+    "queries": [
+      "CKB Explorer Per-script-group cycle analysis in the Explorer transaction view",
+      "CKB Explorer Explorer transaction rawTransaction cycle profiling",
+      "devnet explorer Per-script-group cycle analysis in the Explorer transaction view",
+      "devnet explorer Explorer transaction rawTransaction cycle profiling"
+    ],
+    "limitations": [
+      "This bounded check is not an exhaustive search of every repository, forum, private channel, or alternate project alias.",
+      "Automated text interpretation distinguishes source claims from code observation but does not prove capability correctness or adoption.",
+      "Technical lifecycle and compatibility are separate; no network or release match alone establishes compatibility.",
+      "Unavailable sources leave freshness unresolved and are not treated as evidence that prior work does not exist."
+    ],
+    "sources": [
+      {
+        "url": "https://github.com/wildanrhmn/ckb-devnet-explorer/commits/HEAD.atom",
+        "kind": "github-current-ref",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "b6aef5571bbe5a112b4809881a1b6229095f6da7",
+        "publishedAt": "2026-11-14T12:26:02Z",
+        "cache": "miss",
+        "excerpt": "b6aef5571bbe5a112b4809881a1b6229095f6da7 2026-11-14T12:26:02Z Recent Commits to ckb-devnet-explorer:b6aef5571bbe5a112b4809881a1b6229095f6da7"
+      },
+      {
+        "url": "https://github.com/luongthanhtung03/ckb-cycle-tools/commits/HEAD.atom",
+        "kind": "github-current-ref",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+        "publishedAt": "2026-11-07T05:50:30Z",
+        "cache": "miss",
+        "excerpt": "23182e2abce64d0574cae7acd3229bc87424d0d0 2026-11-07T05:50:30Z Recent Commits to ckb-cycle-tools:23182e2abce64d0574cae7acd3229bc87424d0d0"
+      },
+      {
+        "url": "https://github.com/wildanrhmn/ckb-devnet-explorer/pulls?q=is%3Apr+is%3Amerged",
+        "kind": "github-pulls",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-11-14T12:26:03Z",
+        "cache": "miss",
+        "excerpt": "REPO_PULL_REQUEST_STATE_MERGED feat: add offckb plugin adapter REPO_PULL_REQUEST_STATE_MERGED feat: expose versioned CLI integration for sandboxed hosts Pull requests · wildanrhmn/ckb-devnet-explorer Pull requests · wildanrhmn/ckb-devnet-explorer"
+      },
+      {
+        "url": "https://github.com/wildanrhmn/ckb-devnet-explorer/releases",
+        "kind": "github-releases",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "miss",
+        "excerpt": "Releases · wildanrhmn/ckb-devnet-explorer Releases · wildanrhmn/ckb-devnet-explorer"
+      },
+      {
+        "url": "https://github.com/luongthanhtung03/ckb-cycle-tools/pulls?q=is%3Apr+is%3Amerged",
+        "kind": "github-pulls",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-09-16T17:17:26Z",
+        "cache": "miss",
+        "excerpt": "Pull requests · luongthanhtung03/ckb-cycle-tools Pull requests · luongthanhtung03/ckb-cycle-tools"
+      },
+      {
+        "url": "https://github.com/luongthanhtung03/ckb-cycle-tools/releases",
+        "kind": "github-releases",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "miss",
+        "excerpt": "Releases · luongthanhtung03/ckb-cycle-tools Releases · luongthanhtung03/ckb-cycle-tools"
+      },
+      {
+        "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-11-07T02:57:19Z",
+        "cache": "miss",
+        "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects ckb-cycle-tools: per-script cycle profiling, flamegraphs and PR cycle reports for CKB Scripts OPEN ## Project Summary Tools to answer two questions about a CKB Script: how many cycles it uses on the transactions it will really see (failure paths included), and where inside the script they go. `ckb-cycles` rebuilds any committed transaction (or one not yet on chain) as a ckb-debugger mock, runs each script group once, and checks that the groups add up to exactly what the node reported. The same replay runs in the browser through ckb-debugger's WebAssembly build. On top of that: flamegraphs per script, a GitHub Action that posts a cycle diff on every pull request, and a like-for-like benchmark of the same lock written in Rust and for ckb-js-vm. ## Tools used - TypeScript, `@ckb-ccc/core`, CKB JSON-RPC - `ckb-debugger` (native 1.1.1 for the CLI, the 0.200.1 WebAssembly build shipped in `ckb-testtool` for the browser) - `ckb-testtool`, `ckb-js-vm`, `@ckb-js-std/core` for the benchmark - Next.js on Vercel for the web inspector, Vitest, GitHub Actions (a composite Action for the PR report) ## Current features - `ckb-cycles `: per-script-group cycles, with the sum checked against the node. Matches exactly on the testnet transactions in the README, including a Type ID deployment, a ckb-js-vm counter update and a Nervos DAO withdrawal (input headers are replayed). Older transactions replay on the CKB-VM version of their block, taken from the node's hardfork epochs. - Failure path: `--file` profiles a transaction that is not on chain and shows which script refuses it, its exit code and its cost. CI replays a real session-lock spend edited to overspend by one shannon and requires the lock's code 12. - Clear exit codes: 0 accepted and matching, 1 a script rejects or the sum differs, 2 environment error (so a test cannot pass because the node was down). - `ckb-cycles flame`: flamegraph per script group (SVG and folded stacks), with the costliest functions printed. `--bin` takes an unstripped build and checks it costs exactly the deployed binary's cycles. Example in the README: a real subscription charge of the session lock, 20,999 cycles, where reading lock hashes is the largest cost. - PR cycle reports: `ckb-cycles report`, `diff` and `mock`, and a composite GitHub Action (`action/`) that replays the scenarios in a `cycles.json` for the PR and its base and keeps one sticky comment with the per-group diff, any accept/reject "
+      },
+      {
+        "url": "https://github.com/wildanrhmn/ckb-devnet-explorer/blob/b6aef5571bbe5a112b4809881a1b6229095f6da7/src/explorer.ts",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "b6aef5571bbe5a112b4809881a1b6229095f6da7",
+        "publishedAt": "2026-10-04T03:39:12.000Z",
+        "cache": "miss",
+        "excerpt": "explorer.ts ckb-devnet-explorer/src/explorer.ts at b6aef5571bbe5a112b4809881a1b6229095f6da7 · wildanrhmn/ckb-devnet-explorer ckb-devnet-explorer/src/explorer.ts at b6aef5571bbe5a112b4809881a1b6229095f6da7 · wildanrhmn/ckb-devnet-explorer"
+      },
+      {
+        "url": "https://github.com/luongthanhtung03/ckb-cycle-tools/blob/23182e2abce64d0574cae7acd3229bc87424d0d0/src/replay.ts",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+        "publishedAt": "2026-09-16T17:17:26.000Z",
+        "cache": "miss",
+        "excerpt": "replay.ts ckb-cycle-tools/src/replay.ts at 23182e2abce64d0574cae7acd3229bc87424d0d0 · luongthanhtung03/ckb-cycle-tools ckb-cycle-tools/src/replay.ts at 23182e2abce64d0574cae7acd3229bc87424d0d0 · luongthanhtung03/ckb-cycle-tools"
+      },
+      {
+        "url": "https://github.com/luongthanhtung03/ckb-cycle-tools/blob/23182e2abce64d0574cae7acd3229bc87424d0d0/src/wasm.ts",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+        "publishedAt": "2026-09-16T17:17:26.000Z",
+        "cache": "miss",
+        "excerpt": "wasm.ts ckb-cycle-tools/src/wasm.ts at 23182e2abce64d0574cae7acd3229bc87424d0d0 · luongthanhtung03/ckb-cycle-tools ckb-cycle-tools/src/wasm.ts at 23182e2abce64d0574cae7acd3229bc87424d0d0 · luongthanhtung03/ckb-cycle-tools"
+      },
+      {
+        "url": "https://github.com/luongthanhtung03/ckb-cycle-tools/blob/23182e2abce64d0574cae7acd3229bc87424d0d0/src/replay.ts#L382",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+        "publishedAt": "2026-09-16T17:17:26.000Z",
+        "cache": "miss",
+        "excerpt": "replay.ts ckb-cycle-tools/src/replay.ts at 23182e2abce64d0574cae7acd3229bc87424d0d0 · luongthanhtung03/ckb-cycle-tools ckb-cycle-tools/src/replay.ts at 23182e2abce64d0574cae7acd3229bc87424d0d0 · luongthanhtung03/ckb-cycle-tools"
+      },
+      {
+        "url": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/50",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "publishedAt": "2026-11-14T12:36:42Z",
+        "cache": "miss",
+        "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects ckb-devnet-explorer: a block explorer for local OffCKB devnets that names your own scripts OPEN ## Project Summary When you build on CKB, most of your time is spent on a local devnet started by `offckb node`, and the official CKB Explorer can't see that chain. ckb-devnet-explorer is a block explorer for it. It is one Node process that reads the devnet node directly (JSON-RPC plus the node's built-in indexer), with no database to set up, and it starts with one command inside a project deployed with `offckb deploy`. It follows the official CKB Explorer's design system and covers the official explorer's pages that make sense on a devnet. On top of that it adds what you need while building: your own scripts named from `deployment/scripts.json`, every cell's contents decoded, the node's reason when a transaction is rejected, a faucet, and an automatic rebuild after `offckb clean`. It is my CKBuilders capstone, and RetricSu is integrating it into offckb as its first local plugin ([ckb-devrel/offckb#542](https://github.com/ckb-devrel/offckb/pull/542)). ## Tools used - TypeScript run by `tsx`, Node 22, no build step - `@ckb-ccc/core` (addresses, hashing, molecule) and `@ckb-ccc/spore` (spore and cluster data) - CKB JSON-RPC and the node's built-in indexer (`get_cells`, `get_transactions`, `get_cells_capacity`), batched - OffCKB: `offckb system-scripts`, each project's `deployment/scripts.json`, `offckb transfer` for the faucet - Plain HTML, CSS and JavaScript modules in the browser, with the official [CKB Explorer frontend](https://github.com/nervosnetwork/ckb-explorer-frontend)'s design system (MIT) ## Current features - **Your scripts by name.** Genesis scripts come from `offckb system-scripts`, yours from `deployment/scripts.json` (several projects at once with `--project`). JS contracts behind `ckb-js-vm` are named as the contract, by reading the code hash out of the args. - **Code cells recognised** per RFC 0022, by data hash and by type hash, so both your deployments and the genesis cells are labelled. A \"Your scripts\" check flags a deployment whose code cell isn't on the chain any more (what happens after `offckb clean`). - **Every cell decoded:** contract code, sUDT and xUDT amounts, spores (text, JSON and images) and clusters, Nervos DAO deposits and withdrawals, Type ID, plain text. Each cell has a bar showing what its capacity pays for: the capacity field, lock, type, data and what's unused. - **Transactions:"
+      },
+      {
+        "url": "https://github.com/wildanrhmn/ckb-devnet-explorer/blob/b6aef5571bbe5a112b4809881a1b6229095f6da7/src/explorer.ts#L366",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "b6aef5571bbe5a112b4809881a1b6229095f6da7",
+        "publishedAt": "2026-10-04T03:39:12.000Z",
+        "cache": "miss",
+        "excerpt": "explorer.ts ckb-devnet-explorer/src/explorer.ts at b6aef5571bbe5a112b4809881a1b6229095f6da7 · wildanrhmn/ckb-devnet-explorer ckb-devnet-explorer/src/explorer.ts at b6aef5571bbe5a112b4809881a1b6229095f6da7 · wildanrhmn/ckb-devnet-explorer"
+      },
+      {
+        "url": "https://github.com/search?q=CKB%20Explorer%20Per-script-group%20cycle%20analysis%20in%20the%20Explorer%20transaction%20view&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "unavailable",
+        "httpStatus": 429,
+        "error": "HTTP 429",
+        "cache": "miss",
+        "excerpt": ""
+      },
+      {
+        "url": "https://github.com/search?q=CKB%20Explorer%20Explorer%20transaction%20rawTransaction%20cycle%20profiling&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "cache": "miss",
+        "excerpt": "Issue search results Issue search results"
+      },
+      {
+        "url": "https://github.com/search?q=devnet%20explorer%20Per-script-group%20cycle%20analysis%20in%20the%20Explorer%20transaction%20view&type=issues",
+        "kind": "github-search",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "unavailable",
+        "httpStatus": 429,
+        "error": "HTTP 429",
+        "cache": "miss",
+        "excerpt": ""
+      },
+      {
+        "url": "https://raw.githubusercontent.com/wildanrhmn/ckb-devnet-explorer/b6aef5571bbe5a112b4809881a1b6229095f6da7/src/explorer.ts",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "b6aef5571bbe5a112b4809881a1b6229095f6da7",
+        "cache": "miss",
+        "excerpt": "import { ccc } from \"@ckb-ccc/core\";\nimport { getBlock, rpc, rpcBatch, type RpcBlock, type RpcOutput, type RpcScript, type RpcTransaction } from \"./rpc.ts\";\nimport { Resolver, type Resolved } from \"./resolver.ts\";\nimport { clusterData, dataHash, decodeByType, scriptHash, sporeContent, type Decoded } from \"./decode.ts\";\nimport { ChainIndex, parseCellbaseWitness, type BlockSummary, type TxSummary } from \"./chain.ts\";\nimport { decodeSince, difficultyOf, epochOf, parseWitness, type Since } from \"./txfields.ts\";\nimport type { KnownScript } from \"./scripts.ts\";\nimport { ACCOUNT_ROLES, MINER_ARGS, offckbAccounts } from \"./accounts.ts\";\nimport { FAUCET_ACCOUNT } from \"./faucet.ts\";\nimport { Tools } from \"./tools.ts\";\n\nconst ZERO_HASH = \"0x\" + \"0\".repeat(64);\nconst hex = (n: number | bigint) => \"0x\" + n.toString(16);\nconst num = (h: string) => Number(BigInt(h));\n\nexport type ScriptView = RpcScript & { resolved: Resolved; bytes: number; hash: string };\nexport type CellStatus = { state: \"live\" } | { state: \"spent\"; by: string | null } | { state: \"pending\" };\nexport type CellView = {\n  capacity: string; // shannons, decimal string\n  lock: ScriptView;\n  type: ScriptView | null;\n  address: string;\n  dataLength: number;\n  dataPreview: string; // hex, first 256 bytes\n  dataHash: string | null;\n  occupied: number; // bytes, i.e. minimum CKB\n  decoded: Decoded | null;\n  outPoint?: { txHash: string; index: number };\n  status?: CellStatus;\n  blockNumber?: number;\n  since?: Since;\n};\nexport type Unresolved = { unresolved: string };\n\ntype RpcInput = { previous_output: { tx_hash: string; index: string }; since: string };\ntype FullTx = RpcTransaction & {\n  version: string;\n  cell_deps: { out_point: { tx_hash: string; index: string }; dep_type: string }[];\n  header_deps: string[];\n  inputs: RpcInput[];\n  witnesses: string[];\n};\ntype FullHeader = {\n  number: string; hash: string; parent_hash: string; timestamp: string; epoch: string; compact_target: string;\n  nonce: string; version: string; transactions_root: string; proposals_hash: string; extra_hash: string; dao: string;\n};\ntype FullBlock = { header: FullHeader; transactions: FullTx[]; proposals: string[]; uncles: { header: FullHeader }[] };\ntype TxStatus = { status: string; block_number: string | null; block_hash?: string | null; reason?: string | null };\ntype TxResponse = { transaction: FullTx | null; cycles?: string | null; tx_status: TxStatus };\ntype IndexerCell = { block_number: string; out_point: { tx_hash: string; index: s"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/luongthanhtung03/ckb-cycle-tools/23182e2abce64d0574cae7acd3229bc87424d0d0/src/replay.ts",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+        "cache": "miss",
+        "excerpt": "/**\n * Replaying a transaction group by group, with any ckb-debugger: the native\n * binary (profile.ts, for the CLI) or its WebAssembly build (wasm.ts, for the\n * browser). Everything here is plain TypeScript with no Node built-ins, so\n * both get the same planning, the same Type ID check and the same parsing,\n * and therefore the same numbers.\n */\nimport { ccc } from \"@ckb-ccc/core\";\nimport { cccA } from \"@ckb-ccc/core/advanced\";\nimport { groupScripts, knownScriptNames, type ScriptGroup } from \"./analyze.js\";\nimport {\n  buildMockTransaction,\n  httpRpc,\n  isCellbase,\n  mockFromTransaction,\n  nodeConsensus,\n  scriptVersionAt,\n  type MockTransaction,\n  type NodeConsensus,\n  type Rpc,\n  type RpcScript,\n  type RpcTransaction,\n} from \"./mock.js\";\n\nexport interface GroupRun {\n  /** The `--script` selector passed to ckb-debugger, e.g. `input.0.lock`. */\n  selector: string;\n  /** Exit code of the script: 0 means it accepted the transaction. */\n  result: number;\n  /** Set when the VM itself stopped the script (a fault, the cycle limit), or Type ID refused. */\n  error?: string;\n  cycles: bigint;\n  /** Lines the script printed through ckb_debug. */\n  logs: string[];\n  /**\n   * Set only when some group rejects: whether the node would run this group at\n   * all. It verifies groups in its own order (nodeOrder) and stops at the first\n   * one that fails, so the groups after that one never run there.\n   */\n  nodeReaches?: boolean;\n}\n\nexport type ProfiledGroup = ScriptGroup & GroupRun;\n\nexport interface Profile {\n  /** The transaction hash, or \"(not on chain)\" for a transaction passed in directly. */\n  hash: string;\n  status: string;\n  /** Total cycles as reported by the node. */\n  nodeCycles?: bigint;\n  /**\n   * Sum of the per-group cycles measured by ckb-debugger, each group run on its\n   * own. When a group rejects, this is not what the node spent: see nodeStopsAt.\n   */\n  measuredCycles: bigint;\n  /**\n   * Set when some group rejects: the selector of the group the node would stop\n   * at, the first failing one in the node's order (nodeOrder). The node then\n   * rejects the transaction and reports no cycles for it.\n   */\n  nodeStopsAt?: string;\n  /**\n   * Set only when the groups' cycles add up to more than the node's limit for\n   * one transaction (`limit`: the consensus `max_block_cycles`, or\n   * DEFAULT_TX_CYCLE_LIMIT). ckb-debugger gives every group that limit on its\n   * own; the node gives the whole transaction that limit, each group what the\n   * ones before it "
+      },
+      {
+        "url": "https://raw.githubusercontent.com/luongthanhtung03/ckb-cycle-tools/23182e2abce64d0574cae7acd3229bc87424d0d0/src/wasm.ts",
+        "kind": "github-source",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "fetchStatus": "available",
+        "httpStatus": 200,
+        "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+        "cache": "miss",
+        "excerpt": "/**\n * ckb-debugger compiled to WebAssembly (WASI), run in memory: no Node\n * built-ins, so the same code runs in a browser (or a Web Worker) and in Node.\n *\n * The WASI build ships in the `ckb-testtool` npm package\n * (`src/wasm/ckb-debugger.wasm`); compile it once with `WebAssembly.compile`\n * and pass the module in. Files the debugger reads live in an in-memory\n * directory at `/`, and stdout/stderr are collected as text.\n */\nimport { ConsoleStdout, File, OpenFile, PreopenDirectory, WASI } from \"@bjorn3/browser_wasi_shim\";\nimport { checkMockTransaction, type RunDebugger } from \"./replay.js\";\n\nexport interface WasmRun {\n  exitCode: number;\n  stdout: string;\n  stderr: string;\n}\n\n/**\n * Runs the debugger once. `files` are placed in `/`, so `--tx-file /tx.json`\n * reads `files[\"tx.json\"]`. A fresh instance each time: no state leaks between runs.\n */\nexport async function runWasmDebugger(\n  module: WebAssembly.Module,\n  args: string[],\n  files: Record<string, Uint8Array> = {},\n): Promise<WasmRun> {\n  const decoders = [new TextDecoder(), new TextDecoder()];\n  const text = [\"\", \"\"];\n  const capture = (i: 0 | 1) => new ConsoleStdout((bytes) => (text[i] += decoders[i].decode(bytes, { stream: true })));\n  const root = new Map(Object.entries(files).map(([name, data]) => [name, new File(data, { readonly: true })]));\n  const fds = [new OpenFile(new File([])), capture(0), capture(1), new PreopenDirectory(\"/\", root)];\n  // `debug: false` explicitly: the shim logs every call when it is left undefined.\n  const wasi = new WASI([\"ckb-debugger\", ...args], [], fds, { debug: false });\n  const instance = (await WebAssembly.instantiate(module, { wasi_snapshot_preview1: wasi.wasiImport })) as unknown as {\n    exports: { memory: WebAssembly.Memory; _start: () => unknown };\n  };\n  let exitCode: number;\n  try {\n    exitCode = wasi.start(instance);\n  } catch (e) {\n    // A trap inside the debugger (e.g. out of memory): report it like a crashed\n    // process. Exit code -1 tells parseDebuggerRun not to trust the stdout so far.\n    text[1] += `\\n${e instanceof Error ? e.message : String(e)}`;\n    exitCode = -1;\n  }\n  return { exitCode, stdout: text[0] + decoders[0].decode(), stderr: text[1] + decoders[1].decode() };\n}\n\n/** \"ckb-debugger 0.200.1\", as `--version` prints it. */\nexport async function wasmDebuggerVersion(module: WebAssembly.Module): Promise<string> {\n  return (await runWasmDebugger(module, [\"--version\"])).stdout.trim() || \"unknown\";\n}\n\n/** The text the debugger printed, s"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "b42b606235497366192e7edd1877eb3fc98d0f63d67ed9bf1fcef2e2330ffeb1",
+        "sourceUrl": "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/46",
+        "publishedAt": "2026-11-07T02:57:19.000Z",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "evidenceType": "status_update",
+        "excerpt": "Nervos-Community-Catalyst/CKBuilder-projects ckb-cycle-tools: per-script cycle profiling, flamegraphs and PR cycle reports for CKB Scripts OPEN ## Project Summary Tools to answer two questions about a CKB Script: how many cycles it uses on the transactions it will really see (failure paths included), and where inside the script they go. `ckb-cycles` rebuilds any committed transaction (or one not yet on chain) as a ckb-debugger mock, runs each script group once, and checks that the groups add up to exactly what the node reported. The same replay runs in the browser through ckb-debugger's WebAssembly build. On top of that: flamegraphs per script, a GitHub Action that posts a cycle diff on every pull request, and a like-for-like benchmark of the same lock written in Rust and for ckb-js-vm. ## Tools used - TypeScript, `@ckb-ccc/core`, CKB JSON-RPC - `ckb-debugger` (native 1.1.1 for the CLI, the 0.200.1 WebAssembly build shipped in `ckb-testtool` for the browser) - `ckb-testtool`, `ckb-js-vm`, `@ckb-js-std/core` for the benchmark - Next.js on Vercel for the web inspector, Vitest, GitHub A",
+        "conclusion": "relevant current source material",
+        "verification": "Public source content was retrieved and matched the specific capability terms; interpretation is automated and attributed to the source.",
+        "sourceSha256": "334ad3bf62123217f6fe762555a0a08735140fe7127557c3dd30dbad2b7f1614"
+      },
+      {
+        "id": "689082a2d4c988217089b85b04860b3e5becd42125ca4bfd55e56ca4fd2a0c7f",
+        "sourceUrl": "https://raw.githubusercontent.com/wildanrhmn/ckb-devnet-explorer/b6aef5571bbe5a112b4809881a1b6229095f6da7/src/explorer.ts",
+        "revision": "b6aef5571bbe5a112b4809881a1b6229095f6da7",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "evidenceType": "code_observed",
+        "excerpt": "xtra_hash: string; dao: string;\n};\ntype FullBlock = { header: FullHeader; transactions: FullTx[]; proposals: string[]; uncles: { header: FullHeader }[] };\ntype TxStatus = { status: string; block_number: string | null; block_hash?: string | null; reason?: string | null };\ntype TxResponse = { transaction: FullTx | null; cycles?: string | null; tx_status: TxStatus };\ntype IndexerCell = { block_number: string; out_point: { tx_hash: string; index: string }; output: RpcOutput; output_data: string | null };\ntype SearchKey = Record<string, unknown>;\ntype GroupedTx = { tx_hash: string; block_number: string; cells: [string, string][] };\ntype PoolEntry = { cycles: string; size: string; fee: string; timestamp: string; ancestors_count: string };\ntype EconomicState = {\n  issuance: { primary: string; secondary: string };\n  miner_reward: { primary: string; secondary: string; committed: string; proposal: string };\n  txs_fee: string;\n  finalized_at: string;\n};\n\n// Just the script, without the extra fields a ScriptView carries.\nconst rpcScript = (s: RpcScript): RpcScript => ({ code_hash: s.code_hash, h",
+        "conclusion": "relevant source implementation observed",
+        "verification": "Source file was retrieved; code presence is independently observable, runtime behavior is unverified.",
+        "sourceSha256": "34b8b035a8adc88b1e4fa0f5603f9498a9cb1961e91cf52bd76ed6bb8524a7cf"
+      },
+      {
+        "id": "59e15bd4412675a59c41ddf5bd53d5b7c25877df6d2b536c7aab2498205b6557",
+        "sourceUrl": "https://raw.githubusercontent.com/luongthanhtung03/ckb-cycle-tools/23182e2abce64d0574cae7acd3229bc87424d0d0/src/replay.ts",
+        "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "evidenceType": "code_observed",
+        "excerpt": "ce GroupRun {\n  /** The `--script` selector passed to ckb-debugger, e.g. `input.0.lock`. */\n  selector: string;\n  /** Exit code of the script: 0 means it accepted the transaction. */\n  result: number;\n  /** Set when the VM itself stopped the script (a fault, the cycle limit), or Type ID refused. */\n  error?: string;\n  cycles: bigint;\n  /** Lines the script printed through ckb_debug. */\n  logs: string[];\n  /**\n   * Set only when some group rejects: whether the node would run this group at\n   * all. It verifies groups in its own order (nodeOrder) and stops at the first\n   * one that fails, so the groups after that one never run there.\n   */\n  nodeReaches?: boolean;\n}\n\nexport type ProfiledGroup = ScriptGroup & GroupRun;\n\nexport interface Profile {\n  /** The transaction hash, or \"(not on chain)\" for a transaction passed in directly. */\n  hash: string;\n  status: string;\n  /** Total cycles as reported by the node. */\n  nodeCycles?: bigint;\n  /**\n   * Sum of the per-group cycles measured by ckb-debugger, each group run on its\n   * own. When a group rejects, this is not what the node spent:",
+        "conclusion": "relevant source implementation observed",
+        "verification": "Source file was retrieved; code presence is independently observable, runtime behavior is unverified.",
+        "sourceSha256": "5870798150d45f1fc1a83179388fb649cd0956121f1842babb55320162b5fbc5"
+      },
+      {
+        "id": "547733aa9cd1a1c7ef80c404e26cb65e990e3989968a9a5a3eb68ee4ed9d133c",
+        "sourceUrl": "https://github.com/luongthanhtung03/ckb-cycle-tools/blob/23182e2abce64d0574cae7acd3229bc87424d0d0/src/replay.ts",
+        "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+        "path": "src/replay.ts",
+        "line": 382,
+        "checkedAt": "2026-11-17T01:44:43.527Z",
+        "evidenceType": "executed_demo",
+        "excerpt": "Explorer rawTransaction returned the exact archived transaction. Pinned ckb-debugger ckb-debugger 0.200.1, CKB-VM v2: input.0.lock=1652198 cycles; input.0.type=14022840; modified capacity lock result -31; missing CellDeps rejected. Offline only.",
+        "conclusion": "Actual offline script-group execution using pinned Explorer and cycle-tools source; not public-chain acceptance.",
+        "verification": "Trycove local isolated execution receipt; not a public-chain acceptance or maintainer adoption claim.",
+        "sourceSha256": "846ed336a2c13d78405eb01cb33d8eb4042757ab0c9b246053ee81662731aecc"
+      }
+    ]
+  },
+  "executionReceipt": {
+    "path": "evidence/ckb-explorer-cycle/execution.json",
+    "sha256": "260ccf5de3c7b295d20e3c482246e0c97ab9dec17358edd6332549ee7426aeec",
+    "mode": "offline-script-group-replay"
+  }
+}

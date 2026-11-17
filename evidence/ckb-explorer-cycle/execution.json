@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "experiment": "CKB Devnet Explorer rawTransaction → ckb-cycle-tools real script-group replay",
+  "evidenceLevel": "offline-script-group-execution",
+  "executionEnvironment": {
+    "network": "offline; localhost fixture RPC only",
+    "publicChainAcceptance": false,
+    "signer": false,
+    "broadcast": false,
+    "hostNode": "v24.22.3",
+    "platform": "linux",
+    "arch": "x64",
+    "containerImage": "node:24-alpine@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+    "containerNetwork": "none",
+    "rootFilesystem": "read-only",
+    "capabilities": "all dropped",
+    "noNewPrivileges": true,
+    "pidsLimit": 32,
+    "memoryLimitMiB": 768,
+    "cpuLimit": 1,
+    "containerUser": "1000:1000"
+  },
+  "reproduction": {
+    "command": "scripts/run-ckb-cycle-experiment.sh",
+    "coldStart": "scripts/prepare-ckb-cycle-experiment.sh && scripts/run-ckb-cycle-experiment.sh",
+    "containerCommand": "/upstream/ckb-cycle-tools/node_modules/.bin/tsx /workspace/run.mts"
+  },
+  "sources": {
+    "explorer": {
+      "repository": "https://github.com/wildanrhmn/ckb-devnet-explorer",
+      "revision": "b6aef5571bbe5a112b4809881a1b6229095f6da7",
+      "version": "0.4.0",
+      "cccVersion": "1.23.0",
+      "tsxVersion": "4.23.15",
+      "method": "Explorer.rawTransaction",
+      "path": "src/explorer.ts",
+      "lines": "365-369"
+    },
+    "cycleTools": {
+      "repository": "https://github.com/luongthanhtung03/ckb-cycle-tools",
+      "revision": "23182e2abce64d0574cae7acd3229bc87424d0d0",
+      "version": "1.3.0",
+      "cccVersion": "1.23.0",
+      "ckbTesttoolVersion": "1.0.5",
+      "wasiShimVersion": "0.4.2",
+      "tsxVersion": "4.23.15",
+      "methods": [
+        "groupsOf",
+        "replayGroups",
+        "wasmRunner"
+      ],
+      "paths": [
+        "src/replay.ts",
+        "src/wasm.ts"
+      ]
+    }
+  },
+  "fixture": {
+    "sourcePath": "test/fixtures/replay-testnet.json.br",
+    "sha256": "77c6e1231fb95ca436e34e0781c7ff50dd7a250150bfb359036d2905a064af02",
+    "transactionHash": "0x64f695a23416d9a7b2d34bb7025140c90991b82e9f1dea98e103bc13a72b77ac",
+    "status": "committed",
+    "scriptVersion": "v2",
+    "archivedNodeCycles": "15675038",
+    "resolvedInputs": 2,
+    "resolvedCellDeps": 5,
+    "headerDeps": 0,
+    "rawTransactionDeepEqual": true
+  },
+  "runtime": {
+    "debugger": "ckb-debugger 0.200.1",
+    "debuggerWasmSha256": "53d5a7b1881579e06bc08f197527ef23b6aef8238669e1aedc8e4eae78301f05",
+    "vmVersion": "v2",
+    "explorerRpcCalls": 1
+  },
+  "cases": {
+    "valid": {
+      "result": "accepted_by_each_script_group",
+      "groups": [
+        {
+          "selector": "input.0.lock",
+          "role": "lock",
+          "scriptHash": "0x827952323b4decaec3ed232e5e3c8948b5722015c2e86c5d907a2f3bf2ee7963",
+          "result": 0,
+          "cycles": "1652198",
+          "error": null
+        },
+        {
+          "selector": "input.0.type",
+          "role": "type",
+          "scriptHash": "0x9373f62611ce8ee0cf3aaf4f3cbfb7ac60fa18f9524009d41ea556718b75b625",
+          "result": 0,
+          "cycles": "14022840",
+          "error": null
+        }
+      ],
+      "measuredCycles": "15675038",
+      "archivedNodeCycles": "15675038",
+      "aggregateMatches": true
+    },
+    "modifiedOutputCapacity": {
+      "mutation": "outputs[0].capacity += 1 shannon",
+      "result": "rejected_by_lock_script",
+      "groups": [
+        {
+          "selector": "input.0.lock",
+          "role": "lock",
+          "scriptHash": "0x827952323b4decaec3ed232e5e3c8948b5722015c2e86c5d907a2f3bf2ee7963",
+          "result": -31,
+          "cycles": "1639873",
+          "error": null
+        },
+        {
+          "selector": "input.0.type",
+          "role": "type",
+          "scriptHash": "0x9373f62611ce8ee0cf3aaf4f3cbfb7ac60fa18f9524009d41ea556718b75b625",
+          "result": 0,
+          "cycles": "14022840",
+          "error": null
+        }
+      ]
+    },
+    "missingResolvedCellDeps": {
+      "mutation": "mock_info.cell_deps = []",
+      "result": "rejected",
+      "measurementsTrusted": false,
+      "rejected": true,
+      "error": "unexpected ckb-debugger output (exit 1):\nError: Check Fail: json[\"tx\"][\"cell_deps\"][0] used unprovided cell dep"
+    }
+  },
+  "limitations": [
+    "The transaction and dependency Cells are an archived real Testnet fixture, not newly fetched chain state.",
+    "The local fixture RPC exercises the pinned Explorer rawTransaction JSON-RPC path but is not a CKB node.",
+    "Each script group is executed independently by ckb-cycle-tools; a successful per-group replay is not a new node validation or public-chain acceptance.",
+    "The modified transaction is not broadcast. Its independently replayed type group is not evidence that the whole modified transaction is valid.",
+    "No production deployment, wallet signer, private key, or public-network transaction was used."
+  ]
+}

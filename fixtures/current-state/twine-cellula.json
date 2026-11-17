@@ -1,0 +1,41 @@
+{
+  "opportunityId": "twine-cellula-lsp-invoice-routing",
+  "capability": {
+    "key": "cellula-lsp-invoice-routing",
+    "label": "Cellula LSP invoice parsing and Fiber trampoline routing",
+    "terms": ["Cellula", "LSP", "invoice", "trampoline"]
+  },
+  "consumer": {
+    "id": "twine",
+    "name": "Twine",
+    "aliases": ["Twine CKB", "Twine wallet"],
+    "repositories": ["https://github.com/chukwuma619/twine"]
+  },
+  "provider": {
+    "id": "cellula",
+    "name": "Cellula.id",
+    "aliases": ["Cellula Wallet", "Cellula LSP"],
+    "repositories": []
+  },
+  "sourceUrls": [
+    "https://talk.nervos.org/t/twine-buy-and-sell-ckb-without-depositing-on-an-exchange-fiber-p2p-poc/10741",
+    "https://teapaw.org/twineckb/status/2121412115718181181",
+    "https://github.com/chukwuma619/twine/commit/274ecf42890eeff5abd60e70240240d34ac10f83",
+    "https://github.com/chukwuma619/twine/blob/274ecf42890eeff5abd60e70240240d34ac10f83/src/fiber/hint.rs"
+  ],
+  "knownUnavailableSources": [
+    { "url": "https://talk.nervos.org/t/twine-buy-and-sell-ckb-without-depositing-on-an-exchange-fiber-p2p-poc/10741.json", "checkedAt": "2026-11-17T00:54:00Z", "reason": "Previous request through the configured proxy returned CONNECT 403; do not retry inside the six-hour backoff." },
+    { "url": "https://teapaw.org/twineckb/status/2121412115718181181", "checkedAt": "2026-11-17T00:54:00Z", "reason": "Previous request through the configured proxy returned CONNECT 403; do not retry inside the six-hour backoff." }
+  ],
+  "codeTouchpoints": [
+    { "projectId": "twine", "repository": "https://github.com/chukwuma619/twine", "path": "src/fiber/hint.rs" },
+    { "projectId": "twine", "repository": "https://github.com/chukwuma619/twine", "path": "src/fiber/payment.rs" }
+  ],
+  "searchConcepts": [
+    "TrampolineRouteHint LSP payment routing",
+    "Cellula invoice parsing trampoline hops",
+    "Fiber trampoline route hints invoice expiry"
+  ],
+  "priorLifecycle": "demonstrated_in_wild",
+  "priorCompatibility": "unknown"
+}

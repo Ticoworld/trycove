@@ -1,0 +1,38 @@
+{
+  "opportunityId": "intent-e9a8513f51e82cd0dcdecf6be5da7c28",
+  "capability": {
+    "key": "ckb-indexing-architecture-review-offer",
+    "label": "Cellora human architecture-review offer for applications with indexing needs",
+    "terms": ["20-minute call", "non-trivial indexing needs", "architecture review", "Happy to jump"]
+  },
+  "consumer": {
+    "id": "ckbuilder-issue-26",
+    "name": "CKB Escrow",
+    "aliases": ["CKB Escrow Studio", "escrow history"],
+    "repositories": [
+      "https://github.com/kayceeDev/ckb-escrow-studio",
+      "https://github.com/kayceeDev/ckb-escrow"
+    ]
+  },
+  "provider": {
+    "id": "ckbuilder-cellora-22",
+    "name": "Cellora",
+    "aliases": ["Cellora indexing", "Cellora API"],
+    "repositories": ["https://github.com/Antismart/cellora"]
+  },
+  "sourceUrls": [
+    "https://github.com/Nervos-Community-Catalyst/CKBuilder-projects/issues/12",
+    "https://github.com/Antismart/cellora/blob/a534c38f248c0406eeafee94adadb8c2c9072f8a/crates/api/src/routes/cells.rs"
+  ],
+  "codeTouchpoints": [
+    { "projectId": "ckbuilder-issue-26", "repository": "https://github.com/kayceeDev/ckb-escrow-studio", "path": "packages/escrow-app/src/service.ts" },
+    { "projectId": "ckbuilder-cellora-22", "repository": "https://github.com/Antismart/cellora", "path": "crates/api/src/routes/cells.rs" }
+  ],
+  "searchConcepts": [
+    "Cellora indexing architecture call reorg",
+    "Cellora query service CKB indexer feedback",
+    "non-trivial indexing needs architecture review"
+  ],
+  "priorLifecycle": "proposed",
+  "priorCompatibility": "unknown"
+}

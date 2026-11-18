@@ -1,6 +1,6 @@
-# Trycove · TC-01
+# Trycove · Post-Launch Workbench
 
-A local-first CKB connection workspace: source-backed ecosystem ingestion, structured needs and code observations, explainable candidate discovery, saved compatibility findings, and a persistent follow-up ledger. Imported descriptions and issue requests remain upstream claims; source analysis and synthetic trial results are not runtime compatibility or adoption.
+Trycove helps CKB products find collaborators, test real integrations and shipped apps, and record what happened: **Find → Connect or Try → Follow Through.** Imported descriptions and issue requests remain upstream claims; source analysis and synthetic trial results are not runtime compatibility, human participation or adoption.
 
 ## Run
 
@@ -74,7 +74,7 @@ The Opportunity Workspace shows the current candidate's own readiness. A first q
 
 ## TC-01E Product Hub
 
-The primary navigation is **Explore → Connect → Try → Results**. `/projects` searches products by source category, product claims, pinned interface observations and builder needs. `/projects/[id]` is the Product Passport, showing CKBdapps metadata, source-linked repositories and code, related connections, Pulse activity and saved execution evidence. `/trials` lists Integration Lab receipts; it never executes upstream code. `/results` lists saved execution and follow-up records. Trial Rooms and adoption measurement remain future modules.
+The primary navigation is **Problem Map → Explore → Connect → Try → Results**. `/projects` searches products by source category, product claims, pinned interface observations and builder needs. `/projects/[id]` is the Product Passport, showing CKBdapps metadata, source-linked repositories and code, related connections, Pulse activity and saved execution evidence. `/trials` separates Integration Lab execution receipts from Guided Trial Rooms. TC-02 is implemented as a private, human-guided Owl Pilot room; it remains **PARTIAL** until a real human attempts the hosted app and retains the session evidence. See [the TC-02 handoff](docs/TC-02.md).
 
 Refresh the published CKBdapps JSON and CKB Pulse service with:
 

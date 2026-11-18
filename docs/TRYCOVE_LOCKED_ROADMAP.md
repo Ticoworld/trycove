@@ -5,6 +5,22 @@
 **Implementation baseline:** `511e2a820bbb9b755a8762357c36d6450e648ef2` (TC-01E partial)  
 **Companion contract:** [TRYCOVE_PRODUCT_CONTRACT.md](./TRYCOVE_PRODUCT_CONTRACT.md)
 
+## 2026-11-18 TC-01F sequencing amendment
+
+This amendment changes the next implementation step recorded below; it does not revise the historical TC-01E Gate C **PARTIAL** result or erase the earlier decision record. Complete **TC-01F, the source-backed Problem & Capability Map**, before beginning TC-02. Reuse the already imported product, need, intent, opportunity, evidence and pinned-footprint records. Do not run a new repository scan or generate new provider-consumer matches for this map.
+
+The map must keep shared problem labels distinct from provider-to-consumer connection records, preserve unsupported products as unclassified, and show the evidence state and unknowns on each saved relationship. A testnet or demo claim is not a request for testers; only an explicit source-backed request may appear as a testing need. Do not implement a Trial Room in TC-01F. TC-02 remains the next product phase after this map has been delivered and reviewed.
+
+**Implementation outcome:** The map was implemented from the verified `b074bd25ba9e45da27dc83158c1b28dd1677cf5e` remote baseline. At local database verification it exposed 231 imported product identities: 149 had at least one supported placement, and 82 remained unclassified. Domain counts are non-exclusive because separately supported products can appear in multiple groups: Payments & Fiber 12; Crowdfunding, Funding & Community 42; Accounts, Identity & Permissions 22; Chain Data & Indexing 19; Trading & Markets 31; Developer & Contract Tools 26; Contract & Transaction Safety 9; Digital Assets 13; Cross-chain & Bridges 2. The crowdfunding placement comes from the exact source phrase “CKB crowdfunding” in the imported issue claim; it is shown with that claim and source link, not inferred from general keyword overlap.
+
+Saved relationship examples remain accurately qualified in the UI:
+
+- **Twine → Cellula.id:** a source-reported scoped Fiber invoice-routing demonstration. Compatibility is unknown; the pinned code shows route-hint parsing and payment-parameter construction, not an independently reproduced completed payment or adoption.
+- **CKB Devnet Explorer → ckb-cycle-tools:** an evidence-level-3 offline receipt records the pinned Explorer `rawTransaction` path through a localhost fixture RPC and ckb-cycle-tools with ckb-debugger. The aggregate was 15,675,038 cycles; a +1 shannon output-capacity mutation was rejected. The receipt result is **partial**: missing CellDeps produced no trusted measurements. Lifecycle remains in progress and compatibility partial; live end-to-end use, deployment and adoption remain unknown. The map links the receipt and displays its run result separately from lifecycle status.
+- **CKB Kickstarter indexing need:** a specific production-indexer request is linked to a no-qualified-provider review. This is not proof that no provider exists outside the reviewed records. Owl Pilot's source-backed feedback request is visible under Unclassified and explicitly shows that no test session is recorded.
+
+Focused Problem Map tests passed (6/6), TypeScript and the production build passed, and a local headless Chromium journey followed the overview → domain → Product Passport → saved connection → source evidence path. The same journey reached the execution receipt, unmet indexing need and Owl Pilot request. At a 390 px viewport the domain page had no horizontal overflow; the browser reported no page errors. The shared desktop browser was unavailable in this environment, so visual verification used local headless Chromium.
+
 ## 2026-11-18 milestone decision
 
 **Verified remote baseline before this roadmap amendment:** `3d5ebbf759ffd21b5de559618911037978bc7801`. Codex Local completed the one bounded follow-up TC-01E Gate C attempt in `evidence/tc-01e/gate-c-functional/report.md`. The frozen query cohort produced 15 source-level hypotheses but no selected functional integration, adapter, or runtime experiment. TC-01E remains **PARTIAL**, with Gate C incomplete. The query matcher currently rejects all exact-operation matches for unproven added value; this result does not establish that the ecosystem contains no useful compositions.

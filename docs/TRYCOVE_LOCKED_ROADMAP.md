@@ -5,6 +5,15 @@
 **Implementation baseline:** `511e2a820bbb9b755a8762357c36d6450e648ef2` (TC-01E partial)  
 **Companion contract:** [TRYCOVE_PRODUCT_CONTRACT.md](./TRYCOVE_PRODUCT_CONTRACT.md)
 
+## 2026-11-18 milestone decision
+
+**Verified remote baseline before this roadmap amendment:** `3d5ebbf759ffd21b5de559618911037978bc7801`. Codex Local completed the one bounded follow-up TC-01E Gate C attempt in `evidence/tc-01e/gate-c-functional/report.md`. The frozen query cohort produced 15 source-level hypotheses but no selected functional integration, adapter, or runtime experiment. TC-01E remains **PARTIAL**, with Gate C incomplete. The query matcher currently rejects all exact-operation matches for unproven added value; this result does not establish that the ecosystem contains no useful compositions.
+
+**Decision:** Stop repeated TC-01E discovery scans. Preserve its existing code and evidence, retain functional integration as an unresolved product gap, and proceed directly to **TC-02 Guided Trial Rooms (Product → People)**. Prefer CrowdCell's published testnet application as the initial pilot, subject to confirming its live usability from the local browser. Do not infer a human tester from automated checks. After TC-02, implement TC-03 follow-through. Revisit meaningful product-to-product proof before any Tovarishch readiness claim, by explicit product decision rather than automatic further scanning.
+
+**Execution environment:** Codex **Local**, working from the user's `main` checkout. Future work orders must be direct, targeted, and inspect only necessary files. Preserve necessary security and meaningful validation; do not re-read historical plans or repeat broad research.
+
+
 ## Non-negotiable mission
 
 Trycove is the CKB ecosystem's **product connection, testing, and post-launch follow-through platform**. It helps software builders find complementary products, check whether real code can work together, put shipped products in front of real testers, document friction, and establish whether fixes and connections produced continued use.
@@ -63,7 +72,7 @@ Freeze the existing Grid3 URL example as a regression and fallback. Do not erase
 
 ### Phase 1: Close TC-01E, genuine Product → Product composition
 
-**One bounded Codex Cloud engineering attempt.** Use existing repository and source evidence; do not start another indefinite discovery audit loop.
+**One bounded Codex Local engineering attempt (completed, PARTIAL).** Use existing repository and source evidence; do not start another indefinite discovery audit loop.
 
 - Expand real source capability support beyond deep links to an appropriate **RPC/data-query** or **transaction/session-middleware** family. Exact choice must follow available real interfaces, not a predetermined named pair.
 - Form and pin a fresh, independently selected, bounded evaluation cohort using explicit rules established *before* inspecting outcomes. Preserve prior cohort and evidence unchanged. Reject easy self/affiliate-only pairing as evidence of previously isolated builder collaboration.

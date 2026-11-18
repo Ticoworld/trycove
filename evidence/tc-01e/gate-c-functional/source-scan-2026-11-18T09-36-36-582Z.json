@@ -1,0 +1,323 @@
+{
+  "schemaVersion": "tc-01e-functional-source-scan-v1",
+  "cohortPath": "evidence/tc-01e/gate-c-functional/frozen-cohort.json",
+  "cohortSha256": "db64b72e991974443ead13ed39c8acb22febec9f95cb52bbff4a1bca867cfe53",
+  "methodologySha256": "10b5541fbd50ed7cd94d487b49173a1e2405e9d45fe94fc069aac477cb8434ac",
+  "analyzerVersion": "2.0.1",
+  "scanner": "scripts/footprints.ts; bounded clone and static source analysis; repository code was not executed",
+  "selectedCount": 12,
+  "results": [
+    {
+      "repositoryPath": "psawyerberlin/vericellnet",
+      "productIds": [
+        "vericell"
+      ],
+      "revision": "fb53b7fd43c0801093979d2777a4722caf713d55",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "vericell",
+        "--repository-url",
+        "https://github.com/psawyerberlin/vericellnet",
+        "--revision",
+        "fb53b7fd43c0801093979d2777a4722caf713d55",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:35:36.127Z",
+      "finishedAt": "2026-11-18T09:35:41.409Z",
+      "exitCode": 0,
+      "stdout": "Analyzed vericell primary fb53b7fd43c0801093979d2777a4722caf713d55: 108 files, 1928 observations, 1 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "utxoplay/utxoplay",
+      "productIds": [
+        "utxoplay"
+      ],
+      "revision": "8578cbe8bdbfb9023839084601726192220cb70d",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "utxoplay",
+        "--repository-url",
+        "https://github.com/utxoplay/utxoplay",
+        "--revision",
+        "8578cbe8bdbfb9023839084601726192220cb70d",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:35:41.410Z",
+      "finishedAt": "2026-11-18T09:35:48.164Z",
+      "exitCode": 0,
+      "stdout": "Analyzed utxoplay primary 8578cbe8bdbfb9023839084601726192220cb70d: 50 files, 2087 observations, 7 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "nervosnetwork/fiber-dashboard",
+      "productIds": [
+        "fiberdashboard"
+      ],
+      "revision": "acad8689b10fd975384b25be8551ef07b6de94e0",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "fiberdashboard",
+        "--repository-url",
+        "https://github.com/nervosnetwork/fiber-dashboard",
+        "--revision",
+        "acad8689b10fd975384b25be8551ef07b6de94e0",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:35:48.164Z",
+      "finishedAt": "2026-11-18T09:35:52.200Z",
+      "exitCode": 0,
+      "stdout": "Analyzed fiberdashboard primary acad8689b10fd975384b25be8551ef07b6de94e0: 110 files, 1343 observations, 10 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "lusocryptolabs/ckb-pulse",
+      "productIds": [
+        "ckbpulse"
+      ],
+      "revision": "6d5b3fe20b894e0a7dbdf9259d2acff752088e0a",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "ckbpulse",
+        "--repository-url",
+        "https://github.com/lusocryptolabs/ckb-pulse",
+        "--revision",
+        "6d5b3fe20b894e0a7dbdf9259d2acff752088e0a",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:35:52.201Z",
+      "finishedAt": "2026-11-18T09:35:56.593Z",
+      "exitCode": 0,
+      "stdout": "Analyzed ckbpulse primary 6d5b3fe20b894e0a7dbdf9259d2acff752088e0a: 29 files, 4515 observations, 1 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "nervosnetwork/ckb-script-templates",
+      "productIds": [
+        "ckb-script-templates"
+      ],
+      "revision": "f90b1e2c52de1e60dc6aca437de8f43d7aed9c14",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "ckb-script-templates",
+        "--repository-url",
+        "https://github.com/nervosnetwork/ckb-script-templates",
+        "--revision",
+        "f90b1e2c52de1e60dc6aca437de8f43d7aed9c14",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:35:56.593Z",
+      "finishedAt": "2026-11-18T09:35:59.671Z",
+      "exitCode": 0,
+      "stdout": "Analyzed ckb-script-templates primary f90b1e2c52de1e60dc6aca437de8f43d7aed9c14: 36 files, 7 observations, 4 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "hiepthach/credora_ckb",
+      "productIds": [
+        "credora"
+      ],
+      "revision": "d5365fd6289f163782b2ee37ae10bfa6aa356e77",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "credora",
+        "--repository-url",
+        "https://github.com/hiepthach/credora_ckb",
+        "--revision",
+        "d5365fd6289f163782b2ee37ae10bfa6aa356e77",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:35:59.671Z",
+      "finishedAt": "2026-11-18T09:36:03.754Z",
+      "exitCode": 0,
+      "stdout": "Analyzed credora primary d5365fd6289f163782b2ee37ae10bfa6aa356e77: 99 files, 1572 observations, 2 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "hitbtc-com/hitbtc-api",
+      "productIds": [
+        "hitbtc"
+      ],
+      "revision": "5cca555f8e57b974438e3ccef12604b10c66fb5d",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "hitbtc",
+        "--repository-url",
+        "https://github.com/hitbtc-com/hitbtc-api",
+        "--revision",
+        "5cca555f8e57b974438e3ccef12604b10c66fb5d",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:36:03.755Z",
+      "finishedAt": "2026-11-18T09:36:06.189Z",
+      "exitCode": 0,
+      "stdout": "Analyzed hitbtc primary 5cca555f8e57b974438e3ccef12604b10c66fb5d: 0 files, 0 observations, 2 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "nervosnetwork/ckb-explorer-frontend",
+      "productIds": [
+        "ckbexplorer"
+      ],
+      "revision": "39f93f2d2bd7a682c0d8dffe25192c2db63c7ad9",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "ckbexplorer",
+        "--repository-url",
+        "https://github.com/nervosnetwork/ckb-explorer-frontend",
+        "--revision",
+        "39f93f2d2bd7a682c0d8dffe25192c2db63c7ad9",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:36:06.189Z",
+      "finishedAt": "2026-11-18T09:36:16.958Z",
+      "exitCode": 0,
+      "stdout": "Analyzed ckbexplorer primary 39f93f2d2bd7a682c0d8dffe25192c2db63c7ad9: 411 files, 11809 observations, 542 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "rgbplusplus/rgbpp",
+      "productIds": [
+        "rgbpp"
+      ],
+      "revision": "590a2caf791dcbc687cecd71e29d22f496862d8e",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "rgbpp",
+        "--repository-url",
+        "https://github.com/rgbplusplus/rgbpp",
+        "--revision",
+        "590a2caf791dcbc687cecd71e29d22f496862d8e",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:36:16.958Z",
+      "finishedAt": "2026-11-18T09:36:20.379Z",
+      "exitCode": 0,
+      "stdout": "Analyzed rgbpp primary 590a2caf791dcbc687cecd71e29d22f496862d8e: 28 files, 45 observations, 5 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "truthixify/vellum",
+      "productIds": [
+        "vellum"
+      ],
+      "revision": "87b377d71c10dbbf64d12c93411506268ccf2c9f",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "vellum",
+        "--repository-url",
+        "https://github.com/truthixify/vellum",
+        "--revision",
+        "87b377d71c10dbbf64d12c93411506268ccf2c9f",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:36:20.379Z",
+      "finishedAt": "2026-11-18T09:36:26.809Z",
+      "exitCode": 0,
+      "stdout": "Analyzed vellum primary 87b377d71c10dbbf64d12c93411506268ccf2c9f: 260 files, 5158 observations, 10 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "jackylhh/ckb-community-fund-dao-dashboard",
+      "productIds": [
+        "ckbcfdao"
+      ],
+      "revision": "2971facfc389a9ece85177392199db38621e9804",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "ckbcfdao",
+        "--repository-url",
+        "https://github.com/jackylhh/ckb-community-fund-dao-dashboard",
+        "--revision",
+        "2971facfc389a9ece85177392199db38621e9804",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:36:26.810Z",
+      "finishedAt": "2026-11-18T09:36:33.010Z",
+      "exitCode": 0,
+      "stdout": "Analyzed ckbcfdao primary 2971facfc389a9ece85177392199db38621e9804: 184 files, 4228 observations, 9 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    },
+    {
+      "repositoryPath": "quantumpurse/quantum-purse-v2",
+      "productIds": [
+        "quantumpurse"
+      ],
+      "revision": "4e66bc738b3330f45c8f9e77c350ce90a1c4d400",
+      "command": [
+        "pnpm",
+        "exec",
+        "tsx",
+        "scripts/footprints.ts",
+        "--project",
+        "quantumpurse",
+        "--repository-url",
+        "https://github.com/quantumpurse/quantum-purse-v2",
+        "--revision",
+        "4e66bc738b3330f45c8f9e77c350ce90a1c4d400",
+        "--limit",
+        "1"
+      ],
+      "startedAt": "2026-11-18T09:36:33.010Z",
+      "finishedAt": "2026-11-18T09:36:36.582Z",
+      "exitCode": 0,
+      "stdout": "Analyzed quantumpurse primary 4e66bc738b3330f45c8f9e77c350ce90a1c4d400: 109 files, 67 observations, 3 limitations\nProcessed 1: 1 succeeded, 0 failed\n",
+      "stderr": ""
+    }
+  ]
+}

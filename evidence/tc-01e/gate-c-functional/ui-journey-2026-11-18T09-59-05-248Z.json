@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "tc-01e-functional-discovery-ui-smoke-v1",
+  "createdAt": "2026-11-18T09:59:05.247Z",
+  "result": "passed",
+  "renderScope": "Production Next.js server-rendered HTML; content and journey assertions, not visual browser inspection.",
+  "browserVisualCheck": {
+    "status": "blocked",
+    "reason": "CUA browser connection failed to initialize: the gaas-browser node_repl sandbox cannot be disabled."
+  },
+  "app": {
+    "baseUrl": "http://127.0.0.1:3000",
+    "startCommand": "pnpm start --hostname 0.0.0.0",
+    "buildCommand": "pnpm build"
+  },
+  "discoveryReport": {
+    "path": "evidence/tc-01e/gate-c-functional/functional-discovery.json",
+    "sha256": "21d4e6e211dcaa76967e5d99e3a639b5bf927316d5a2082889d068305dda0264"
+  },
+  "journey": {
+    "productId": "vericell",
+    "repository": "https://github.com/psawyerberlin/vericellnet",
+    "revision": "fb53b7fd43c0801093979d2777a4722caf713d55",
+    "passportRoute": "/projects/vericell",
+    "discoveryRoute": "/functional-discovery?product=vericell"
+  },
+  "checks": [
+    {
+      "route": "/projects/vericell",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "htmlSha256": "108ac1f25226b2d8085c7ac77cfb7b770bdeebf520ea341cda204541c6ee8422",
+      "requiredText": [
+        "Product Passport",
+        "CKB query interfaces assessed",
+        "/functional-discovery?product=vericell"
+      ],
+      "missing": []
+    },
+    {
+      "route": "/functional-discovery?product=vericell",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "htmlSha256": "5eb47df1cd2373bba65d94a4cbb1a7a498f2cd3788911d662655a42e772212b4",
+      "requiredText": [
+        "Functional discovery evidence",
+        "Rejected exact-operation hypotheses",
+        "0 selected connections",
+        "No candidate passed the value requirement",
+        "packages/chain/src/proof.ts",
+        "Integration Lab and execution evidence",
+        "Not produced for this discovery attempt"
+      ],
+      "missing": []
+    }
+  ]
+}

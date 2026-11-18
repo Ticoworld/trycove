@@ -23,4 +23,16 @@ describe('versioned technical footprint',()=>{
   {path:'src/url.ts',content:`export function link(slug: string) { return \`/tx/${'${slug}'}\` }`},
  ]});expect(r.observations.some(x=>x.kind==='transaction_explorer_link')).toBe(false);expect(r.observations.some(x=>x.kind==='transaction_deep_link')).toBe(false);expect(r.observations.some(x=>x.kind==='transaction_deep_link_parser')).toBe(false)});
  it('keeps unresolved imports and dynamic dispatch unknown and rejects invalid inputs',()=>{const r=analyzeFootprint({...base,files:[{path:'x.ts',content:'import { x } from "./missing"; foo[method]();'}]});expect(r.unknowns.join(' ')).toContain('Unresolved local import');expect(r.unknowns.join(' ')).toContain('Dynamic call');expect(()=>analyzeFootprint({...base,files:[{path:'../secret.ts',content:''}]})).toThrow();expect(()=>analyzeFootprint({...base,revision:'main',files:[]})).toThrow()});
+ it('extracts typed application data-query calls and exported SDK provider methods',()=>{const r=analyzeFootprint({...base,files:[
+  {path:'src/client.ts',content:`export class TransactionSource {\n  async getTransaction(hash: string): Promise<{ transaction: { hash: string } } | undefined> {\n    return this.node.getTransaction(hash)\n  }\n}`},
+  {path:'src/consumer.ts',content:`export async function load(hash: string, client: { getTransaction(hash: string): Promise<{ transaction: unknown } | undefined> }) {\n  const result = await client.getTransaction(hash)\n  return result?.transaction\n}`},
+ ]});expect(r.analyzerVersion).toBe('2.0.1');expect(r.observations.some(x=>x.kind==='data_query_call'&&x.fact.includes('CKB getTransaction')&&x.fact.includes('Promise'))).toBe(true);expect(r.observations.some(x=>x.kind==='data_query_export'&&x.fact.includes('Exported query method getTransaction')&&x.fact.includes('getTransaction'))).toBe(true)});
+ it('extracts executable CKB query route handlers with their concrete route and operation',()=>{const r=analyzeFootprint({...base,files:[
+  {path:'src/server.ts',content:`app.get('/transactions/:hash', async (request: Request) => {\n  const transaction = await node.getTransaction(request.params.hash)\n  return { transaction }\n})`},
+  {path:'app/api/transactions/route.ts',content:`export async function GET(request: Request) {\n  const hash = new URL(request.url).searchParams.get('hash')!\n  const transaction = await node.getTransaction(hash)\n  return Response.json({ transaction })\n}`},
+ ]});expect(r.observations.filter(x=>x.kind==='data_query_route_handler').map(x=>x.fact)).toEqual(expect.arrayContaining([
+  expect.stringContaining('HTTP GET /transactions/:hash directly invokes CKB getTransaction'),
+  expect.stringContaining('Next.js GET route handler at app/api/transactions/route.ts directly invokes CKB getTransaction'),
+ ]));expect(r.observations.filter(x=>x.kind==='data_query_route_handler').every(x=>x.verification==='source_observed')).toBe(true)});
+ it('does not treat inherited JavaScript object methods as CKB query operations',()=>{const r=analyzeFootprint({...base,files:[{path:'src/format.ts',content:`export function format(value: string) { return value.toString() + value.toLocaleString() + String(value.valueOf()) }`}]});expect(r.observations.some(x=>['data_query_call','data_query_export','data_query_route_handler'].includes(x.kind))).toBe(false)});
 });

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "tc-01e-license-review-v1",
+  "checkedAt": "2026-11-18T09:45:50Z",
+  "method": "Queried the GitHub REST license endpoint at each frozen full revision. A 404 means GitHub did not identify a repository license file at that revision; it is recorded as unknown, not as permission to use the code.",
+  "scope": "Inventory metadata review for the 12 frozen source revisions only. No candidate was selected, no integration was attempted, and no third-party source or generated bundle is included in this report.",
+  "checks": [
+    { "repositoryPath": "psawyerberlin/vericellnet", "revision": "fb53b7fd43c0801093979d2777a4722caf713d55", "httpStatus": 404, "licensePath": null, "spdx": null, "status": "unknown-no-license-detected" },
+    { "repositoryPath": "utxoplay/utxoplay", "revision": "8578cbe8bdbfb9023839084601726192220cb70d", "httpStatus": 404, "licensePath": null, "spdx": null, "status": "unknown-no-license-detected" },
+    { "repositoryPath": "nervosnetwork/fiber-dashboard", "revision": "acad8689b10fd975384b25be8551ef07b6de94e0", "httpStatus": 404, "licensePath": null, "spdx": null, "status": "unknown-no-license-detected" },
+    { "repositoryPath": "lusocryptolabs/ckb-pulse", "revision": "6d5b3fe20b894e0a7dbdf9259d2acff752088e0a", "httpStatus": 200, "licensePath": "LICENSE", "spdx": "MIT", "status": "identified-metadata-only" },
+    { "repositoryPath": "nervosnetwork/ckb-script-templates", "revision": "f90b1e2c52de1e60dc6aca437de8f43d7aed9c14", "httpStatus": 404, "licensePath": null, "spdx": null, "status": "unknown-no-license-detected" },
+    { "repositoryPath": "hiepthach/credora_ckb", "revision": "d5365fd6289f163782b2ee37ae10bfa6aa356e77", "httpStatus": 404, "licensePath": null, "spdx": null, "status": "unknown-no-license-detected" },
+    { "repositoryPath": "hitbtc-com/hitbtc-api", "revision": "5cca555f8e57b974438e3ccef12604b10c66fb5d", "httpStatus": 200, "licensePath": "LICENSE", "spdx": "LGPL-3.0", "status": "identified-metadata-only" },
+    { "repositoryPath": "nervosnetwork/ckb-explorer-frontend", "revision": "39f93f2d2bd7a682c0d8dffe25192c2db63c7ad9", "httpStatus": 200, "licensePath": "COPYING", "spdx": "MIT", "status": "identified-metadata-only" },
+    { "repositoryPath": "rgbplusplus/rgbpp", "revision": "590a2caf791dcbc687cecd71e29d22f496862d8e", "httpStatus": 404, "licensePath": null, "spdx": null, "status": "unknown-no-license-detected" },
+    { "repositoryPath": "truthixify/vellum", "revision": "87b377d71c10dbbf64d12c93411506268ccf2c9f", "httpStatus": 200, "licensePath": "LICENSE", "spdx": "MIT", "status": "identified-metadata-only" },
+    { "repositoryPath": "jackylhh/ckb-community-fund-dao-dashboard", "revision": "2971facfc389a9ece85177392199db38621e9804", "httpStatus": 404, "licensePath": null, "spdx": null, "status": "unknown-no-license-detected" },
+    { "repositoryPath": "quantumpurse/quantum-purse-v2", "revision": "4e66bc738b3330f45c8f9e77c350ce90a1c4d400", "httpStatus": 200, "licensePath": "LICENSE", "spdx": "MIT", "status": "identified-metadata-only" }
+  ],
+  "permissionDecision": "No source or generated bundle was used in an adapter, execution, or redistribution. If a later candidate requires a repository with unknown licensing, obtain adequate permission before incorporating or executing its source."
+}

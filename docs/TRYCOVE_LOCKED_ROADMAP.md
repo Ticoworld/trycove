@@ -1,8 +1,8 @@
 # Trycove: Locked Product Direction and Delivery Roadmap
 
 **Status:** Authoritative product roadmap, approved 2026-11-18  
-**Repository:** \`Ticoworld/trycove\`  
-**Implementation baseline:** \`511e2a820bbb9b755a8762357c36d6450e648ef2\` (TC-01E partial)  
+**Repository:** `Ticoworld/trycove`  
+**Implementation baseline:** `511e2a820bbb9b755a8762357c36d6450e648ef2` (TC-01E partial)  
 **Companion contract:** [TRYCOVE_PRODUCT_CONTRACT.md](./TRYCOVE_PRODUCT_CONTRACT.md)
 
 ## Non-negotiable mission
@@ -47,7 +47,7 @@ Trycove's differentiation is the **connected discovery → usable test/integrati
 
 ## Current known implementation
 
-At the TC-01E baseline \`511e2a8\`:
+At the TC-01E baseline `511e2a8`:
 
 - CKBdapps ingestion and CKB Pulse snapshots feed a sourced Product Hub.
 - Pinned source footprints and a narrow capability matcher exist.
@@ -110,7 +110,7 @@ Unify Integration Lab and Trial Room records under versioned project identities 
 
 ## Readiness to show Tovarishch
 
-**Not ready at \`511e2a8\`.** A successful CI build, test count, SDK import, matched pair, container run, polished UI, public link or explanatory demo is not a sufficient case.
+**Not ready at `511e2a8`.** A successful CI build, test count, SDK import, matched pair, container run, polished UI, public link or explanatory demo is not a sufficient case.
 
 Show Tovarishch only when, on at least **two real CKB products or product journeys**, a reviewer can independently navigate the actual platform and see:
 

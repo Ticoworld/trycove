@@ -2,26 +2,8 @@ import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {getGuidedTrialDefinition} from '../../../../lib/trials/room-definitions';
 import {GuidedTrialStart} from './start-client';
-
-export const dynamic = 'force-dynamic';
-
-export default async function GuidedTrialRoomPage({params}: {params: Promise<{packId: string}>}) {
-  const {packId} = await params;
-  const definition = getGuidedTrialDefinition(packId);
-  if (!definition) notFound();
-
-  return <>
-    <section className="hero">
-      <Link className="eyebrow" href={`/projects/${encodeURIComponent(definition.product.id)}`}>← {definition.product.name} Product Passport</Link>
-      <h1>Guided Trial Room</h1>
-      <p>Attempt the actual {definition.application.name} flow and record what happened, one task at a time. Trycove does not recreate the wallet or approve actions for you.</p>
-      <div className="bar"><a className="button" href={definition.application.url} target="_blank" rel="noreferrer">Open Owl Pilot ↗</a><Link className="button secondary" href={`/map/${definition.problemMap.slug}#${definition.problemMap.opportunityId}`}>Open linked Problem Map request ↗</Link></div>
-    </section>
-    <section className="section" aria-labelledby="pilot-trial-app">
-      <div className="eyebrow">Application under test</div><h2 id="pilot-trial-app">{definition.application.name}</h2>
-      <article className="card"><p><strong>Live application:</strong> <a className="source" href={definition.application.url} target="_blank" rel="noreferrer">{definition.application.url}</a></p><p><strong>Network:</strong> {definition.application.network}</p><p><strong>Version:</strong> {definition.application.version}</p><p><strong>Linked source request:</strong> <a className="source" href={definition.problemMap.sourceUrl} target="_blank" rel="noreferrer">CKBuilder issue #51 ↗</a></p>{definition.application.relatedApps.map((app) => <p key={app.url}><strong>Related test app:</strong> <a className="source" href={app.url} target="_blank" rel="noreferrer">{app.name} ↗</a> — {app.role}</p>)}</article>
-    </section>
-    <section className="section" aria-labelledby="guided-trial-tasks"><div className="eyebrow">Four real tasks</div><h2 id="guided-trial-tasks">What to try</h2><div className="grid guided-trial-task-grid">{definition.tasks.map((task, index) => <article className="card" key={task.id}><span className="tag">Task {index + 1}</span><h3>{task.title}</h3><p>{task.instructions}</p><ul>{task.observe.map((item) => <li key={item}>{item}</li>)}</ul></article>)}</div></section>
-    <section className="section" aria-labelledby="trial-safety"><div className="eyebrow">Before starting</div><h2 id="trial-safety">Keep your account in your control</h2><ul className="guided-trial-safety">{definition.safety.map((item) => <li key={item}>{item}</li>)}</ul><GuidedTrialStart packId={definition.id} /></section>
-  </>;
+export const dynamic='force-dynamic';
+export default async function GuidedTrialRoomPage({params}:{params:Promise<{packId:string}>}){
+ const {packId}=await params;const definition=getGuidedTrialDefinition(packId);if(!definition)notFound();
+ return <div className="studio studio-entry"><div className="studio-top"><Link className="studio-wordmark" href="/">trycove<span>●</span></Link><Link href={`/projects/${encodeURIComponent(definition.product.id)}`}>Back to project</Link></div><div className="invitation"><div className="invitation-copy"><div className="product-identity"><span className="product-mark" aria-hidden="true">O</span><div><strong>Owl Pilot</strong><small>CKB Testnet</small></div></div><h1>Try Owl Pilot</h1><p>Explore the wallet and tell us what works or feels confusing.</p><GuidedTrialStart packId={definition.id}/></div><aside className="invitation-path"><h2>What you’ll explore</h2><p>Four small steps, at your own pace.</p><ol><li><span>1</span><div><strong>Account</strong><small>Find the owner and app-facing accounts</small></div></li><li><span>2</span><div><strong>Permissions</strong><small>Review what an app can request</small></div></li><li><span>3</span><div><strong>Allowance</strong><small>Understand the spending limit</small></div></li><li><span>4</span><div><strong>Recovery</strong><small>Explore receipts and session controls</small></div></li></ol></aside></div></div>;
 }

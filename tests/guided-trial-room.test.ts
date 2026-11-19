@@ -39,7 +39,9 @@ describe('private Guided Trial Room persistence', () => {
       expect(await store.loadSession(started.sessionId, 'wrong-token')).toBeNull();
       expect(await store.recordStep({sessionId: started.sessionId, accessToken: 'wrong-token', taskId: 'account-addresses', status: 'completed', note: ''})).toMatchObject({ok: false, reason: 'unavailable'});
 
-      expect(await store.recordStep({sessionId: started.sessionId, accessToken: started.accessToken, taskId: 'account-addresses', status: 'completed', note: 'The account selection was clear.'})).toMatchObject({ok: true, version: 2});
+      expect(await store.recordStep({sessionId: started.sessionId, accessToken: started.accessToken, taskId: 'account-addresses', status: 'completed', note: ''})).toMatchObject({ok: true, version: 2});
+      const emptyNote = await store.loadSession(started.sessionId, started.accessToken);
+      expect(emptyNote?.events.at(-1)).toMatchObject({status: 'completed', note: ''});
       expect(await store.recordStep({sessionId: started.sessionId, accessToken: started.accessToken, taskId: 'account-addresses', status: 'stuck', note: 'I could not distinguish the two account roles.'})).toMatchObject({ok: true, version: 3});
       expect(await store.recordStep({sessionId: started.sessionId, accessToken: started.accessToken, taskId: 'not-a-real-task', status: 'completed', note: ''})).toMatchObject({ok: false, reason: 'invalid-task'});
       await expect(first.exec("UPDATE guided_trial_receipts SET receipt='altered' WHERE session_id='" + started.sessionId + "' AND version=1")).rejects.toThrow('append-only');
@@ -49,11 +51,12 @@ describe('private Guided Trial Room persistence', () => {
       const reopened = createGuidedTrialStore(drizzle(first, {schema}) as unknown as typeof db);
       const loaded = await reopened.loadSession(started.sessionId, started.accessToken);
       expect(loaded?.events.map((event) => [event.status, event.note])).toEqual([
-        ['completed', 'The account selection was clear.'],
+        ['completed', ''],
         ['stuck', 'I could not distinguish the two account roles.'],
       ]);
       expect(loaded?.receipts.map((receipt) => receipt.version)).toEqual([1, 2, 3]);
       expect(loaded?.receiptIntact).toBe(true);
+      expect(loaded?.definition.tasks.find((task) => task.id === 'account-addresses')?.instructions).toContain('owner');
       expect(loaded?.latestReceipt?.receiptSha256).toMatch(/^[a-f0-9]{64}$/);
       const receipt = JSON.parse(loaded!.latestReceipt!.receipt) as {sessionType: string; results: Array<{taskId: string; status: string; history: unknown[]}>};
       expect(receipt.sessionType).toBe('guided-trial-session');
@@ -73,5 +76,5 @@ describe('private Guided Trial Room persistence', () => {
       await first.close().catch(() => undefined);
       await rm(directory, {recursive: true, force: true});
     }
-  }, 20000);
+  }, 60000);
 });

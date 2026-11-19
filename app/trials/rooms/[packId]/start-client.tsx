@@ -1,52 +1,14 @@
 'use client';
-
 import Link from 'next/link';
-import {useRouter} from 'next/navigation';
-import {useEffect, useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
+import {ArrowRight,Info,X} from 'lucide-react';
+import {Button} from '../../../../components/ui/button';
 import {startGuidedTrial} from './actions';
-
-type SavedSession = {id: string; startedAt: string};
-
-export function GuidedTrialStart({packId}: {packId: string}) {
-  const router = useRouter();
-  const [saved, setSaved] = useState<SavedSession[]>([]);
-  const [selfReported, setSelfReported] = useState(false);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    try {
-      const stored: unknown = JSON.parse(localStorage.getItem(`trycove-guided-trials:${packId}`) ?? '[]');
-      if (Array.isArray(stored)) setSaved(stored.filter((item): item is SavedSession => Boolean(item && typeof item.id === 'string' && /^[A-Za-z0-9_-]{16,40}$/.test(item.id) && typeof item.startedAt === 'string')));
-    } catch { setSaved([]); }
-  }, [packId]);
-
-  async function begin() {
-    if (!selfReported || busy) return;
-    setBusy(true);
-    setError('');
-    try {
-      const session = await startGuidedTrial(packId, true);
-      try {
-        const key = `trycove-guided-trials:${packId}`;
-        const previous: unknown = JSON.parse(localStorage.getItem(key) ?? '[]');
-        const entries = Array.isArray(previous) ? previous.filter((item): item is SavedSession => Boolean(item && typeof item.id === 'string' && /^[A-Za-z0-9_-]{16,40}$/.test(item.id) && typeof item.startedAt === 'string')) : [];
-        const next = [{id: session.sessionId, startedAt: session.startedAt}, ...entries.filter((item) => item.id !== session.sessionId)].slice(0, 12);
-        localStorage.setItem(key, JSON.stringify(next));
-        setSaved(next);
-      } catch { /* The private cookie and URL still support this session. */ }
-      router.push(`/trials/rooms/${packId}/sessions/${session.sessionId}`);
-    } catch {
-      setError('The private session could not be started. Reload and try again.');
-      setBusy(false);
-    }
-  }
-
-  return <div className="guided-trial-entry">
-    <label className="guided-trial-consent"><input type="checkbox" checked={selfReported} onChange={(event) => setSelfReported(event.target.checked)} /> I am recording my own attempt. I understand Trycove does not verify my identity or independently prove that I am a human tester.</label>
-    <button type="button" onClick={begin} disabled={!selfReported || busy}>{busy ? 'Starting private session…' : 'Start a private trial session'}</button>
-    <p className="muted">This browser stores a private access cookie and a non-secret session link for resume. The app only shows notes through this session cookie; the Trycove server/database operator can access stored text. Never enter addresses, keys or passkey details.</p>
-    {error && <p role="alert">{error}</p>}
-    {saved.length > 0 && <section aria-labelledby="resume-trial-session"><h3 id="resume-trial-session">Resume on this browser</h3><ul>{saved.map((session) => <li key={session.id}><Link className="source" href={`/trials/rooms/${packId}/sessions/${session.id}`}>Resume session started {new Date(session.startedAt).toLocaleString()}</Link></li>)}</ul><p className="muted">A saved link alone cannot open the session; its private HttpOnly cookie is also required.</p></section>}
-  </div>;
+type SavedSession={id:string;startedAt:string};
+const valid=(x:unknown):x is SavedSession=>!!x&&typeof x==='object'&&typeof (x as SavedSession).id==='string'&&/^[A-Za-z0-9_-]{16,40}$/.test((x as SavedSession).id)&&typeof (x as SavedSession).startedAt==='string';
+export function GuidedTrialStart({packId}:{packId:string}){
+ const guard=useRef(false);const [busy,setBusy]=useState(false);const [saved,setSaved]=useState<SavedSession[]>([]);const [error,setError]=useState('');const [direct,setDirect]=useState('');const [help,setHelp]=useState(false);
+ useEffect(()=>{let active=true;async function check(){try{const data:unknown=JSON.parse(localStorage.getItem(`trycove-guided-trials:${packId}`)??'[]');if(!Array.isArray(data))return;const entries=data.filter(valid);const checked=await Promise.all(entries.map(async item=>{try{const response=await fetch(`/trials/rooms/${encodeURIComponent(packId)}/sessions/${item.id}`,{cache:'no-store'});return response.ok?item:null}catch{return null}}));if(active)setSaved(checked.filter((x):x is SavedSession=>x!==null))}catch{}}void check();return()=>{active=false}},[packId]);
+ async function begin(){if(guard.current||direct)return;guard.current=true;setBusy(true);setError('');try{const session=await startGuidedTrial(packId,true);const url=`/trials/rooms/${encodeURIComponent(packId)}/sessions/${session.sessionId}`;setDirect(url);try{const key=`trycove-guided-trials:${packId}`;const value:unknown=JSON.parse(localStorage.getItem(key)??'[]');const entries=Array.isArray(value)?value.filter(valid):[];localStorage.setItem(key,JSON.stringify([{id:session.sessionId,startedAt:session.startedAt},...entries.filter(x=>x.id!==session.sessionId)].slice(0,12)))}catch{}try{window.location.assign(url);window.setTimeout(()=>{setBusy(false);setError('If your session did not open, use the link below.')},3000)}catch{setBusy(false);setError('Your session is ready. Open it using the link below.')}}catch{guard.current=false;setBusy(false);setError('Could not start a session. Please try again.')}}
+ return <div className="studio-start"><Button className="studio-primary" onClick={begin} disabled={busy||!!direct}>{busy?'Starting testing…':'Start testing'} <ArrowRight size={18} aria-hidden="true"/></Button><p className="studio-notice">By starting, you agree to record your own testnet experience. Notes are private to this session, but visible to the server operator. <button type="button" onClick={()=>setHelp(!help)} aria-expanded={help} aria-controls="trial-privacy"><Info size={15} aria-hidden="true"/> Privacy & safety</button></p>{help&&<div className="privacy-panel" id="trial-privacy"><button type="button" aria-label="Close privacy details" onClick={()=>setHelp(false)}><X size={16}/></button><strong>Before you begin</strong><p>Use testnet only. Don’t put addresses, passkeys, private keys or signatures in notes. Outcomes are self-reported and do not prove wallet activity.</p></div>}{direct&&<p role="status">Your session is ready. <a href={direct}>Open your session</a></p>}{error&&<p role="alert">{error}</p>}{saved.length>0&&<div className="resume-list"><strong>Resume your trial</strong>{saved.map(s=><Link key={s.id} href={`/trials/rooms/${encodeURIComponent(packId)}/sessions/${s.id}`}>Session started {new Date(s.startedAt).toLocaleString()} →</Link>)}</div>}</div>;
 }

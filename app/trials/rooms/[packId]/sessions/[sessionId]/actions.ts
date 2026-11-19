@@ -1,7 +1,7 @@
 'use server';
 
 import {cookies} from 'next/headers';
-import {notFound, redirect} from 'next/navigation';
+import {notFound} from 'next/navigation';
 import {revalidatePath} from 'next/cache';
 import {getGuidedTrialDefinition} from '../../../../../../lib/trials/room-definitions';
 import {GuidedTrialStatusSchema, guidedTrialStore} from '../../../../../../lib/trials/guided-room-store';
@@ -40,5 +40,5 @@ export async function finishGuidedTrial(formData: FormData) {
   const result = await guidedTrialStore.finishSession({sessionId, accessToken: token});
   if (!result.ok) notFound();
   revalidatePath(`/trials/rooms/${packId}/sessions/${sessionId}`);
-  redirect(`/trials/rooms/${packId}/sessions/${sessionId}`);
+  return {ok: true};
 }

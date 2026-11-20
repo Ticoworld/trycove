@@ -2,13 +2,16 @@ import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {and,desc,eq,inArray} from 'drizzle-orm';
 import {db} from '../../../lib/db';
-import {candidateCapabilities,evidence,followUps,intelligenceAssessments,lifecycleEvidence,lifecycleVerificationRuns,needItems,opportunities,opportunityPriorWorkReconciliations,opportunityQualificationReviews,projects,technicalFootprints,trialEvidenceRecords,trialRuns} from '../../../lib/schema';
+import {candidateCapabilities,evidence,followUps,handoffReports,intelligenceAssessments,lifecycleEvidence,lifecycleVerificationRuns,needItems,opportunities,opportunityPriorWorkReconciliations,opportunityQualificationReviews,projects,technicalFootprints,trialEvidenceRecords,trialRuns} from '../../../lib/schema';
 import {QualificationReviewReportSchema} from '../../../lib/intelligence/qualification';
 import {PriorWorkR1ReportSchema} from '../../../lib/intelligence/prior-work-reconciliation';
 import {FootprintLink} from '../../components/footprint';
 import {IntelligenceAssessment} from '../../components/assessment';
 import {LifecycleVerification} from '../../components/lifecycle-verification';
 import {addFollowUp} from './actions';
+import {ConnectionHandoff} from './connection-handoff';
+import {hasOrganizerSession} from '../../../lib/organizer-auth';
+import {getGuidedTrialForOpportunity} from '../../../lib/trials/room-definitions';
 
 export const dynamic='force-dynamic';
 type ConnectionDetails={boundary?:string;adapter?:string;findings?:Array<{dimension:string;state:string;explanation:string}>;providerRevision?:string;consumerRevision?:string};
@@ -19,6 +22,8 @@ function safeExternalUrl(raw:string){
 
 export default async function Page({params}:{params:Promise<{id:string}>}){
  const {id}=await params;
+ const organizer=await hasOrganizerSession();
+ const linkedTrial=getGuidedTrialForOpportunity(id);
  const [opportunity]=await db.select().from(opportunities).where(eq(opportunities.id,id));
  if(!opportunity)notFound();
  const allProjects=await db.select().from(projects);
@@ -30,7 +35,7 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
   db.select().from(lifecycleVerificationRuns).where(inArray(lifecycleVerificationRuns.capabilityId,capabilityIds)).orderBy(desc(lifecycleVerificationRuns.checkedAt)),
   db.select().from(lifecycleEvidence).where(inArray(lifecycleEvidence.capabilityId,capabilityIds)).orderBy(desc(lifecycleEvidence.checkedAt)),
  ]):[[],[]];
- const [sourceEvidence,trials,history,consumerFootprints,providerFootprints,assessments,receipts]=await Promise.all([
+ const [sourceEvidence,trials,history,consumerFootprints,providerFootprints,assessments,receipts,connectionReports]=await Promise.all([
   db.select().from(evidence).where(eq(evidence.opportunityId,id)),
   db.select().from(trialRuns).where(eq(trialRuns.opportunityId,id)),
   db.select().from(followUps).where(eq(followUps.opportunityId,id)).orderBy(desc(followUps.createdAt)),
@@ -38,6 +43,7 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
   opportunity.projectB?db.select().from(technicalFootprints).where(eq(technicalFootprints.projectId,opportunity.projectB)).orderBy(desc(technicalFootprints.analyzedAt)).limit(1):Promise.resolve([]),
   db.select().from(intelligenceAssessments).where(eq(intelligenceAssessments.opportunityId,id)).orderBy(desc(intelligenceAssessments.createdAt)).limit(1),
   db.select({id:trialEvidenceRecords.id,mode:trialEvidenceRecords.mode,result:trialEvidenceRecords.result,evidenceLevel:trialEvidenceRecords.evidenceLevel,createdAt:trialEvidenceRecords.createdAt}).from(trialEvidenceRecords).where(eq(trialEvidenceRecords.opportunityId,id)).orderBy(desc(trialEvidenceRecords.createdAt)).limit(20),
+  db.select().from(handoffReports).where(eq(handoffReports.opportunityId,id)).orderBy(desc(handoffReports.createdAt)),
  ]);
  const [savedQualification,savedPriorWork]=await Promise.all([
   db.select().from(opportunityQualificationReviews).where(eq(opportunityQualificationReviews.opportunityId,id)).orderBy(desc(opportunityQualificationReviews.createdAt)).limit(1),
@@ -164,19 +170,20 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
     {assessment?<IntelligenceAssessment assessment={assessment} consumer={usedConsumer[0]} provider={usedProvider[0]}/>:<p className="muted">No structured intelligence assessment has been recorded for this opportunity.</p>}
     <LifecycleVerification claims={capabilities} runs={lifecycleRuns} evidence={lifecycleItems}/>
     <h2>Experiment</h2><p>{opportunity.experiment}</p>
+    <p><Link className="source" href="/results">Open unified Results ↗</Link>{linkedTrial&&<> · <Link className="source" href={`/trials/rooms/${linkedTrial.id}`}>Open guided trial room ↗</Link></>}</p>
     {trials.map(trial=><div className="card" key={trial.id}><span className="tag">Independent trial · {trial.result}</span><p>{trial.details}</p></div>)}
     <h2>Execution receipts</h2>
     {receipts.length?receipts.map(receipt=><p key={receipt.id}><Link className="source" href={`/trials/${encodeURIComponent(receipt.id)}`}>Level {receipt.evidenceLevel} · {receipt.mode} · {receipt.result} →</Link></p>):<p className="muted">No isolated execution receipt is attached.</p>}
+    <ConnectionHandoff opportunityId={id} authorized={organizer} candidates={capabilities.map(c=>({id:c.id,capability:c.capability,summary:c.summary,uncertainty:c.uncertainty,nextAction:c.nextAction,consumer:allProjects.find(p=>p.id===c.consumerProjectId)?.name??c.consumerProjectId,provider:allProjects.find(p=>p.id===c.providerProjectId)?.name??c.providerProjectId}))} events={history.filter(e=>e.handoffReportId&&connectionReports.some(r=>r.id===e.handoffReportId)).map(e=>({id:e.id,kind:e.kind,note:organizer||e.publicNote?e.note:'',sourceUrl:organizer||e.publicNote?e.sourceUrl:null,publicNote:e.publicNote,createdAt:e.createdAt.toISOString()}))} reports={connectionReports.filter(r=>r.kind==='connection').map(r=>({id:r.id,title:(JSON.parse(r.content) as {title?:string}).title??'Connection Brief',url:`/share/${r.shareToken}`,revoked:!!r.revokedAt}))}/>
     <h2>Follow-up ledger / 跟进记录</h2>
     <p>Record observations as they happen. Entries do not imply maintainer participation or adoption.</p>
-    <div className="timeline">{history.map(item=><article key={item.id}><span className="tag">{item.kind} · {item.createdAt.toISOString().slice(0,10)}</span><p>{item.note}</p></article>)}{!history.length&&<p className="muted">No follow-ups recorded yet.</p>}</div>
-    <form action={addFollowUp} className="card">
+    <div className="timeline">{history.map(item=><article key={item.id}><span className="tag">{item.kind} · {item.createdAt.toISOString().slice(0,10)}</span>{(organizer||item.publicNote)&&<p>{item.note}</p>}</article>)}{!history.length&&<p className="muted">No follow-ups recorded yet.</p>}</div>
+    {organizer?<form action={addFollowUp} className="card">
      <input type="hidden" name="id" value={id}/>
      <label htmlFor="kind">Entry type</label><select name="kind" id="kind">{['investigation','introduction','response','attempt','finding','fix','adoption','rejection','follow-up','dismissed','revised','advanced'].map(kind=><option key={kind}>{kind}</option>)}</select>
      <label htmlFor="note">What happened?</label><textarea id="note" name="note" required maxLength={2000}/>
-     <label htmlFor="key">Write access key</label><input id="key" name="key" type="password" required autoComplete="off"/>
-     <p>Writing is disabled unless write access is configured on the server.</p><button>Add to ledger</button>
-    </form>
+     <p>Entries are append-only. Status labels record what was reported; they do not independently verify an integration or adoption.</p><button>Add to ledger</button>
+    </form>:<p className="muted"><Link href={`/organizer?return=${encodeURIComponent(`/opportunities/${id}`)}`}>Sign in as organizer</Link> to inspect private follow-up notes or append an event.</p>}
    </div>
    <aside className="stack">
     <div className="card"><span className="tag">Source evidence / 证据</span>{sourceEvidence.map(item=>{const href=safeExternalUrl(item.sourceUrl);return <div key={item.id}><p>{item.claim}</p>{href&&<a className="source" href={href} target="_blank" rel="noreferrer">Inspect source ↗</a>}<p>{item.verification} · {item.observedAt.toISOString().slice(0,10)}</p></div>})}</div>

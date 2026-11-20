@@ -1,0 +1,9 @@
+import Link from 'next/link';
+import {hasOrganizerSession} from '../../lib/organizer-auth';
+import {signInOrganizer,signOutOrganizer} from './actions';
+export const dynamic='force-dynamic';
+function safeReturn(value:string){return value.startsWith('/')&&!value.startsWith('//')&&!value.startsWith('/\\')?value:'/results'}
+export default async function OrganizerPage({searchParams}:{searchParams:Promise<{return?:string;error?:string}>}){
+ const query=await searchParams,returnTo=safeReturn(query.return??'/results'),authorized=await hasOrganizerSession(),enabled=Boolean(process.env.TRYCOVE_WRITE_KEY);
+ return <section className="hero"><span className="eyebrow">Organizer access</span><h1>{authorized?'Follow-up workspace':'Sign in to record follow-up'}</h1><p>Organizer access protects report publication and event records. It does not grant access to private tester sessions.</p>{authorized?<><p className="tag">Signed in for this browser session</p><p><Link className="button" href={returnTo}>Return to the workspace</Link></p><form action={signOutOrganizer}><input type="hidden" name="returnTo" value={returnTo}/><button className="button secondary">Sign out</button></form></>:enabled?<form action={signInOrganizer} className="card" style={{maxWidth:520}}><input type="hidden" name="returnTo" value={returnTo}/><label htmlFor="organizer-key">Organizer key</label><input id="organizer-key" name="key" type="password" autoComplete="current-password" required/><button className="button" style={{marginTop:14}}>Sign in</button>{query.error==='invalid'&&<p role="alert">Organizer key did not match.</p>}</form>:<p className="card">Organizer access is disabled until <code>TRYCOVE_WRITE_KEY</code> is configured on the server.</p>}</section>
+}

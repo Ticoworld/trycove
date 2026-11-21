@@ -3,7 +3,7 @@ import {basename} from 'node:path';
 import {PGlite} from '@electric-sql/pglite';
 import {Client} from 'pg';
 
-const files=['0001_initial.sql','0002_connections.sql','0003_footprints.sql','0004_intelligence.sql','0005_trial_evidence.sql','0006_project_repositories.sql','0007_signal_intents.sql','0008_candidate_lifecycle.sql','0009_need_items.sql','0010_need_taxonomy.sql','0011_need_lineage_and_decisions.sql','0012_opportunity_qualification.sql','0013_opportunity_prior_work_reconciliations.sql','0014_external_source_snapshots.sql','0015_guided_trial_rooms.sql','0016_devrel_handoffs.sql','0017_trial_packs.sql'].map(name=>`migrations/${name}`);
+const files=['0001_initial.sql','0002_connections.sql','0003_footprints.sql','0004_intelligence.sql','0005_trial_evidence.sql','0006_project_repositories.sql','0007_signal_intents.sql','0008_candidate_lifecycle.sql','0009_need_items.sql','0010_need_taxonomy.sql','0011_need_lineage_and_decisions.sql','0012_opportunity_qualification.sql','0013_opportunity_prior_work_reconciliations.sql','0014_external_source_snapshots.sql','0015_guided_trial_rooms.sql','0016_devrel_handoffs.sql','0017_trial_packs.sql','0018_identity.sql'].map(name=>`migrations/${name}`);
 async function main(){
  const migrations=await Promise.all(files.map(async path=>({version:basename(path).slice(0,4),sql:await readFile(path,'utf8')})));
  if(process.env.DATABASE_URL){

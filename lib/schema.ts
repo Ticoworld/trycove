@@ -1,4 +1,4 @@
-import {pgTable,text,timestamp,serial,integer,index,uniqueIndex,boolean} from 'drizzle-orm/pg-core';
+import {pgTable,text,timestamp,serial,integer,index,uniqueIndex,boolean,uuid,primaryKey} from 'drizzle-orm/pg-core';
 export const projects=pgTable('projects',{id:text('id').primaryKey(),name:text('name').notNull(),description:text('description').notNull(),website:text('website'),repository:text('repository'),sourceUrl:text('source_url').notNull(),revision:text('revision').notNull(),observedAt:timestamp('observed_at',{withTimezone:true}).notNull()});
 export const projectRepositories=pgTable('project_repositories',{id:text('id').primaryKey(),projectId:text('project_id').notNull().references(()=>projects.id),repository:text('repository').notNull(),role:text('role').notNull(),sourceUrl:text('source_url').notNull(),revision:text('revision').notNull(),verification:text('verification').notNull(),observedAt:timestamp('observed_at',{withTimezone:true}).notNull()});
 export const opportunities=pgTable('opportunities',{id:text('id').primaryKey(),projectA:text('project_a').notNull().references(()=>projects.id),projectB:text('project_b').references(()=>projects.id),kind:text('kind').notNull(),problem:text('problem').notNull(),reasoning:text('reasoning').notNull(),requirements:text('requirements').notNull(),experiment:text('experiment').notNull(),status:text('status').notNull()});
@@ -37,3 +37,35 @@ export const trialPackVersions = pgTable('trial_pack_versions', {
   definition: text('definition').notNull(),
   createdAt: timestamp('created_at', {withTimezone:true}).notNull().defaultNow(),
 }, row => [uniqueIndex('trial_pack_versions_key').on(row.packId, row.version)]);
+
+export const appUsers = pgTable('app_users', {
+  id: uuid('id').primaryKey(),
+  organizer: boolean('organizer').notNull().default(false),
+  createdAt: timestamp('created_at', {withTimezone: true}).notNull().defaultNow(),
+});
+export const projectMemberships = pgTable('project_memberships', {
+  projectId: text('project_id').notNull().references(() => projects.id),
+  userId: uuid('user_id').notNull().references(() => appUsers.id),
+  role: text('role', {enum: ['owner', 'maintainer']}).notNull(),
+}, table => [primaryKey({columns: [table.projectId, table.userId]})]);
+export const ownershipClaims = pgTable('ownership_claims', {
+  id: uuid('id').primaryKey(),
+  projectId: text('project_id').notNull().references(() => projects.id),
+  userId: uuid('user_id').notNull().references(() => appUsers.id),
+  repository: text('repository').notNull(),
+  method: text('method', {enum: ['personal', 'organization', 'review']}).notNull(),
+  status: text('status', {enum: ['pending', 'approved', 'rejected', 'expired', 'revoked']}).notNull(),
+  evidence: text('evidence').notNull(),
+  reviewerId: uuid('reviewer_id').references(() => appUsers.id),
+  expiresAt: timestamp('expires_at', {withTimezone: true}).notNull(),
+  decidedAt: timestamp('decided_at', {withTimezone: true}),
+  createdAt: timestamp('created_at', {withTimezone: true}).notNull().defaultNow(),
+});
+export const authorizationAudit = pgTable('authorization_audit', {
+  id: serial('id').primaryKey(),
+  actorId: uuid('actor_id').notNull().references(() => appUsers.id),
+  projectId: text('project_id').references(() => projects.id),
+  action: text('action').notNull(),
+  detail: text('detail').notNull(),
+  createdAt: timestamp('created_at', {withTimezone: true}).notNull().defaultNow(),
+});

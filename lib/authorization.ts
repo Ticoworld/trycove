@@ -2,12 +2,12 @@ import {and, eq} from 'drizzle-orm';
 import {cache} from 'react';
 import {db} from './db';
 import {appUsers, projectMemberships, projects} from './schema';
-import {authConfigured, serverAuth} from './supabase-auth';
+import {authConfigured, serverAuth} from './neon-auth';
 
 export const authenticatedUser = cache(async () => {
   if (!authConfigured()) return null;
-  const {data, error} = await (await serverAuth()).auth.getUser();
-  return error ? null : data.user;
+  const {data, error} = await serverAuth().getSession();
+  return error ? null : data?.user ?? null;
 });
 
 export async function ensureProfile(id: string) {

@@ -1,5 +1,5 @@
 import {authenticatedUser, isOrganizer} from './authorization';
-import {authConfigured} from './supabase-auth';
+import {authConfigured} from './neon-auth';
 import {createHmac,randomBytes,timingSafeEqual} from 'node:crypto';
 import {cookies} from 'next/headers';
 

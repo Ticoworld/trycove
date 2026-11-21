@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import {eq, or} from 'drizzle-orm';
 import {authenticatedUser, ensureProfile, isOrganizer} from '../../lib/authorization';
-import {authConfigured, emailOtpEnabled} from '../../lib/supabase-auth';
+import {authConfigured} from '../../lib/neon-auth';
 import {db} from '../../lib/db';
 import {ownershipClaims, projectMemberships, projects} from '../../lib/schema';
-import {bootstrapOrganizer, githubLogin, logout, sendCode, verifyCode} from './actions';
+import {bootstrapOrganizer, githubLogin, logout} from './actions';
 import {manageMaintainer, reviewClaim, revokeClaim, startClaim, verifyClaim} from './claims';
 
 export const dynamic = 'force-dynamic';
 
-export default async function Account({searchParams}: {searchParams: Promise<{otp?: string; error?: string; project?: string}>}) {
+export default async function Account({searchParams}: {searchParams: Promise<{error?: string; project?: string}>}) {
   const [query, user] = await Promise.all([searchParams, authenticatedUser()]);
   if (!user) return <section className="section stack">
     <h1>Sign in to Trycove</h1>
@@ -17,11 +17,7 @@ export default async function Account({searchParams}: {searchParams: Promise<{ot
     {authConfigured() && process.env.TRYCOVE_PUBLIC_URL
       ? <form action={githubLogin}><button className="button">Continue with GitHub</button></form>
       : <p>GitHub sign-in is unavailable.</p>}
-    {emailOtpEnabled() ? <form action={query.otp === 'sent' ? verifyCode : sendCode} className="card stack">
-      <label>Email <input name="email" type="email" autoComplete="email" required/></label>
-      {query.otp === 'sent' && <label>Email code <input name="code" inputMode="numeric" autoComplete="one-time-code" required/></label>}
-      <button className="button">{query.otp === 'sent' ? 'Verify code' : 'Email me a code'}</button>
-    </form> : <p>Email sign-in is unavailable until a custom SMTP sender is configured.</p>}
+    <p>Email sign-in is pending production delivery configuration.</p>
     <Link href="/trials">Explore trials as a guest</Link>
   </section>;
 

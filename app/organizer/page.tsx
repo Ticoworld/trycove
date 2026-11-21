@@ -1,4 +1,4 @@
-import {authConfigured} from '../../lib/supabase-auth';
+import {authConfigured} from '../../lib/neon-auth';
 import Link from 'next/link';
 import {hasOrganizerSession} from '../../lib/organizer-auth';
 import {signInOrganizer,signOutOrganizer} from './actions';

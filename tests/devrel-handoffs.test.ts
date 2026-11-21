@@ -12,6 +12,7 @@ import {saveDraft,changeState} from '../app/organizer/trial-packs/actions';
 import {readPackVersion, saveTrialDraft, setTrialPackState} from '../lib/trials/trial-packs';
 import {eq} from 'drizzle-orm';
 
+vi.mock('../lib/neon-auth', () => ({authConfigured: () => false}));
 vi.mock('../lib/organizer-auth', async importOriginal => ({...await importOriginal<typeof import('../lib/organizer-auth')>(), hasOrganizerSession: vi.fn()}));
 import {hasOrganizerSession} from '../lib/organizer-auth';
 

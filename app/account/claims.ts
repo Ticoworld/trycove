@@ -1,5 +1,6 @@
 'use server';
 
+import {linkedGitHubId} from '../../lib/neon-auth';
 import {randomUUID} from 'node:crypto';
 import {and, eq, gt} from 'drizzle-orm';
 import {redirect} from 'next/navigation';
@@ -45,7 +46,7 @@ export async function startClaim(form: FormData) {
   const user = await requireUser();
   const projectId = z.string().min(1).max(200).parse(form.get('projectId'));
   const {project, repository} = await authority(projectId);
-  const githubId = user.identities?.find(identity => identity.provider === 'github')?.id;
+  const githubId = await linkedGitHubId().catch(() => undefined);
   const method = repository && githubId
     ? repository.owner.type === 'Organization' ? 'organization' : String(repository.owner.id) === githubId ? 'personal' : 'review'
     : 'review';
@@ -93,7 +94,7 @@ export async function verifyClaim(form: FormData) {
   if (!claim || claim.method === 'review') throw new Error('Claim is unavailable for automatic verification.');
   const {repository} = await authority(claim.projectId);
   const evidence = JSON.parse(claim.evidence) as {repositoryId?: number; githubId?: string};
-  const githubId = user.identities?.find(identity => identity.provider === 'github')?.id;
+  const githubId = await linkedGitHubId().catch(() => undefined);
   if (!repository || repository.id !== evidence.repositoryId || !githubId || githubId !== evidence.githubId) {
     throw new Error('Repository or GitHub identity changed. Request organizer review.');
   }

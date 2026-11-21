@@ -7,9 +7,9 @@ import {manageMaintainer} from '../app/account/claims';
 
 const mocks = vi.hoisted(() => ({getUser: vi.fn(), db: {current: null as unknown}}));
 vi.mock('../lib/db', () => ({get db() {return mocks.db.current;}}));
-vi.mock('../lib/supabase-auth', () => ({
+vi.mock('../lib/neon-auth', () => ({
   authConfigured: () => true,
-  serverAuth: async () => ({auth: {getUser: mocks.getUser}}),
+  serverAuth: () => ({getSession: mocks.getUser}),
 }));
 
 it('isolates project roles across authenticated accounts and rejects anonymous access', async () => {

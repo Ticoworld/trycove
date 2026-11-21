@@ -32,7 +32,8 @@ it('imports reviewed public records and approved report bytes idempotently witho
    await expect(importPublicHistory(manifest,sha256(manifest),report,sha256(report),database))
     .resolves.toEqual({projects:1,sources:1,repositories:0,exportDigest:sha256(report)});
   }
-  const counts=await (native ?? instance!).query('SELECT (SELECT count(*) FROM guided_trial_sessions)::int AS sessions,(SELECT count(*) FROM historical_feedback)::int AS reports');
+  const countSql='SELECT (SELECT count(*) FROM guided_trial_sessions)::int AS sessions,(SELECT count(*) FROM historical_feedback)::int AS reports';
+  const counts=native ? await native.query(countSql) : await instance!.query(countSql);
   expect(counts.rows).toEqual([{sessions:0,reports:1}]);
  } finally {await native?.end();await instance?.close();}
 },60000);

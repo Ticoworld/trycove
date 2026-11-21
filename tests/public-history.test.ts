@@ -1,16 +1,24 @@
 import {readFile} from 'node:fs/promises';
 import {PGlite} from '@electric-sql/pglite';
 import {drizzle} from 'drizzle-orm/pglite';
+import {Client} from 'pg';
+import {drizzle as pgDrizzle} from 'drizzle-orm/node-postgres';
 import {expect,it} from 'vitest';
 import {importPublicHistory,sha256} from '../lib/public-history';
 import {db} from '../lib/db';
 
 it('imports reviewed public records and approved report bytes idempotently without a trial session',async()=>{
- const instance=new PGlite();
+ const nativeUrl=process.env.TRYCOVE_TEST_NEON_URL;
+ const instance=nativeUrl ? null : new PGlite();
+ const native=nativeUrl ? new Client({connectionString:nativeUrl}) : null;
+ if (native) {
+  if (process.env.NEON_BRANCH !== 'trycove-stage2-verification') throw new Error('Use the isolated Neon verification branch.');
+  await native.connect();
+ }
  try {
   const names=['initial','connections','footprints','intelligence','trial_evidence','project_repositories','signal_intents','candidate_lifecycle','need_items','need_taxonomy','need_lineage_and_decisions','opportunity_qualification','opportunity_prior_work_reconciliations','external_source_snapshots','guided_trial_rooms','devrel_handoffs','trial_packs','identity','participation','hosted_evidence'];
-  for (const [index,name] of names.entries()) await instance.exec(await readFile('migrations/'+String(index+1).padStart(4,'0')+'_'+name+'.sql','utf8'));
-  const database=drizzle(instance) as unknown as typeof db;
+  for (const [index,name] of names.entries()) if (instance) await instance.exec(await readFile('migrations/'+String(index+1).padStart(4,'0')+'_'+name+'.sql','utf8'));
+  const database=(native ? pgDrizzle(native) : drizzle(instance!)) as unknown as typeof db;
   const time='2026-01-01T00:00:00Z';
   const id='ckbuilder-owlpilot-67';
   const provenance={sourceUrl:'https://example.org/source',revision:'fixture',observedAt:time};
@@ -24,7 +32,7 @@ it('imports reviewed public records and approved report bytes idempotently witho
    await expect(importPublicHistory(manifest,sha256(manifest),report,sha256(report),database))
     .resolves.toEqual({projects:1,sources:1,repositories:0,exportDigest:sha256(report)});
   }
-  const counts=await instance.query('SELECT (SELECT count(*) FROM guided_trial_sessions)::int AS sessions,(SELECT count(*) FROM historical_feedback)::int AS reports');
+  const counts=await (native ?? instance!).query('SELECT (SELECT count(*) FROM guided_trial_sessions)::int AS sessions,(SELECT count(*) FROM historical_feedback)::int AS reports');
   expect(counts.rows).toEqual([{sessions:0,reports:1}]);
- } finally {await instance.close();}
+ } finally {await native?.end();await instance?.close();}
 },60000);

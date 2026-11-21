@@ -92,3 +92,10 @@ export const feedbackListingConsents = pgTable('feedback_listing_consents', {
   reportId: text('report_id').primaryKey().references(() => handoffReports.id),
   consentedAt: timestamp('consented_at', {withTimezone: true}).notNull().defaultNow(),
 });
+
+export const historicalFeedback = pgTable('historical_feedback', {
+  sha256: text('sha256').primaryKey(),
+  projectId: text('project_id').notNull().references(() => projects.id),
+  exportJson: text('export_json').notNull(),
+  importedAt: timestamp('imported_at', {withTimezone: true}).notNull().defaultNow(),
+});

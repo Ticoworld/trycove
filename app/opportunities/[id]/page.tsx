@@ -11,7 +11,7 @@ import {LifecycleVerification} from '../../components/lifecycle-verification';
 import {addFollowUp} from './actions';
 import {ConnectionHandoff} from './connection-handoff';
 import {hasOrganizerSession} from '../../../lib/organizer-auth';
-import {getGuidedTrialForOpportunity} from '../../../lib/trials/room-definitions';
+import {listPublishedTrials} from '../../../lib/trials/trial-packs';
 
 export const dynamic='force-dynamic';
 type ConnectionDetails={boundary?:string;adapter?:string;findings?:Array<{dimension:string;state:string;explanation:string}>;providerRevision?:string;consumerRevision?:string};
@@ -23,7 +23,7 @@ function safeExternalUrl(raw:string){
 export default async function Page({params}:{params:Promise<{id:string}>}){
  const {id}=await params;
  const organizer=await hasOrganizerSession();
- const linkedTrial=getGuidedTrialForOpportunity(id);
+ const linkedTrial=(await listPublishedTrials()).find(room=>room.problemMap?.opportunityId===id);
  const [opportunity]=await db.select().from(opportunities).where(eq(opportunities.id,id));
  if(!opportunity)notFound();
  const allProjects=await db.select().from(projects);

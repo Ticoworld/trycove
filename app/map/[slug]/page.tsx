@@ -2,7 +2,7 @@ import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {getProblemDomain, relationshipStatus, UNCLASSIFIED_DOMAIN, type ClassificationEvidence} from '../../../lib/problem-map';
 import {getProblemDomainData} from '../../../lib/problem-map-data';
-import {getGuidedTrialForOpportunity} from '../../../lib/trials/room-definitions';
+import {listPublishedTrials} from '../../../lib/trials/trial-packs';
 
 export const dynamic = 'force-dynamic';
 
@@ -58,6 +58,7 @@ export default async function ProblemDomainPage({params}: {params: Promise<{slug
   const sharedCategoryGroups = [...sharedCategories.entries()].filter(([,products]) => new Set(products).size > 1).map(([category,products]) => ({category,products:[...new Set(products)].sort()}));
   const domainOpportunities = data.opportunities.filter((row) => data.products.some((product) => product.id === row.projectA || product.id === row.projectB));
   const feedbackNeeds = data.needs.filter((need) => (need.category === 'user-testing' || need.category === 'adoption') && ['explicit-request', 'explicit-offer'].includes(need.stance));
+  const rooms = await listPublishedTrials();
   const feedbackOpportunities = domainOpportunities.filter((row) => row.kind === 'user-testing');
 
   return <>
@@ -139,7 +140,7 @@ export default async function ProblemDomainPage({params}: {params: Promise<{slug
 
     <section className="section" aria-labelledby="people-needs">
       <div className="eyebrow">Adoption and testing evidence</div><h2 id="people-needs">Products asking for feedback or adoption</h2>
-      {feedbackOpportunities.length || feedbackNeeds.length ? <div className="grid">{feedbackOpportunities.map((opportunity) => {const room=getGuidedTrialForOpportunity(opportunity.id);return <article className="card" id={opportunity.id} key={opportunity.id}><span className="tag">Explicit source-backed user-feedback request</span><h3><Link href={`/projects/${encodeURIComponent(opportunity.projectA)}`}>{names.get(opportunity.projectA) ?? 'Product'}</Link></h3><blockquote><p>{opportunity.problem}</p></blockquote><p>{relationshipStatus({opportunityKind:opportunity.kind,opportunityStatus:opportunity.status,providerExists:false}).detail}</p>{(evidenceByOpportunity.get(opportunity.id) ?? []).slice(0, 2).map((row) => <p key={row.id}><ClaimLink href={row.sourceUrl}>{row.verification}</ClaimLink></p>)}<div className="bar"><Link className="arrow" href={`/opportunities/${encodeURIComponent(opportunity.id)}`}>Review request and questions →</Link>{room&&<Link className="button secondary" href={`/trials/rooms/${room.id}`}>Open its Guided Trial Room →</Link>}</div></article>})}{feedbackNeeds.map((need) => <article className="card" key={need.id}><span className="tag">Automated need classification · {need.category} / {need.stance}</span><h3>{names.get(need.projectId) ?? 'Product'}</h3><blockquote><p>{need.excerpt}</p></blockquote><p>{need.verification}</p><ClaimLink href={need.sourceUrl}>inspect source →</ClaimLink></article>)}</div> : <p className="muted">No explicit user-testing or adoption request is supported by this domain's loaded records. A directory testnet flag or app status is not treated as a request for testers.</p>}
+      {feedbackOpportunities.length || feedbackNeeds.length ? <div className="grid">{feedbackOpportunities.map((opportunity) => {const room=rooms.find(room=>room.problemMap?.opportunityId===opportunity.id);return <article className="card" id={opportunity.id} key={opportunity.id}><span className="tag">Explicit source-backed user-feedback request</span><h3><Link href={`/projects/${encodeURIComponent(opportunity.projectA)}`}>{names.get(opportunity.projectA) ?? 'Product'}</Link></h3><blockquote><p>{opportunity.problem}</p></blockquote><p>{relationshipStatus({opportunityKind:opportunity.kind,opportunityStatus:opportunity.status,providerExists:false}).detail}</p>{(evidenceByOpportunity.get(opportunity.id) ?? []).slice(0, 2).map((row) => <p key={row.id}><ClaimLink href={row.sourceUrl}>{row.verification}</ClaimLink></p>)}<div className="bar"><Link className="arrow" href={`/opportunities/${encodeURIComponent(opportunity.id)}`}>Review request and questions →</Link>{room&&<Link className="button secondary" href={`/trials/rooms/${room.id}`}>Open its Guided Trial Room →</Link>}</div></article>})}{feedbackNeeds.map((need) => <article className="card" key={need.id}><span className="tag">Automated need classification · {need.category} / {need.stance}</span><h3>{names.get(need.projectId) ?? 'Product'}</h3><blockquote><p>{need.excerpt}</p></blockquote><p>{need.verification}</p><ClaimLink href={need.sourceUrl}>inspect source →</ClaimLink></article>)}</div> : <p className="muted">No explicit user-testing or adoption request is supported by this domain's loaded records. A directory testnet flag or app status is not treated as a request for testers.</p>}
       <p className="muted">Opening a room does not create a tester result. Only saved task observations appear in its separate private receipt.</p>
     </section>
 

@@ -8,8 +8,8 @@ import * as schema from '../lib/schema';
 import {db} from '../lib/db';
 import {createGuidedTrialStore} from '../lib/trials/guided-room-store';
 
-const migrationFiles = Array.from({length: 16}, (_, index) => `migrations/${String(index + 1).padStart(4, '0')}_${[
-  'initial', 'connections', 'footprints', 'intelligence', 'trial_evidence', 'project_repositories', 'signal_intents', 'candidate_lifecycle', 'need_items', 'need_taxonomy', 'need_lineage_and_decisions', 'opportunity_qualification', 'opportunity_prior_work_reconciliations', 'external_source_snapshots', 'guided_trial_rooms', 'devrel_handoffs',
+const migrationFiles = Array.from({length: 17}, (_, index) => `migrations/${String(index + 1).padStart(4, '0')}_${[
+  'initial', 'connections', 'footprints', 'intelligence', 'trial_evidence', 'project_repositories', 'signal_intents', 'candidate_lifecycle', 'need_items', 'need_taxonomy', 'need_lineage_and_decisions', 'opportunity_qualification', 'opportunity_prior_work_reconciliations', 'external_source_snapshots', 'guided_trial_rooms', 'devrel_handoffs', 'trial_packs',
 ][index]}.sql`);
 
 async function migrate(instance: PGlite) {

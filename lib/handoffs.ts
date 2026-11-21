@@ -47,23 +47,29 @@ export async function exportFeedbackReport(
   }});
 }
 
+export async function feedbackRequest(definition: import('./trials/room-definitions').GuidedTrialDefinition, database = db) {
+  if (definition.request) return definition.request;
+  const opportunityId = definition.problemMap?.opportunityId;
+  const [source] = opportunityId ? await database.select().from(evidence)
+    .where(eq(evidence.opportunityId, opportunityId)).orderBy(asc(evidence.id)).limit(1) : [];
+  return {kind: 'externally-sourced' as const, text: source?.claim ?? 'See the saved testing request.',
+    sourceUrl: source?.sourceUrl ?? definition.problemMap?.sourceUrl,
+    revision: source?.revision ?? null, verification: source?.verification};
+}
+
 export async function createFeedbackReport(input:{sessionId:string;sessionToken:string;approvedTaskIds:string[]},database:typeof db=db,trialStore=guidedTrialStore) {
   const loaded=await trialStore.loadSession(input.sessionId,input.sessionToken);
   if(!loaded||!loaded.session.completedAt||!loaded.latestReceipt||!loaded.receiptIntact)return null;
   const opportunityId=loaded.session.problemMapOpportunityId;
-  if(!opportunityId||opportunityId!==loaded.definition.problemMap.opportunityId)return null;
-  const [opportunity]=await database.select().from(opportunities).where(eq(opportunities.id,opportunityId));
-  if(!opportunity)return null;
-  const [project]=await database.select().from(projects).where(eq(projects.id,opportunity.projectA));
-  if(!project)return null;
-  const sources=await database.select().from(evidence).where(eq(evidence.opportunityId,opportunityId));
+  const project = loaded.definition.product;
+  const request = await feedbackRequest(loaded.definition,database);
   const approved=new Set(input.approvedTaskIds);
   const outcomes=loaded.definition.tasks.map(task=>{
     const events=loaded.events.filter(e=>e.taskId===task.id);const latest=events.at(-1);
     const outcomeCode=latest?.status??'not_recorded';const outcome=outcomeCode==='completed'?'It worked':outcomeCode==='failed'?'Something failed':outcomeCode==='stuck'?'Got stuck':outcomeCode==='skipped'?"Couldn't try":'Not recorded';
     return {task:task.title,outcome,outcomeCode,attempted:!!latest&&latest.status!=='skipped', ...(latest?.note&&approved.has(task.id)?{note:latest.note}:{})};
   });
-  const content={type:'feedback',title:`${project.name} testing feedback`,project:{name:project.name,application:loaded.definition.application.name,url:validHttpsUrl(loaded.definition.application.url)},request:{text:sources[0]?.claim??opportunity.problem,sourceUrl:validHttpsUrl(sources[0]?.sourceUrl??loaded.definition.problemMap.sourceUrl),revision:sources[0]?.revision??null,verification:sources[0]?.verification??'Source reference from the saved testing request.'},tasks:outcomes,prerequisites:['CKB Testnet','A Pilot account and connected app were required for some tasks.'],blockers:outcomes.filter(x=>x.outcome==='stuck'||x.outcome==='skipped').map(x=>({task:x.task,outcome:x.outcome, ...(x.note?{note:x.note}:{})})),startedAt:loaded.session.startedAt.toISOString(),completedAt:loaded.session.completedAt.toISOString(),publishedAt:new Date().toISOString(),environment:loaded.definition.application.network,versionLimitations:loaded.definition.application.version,followUpStatus:'Report prepared; sharing with the builder and any reply are not recorded.',limitations:['Self-reported observations; tester identity and human participation are not independently verified.','Outcomes describe this session and are not verified product defects, compatibility findings or adoption claims.']};
+  const content={type:'feedback',title:`${project.name} testing feedback`,project:{name:project.name,application:loaded.definition.application.name,url:validHttpsUrl(loaded.definition.application.url)},request:{...request,sourceUrl:validHttpsUrl(request.sourceUrl),verification:request.kind==='builder-declared'?'Builder-declared request. Independent confirmation has not been recorded.':request.verification},tasks:outcomes,prerequisites:loaded.definition.prerequisites??[],blockers:outcomes.filter(x=>x.outcome==='stuck'||x.outcome==='skipped').map(x=>({task:x.task,outcome:x.outcome, ...(x.note?{note:x.note}:{})})),startedAt:loaded.session.startedAt.toISOString(),completedAt:loaded.session.completedAt.toISOString(),publishedAt:new Date().toISOString(),environment:loaded.definition.application.network,versionLimitations:loaded.definition.application.version,followUpStatus:'Report prepared; sharing with the builder and any reply are not recorded.',limitations:['Self-reported observations; tester identity and human participation are not independently verified.','Outcomes describe this session and are not verified product defects, compatibility findings or adoption claims.']};
   const token=randomBytes(32).toString('base64url'),id=randomBytes(18).toString('base64url'),createdAt=new Date();
   await database.transaction(async tx=>{
     await tx.insert(handoffReports).values({id,kind:'feedback',tokenSha256:hash(token),shareToken:token,projectId:project.id,opportunityId,sessionId:loaded.session.id,content:JSON.stringify(content),approvedNoteTaskIds:JSON.stringify([...approved]),createdAt,revokedAt:null});

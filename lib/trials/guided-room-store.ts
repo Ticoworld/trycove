@@ -4,21 +4,9 @@ import {z} from 'zod';
 import {db} from '../db';
 import {guidedTrialReceipts, guidedTrialSessions, guidedTrialStepEvents} from '../schema';
 import type {GuidedTrialDefinition, GuidedTrialStatus} from './room-definitions';
-import {getGuidedTrialDefinition} from './room-definitions';
+import {DefinitionSchema} from './room-definitions';
+import {readTrialPack} from './trial-packs';
 import {GUIDED_TRIAL_ACCESS_MAX_AGE_SECONDS} from './room-auth';
-
-const DefinitionSchema = z.object({
-  id: z.string(),
-  version: z.string(),
-  product: z.object({id: z.string(), name: z.string()}),
-  problemMap: z.object({slug: z.string(), opportunityId: z.string(), sourceUrl: z.string().url()}),
-  application: z.object({
-    name: z.string(), url: z.string().url(), network: z.string(), version: z.string(),
-    relatedApps: z.array(z.object({name: z.string(), url: z.string().url(), role: z.string()})),
-  }),
-  tasks: z.array(z.object({id: z.string(), title: z.string(), instructions: z.string(), observe: z.array(z.string())})),
-  safety: z.array(z.string()),
-});
 
 export const GuidedTrialStatusSchema = z.enum(['completed', 'failed', 'stuck', 'skipped']);
 export type GuidedTrialEvent = typeof guidedTrialStepEvents.$inferSelect;
@@ -53,7 +41,7 @@ const sha256 = (value: string) => createHash('sha256').update(value).digest('hex
 const iso = (value: Date) => value.toISOString();
 const RECEIPT_LIMITATIONS = [
   'Task outcomes and notes are self-reported. Tester identity and human participation are not independently verified.',
-  'The hosted application did not expose a build or commit identifier during the live check; the receipt identifies the URL and network, not an immutable deployment.',
+  'Application version information is supplied by the trial definition and is not independently verified.',
   'This is a Trycove user-observation receipt, not a CKB transaction receipt, security audit, compatibility verdict or adoption claim.',
   'Session notes are access-controlled in the app but are not encrypted per session in the database; the server/database operator can read them.',
   'Trycove does not request or store passkeys, seed phrases, private keys, wallet addresses or signatures.',
@@ -142,40 +130,41 @@ export function createGuidedTrialStore(database: GuidedTrialDatabase = db) {
 
   return {
     async createSession(packId: string, selfReported: boolean) {
-      const definition = getGuidedTrialDefinition(packId);
-      if (!definition || selfReported !== true) throw new Error('A valid guided trial and self-report acknowledgement are required.');
-      const sessionId = randomBytes(18).toString('base64url');
-      const accessToken = randomBytes(32).toString('base64url');
-      const now = new Date();
-      const definitionSnapshot = JSON.stringify(definition);
-      const definitionSha256 = sha256(definitionSnapshot);
-      const row: GuidedTrialSession = {
-        id: sessionId,
-        packId: definition.id,
-        productId: definition.product.id,
-        problemMapSlug: definition.problemMap.slug,
-        problemMapOpportunityId: definition.problemMap.opportunityId,
-        definitionVersion: definition.version,
-        definitionSha256,
-        definitionSnapshot,
-        accessTokenSha256: sha256(accessToken),
-        selfReportedAt: now,
-        startedAt: now,
-        updatedAt: now,
-        completedAt: null,
-      };
-      await database.transaction(async (tx) => {
+      return database.transaction(async tx => {
+        const room = await readTrialPack(packId, tx, true);
+        const definition = room?.pack.state === 'published' ? room.definition : null;
+        if (!definition || selfReported !== true) throw new Error('A valid guided trial and self-report acknowledgement are required.');
+        const sessionId = randomBytes(18).toString('base64url');
+        const accessToken = randomBytes(32).toString('base64url');
+        const now = new Date();
+        const definitionSnapshot = JSON.stringify(definition);
+        const definitionSha256 = sha256(definitionSnapshot);
+        const row: GuidedTrialSession = {
+          id: sessionId,
+          packId: definition.id,
+          productId: definition.product.id,
+          problemMapSlug: definition.problemMap?.slug ?? 'unclassified',
+          problemMapOpportunityId: definition.problemMap?.opportunityId ?? null,
+          definitionVersion: definition.version,
+          definitionSha256,
+          definitionSnapshot,
+          accessTokenSha256: sha256(accessToken),
+          selfReportedAt: now,
+          startedAt: now,
+          updatedAt: now,
+          completedAt: null,
+        };
         await tx.insert(guidedTrialSessions).values(row);
         await addReceipt(tx, row, definition, [], now);
+        return {sessionId, accessToken, startedAt: now};
       });
-      return {sessionId, accessToken, startedAt: now};
     },
 
-    async recordStep(input: {sessionId: string; accessToken: string; taskId: string; status: GuidedTrialStatus; note: string}) {
+    async recordStep(input: {sessionId: string; packId?: string; accessToken: string; taskId: string; status: GuidedTrialStatus; note: string}) {
       const now = new Date();
       return database.transaction(async (tx) => {
         const session = await authorize(tx, input.sessionId, input.accessToken);
-        if (!session) return {ok: false as const, reason: 'unavailable' as const};
+        if (!session || (input.packId !== undefined && session.packId !== input.packId)) return {ok: false as const, reason: 'unavailable' as const};
         if (session.completedAt) return {ok: false as const, reason: 'finished' as const};
         const definition = sha256(session.definitionSnapshot) === session.definitionSha256 ? parseDefinition(session.definitionSnapshot) : null;
         if (!definition || !definition.tasks.some((task) => task.id === input.taskId)) return {ok: false as const, reason: 'invalid-task' as const};
@@ -190,11 +179,11 @@ export function createGuidedTrialStore(database: GuidedTrialDatabase = db) {
       });
     },
 
-    async finishSession(input: {sessionId: string; accessToken: string}) {
+    async finishSession(input: {sessionId: string; packId?: string; accessToken: string}) {
       const now = new Date();
       return database.transaction(async (tx) => {
         const session = await authorize(tx, input.sessionId, input.accessToken);
-        if (!session) return {ok: false as const, reason: 'unavailable' as const};
+        if (!session || (input.packId !== undefined && session.packId !== input.packId)) return {ok: false as const, reason: 'unavailable' as const};
         if (session.completedAt) return {ok: true as const, alreadyFinished: true as const};
         const definition = sha256(session.definitionSnapshot) === session.definitionSha256 ? parseDefinition(session.definitionSnapshot) : null;
         if (!definition) return {ok: false as const, reason: 'invalid-definition' as const};

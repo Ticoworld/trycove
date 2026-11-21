@@ -1,4 +1,4 @@
-import {describe,expect,it} from 'vitest';
+import {describe,expect,it,vi} from 'vitest';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {PGlite} from '@electric-sql/pglite';
@@ -8,9 +8,14 @@ import {db} from '../lib/db';
 import {createGuidedTrialStore} from '../lib/trials/guided-room-store';
 import {createConnectionBrief,createFeedbackReport,exportFeedbackReport,readPublicHandoff,revokeHandoff} from '../lib/handoffs';
 import {verifyOrganizerKey} from '../lib/organizer-auth';
+import {saveDraft,changeState} from '../app/organizer/trial-packs/actions';
+import {readPackVersion, saveTrialDraft, setTrialPackState} from '../lib/trials/trial-packs';
 import {eq} from 'drizzle-orm';
 
-const migrationNames=['initial','connections','footprints','intelligence','trial_evidence','project_repositories','signal_intents','candidate_lifecycle','need_items','need_taxonomy','need_lineage_and_decisions','opportunity_qualification','opportunity_prior_work_reconciliations','external_source_snapshots','guided_trial_rooms','devrel_handoffs'];
+vi.mock('../lib/organizer-auth', async importOriginal => ({...await importOriginal<typeof import('../lib/organizer-auth')>(), hasOrganizerSession: vi.fn()}));
+import {hasOrganizerSession} from '../lib/organizer-auth';
+
+const migrationNames=['initial','connections','footprints','intelligence','trial_evidence','project_repositories','signal_intents','candidate_lifecycle','need_items','need_taxonomy','need_lineage_and_decisions','opportunity_qualification','opportunity_prior_work_reconciliations','external_source_snapshots','guided_trial_rooms','devrel_handoffs','trial_packs'];
 async function migrate(instance:PGlite){for(let i=0;i<migrationNames.length;i++)await instance.exec(await readFile(`migrations/${String(i+1).padStart(4,'0')}_${migrationNames[i]}.sql`,'utf8'))}
 async function fixture(instance:PGlite){
  await instance.exec("INSERT INTO projects(id,name,description,source_url,revision,observed_at) VALUES ('ckbuilder-owlpilot-67','Owl Pilot test fixture','','https://invalid.example/owl','test-fixture-r0',now()),('consumer-test','Consumer test fixture','','https://invalid.example/consumer','test-fixture-r1',now()),('provider-test','Provider test fixture','','https://invalid.example/provider','test-fixture-r2',now())");
@@ -59,6 +64,68 @@ describe('TC-03 handoff records',()=>{
    expect((await exportFeedbackReport(exportInput,testDb,store)).status).toBe(404);
   }finally{await instance.close()}
  },30000);
+
+ it('runs a builder-declared second room through approval and download', async () => {
+  const instance = new PGlite();
+  try {
+   await migrate(instance);
+   await fixture(instance);
+   const testDb = drizzle(instance, {schema}) as unknown as typeof db;
+   const store = createGuidedTrialStore(testDb);
+   const draft = {
+    id: 'second-room', productId: 'consumer-test', description: 'Fixture-only testing room',
+    request: {kind:'builder-declared', text:'Tell us where navigation is unclear.'},
+    application: {name:'Fixture app',url:'https://invalid.example/app',network:'CKB Testnet',version:'Fixture'},
+    prerequisites: ['No wallet needed'], safety: ['No transactions'],
+    tasks: [{id:'navigation',title:'Find navigation',instructions:'Open the menu.',observe:['Is it readable?']}],
+   };
+   const databaseContext = globalThis as typeof globalThis & {tcDb?: typeof db};
+   databaseContext.tcDb = testDb;
+   const draftForm = new FormData();
+   draftForm.set('definition', JSON.stringify(draft));
+   vi.mocked(hasOrganizerSession).mockResolvedValue(false);
+   await expect(saveDraft(draftForm)).rejects.toThrow('Organizer access is required');
+   vi.mocked(hasOrganizerSession).mockResolvedValue(true);
+   await expect(saveDraft(draftForm)).rejects.toMatchObject({digest:expect.stringContaining('room=second-room')});
+   const pack = {id:draft.id};
+   expect((await readPackVersion(pack.id, 1, testDb)).request).toEqual(draft.request);
+   await expect(store.createSession(pack.id,true)).rejects.toThrow();
+   const publishForm = new FormData();
+   publishForm.set('id',pack.id);
+   publishForm.set('version','1');
+   publishForm.set('state','published');
+   await expect(changeState(publishForm)).rejects.toMatchObject({digest:expect.stringContaining('room=second-room')});
+   const session = await store.createSession(pack.id,true);
+   const credential = {sessionId:session.sessionId, accessToken:session.accessToken};
+   await store.recordStep({...credential,taskId:'navigation',status:'completed',note:'Private fixture note'});
+   await saveTrialDraft({...draft,tasks:[{...draft.tasks[0],title:'Updated task'}]},testDb);
+   await setTrialPackState(pack.id, 2, 'published', testDb);
+   const resumed = await store.loadSession(session.sessionId, session.accessToken);
+   expect(resumed?.definition.tasks[0].title).toBe('Find navigation');
+   expect(resumed?.definition.version).toBe('1');
+   expect(resumed?.events).toHaveLength(1);
+   await setTrialPackState(pack.id,2,'paused',testDb);
+   await expect(store.createSession(pack.id,true)).rejects.toThrow();
+   expect(await store.loadSession(session.sessionId,'other-credential')).toBeNull();
+   await store.finishSession(credential);
+   expect(await testDb.select().from(schema.handoffReports)).toEqual([]);
+   const report = await createFeedbackReport({sessionId:session.sessionId,sessionToken:session.accessToken,approvedTaskIds:[]},testDb,store);
+   expect(report).not.toBeNull();
+   const shared = await readPublicHandoff(report!.token,testDb);
+   expect(shared?.content.request).toMatchObject(draft.request);
+   const response = await exportFeedbackReport({packId:pack.id,sessionId:session.sessionId,reportId:report!.id,sessionToken:session.accessToken},testDb,store);
+   expect(response.status).toBe(200);
+   const body = await response.text();
+   expect(body).not.toContain('Private fixture note');
+   expect(body).toContain('No wallet needed');
+   await setTrialPackState(pack.id,2,'closed',testDb);
+   await expect(setTrialPackState(pack.id,2,'published',testDb)).rejects.toThrow();
+  } finally {
+   delete (globalThis as typeof globalThis & {tcDb?: typeof db}).tcDb;
+   vi.mocked(hasOrganizerSession).mockReset();
+   await instance.close();
+  }
+ }, 30000);
 
  it('keeps connection hypotheses, uncertainty and append-only follow-up explicit',async()=>{
   const instance=new PGlite();const original=process.env.TRYCOVE_WRITE_KEY;

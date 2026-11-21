@@ -1,3 +1,4 @@
+import {BuilderDeclarations} from '../components/builder-declarations';
 import Link from 'next/link';
 import {desc} from 'drizzle-orm';
 import {db} from '../../lib/db';
@@ -31,6 +32,7 @@ export default async function Page() {
       </article>)}</div>
       {!rooms.length && <p>No Trial Rooms are open for enrollment.</p>}
     </section>
+    <BuilderDeclarations testingOnly/>
     <section className="section" aria-labelledby="integration-lab-receipts">
       <h2 id="integration-lab-receipts">Integration Lab receipts</h2>
       <p>Inspect controlled experiments, their results and reproduction limits. <Link href="/results">View recorded results</Link></p>

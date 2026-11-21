@@ -1,3 +1,5 @@
+import {authenticatedUser, isOrganizer} from './authorization';
+import {authConfigured} from './supabase-auth';
 import {createHmac,randomBytes,timingSafeEqual} from 'node:crypto';
 import {cookies} from 'next/headers';
 
@@ -5,6 +7,7 @@ export const ORGANIZER_COOKIE='trycove_organizer';
 const MAX_AGE=8*60*60;
 function sign(payload:string,key:string){return createHmac('sha256',key).update(payload).digest('hex')}
 export function verifyOrganizerKey(supplied:string){
+ if(authConfigured()||process.env.VERCEL_ENV==='production'||process.env.TRYCOVE_PUBLIC_URL)return false;
  const expected=process.env.TRYCOVE_WRITE_KEY;if(!expected||supplied.length>512)return false;
  const a=Buffer.from(supplied),b=Buffer.from(expected);return a.length===b.length&&timingSafeEqual(a,b);
 }
@@ -14,6 +17,8 @@ export function makeOrganizerToken(){
  return `${payload}.${sign(payload,key)}`;
 }
 export async function hasOrganizerSession(){
+ if(authConfigured()){const user=await authenticatedUser();return !!user&&await isOrganizer(user.id)}
+ if(process.env.VERCEL_ENV==='production'||process.env.TRYCOVE_PUBLIC_URL)return false;
  const key=process.env.TRYCOVE_WRITE_KEY;if(!key)return false;
  const raw=(await cookies()).get(ORGANIZER_COOKIE)?.value;if(!raw)return false;
  const [issued,nonce,signature,...rest]=raw.split('.');

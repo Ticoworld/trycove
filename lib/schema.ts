@@ -69,3 +69,26 @@ export const authorizationAudit = pgTable('authorization_audit', {
   detail: text('detail').notNull(),
   createdAt: timestamp('created_at', {withTimezone: true}).notNull().defaultNow(),
 });
+
+export const projectDeclarations = pgTable('project_declarations', {
+  id: uuid('id').primaryKey(),
+  projectId: text('project_id').notNull().references(() => projects.id),
+  authorId: uuid('author_id').notNull().references(() => appUsers.id),
+  kind: text('kind', {enum: ['testing-need','product-need','capability']}).notNull(),
+  content: text('content').notNull(),
+  prerequisites: text('prerequisites').notNull().default(''),
+  provenance: text('provenance').notNull().default('authenticated-builder'),
+  state: text('state', {enum: ['published','withdrawn']}).notNull(),
+  moderation: text('moderation', {enum: ['visible','hidden']}).notNull().default('visible'),
+  supersedesId: uuid('supersedes_id').unique(),
+  createdAt: timestamp('created_at', {withTimezone: true}).notNull().defaultNow(),
+});
+export const trialParticipations = pgTable('trial_participations', {
+  sessionId: text('session_id').primaryKey().references(() => guidedTrialSessions.id),
+  userId: uuid('user_id').notNull().references(() => appUsers.id),
+  consentedAt: timestamp('consented_at', {withTimezone: true}).notNull().defaultNow(),
+});
+export const feedbackListingConsents = pgTable('feedback_listing_consents', {
+  reportId: text('report_id').primaryKey().references(() => handoffReports.id),
+  consentedAt: timestamp('consented_at', {withTimezone: true}).notNull().defaultNow(),
+});

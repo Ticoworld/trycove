@@ -30,9 +30,10 @@ export async function listPublishedTrials() {
   return rows.map(row => DefinitionSchema.parse(JSON.parse(row.definition)));
 }
 
-export async function saveTrialDraft(input: unknown, database = db) {
+export async function saveTrialDraft(input: unknown, database = db, authorize?: (tx: Transaction, productId: string) => Promise<void>) {
   const draft = DraftSchema.parse(input);
   return database.transaction(async tx => {
+    await authorize?.(tx, draft.productId);
     const [product] = await tx.select().from(projects).where(eq(projects.id, draft.productId));
     if (!product) throw new Error('Choose an existing project ID.');
     const {request, productId, ...fields} = draft;
@@ -66,9 +67,18 @@ export async function saveTrialDraft(input: unknown, database = db) {
   });
 }
 
-export async function setTrialPackState(id: string, version: number, state: 'published' | 'paused' | 'closed', database = db) {
-  const [pack] = await database.update(trialPacks).set(state === 'published' ? {state, publishedVersion: version} : {state})
+export async function setTrialPackState(id: string, version: number, state: 'published' | 'paused' | 'closed', database = db,
+  authorize?: (tx: Transaction, productId: string) => Promise<void>) {
+  return database.transaction(async tx => {
+    if (authorize) {
+      const [room] = await tx.select().from(trialPacks).where(eq(trialPacks.id,id));
+      if (!room) throw new Error('Trial Pack is unavailable.');
+      const definition = await readPackVersion(id,room.latestVersion,tx);
+      await authorize(tx,definition.product.id);
+    }
+  const [pack] = await tx.update(trialPacks).set(state === 'published' ? {state, publishedVersion: version} : {state})
     .where(and(eq(trialPacks.id, id), eq(trialPacks.latestVersion, version),
       state === 'paused' ? eq(trialPacks.state, 'published') : sql`${trialPacks.state} <> 'closed'`)).returning();
   if (!pack) throw new Error('The room changed or this transition is unavailable. Reload and review it.');
+  });
 }

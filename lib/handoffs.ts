@@ -106,7 +106,7 @@ export async function readPublicHandoff(token:string,database:typeof db=db) {
   if(!report||report.revokedAt)return null;
   let content:HandoffContent;try{content=JSON.parse(report.content)}catch{return null}
   const timeline=await database.select().from(followUps).where(eq(followUps.handoffReportId,report.id)).orderBy(asc(followUps.createdAt),asc(followUps.id));
-  return {kind:report.kind as 'feedback'|'connection',content,timeline:timeline.map(event=>({kind:event.kind,note:event.publicNote?event.note:null,sourceUrl:event.publicNote?validHttpsUrl(event.sourceUrl):null,createdAt:event.createdAt.toISOString()}))};
+  return {kind:report.kind as 'feedback'|'connection',content,timeline:timeline.filter(event=>event.publicNote).map(event=>({kind:event.kind,note:event.publicNote?event.note:null,sourceUrl:event.publicNote?validHttpsUrl(event.sourceUrl):null,createdAt:event.createdAt.toISOString()}))};
 }
 
 export async function revokeHandoff(reportId:string,sessionId:string,token:string,database:typeof db=db,trialStore=guidedTrialStore) {

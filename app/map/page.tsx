@@ -1,3 +1,4 @@
+import {BuilderDeclarations} from '../components/builder-declarations';
 import Link from 'next/link';
 import {PROBLEM_DOMAINS, UNCLASSIFIED_DOMAIN} from '../../lib/problem-map';
 import {getProblemMapOverview} from '../../lib/problem-map-data';
@@ -14,6 +15,8 @@ export default async function ProblemMapPage() {
       <p>Groups come from imported directory categories, structured source-intent scopes, and existing recorded capability evidence. Shared labels help organize browsing; they do not prove products are compatible.</p>
       <div className="bar"><Link className="button" href="/projects">Search every product</Link><Link className="button secondary" href="/opportunities">Open connection records</Link></div>
     </section>
+    <BuilderDeclarations/>
+
 
     <section className="section" aria-labelledby="map-groups">
       <div className="section-head"><div><div className="eyebrow">Problem domains</div><h2 id="map-groups">Products and recorded needs</h2></div><span className="muted">{productCount} imported product identities</span></div>

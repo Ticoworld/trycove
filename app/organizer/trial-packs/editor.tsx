@@ -13,8 +13,8 @@ const blankTask = (id: string): Draft['tasks'][number] => ({id, title: '', instr
 const lines = (value: string) => value.split('\n');
 const nonempty = (items: string[]) => items.map(item => item.trim()).filter(Boolean);
 
-export function TrialPackEditor({initial, products, sources, editing}: {
-  initial: Draft; products: Choice[]; sources: Source[]; editing: boolean;
+export function TrialPackEditor({initial, products, sources, editing, scopedProduct}: {
+  initial: Draft; products: Choice[]; sources: Source[]; editing: boolean; scopedProduct?: string;
 }) {
   const [error, submit, pending] = useActionState(saveDraft, '');
   const [draft, setDraft] = useState(initial);
@@ -48,7 +48,7 @@ export function TrialPackEditor({initial, products, sources, editing}: {
     {error && <p role="alert">{error}</p>}
     <input type="hidden" name="definition" value={JSON.stringify(payload)}/>
     <label>Product Passport
-      <select required disabled={editing} value={draft.productId} onChange={event => {
+      <select required disabled={editing || !!scopedProduct} value={draft.productId} onChange={event => {
         update('productId', event.target.value);
         setSourceId(0);
       }}>

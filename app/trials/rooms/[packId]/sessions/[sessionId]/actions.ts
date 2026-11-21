@@ -40,3 +40,44 @@ export async function finishGuidedTrial(formData: FormData) {
   revalidatePath(`/trials/rooms/${packId}/sessions/${sessionId}`);
   return {ok: true};
 }
+
+export async function linkTrialParticipation(form: FormData) {
+  const {requireUser} = await import('../../../../../../lib/authorization');
+  const {db} = await import('../../../../../../lib/db');
+  const {trialParticipations} = await import('../../../../../../lib/schema');
+  const user = await requireUser();
+  if (form.get('consent') !== 'on') throw new Error('Explicit account-linking consent is required.');
+  const loaded = await authorizedTrial(form);
+  const [linked] = await db.insert(trialParticipations).values({
+    sessionId: loaded.session.id, userId: user.id,
+  }).onConflictDoNothing().returning();
+  if (!linked) throw new Error('This session has already been linked.');
+  revalidatePath('/account');
+  revalidatePath('/trials/rooms/' + loaded.session.packId + '/sessions/' + loaded.session.id);
+}
+
+async function authorizedTrial(form: FormData) {
+  const sessionId = field(form, 'sessionId');
+  if (!/^[A-Za-z0-9_-]{16,40}$/.test(sessionId)) notFound();
+  const token = (await cookies()).get(GUIDED_TRIAL_ACCESS_COOKIE)?.value;
+  const loaded = token ? await guidedTrialStore.loadSession(sessionId,token) : null;
+  if (!loaded || loaded.session.packId !== field(form, 'packId')) notFound();
+  return loaded;
+}
+
+export async function changeListingConsent(form: FormData) {
+  const {and, eq, isNull} = await import('drizzle-orm');
+  const {db} = await import('../../../../../../lib/db');
+  const {feedbackListingConsents, handoffReports} = await import('../../../../../../lib/schema');
+  const loaded = await authorizedTrial(form);
+  const reportId = field(form, 'reportId');
+  const [report] = await db.select({id: handoffReports.id}).from(handoffReports).where(and(
+    eq(handoffReports.id, reportId), eq(handoffReports.sessionId, loaded.session.id),
+    eq(handoffReports.kind, 'feedback'), isNull(handoffReports.revokedAt),
+  ));
+  if (!report) notFound();
+  if (form.get('consent') === 'on') await db.insert(feedbackListingConsents).values({reportId}).onConflictDoNothing();
+  else await db.delete(feedbackListingConsents).where(eq(feedbackListingConsents.reportId, reportId));
+  revalidatePath('/results');
+  revalidatePath('/trials/rooms/' + loaded.session.packId + '/sessions/' + loaded.session.id);
+}

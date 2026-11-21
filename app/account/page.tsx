@@ -39,7 +39,7 @@ export default async function Account({searchParams}: {searchParams: Promise<{ot
     {!organizer && process.env.TRYCOVE_BOOTSTRAP_ORGANIZER_ID === user.id &&
       <form action={bootstrapOrganizer}><button className="button">Activate configured organizer access</button></form>}
     <h2>Managed products</h2>
-    <ul>{memberships.map(project => <li key={project.id}><Link href={'/projects/' + encodeURIComponent(project.id)}>{project.name}</Link> ({project.role})</li>)}</ul>
+    <ul>{memberships.map(project => <li key={project.id}><Link href={'/projects/' + encodeURIComponent(project.id)}>{project.name}</Link> ({project.role}) <Link href={'/builder/' + encodeURIComponent(project.id)}>Open builder workspace</Link></li>)}</ul>
     {memberships.filter(project => project.role === 'owner').map(project =>
       <form key={project.id} action={manageMaintainer} className="card stack">
         <h3>Manage maintainers for {project.name}</h3>

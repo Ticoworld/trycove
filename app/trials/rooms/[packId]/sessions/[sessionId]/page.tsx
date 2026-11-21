@@ -5,9 +5,12 @@ import {db} from '../../../../../../lib/db';
 import {guidedTrialStore} from '../../../../../../lib/trials/guided-room-store';
 import {GUIDED_TRIAL_ACCESS_COOKIE} from '../../../../../../lib/trials/room-auth';
 import type {GuidedTrialStatus} from '../../../../../../lib/trials/room-definitions';
-import {handoffReports} from '../../../../../../lib/schema';
+import {feedbackListingConsents,handoffReports,trialParticipations} from '../../../../../../lib/schema';
 import {eq} from 'drizzle-orm';
 import {TrialStudio} from './trial-studio';
+import Link from 'next/link';
+import {authenticatedUser} from '../../../../../../lib/authorization';
+import {changeListingConsent,linkTrialParticipation} from './actions';
 import {FeedbackHandoff} from './feedback-handoff';
 export const dynamic='force-dynamic';
 export const revalidate=0;
@@ -20,9 +23,27 @@ export default async function GuidedTrialSessionPage({params}:{params:Promise<{p
  const loaded=await guidedTrialStore.loadSession(sessionId,token);
  if(!loaded || loaded.session.packId!==packId || !loaded.latestReceipt)notFound();
  const latest=Object.fromEntries(loaded.definition.tasks.map(task=>{const event=loaded.events.filter(e=>e.taskId===task.id).at(-1);return [task.id,event?{status:event.status as GuidedTrialStatus,note:event.note}:null]}));
+ const [user, [participation]] = await Promise.all([
+  authenticatedUser(),
+  db.select({sessionId: trialParticipations.sessionId}).from(trialParticipations).where(eq(trialParticipations.sessionId,sessionId)),
+ ]);
  const [request,reportRows]=loaded.session.completedAt?await Promise.all([
   feedbackRequest(loaded.definition),
-  db.select({id:handoffReports.id,shareToken:handoffReports.shareToken,createdAt:handoffReports.createdAt,revokedAt:handoffReports.revokedAt}).from(handoffReports).where(eq(handoffReports.sessionId,sessionId)),
+  db.select({id:handoffReports.id,shareToken:handoffReports.shareToken,createdAt:handoffReports.createdAt,revokedAt:handoffReports.revokedAt, listed:feedbackListingConsents.reportId}).from(handoffReports).leftJoin(feedbackListingConsents,eq(feedbackListingConsents.reportId,handoffReports.id)).where(eq(handoffReports.sessionId,sessionId)),
  ]):[null,[]];
- return <><TrialStudio packId={packId} sessionId={sessionId} definition={loaded.definition} initialAnswers={latest} finished={!!loaded.session.completedAt} receiptIntact={loaded.receiptIntact} receipts={loaded.receipts.map(r=>({version:r.version,sha256:r.receiptSha256,createdAt:r.createdAt.toISOString(),receipt:r.receipt}))}/>{!!loaded.session.completedAt&&request&&<FeedbackHandoff productName={loaded.definition.product.name} packId={packId} sessionId={sessionId} items={loaded.definition.tasks.map(t=>({taskId:t.id,title:t.title,outcome:latest[t.id]?.status??'not_recorded',note:latest[t.id]?.note??''}))} request={request.text} requestKind={request.kind} sourceUrl={request.sourceUrl} startedAt={loaded.session.startedAt.toISOString()} completedAt={loaded.session.completedAt.toISOString()} environment={loaded.definition.application.network} versionLimitations={loaded.definition.application.version} prerequisites={loaded.definition.prerequisites??[]} existingReports={reportRows.map(r=>({id:r.id,createdAt:r.createdAt.toISOString(),revoked:!!r.revokedAt,url:`/share/${r.shareToken}`,exportUrl:feedbackExportPath(packId,sessionId,r.id)}))}/>}</>;
+ return <><TrialStudio packId={packId} sessionId={sessionId} definition={loaded.definition} initialAnswers={latest} finished={!!loaded.session.completedAt} receiptIntact={loaded.receiptIntact} receipts={loaded.receipts.map(r=>({version:r.version,sha256:r.receiptSha256,createdAt:r.createdAt.toISOString(),receipt:r.receipt}))}/>{!!loaded.session.completedAt&&request&&<FeedbackHandoff productName={loaded.definition.product.name} packId={packId} sessionId={sessionId} items={loaded.definition.tasks.map(t=>({taskId:t.id,title:t.title,outcome:latest[t.id]?.status??'not_recorded',note:latest[t.id]?.note??''}))} request={request.text} requestKind={request.kind} sourceUrl={request.sourceUrl} startedAt={loaded.session.startedAt.toISOString()} completedAt={loaded.session.completedAt.toISOString()} environment={loaded.definition.application.network} versionLimitations={loaded.definition.application.version} prerequisites={loaded.definition.prerequisites??[]} existingReports={reportRows.map(r=>({id:r.id,createdAt:r.createdAt.toISOString(),revoked:!!r.revokedAt,url:`/share/${r.shareToken}`,exportUrl:feedbackExportPath(packId,sessionId,r.id)}))}/>}
+ <section className="section shell stack">
+   <h2>Participation</h2>
+   {participation ? <p>This session has been linked to an account.</p> : user ? <form action={linkTrialParticipation} className="stack">
+     <input type="hidden" name="sessionId" value={sessionId}/><input type="hidden" name="packId" value={packId}/>
+     <label><input type="checkbox" name="consent" required/> Link this specific trial to my signed-in account</label>
+     <button className="button">Link trial</button>
+   </form> : <p><Link href="/account" target="_blank" rel="noreferrer">Sign in in another tab</Link> and reload this session to link it to your account.</p>}
+   {reportRows.filter(report => !report.revokedAt).map(report => <form action={changeListingConsent} key={report.id} className="stack">
+     <input type="hidden" name="reportId" value={report.id}/><input type="hidden" name="sessionId" value={sessionId}/><input type="hidden" name="packId" value={packId}/>
+     <label><input type="checkbox" name="consent" defaultChecked={!!report.listed}/> List this approved report on the public Results page</label>
+     <button className="button secondary">Save listing preference</button>
+   </form>)}
+ </section>
+ </>;
 }

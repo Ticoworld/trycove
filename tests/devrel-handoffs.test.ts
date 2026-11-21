@@ -84,7 +84,7 @@ describe('TC-03 handoff records',()=>{
    const draftForm = new FormData();
    draftForm.set('definition', JSON.stringify(draft));
    vi.mocked(hasOrganizerSession).mockResolvedValue(false);
-   await expect(saveDraft('', draftForm)).rejects.toThrow('Organizer access is required');
+   await expect(saveDraft('', draftForm)).rejects.toThrow('Sign in to continue');
    vi.mocked(hasOrganizerSession).mockResolvedValue(true);
    await expect(saveDraft('', draftForm)).rejects.toMatchObject({digest:expect.stringContaining('room=second-room')});
    const pack = {id:draft.id};
@@ -138,7 +138,7 @@ describe('TC-03 handoff records',()=>{
    const [row]=await testDb.select().from(schema.handoffReports).where(eq(schema.handoffReports.id,reportId));
    await testDb.insert(schema.followUps).values({opportunityId:row.opportunityId,handoffReportId:row.id,kind:'introduction-made',note:'Private test fixture event only',sourceUrl:'https://invalid.example/private-event',publicNote:false,createdAt:new Date()});
    await expect(testDb.update(schema.followUps).set({note:'changed'}).where(eq(schema.followUps.handoffReportId,row.id))).rejects.toThrow();
-   const publicTimeline=(await readPublicHandoff(token,testDb))?.timeline;expect(publicTimeline?.map(x=>x.kind)).toContain('introduction-made');expect(publicTimeline?.find(x=>x.kind==='introduction-made')).toMatchObject({note:null,sourceUrl:null});
+   const publicTimeline=(await readPublicHandoff(token,testDb))?.timeline;expect(publicTimeline).toEqual([]);
   }finally{if(original===undefined)delete process.env.TRYCOVE_WRITE_KEY;else process.env.TRYCOVE_WRITE_KEY=original;await instance.close()}
  },30000);
 });

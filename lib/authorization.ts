@@ -1,7 +1,7 @@
 import {and, eq} from 'drizzle-orm';
 import {cache} from 'react';
 import {db} from './db';
-import {appUsers, projectMemberships} from './schema';
+import {appUsers, projectMemberships, projects} from './schema';
 import {authConfigured, serverAuth} from './supabase-auth';
 
 export const authenticatedUser = cache(async () => {
@@ -32,13 +32,26 @@ export async function requireOrganizer() {
   return user;
 }
 
-export async function requireProjectPermission(projectId: string, permission: 'edit' | 'publish' | 'membership') {
-  const user = await requireUser();
-  const [membership] = await db.select().from(projectMemberships).where(and(
-    eq(projectMemberships.projectId, projectId), eq(projectMemberships.userId, user.id),
+type Transaction = Parameters<Parameters<typeof db.transaction>[0]>[0];
+
+export async function checkProjectPermission(reader: typeof db | Transaction, userId: string, projectId: string,
+  permission: 'edit' | 'publish' | 'membership') {
+  const [membership] = await reader.select().from(projectMemberships).where(and(
+    eq(projectMemberships.projectId, projectId), eq(projectMemberships.userId, userId),
   ));
   if (!membership || (permission !== 'edit' && membership.role !== 'owner')) {
     throw new Error('Project permission is required.');
   }
+}
+
+export async function lockProjectPermission(tx: Transaction, userId: string, projectId: string,
+  permission: 'edit' | 'publish') {
+  await tx.select({id: projects.id}).from(projects).where(eq(projects.id, projectId)).for('update');
+  await checkProjectPermission(tx, userId, projectId, permission);
+}
+
+export async function requireProjectPermission(projectId: string, permission: 'edit' | 'publish' | 'membership') {
+  const user = await requireUser();
+  await checkProjectPermission(db, user.id, projectId, permission);
   return user;
 }

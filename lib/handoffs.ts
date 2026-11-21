@@ -10,6 +10,43 @@ export type HandoffContent = Record<string, unknown>;
 const hash = (s: string) => createHash('sha256').update(s).digest('hex');
 export function validHttpsUrl(value: string | null | undefined) { if(!value)return null;try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.toString():null}catch{return null} }
 
+export function feedbackExportPath(packId: string, sessionId: string, reportId: string) {
+  return `/trials/rooms/${packId}/sessions/${sessionId}/reports/${reportId}`;
+}
+
+export async function exportFeedbackReport(
+  {packId, sessionId, reportId, sessionToken}: {
+    packId: string; sessionId: string; reportId: string; sessionToken?: string;
+  },
+  database: typeof db = db,
+  trialStore = guidedTrialStore,
+) {
+  const unavailable = () => new Response('Not found', {status: 404});
+  const idPattern = /^[A-Za-z0-9_-]{16,40}$/;
+  if (!idPattern.test(reportId) || !idPattern.test(sessionId) || !sessionToken) {
+    return unavailable();
+  }
+  const [report] = await database.select().from(handoffReports).where(eq(handoffReports.id, reportId));
+  if (!report || report.kind !== 'feedback' || report.revokedAt || report.sessionId !== sessionId) {
+    return unavailable();
+  }
+  const loaded = await trialStore.loadSession(sessionId, sessionToken);
+  if (!loaded?.session.completedAt || loaded.session.packId !== packId) return unavailable();
+
+  const body = JSON.stringify({
+    schemaVersion: 'trycove-approved-handoff-export/1.0',
+    exportedAt: new Date().toISOString(),
+    report: JSON.parse(report.content) as HandoffContent,
+  }, null, 2);
+  return new Response(body, {headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+    'Content-Disposition': `attachment; filename="trycove-approved-feedback-${reportId}.json"`,
+    'Cache-Control': 'no-store, private',
+    'Referrer-Policy': 'no-referrer',
+    'X-Content-SHA256': hash(body),
+  }});
+}
+
 export async function createFeedbackReport(input:{sessionId:string;sessionToken:string;approvedTaskIds:string[]},database:typeof db=db,trialStore=guidedTrialStore) {
   const loaded=await trialStore.loadSession(input.sessionId,input.sessionToken);
   if(!loaded||!loaded.session.completedAt||!loaded.latestReceipt||!loaded.receiptIntact)return null;

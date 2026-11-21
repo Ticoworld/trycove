@@ -1,11 +1,12 @@
 import {describe,expect,it} from 'vitest';
 import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import {PGlite} from '@electric-sql/pglite';
 import {drizzle} from 'drizzle-orm/pglite';
 import * as schema from '../lib/schema';
 import {db} from '../lib/db';
 import {createGuidedTrialStore} from '../lib/trials/guided-room-store';
-import {createConnectionBrief,createFeedbackReport,readPublicHandoff,revokeHandoff} from '../lib/handoffs';
+import {createConnectionBrief,createFeedbackReport,exportFeedbackReport,readPublicHandoff,revokeHandoff} from '../lib/handoffs';
 import {verifyOrganizerKey} from '../lib/organizer-auth';
 import {eq} from 'drizzle-orm';
 
@@ -33,9 +34,29 @@ describe('TC-03 handoff records',()=>{
    const report=await readPublicHandoff(published!.token,testDb);expect(report?.kind).toBe('feedback');
    const tasks=report?.content.tasks as Array<{task:string;outcome:string;note?:string}>;
    expect(tasks.find(x=>x.task.includes('owner'))?.note).toBe('Approved note A');expect(JSON.stringify(report?.content)).not.toContain('Private note B');
+   const exportInput = {packId:'owl-pilot-ux', sessionId:started.sessionId, reportId:published!.id, sessionToken:started.accessToken};
+   const download = await exportFeedbackReport(exportInput,testDb,store);
+   expect(download.status).toBe(200);
+   const bytes = Buffer.from(await download.arrayBuffer());
+   expect(download.headers.get('X-Content-SHA256')).toBe(createHash('sha256').update(bytes).digest('hex'));
+   const body = bytes.toString('utf8');
+   expect(JSON.parse(body)).toEqual({
+     schemaVersion:'trycove-approved-handoff-export/1.0',
+     exportedAt:expect.any(String),
+     report:report?.content,
+   });
+   for (const privateValue of ['Private note B',started.accessToken,published!.token,beforeReceipt!.receiptSha256]) {
+     expect(body).not.toContain(privateValue);
+   }
+   const other = await store.createSession('owl-pilot-ux',true);
+   expect((await exportFeedbackReport({...exportInput,sessionId:other.sessionId},testDb,store)).status).toBe(404);
+   expect((await exportFeedbackReport({...exportInput,sessionToken:other.accessToken},testDb,store)).status).toBe(404);
+   expect((await exportFeedbackReport({...exportInput,packId:'wrong-pack'},testDb,store)).status).toBe(404);
+   expect((await exportFeedbackReport({...exportInput,sessionToken:undefined},testDb,store)).status).toBe(404);
    const after=await store.loadSession(started.sessionId,started.accessToken);expect(after?.latestReceipt?.version).toBe(beforeReceipt?.version);expect(after?.latestReceipt?.receiptSha256).toBe(beforeReceipt?.receiptSha256);
    expect(await revokeHandoff(published!.id,started.sessionId,'wrong-token',testDb,store)).toBe(false);expect(await readPublicHandoff(published!.token,testDb)).not.toBeNull();
    expect(await revokeHandoff(published!.id,started.sessionId,started.accessToken,testDb,store)).toBe(true);expect(await readPublicHandoff(published!.token,testDb)).toBeNull();
+   expect((await exportFeedbackReport(exportInput,testDb,store)).status).toBe(404);
   }finally{await instance.close()}
  },30000);
 

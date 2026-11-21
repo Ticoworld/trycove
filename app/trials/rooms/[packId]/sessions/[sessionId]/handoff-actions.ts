@@ -2,7 +2,7 @@
 import {cookies} from 'next/headers';
 import {revalidatePath} from 'next/cache';
 import {GUIDED_TRIAL_ACCESS_COOKIE} from '../../../../../../lib/trials/room-auth';
-import {createFeedbackReport,revokeHandoff} from '../../../../../../lib/handoffs';
+import {createFeedbackReport,feedbackExportPath,revokeHandoff} from '../../../../../../lib/handoffs';
 
 export async function publishFeedbackReport(input:{packId:string;sessionId:string;approvedTaskIds:string[]}){
   if(!/^[A-Za-z0-9_-]{16,40}$/.test(input.sessionId)||input.approvedTaskIds.length>12||input.approvedTaskIds.some(x=>!/^[-a-z0-9]{1,80}$/.test(x)))return {ok:false as const,error:'The report request is invalid.'};
@@ -10,7 +10,7 @@ export async function publishFeedbackReport(input:{packId:string;sessionId:strin
   const result=await createFeedbackReport({sessionId:input.sessionId,sessionToken:token,approvedTaskIds:input.approvedTaskIds});
   if(!result)return {ok:false as const,error:'The completed session or its latest receipt could not be verified.'};
   revalidatePath('/results');
-  return {ok:true as const,url:`/share/${result.token}`,exportUrl:`/reports/${result.id}/export`};
+  return {ok:true as const,url:`/share/${result.token}`,exportUrl:feedbackExportPath(input.packId,input.sessionId,result.id)};
 }
 
 export async function revokeFeedbackReport(input:{sessionId:string;reportId:string}){

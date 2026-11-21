@@ -1,33 +1,49 @@
 import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import {db} from '../../../lib/db';
-import {trialPacks} from '../../../lib/schema';
+import {asc, eq} from 'drizzle-orm';
+import {evidence, opportunities, projects, trialPacks} from '../../../lib/schema';
 import {hasOrganizerSession} from '../../../lib/organizer-auth';
 import {readPackVersion} from '../../../lib/trials/trial-packs';
-import {changeState, saveDraft} from './actions';
+import {changeState} from './actions';
+import {TrialPackEditor, type Draft} from './editor';
 
 export const dynamic = 'force-dynamic';
 const path = '/organizer/trial-packs';
-const example = {
-  id: 'product-testing', productId: 'existing-project-id', description: 'What testers will explore',
-  request: {kind: 'builder-declared', text: 'What the builder wants to learn'},
-  application: {name: 'Application name', url: 'https://example.com/', network: 'CKB Testnet', version: 'Hosted preview'},
-  prerequisites: ['List any wallet, account, faucet or token requirements'],
-  safety: ['Use testnet only'],
-  tasks: [{id: 'first-task', title: 'Open the app', instructions: 'Open the app and find the main navigation.', observe: ['Is the next action clear?']}],
+const empty: Draft = {
+  id: '', productId: '', description: '',
+  request: {kind: 'builder-declared', text: ''},
+  application: {name: '', url: '', network: '', version: ''},
+  prerequisites: [], safety: [],
+  tasks: [{id: 'task-1', title: '', instructions: '', observe: []}],
 };
 
 export default async function TrialPackOrganizer({searchParams}: {searchParams: Promise<{room?: string; error?: string}>}) {
   if (!await hasOrganizerSession()) redirect(`/organizer?return=${encodeURIComponent(path)}`);
   const {room, error} = await searchParams;
-  const packs = await db.select().from(trialPacks).orderBy(trialPacks.id);
+  const [packs, products, sources] = await Promise.all([
+    db.select().from(trialPacks).orderBy(trialPacks.id),
+    db.select({id: projects.id, name: projects.name}).from(projects).orderBy(asc(projects.name)),
+    db.select({id: evidence.id, productId: opportunities.projectA, claim: evidence.claim,
+      url: evidence.sourceUrl, revision: evidence.revision, opportunityId: opportunities.id})
+      .from(evidence).innerJoin(opportunities, eq(evidence.opportunityId, opportunities.id))
+      .where(eq(opportunities.kind, 'user-testing')).orderBy(evidence.id),
+  ]);
   const pack = packs.find(item => item.id === room);
   const definition = pack ? await readPackVersion(pack.id, pack.latestVersion) : null;
-  const editable = definition && {
-    id: definition.id, productId: definition.product.id, description: definition.description,
-    request: definition.request?.kind === 'builder-declared' ? definition.request : {kind: 'externally-sourced', evidenceId: null},
+  const source = sources.find(item => item.productId === definition?.product.id
+    && item.opportunityId === definition?.problemMap?.opportunityId
+    && (definition?.request
+      ? item.url === definition.request.sourceUrl && item.claim === definition.request.text
+        && item.revision === (definition.request.revision ?? null)
+      : item.url === definition?.problemMap?.sourceUrl));
+  const editable: Draft | null = definition && {
+    id: definition.id, productId: definition.product.id, description: definition.description ?? '',
+    request: (definition.request?.kind === 'externally-sourced' || (!definition.request && definition.problemMap))
+      ? {kind: 'externally-sourced', evidenceId: source?.id ?? 0}
+      : {kind: 'builder-declared', text: definition.request?.text ?? ''},
     application: definition.application, prerequisites: definition.prerequisites ?? [],
-    safety: definition.safety, tasks: definition.tasks,
+    safety: definition.safety, tasks: definition.tasks, testingMode: definition.testingMode,
   };
 
   return <section className="section stack">
@@ -46,18 +62,21 @@ export default async function TrialPackOrganizer({searchParams}: {searchParams: 
       <p>{definition.prerequisites?.join(' · ')}</p>
       <p>{definition.safety.join(' · ')}</p>
       {pack.publishedVersion !== null && <Link href={`/trials/rooms/${pack.id}`}>Open tester link</Link>}
-      {pack.state !== 'closed' && <form action={changeState} className="bar">
-        <input type="hidden" name="id" value={pack.id}/><input type="hidden" name="version" value={pack.latestVersion}/>
-        <button className="button" name="state" value="published">Publish this version</button>
-        {pack.state === 'published' && <button className="button secondary" name="state" value="paused">Pause enrollment</button>}
-        <button className="button secondary" name="state" value="closed">Close room</button>
-      </form>}
+      {pack.state !== 'closed' && <div className="bar">
+        {([
+          ['published', 'Publish this version'],
+          ['paused', 'Pause enrollment'],
+          ['closed', 'Close room'],
+        ] as const).filter(([state]) => state !== 'paused' || pack.state === 'published').map(([state, label]) =>
+          <form action={changeState} key={state}>
+            <input type="hidden" name="id" value={pack.id}/>
+            <input type="hidden" name="version" value={pack.latestVersion}/>
+            <input type="hidden" name="state" value={state}/>
+            <button className={state === 'published' ? 'button' : 'button secondary'}>{label}</button>
+          </form>)}
+      </div>}
     </article>}
-    {pack?.state !== 'closed' && <form action={saveDraft} className="card stack">
-      <label htmlFor="trial-definition">{pack ? 'Edit definition' : 'New room definition'}</label>
-      <p>Use an existing Product Passport ID. For an external request, use a request object with kind “externally-sourced” and a saved testing evidence ID.</p>
-      <textarea id="trial-definition" name="definition" rows={22} required defaultValue={JSON.stringify(editable ?? example, null, 2)}/>
-      <button className="button">Save draft and preview</button>
-    </form>}
+    {pack?.state !== 'closed' && <TrialPackEditor key={pack ? pack.id + '/' + pack.latestVersion : 'new'}
+      initial={editable ?? empty} products={products} sources={sources} editing={!!pack}/>}
   </section>;
 }

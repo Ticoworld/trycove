@@ -14,6 +14,7 @@ const task = z.object({
   launch: launch.optional(),
 });
 const fields = z.object({
+  testingMode: z.literal('browser_guided').default('browser_guided'),
   application: launch.extend({
     network: text, version: text,
     relatedApps: z.array(launch.extend({role: text})).max(12).default([]),

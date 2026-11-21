@@ -84,9 +84,9 @@ describe('TC-03 handoff records',()=>{
    const draftForm = new FormData();
    draftForm.set('definition', JSON.stringify(draft));
    vi.mocked(hasOrganizerSession).mockResolvedValue(false);
-   await expect(saveDraft(draftForm)).rejects.toThrow('Organizer access is required');
+   await expect(saveDraft('', draftForm)).rejects.toThrow('Organizer access is required');
    vi.mocked(hasOrganizerSession).mockResolvedValue(true);
-   await expect(saveDraft(draftForm)).rejects.toMatchObject({digest:expect.stringContaining('room=second-room')});
+   await expect(saveDraft('', draftForm)).rejects.toMatchObject({digest:expect.stringContaining('room=second-room')});
    const pack = {id:draft.id};
    expect((await readPackVersion(pack.id, 1, testDb)).request).toEqual(draft.request);
    await expect(store.createSession(pack.id,true)).rejects.toThrow();

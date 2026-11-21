@@ -8,7 +8,7 @@ import {saveTrialDraft, setTrialPackState} from '../../../lib/trials/trial-packs
 
 const page = '/organizer/trial-packs';
 
-export async function saveDraft(form: FormData) {
+export async function saveDraft(_previous: string, form: FormData) {
   if (!await hasOrganizerSession()) throw new Error('Organizer access is required.');
   let id: string;
   try {
@@ -17,8 +17,8 @@ export async function saveDraft(form: FormData) {
   } catch (error) {
     const message = error instanceof z.ZodError
       ? error.issues.map(issue => `${issue.path.join('.')}: ${issue.message}`).join('; ')
-      : 'Check the JSON, product ID, evidence ID and room state.';
-    redirect(`${page}?error=${encodeURIComponent(message.slice(0, 500))}`);
+      : 'Check the selected product, testing request and room state.';
+    return message.slice(0, 500);
   }
   redirect(`${page}?room=${id}`);
 }

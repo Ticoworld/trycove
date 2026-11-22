@@ -1,3 +1,9 @@
 import type {NextConfig} from 'next';
-const config:NextConfig={serverExternalPackages:['@electric-sql/pglite','pg']};
-export default config;
+import {PHASE_DEVELOPMENT_SERVER} from 'next/constants';
+
+export default function config(phase: string): NextConfig {
+  return {
+    distDir: phase === PHASE_DEVELOPMENT_SERVER ? '.next' : '.next-production',
+    serverExternalPackages: ['@electric-sql/pglite', 'pg'],
+  };
+}

@@ -10,3 +10,4 @@ node_modules/
 .neon/
 .neon
 .next-production/
+.netlify/

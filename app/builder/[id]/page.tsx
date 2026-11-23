@@ -26,10 +26,12 @@ export default async function Builder({params}: {params: Promise<{id:string}>}) 
     inArray(followUps.handoffReportId,reports.map(report=>report.id)),eq(followUps.kind,'builder-responded'),
   )) : [];
   return <section className="section stack">
-    <h1>{product.name} builder workspace</h1>
-    <Link className="button" href={'/organizer/trial-packs?project=' + encodeURIComponent(id)}>Manage Trial Packs</Link>
+    <Link href="/account">← My products</Link>
+    <span className="eyebrow">Builder workspace</span><h1>{product.name}</h1>
+    <p className="lead">Create or manage a trial, publish it, then share the tester link. Approved feedback will appear here.</p>
+    <Link className="button" href={'/organizer/trial-packs?project=' + encodeURIComponent(id)}>Create or manage trial →</Link>
     <Link href={'/projects/' + encodeURIComponent(id)}>Product Passport and connections</Link>
-    <form action={saveDeclaration} className="card stack">
+    <details><summary>Manage product declarations</summary><form action={saveDeclaration} className="card stack">
       <h2>Publish a declaration</h2>
       <input type="hidden" name="projectId" value={id}/>
       <input type="hidden" name="state" value="published"/>
@@ -46,6 +48,7 @@ export default async function Builder({params}: {params: Promise<{id:string}>}) 
       <label>Action <select name="state"><option value="published">Publish edited declaration</option><option value="withdrawn">Withdraw declaration</option></select></label>
       <button className="button">Save declaration</button>
     </form>)}
+    </details>
     <h2>Tester-approved feedback</h2>
     {!reports.length && !historical.length && <p>No approved feedback is available.</p>}
     {historical.map(record => <details key={record.sha256} className="card">

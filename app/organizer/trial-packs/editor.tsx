@@ -1,6 +1,6 @@
 'use client';
 
-import {useActionState, useState} from 'react';
+import {useActionState, useRef, useState} from 'react';
 import type {z} from 'zod';
 import type {DraftSchema} from '../../../lib/trials/room-definitions';
 import {saveDraft} from './actions';
@@ -18,6 +18,15 @@ export function TrialPackEditor({initial, products, sources, editing, scopedProd
 }) {
   const [error, submit, pending] = useActionState(saveDraft, '');
   const [draft, setDraft] = useState(initial);
+  const [step, setStep] = useState(0);
+  const formRef = useRef<HTMLFormElement>(null);
+  const sections = ["About", "Application", "Tasks", "Safety"];
+  function next() {
+    const section = formRef.current?.querySelector<HTMLElement>(`[data-step="${step}"]`);
+    const fields = section?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>("input, textarea, select");
+    for (const field of Array.from(fields ?? [])) if (!field.reportValidity()) return;
+    setStep(current => Math.min(current + 1, 3));
+  }
   const [declared, setDeclared] = useState(initial.request.kind === 'builder-declared' ? initial.request.text : '');
   const [sourceId, setSourceId] = useState(initial.request.kind === 'externally-sourced' ? initial.request.evidenceId : 0);
   const [sourced, setSourced] = useState(initial.request.kind === 'externally-sourced');
@@ -43,20 +52,22 @@ export function TrialPackEditor({initial, products, sources, editing, scopedProd
     update('tasks', [...draft.tasks, blankTask(`task-${number}`)]);
   }
 
-  return <form action={submit} className="card stack pack-editor">
+  return <form ref={formRef} action={submit} className="card stack pack-editor" onInvalid={event => { const section = (event.target as HTMLElement).closest<HTMLElement>("[data-step]"); if (section) setStep(Number(section.dataset.step)); }}>
     <h2>{editing ? 'Edit Trial Pack' : 'Create a Trial Pack'}</h2>
     {error && <p role="alert">{error}</p>}
     <input type="hidden" name="definition" value={JSON.stringify(payload)}/>
+    <p aria-live="polite">Step {step + 1} of 4 · {sections[step]}</p>
+    <section data-step="0" hidden={step !== 0}><h3>About this trial</h3>
     <label>Product Passport
       <select required disabled={editing || !!scopedProduct} value={draft.productId} onChange={event => {
         update('productId', event.target.value);
         setSourceId(0);
       }}>
         <option value="">Choose a product</option>
-        {products.map(product => <option key={product.id} value={product.id}>{product.name} ({product.id})</option>)}
+        {products.map(product => <option key={product.id} value={product.id}>{product.name}</option>)}
       </select>
     </label>
-    <label>Trial Pack ID
+    <label>Room link name
       <input required readOnly={editing} pattern="[a-z0-9]+(-[a-z0-9]+)*" maxLength={80} value={draft.id}
         onChange={event => update('id', event.target.value)}/>
     </label>
@@ -74,8 +85,10 @@ export function TrialPackEditor({initial, products, sources, editing, scopedProd
       </select>
     </label> : <label>What should testers help learn?
       <textarea required value={declared} onChange={event => setDeclared(event.target.value)}/>
-      <small>Builder ownership is unverified.</small>
+      <small>{scopedProduct ? "This request is provided by the builder." : "Builder ownership has not been independently verified."}</small>
     </label>}
+    </section>
+    <section data-step="1" hidden={step !== 1}><h3>Application and setup</h3>
     <fieldset className="stack">
       <legend>Application</legend>
       {([['name', 'Application name'], ['url', 'Application URL (HTTPS)'], ['network', 'Network'], ['version', 'Application version']] as const).map(([field, label]) =>
@@ -88,6 +101,8 @@ export function TrialPackEditor({initial, products, sources, editing, scopedProd
       <small>List wallet requirements, faucet or funding requirements, and setup instructions. Use one line per item.</small>
       <textarea rows={4} value={draft.prerequisites.join('\n')} onChange={event => update('prerequisites', lines(event.target.value))}/>
     </label>
+    </section>
+    <section data-step="2" hidden={step !== 2}>
     <h3>Ordered tasks</h3>
     {draft.tasks.map((task, index) => <fieldset className="stack" key={task.id}>
       <legend>Task {index + 1}</legend>
@@ -109,9 +124,15 @@ export function TrialPackEditor({initial, products, sources, editing, scopedProd
       </div>
     </fieldset>)}
     <button type="button" className="button secondary" disabled={draft.tasks.length >= 12} onClick={addTask}>Add task</button>
+    </section>
+    <section data-step="3" hidden={step !== 3}><h3>Safety</h3>
     <label>Safety rules (one per line)
       <textarea required rows={4} value={draft.safety.join('\n')} onChange={event => update('safety', lines(event.target.value))}/>
     </label>
-    <button className="button" disabled={pending}>{pending ? 'Saving…' : 'Save draft and preview'}</button>
+    </section>
+    <div className="bar">
+      {step > 0 && <button type="button" className="button secondary" disabled={pending} onClick={() => setStep(step - 1)}>Back</button>}
+      {step < 3 ? <button type="button" className="button" onClick={next}>Next</button> : <button className="button" disabled={pending}>{pending ? 'Saving…' : 'Save draft and preview'}</button>}
+    </div>
   </form>;
 }

@@ -28,7 +28,7 @@ export async function saveDraft(_previous: string, form: FormData) {
       : 'Check the selected product, testing request and room state.';
     return message.slice(0, 500);
   }
-  redirect(`${page}?room=${id}${user ? "&project=" + encodeURIComponent(projectId) : ""}`);
+  redirect(`${page}?room=${id}${user ? "&project=" + encodeURIComponent(projectId) : ""}&notice=saved`);
 }
 
 export async function changeState(form: FormData) {
@@ -46,5 +46,5 @@ export async function changeState(form: FormData) {
   } catch {
     redirect(`${page}?room=${id}${scope}&error=Reload%20and%20review%20the%20room%20before%20changing%20its%20state.`);
   }
-  redirect(`${page}?room=${id}${scope}`);
+  redirect(`${page}?room=${id}${scope}&notice=updated`);
 }

@@ -56,7 +56,7 @@ export async function startClaim(form: FormData) {
     status: 'pending', expiresAt: new Date(Date.now() + (method === 'review' ? 7 * 86400000 : 1800000)),
     evidence: JSON.stringify({repositoryId: repository?.id, githubId, source: project.sourceUrl}),
   });
-  redirect('/account?claim=' + id);
+  redirect('/account?claim=' + id + '&notice=claim');
 }
 
 async function decide(claim: typeof ownershipClaims.$inferSelect, actorId: string, status: 'approved' | 'rejected', detail: string, review: boolean) {
@@ -113,7 +113,7 @@ export async function verifyClaim(form: FormData) {
     detail += ' default branch commit ' + sha;
   }
   await decide(claim, user.id, 'approved', detail, false);
-  redirect('/account');
+  redirect('/account?notice=verified');
 }
 
 export async function reviewClaim(form: FormData) {
@@ -124,7 +124,7 @@ export async function reviewClaim(form: FormData) {
   const [claim] = await db.select().from(ownershipClaims).where(eq(ownershipClaims.id, id));
   if (!claim || claim.userId === organizer.id) throw new Error('A separate organizer must review this claim.');
   await decide(claim, organizer.id, status, detail, true);
-  redirect('/account');
+  redirect('/account?notice=saved');
 }
 
 export async function manageMaintainer(form: FormData) {
@@ -141,11 +141,12 @@ export async function manageMaintainer(form: FormData) {
       ? await tx.insert(projectMemberships).values({projectId, userId, role: 'maintainer'}).onConflictDoNothing().returning()
       : await tx.delete(projectMemberships).where(and(eq(projectMemberships.projectId, projectId),
         eq(projectMemberships.userId, userId), eq(projectMemberships.role, 'maintainer'))).returning();
-    if (affected.length) await tx.insert(authorizationAudit).values({
+    if (!affected.length) throw new Error(operation === 'add' ? 'That account already has access.' : 'No maintainer was found for that account.');
+    await tx.insert(authorizationAudit).values({
       actorId: actor.id, projectId, action: 'maintainer-' + operation, detail: userId,
     });
   });
-  redirect('/account');
+  redirect('/account?notice=saved');
 }
 
 export async function revokeClaim(form: FormData) {
@@ -166,5 +167,5 @@ export async function revokeClaim(form: FormData) {
       actorId: actor.id, projectId: claim.projectId, action: 'ownership-revoked', detail: JSON.stringify({claimId: id, detail}),
     });
   });
-  redirect('/account');
+  redirect('/account?notice=saved');
 }

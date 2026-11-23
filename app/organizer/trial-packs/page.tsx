@@ -9,6 +9,7 @@ import {hasOrganizerSession} from '../../../lib/organizer-auth';
 import {readPackVersion} from '../../../lib/trials/trial-packs';
 import {changeState} from './actions';
 import {TrialPackEditor, type Draft} from './editor';
+import {PendingButton} from './pending-button';
 
 export const dynamic = 'force-dynamic';
 const path = '/organizer/trial-packs';
@@ -20,9 +21,9 @@ const empty: Draft = {
   tasks: [{id: 'task-1', title: '', instructions: '', observe: []}],
 };
 
-export default async function TrialPackOrganizer({searchParams}: {searchParams: Promise<{room?: string; error?: string; project?: string}>}) {
+export default async function TrialPackOrganizer({searchParams}: {searchParams: Promise<{room?: string; error?: string; project?: string; notice?: string}>}) {
   const organizer = await hasOrganizerSession();
-  const {room, error, project} = await searchParams;
+  const {room, error, project, notice} = await searchParams;
   const scope = project ? 'project=' + encodeURIComponent(project) : '';
   let canPublish = organizer;
   if (!organizer) {
@@ -65,10 +66,13 @@ export default async function TrialPackOrganizer({searchParams}: {searchParams: 
   };
 
   return <section className="section stack">
-    <h1>Trial Packs</h1>
+    {project && <Link href={'/builder/' + encodeURIComponent(project)}>← Product workspace</Link>}
+    <span className="eyebrow">Testing room</span><h1>Manage trials</h1>
+    <p className="lead">Save a draft, review it, and publish when it is ready for testers.</p>
     <nav className="bar"><Link href={scope ? path + "?" + scope : path}>Create a room</Link>
-      {packs.map(item => <Link key={item.id} href={`${path}?room=${item.id}${scope ? "&" + scope : ""}`}>{item.id} · {item.state}</Link>)}</nav>
+      {packs.map(item => <Link key={item.id} href={`${path}?room=${item.id}${scope ? "&" + scope : ""}`}>{visible.find(entry => entry.pack.id === item.id)?.definition.application.name || item.id} · {item.state}</Link>)}</nav>
     {error && <p role="alert">{error}</p>}
+    {notice && <p role="status">{notice === "saved" ? "Draft saved. Review it below before publishing." : "Trial status updated."}</p>}
     {pack && definition && <article className="card stack">
       <h2>Preview · {definition.product.name}</h2>
       <p>Saved version {pack.latestVersion} · {pack.state}{pack.publishedVersion !== null && ` · published version ${pack.publishedVersion}`}</p>
@@ -79,23 +83,24 @@ export default async function TrialPackOrganizer({searchParams}: {searchParams: 
         {task.observe.map((item, i) => <li key={i}>{item}</li>)}</ul></li>)}</ol>
       <p>{definition.prerequisites?.join(' · ')}</p>
       <p>{definition.safety.join(' · ')}</p>
-      {pack.publishedVersion !== null && <Link href={`/trials/rooms/${pack.id}`}>Open tester link</Link>}
+      {pack.publishedVersion !== null && <p>Ready to share: <Link className="source" href={`/trials/rooms/${pack.id}`}>Open tester link</Link></p>}
       {canPublish && pack.state !== 'closed' && <div className="bar">
         {([
           ['published', 'Publish this version'],
           ['paused', 'Pause enrollment'],
           ['closed', 'Close room'],
-        ] as const).filter(([state]) => state !== 'paused' || pack.state === 'published').map(([state, label]) =>
+        ] as const).filter(([state]) => (state !== 'paused' || pack.state === 'published') && (state !== 'published' || pack.state !== 'published' || pack.latestVersion !== pack.publishedVersion)).map(([state, label]) =>
           <form action={changeState} key={state}>
             <input type="hidden" name="id" value={pack.id}/>
             <input type="hidden" name="version" value={pack.latestVersion}/>
             <input type="hidden" name="project" value={project ?? ""}/>
             <input type="hidden" name="state" value={state}/>
-            <button className={state === 'published' ? 'button' : 'button secondary'}>{label}</button>
+            <PendingButton label={label} pendingLabel={state === "published" ? "Publishing…" : "Updating…"} secondary={state !== "published"}/>
           </form>)}
       </div>}
     </article>}
-    {pack?.state !== 'closed' && <TrialPackEditor key={pack ? pack.id + '/' + pack.latestVersion : 'new'}
-      initial={editable ?? {...empty,productId: organizer ? "" : project ?? ""}} products={products} sources={organizer ? sources : sources.filter(item => item.productId === project)} editing={!!pack} scopedProduct={organizer ? undefined : project}/>}
+    {pack?.state !== 'closed' && (pack ? <details><summary>Edit this trial</summary><TrialPackEditor key={pack.id + '/' + pack.latestVersion}
+      initial={editable ?? {...empty,productId: organizer ? "" : project ?? ""}} products={products} sources={organizer ? sources : sources.filter(item => item.productId === project)} editing scopedProduct={organizer ? undefined : project}/></details> : <TrialPackEditor key="new"
+      initial={{...empty,productId: organizer ? "" : project ?? ""}} products={products} sources={organizer ? sources : sources.filter(item => item.productId === project)} editing={false} scopedProduct={organizer ? undefined : project}/>)}
   </section>;
 }

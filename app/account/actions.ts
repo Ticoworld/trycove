@@ -11,7 +11,7 @@ export async function githubLogin() {
   const origin = process.env.TRYCOVE_PUBLIC_URL;
   if (!origin) throw new Error('GitHub sign-in is unavailable.');
   const {data, error} = await serverAuth().signIn.social({
-    provider: 'github', callbackURL: new URL('/account', origin).href,
+    provider: 'github', callbackURL: new URL('/auth/complete', origin).href,
   });
   if (error || !data?.url) redirect('/account?error=signin');
   redirect(data.url);

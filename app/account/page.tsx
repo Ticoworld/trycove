@@ -11,14 +11,13 @@ export const dynamic = 'force-dynamic';
 
 export default async function Account({searchParams}: {searchParams: Promise<{error?: string; project?: string}>}) {
   const [query, user] = await Promise.all([searchParams, authenticatedUser()]);
-  if (!user) return <section className="section stack">
-    <h1>Sign in to Trycove</h1>
+  if (!user) return <section className="section account-entry"><div className="account-entry-copy"><span className="eyebrow">Trycove account</span><h1>Build with your community.</h1><p>Sign in to manage your product and follow feedback from testers.</p></div><div className="card stack account-entry-card"><h2>Sign in</h2>
     {query.error && <p role="alert">Account action failed. Please try again.</p>}
     {authConfigured() && process.env.TRYCOVE_PUBLIC_URL
       ? <form action={githubLogin}><button className="button">Continue with GitHub</button></form>
       : <p>GitHub sign-in is unavailable.</p>}
     <p>Email sign-in is pending production delivery configuration.</p>
-    <Link href="/trials">Explore trials as a guest</Link>
+    <Link href="/trials">Explore trials as a guest</Link></div>
   </section>;
 
   await ensureProfile(user.id);

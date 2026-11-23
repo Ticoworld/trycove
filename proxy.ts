@@ -6,4 +6,4 @@ export async function proxy(request: NextRequest) {
   return serverAuth().middleware({loginUrl: '/account', publicRoutes: ['/account']})(request);
 }
 
-export const config = {matcher: ['/account', '/builder/:path*']};
+export const config = {matcher: ['/account', '/auth/complete', '/builder/:path*']};

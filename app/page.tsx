@@ -1,31 +1,25 @@
 import Link from 'next/link';
-import {asc, like} from 'drizzle-orm';
-import {db} from '../lib/db';
-import {projects} from '../lib/schema';
+import {listPublishedTrials} from '../lib/trials/trial-packs';
 import './home.css';
 
 export const dynamic = 'force-dynamic';
 
-function Story() {
- return <div className="home-story-art" role="img" aria-label="An imagined story: a builder makes a product, someone needs it, they try it together, and record feedback.">
-  {[0, 1, 2, 3].map((scene) => <svg key={scene} viewBox={`${scene * 248} 0 ${scene === 3 ? 256 : 248} 250`} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-   <g stroke="#29263b" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-    <path fill="#f8cb61" d="M4 10h230v230H4z"/><path fill="#fb907d" d="M252 10h230v230H252z"/><path fill="#b7a8ef" d="M500 10h230v230H500z"/><path fill="#81d4e4" d="M748 10h248v230H748z"/>
-    <path fill="#fff8e8" d="M30 168h180v42H30zM52 65h100v78H52z"/><path fill="#81d4e4" d="M64 78h76v50H64z"/><path fill="none" d="M80 101h43m-21-20v40"/><circle fill="#f4b79f" cx="171" cy="107" r="25"/><path fill="#29263b" d="M148 103q-4-37 27-31 24 4 21 28-16-17-48 3z"/><path fill="#fff8e8" d="M145 171q0-42 27-42t30 42z"/><path fill="none" d="M149 145l-28 17"/>
-    <circle fill="#f4b79f" cx="327" cy="124" r="26"/><path fill="#29263b" d="M302 120q0-35 25-35 28 0 27 32-18-15-52 3z"/><path fill="#fff8e8" d="M293 205q1-53 34-53t35 53z"/><path fill="#fff8e8" d="M370 39h81v65h-37l-19 15 2-15h-27z"/><path fill="none" d="M390 70h40m-20-20v40"/>
-    <path fill="#fff8e8" d="M545 71h135v112H545z"/><path fill="#81d4e4" d="M559 84h107v72H559z"/><path fill="none" d="M592 119l14 14 30-31"/><circle fill="#f4b79f" cx="536" cy="172" r="22"/><path fill="#f4b79f" d="M517 205q1-20 20-20t21 20z"/><circle fill="#f4b79f" cx="690" cy="172" r="22"/><path fill="#f4b79f" d="M670 205q1-20 20-20t22 20z"/>
-    <path fill="#fff8e8" d="M813 41h112v155H813z"/><path fill="none" d="M837 78h64m-64 25h64m-64 25h35"/><path fill="#f8cb61" d="M866 149l14 13 27-32"/><circle fill="#f4b79f" cx="796" cy="165" r="22"/><path fill="#29263b" d="M775 162q-2-28 22-27 23 2 21 25-17-12-43 2z"/><path fill="#fff8e8" d="M768 216q0-31 28-31t29 31z"/>
-   </g>
-  </svg>)}
- </div>;
-}
+function Header(){return <div className="home-header"><Link href="/" className="home-brand">trycove<span>●</span></Link><nav className="home-desktop-nav" aria-label="Homepage navigation"><details><summary>Explore</summary><div><Link href="/map">Problem map</Link><Link href="/projects">Project catalog</Link></div></details><Link href="/opportunities">Connect</Link><Link href="/trials">Try</Link><Link href="/results">Results</Link><Link href="/about">About</Link><Link href="/account">Account</Link></nav><details className="home-menu"><summary aria-label="Open navigation menu">Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation"><Link href="/map">Problem map</Link><Link href="/projects">Project catalog</Link><Link href="/opportunities">Connect</Link><Link href="/trials">Try</Link><Link href="/results">Results</Link><Link href="/about">About</Link><Link href="/account">Account</Link></nav></details></div>}
+
+function Story(){return <div className="comic" role="img" aria-label="An imagined example: a builder makes a small tool, another person needs it, they try it together, and write down feedback.">
+ {[0, 1].map(part => <svg key={part} viewBox={part === 0 ? "0 0 610 360" : "610 0 590 360"} xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="#29263b" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+ {/* The same blue tool travels through each scene. */}
+ <path fill="#f8cb61" d="M5 35 Q8 8 40 10 H340 V330 H5Z"/><path fill="#fb907d" d="M350 10 H610 V330 H350Z"/><path fill="#b7a8ef" d="M620 10 H930 V330 H620Z"/><path fill="#81d4e4" d="M940 10 H1160 Q1195 10 1195 45 V330 H940Z"/>
+ <path fill="#fff8e8" d="M27 257h280v43H27z M58 72h155v118H58z"/><path fill="#81d4e4" d="M75 87h121v87H75z"/><path fill="none" d="M116 130h40m-20-20v40 M54 226h83"/><path fill="#f4b79f" d="M236 175q-27 0-27-29t27-29 27 29-27 29z"/><path fill="#29263b" d="M209 143q-2-42 30-39 28 2 25 35-22-13-55 4z"/><path fill="#fff8e8" d="M198 256q3-70 40-70t42 70z"/><path fill="none" d="M211 199l-52 31 20 10"/><path fill="#81d4e4" d="M155 209h38v36h-38z"/><path fill="none" d="M164 227h20m-10-10v20"/>
+ <path fill="#fff8e8" d="M389 38h181v115H389z"/><path fill="none" d="M410 68h83m-83 23h113m-113 23h55"/><path fill="#f4b79f" d="M473 205q-29 0-29-30t29-30 29 30-29 30z"/><path fill="#29263b" d="M444 169q-2-36 28-37 30 0 31 34-24-12-59 3z"/><path fill="#fff8e8" d="M426 300q4-81 47-81t46 81z"/><path fill="none" d="M508 205l48-28"/><path fill="#fff8e8" d="M522 174l16 18 23-17-10-21z"/>
+ <path fill="#fff8e8" d="M670 74h207v138H670z"/><path fill="#81d4e4" d="M688 91h171v102H688z"/><path fill="none" d="M752 137h40m-20-20v40"/><path fill="#f4b79f" d="M665 234q-24 0-24-25t24-25 24 25-24 25z M877 234q-24 0-24-25t24-25 24 25-24 25z"/><path fill="#29263b" d="M640 204q0-34 25-34t25 32q-20-11-50 2z M852 204q0-34 25-34t25 32q-20-11-50 2z"/><path fill="#fff8e8" d="M625 304q3-59 40-59t40 59z M837 304q3-59 40-59t40 59z"/><path fill="none" d="M701 261l52-41m87 41-44-41"/>
+ <path fill="#fff8e8" d="M1006 42h143v183h-143z"/><path fill="none" d="M1026 79h100m-100 26h100m-100 26h60 M1026 165h55"/><path fill="#fb907d" d="M1094 157l18 16 24-30"/><path fill="#f4b79f" d="M984 236q-25 0-25-26t25-26 25 26-25 26z"/><path fill="#29263b" d="M959 206q0-34 25-34t25 32q-20-11-50 2z"/><path fill="#fff8e8" d="M945 304q2-58 39-58t39 58z"/><path fill="none" d="M1012 258l46-50"/>
+ </g></svg>)}</div>}
+
 export default async function Home(){
- const products=await db.select({id:projects.id,name:projects.name,description:projects.description}).from(projects).where(like(projects.sourceUrl, 'https://github.com/CKBFansDAO/ckbdapps/%')).orderBy(asc(projects.name)).limit(3);
- return <div className="home">
-  <section className="home-hero"><div className="home-copy"><span className="home-star" aria-hidden="true">✳</span><h1>It&apos;s built.<br/><em>Now what?</em></h1><p>Find projects, make connections, and try something real.</p><div className="home-actions"><Link className="home-primary" href="/projects">Explore projects <span>↗</span></Link><Link className="home-secondary" href="/trials">Find a trial ↗</Link></div></div>
-   <div className="home-world"><img src="/home-districts.svg" alt=""/><Link className="district payments" href="/map/payments-checkout">Payments ↗</Link><Link className="district trade" href="/map/trading-markets">Trade &amp; swap ↗</Link><Link className="district fiber" href="/projects?q=Fiber">Fiber ↗</Link><Link className="district build" href="/map/developer-tools">Build apps ↗</Link></div>
-  </section>
-  <section className="home-story"><div className="home-story-heading"><div><span>From idea to feedback</span><h2>See what happens next.</h2></div><Link href="/opportunities">Explore connections ↗</Link></div><Story/><p className="home-story-note">An illustrated example</p></section>
-  <section className="home-discover"><div className="home-discover-heading"><div><span>Take a closer look</span><h2>Projects to explore</h2></div><Link href="/projects">All projects ↗</Link></div><div className="home-products">{products.map((p,i)=><Link href={`/projects/${encodeURIComponent(p.id)}`} className={`home-product product-${i}`} key={p.id}><span>Project</span><h3>{p.name}</h3><p>{p.description || 'Open the project to explore its source records.'}</p><b>View project ↗</b></Link>)}{!products.length && <p>No directory projects are available yet.</p>}</div><Link className="home-trial" href="/trials"><span>Ready to try something?</span><strong>Find a trial <b>↗</b></strong></Link></section>
- </div>;
+ const rooms=(await listPublishedTrials()).filter(room => room.id !== 'local-test');
+ return <div className="home"><Header/><section className="home-hero"><div className="home-copy"><h1>It&apos;s built.<br/><em>Now what?</em></h1><div className="home-actions"><Link className="home-primary" href="/projects">Explore projects <span>↗</span></Link><Link className="home-secondary" href="/trials">Find a trial ↗</Link></div></div>
+ <div className="home-world"><img src="/home-districts.svg" alt=""/><Link className="district payments" href="/map/payments-checkout"><span>Payments ↗</span></Link><Link className="district trade" href="/map/trading-markets"><span>Trade &amp; swap ↗</span></Link><Link className="district fiber" href="/projects?category=Fiber"><span>Fiber ↗</span></Link><Link className="district build" href="/map/developer-tools"><span>Build apps ↗</span></Link></div></section>
+ <section className="home-story" aria-label="An illustrated example"><Story/><div className="story-foot"><small>An illustrated example</small><Link href="/opportunities">Explore connections ↗</Link></div></section>
+ <section className="home-discover"><div className="discover-title"><h2>Try something</h2><Link href="/trials">All trials ↗</Link></div>{rooms.length?<div className="room-list">{rooms.slice(0,3).map(room=><Link className="room" href={`/trials/rooms/${encodeURIComponent(room.id)}`} key={room.id}><span>Published trial room</span><h3>{room.product.name}</h3><p>{room.description}</p><b>Explore trial ↗</b></Link>)}</div>:<div className="home-empty"><p>No trial rooms are currently open.</p><Link href="/projects">Browse projects ↗</Link></div>}</section></div>
 }

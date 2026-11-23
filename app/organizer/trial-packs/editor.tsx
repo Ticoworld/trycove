@@ -2,7 +2,7 @@
 
 import {useActionState, useRef, useState} from 'react';
 import type {z} from 'zod';
-import type {DraftSchema} from '../../../lib/trials/room-definitions';
+import {DraftSchema} from '../../../lib/trials/room-definitions';
 import {saveDraft} from './actions';
 
 export type Draft = z.input<typeof DraftSchema>;
@@ -19,6 +19,7 @@ export function TrialPackEditor({initial, products, sources, editing, scopedProd
   const [error, submit, pending] = useActionState(saveDraft, '');
   const [draft, setDraft] = useState(initial);
   const [step, setStep] = useState(0);
+  const [importMessage, setImportMessage] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
   const sections = ["About", "Application", "Tasks", "Safety"];
   function next() {
@@ -35,6 +36,25 @@ export function TrialPackEditor({initial, products, sources, editing, scopedProd
     request: sourced ? {kind: 'externally-sourced', evidenceId: sourceId} : {kind: 'builder-declared', text: declared},
     tasks: draft.tasks.map(task => ({...task, observe: nonempty(task.observe)})),
   };
+
+  async function importDraft(file: File | undefined) {
+    if (!file) return;
+    try {
+      if (file.size > 150_000) throw new Error('This file is too large.');
+      const parsed = DraftSchema.safeParse(JSON.parse(await file.text()));
+      if (!parsed.success) throw new Error('The file is not a valid Trial Pack draft.');
+      if (scopedProduct && parsed.data.productId !== scopedProduct) throw new Error('This draft belongs to another product.');
+      if (!products.some(product => product.id === parsed.data.productId)) throw new Error('This product is not available.');
+      setDraft(parsed.data);
+      setSourced(parsed.data.request.kind === 'externally-sourced');
+      setDeclared(parsed.data.request.kind === 'builder-declared' ? parsed.data.request.text : '');
+      setSourceId(parsed.data.request.kind === 'externally-sourced' ? parsed.data.request.evidenceId : 0);
+      setStep(0);
+      setImportMessage('Draft loaded. Review each step before saving.');
+    } catch (error) {
+      setImportMessage(error instanceof Error && error.message !== 'Unexpected end of JSON input' ? error.message : 'Could not read this draft.');
+    }
+  }
 
   function update<K extends keyof Draft>(field: K, value: Draft[K]) {
     setDraft(current => ({...current, [field]: value}));
@@ -55,6 +75,10 @@ export function TrialPackEditor({initial, products, sources, editing, scopedProd
   return <form ref={formRef} action={submit} className="card stack pack-editor" onInvalid={event => { const section = (event.target as HTMLElement).closest<HTMLElement>("[data-step]"); if (section) setStep(Number(section.dataset.step)); }}>
     <h2>{editing ? 'Edit Trial Pack' : 'Create a Trial Pack'}</h2>
     {error && <p role="alert">{error}</p>}
+    {!editing && <label>Load a prepared draft (JSON)
+      <input type="file" accept="application/json,.json" onChange={event => { void importDraft(event.target.files?.[0]); event.target.value = ''; }}/>
+    </label>}
+    {importMessage && <p role="status">{importMessage}</p>}
     <input type="hidden" name="definition" value={JSON.stringify(payload)}/>
     <p aria-live="polite">Step {step + 1} of 4 · {sections[step]}</p>
     <section data-step="0" hidden={step !== 0}><h3>About this trial</h3>

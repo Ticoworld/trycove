@@ -27,7 +27,7 @@ export default async function Page() {
           <ul>{room.prerequisites.map((item, index) => <li key={index}>{item}</li>)}</ul></> : null}
         {(room.request?.kind === 'externally-sourced' || (!room.request && room.problemMap)) && <p>Externally sourced testing request. Builder participation is unconfirmed.
           {(room.request?.sourceUrl ?? room.problemMap?.sourceUrl) && <> <a href={room.request?.sourceUrl ?? room.problemMap?.sourceUrl}>View source</a></>}</p>}
-        {room.request?.kind === 'builder-declared' && <p>Builder-declared request entered by an organizer. Builder ownership is unverified.</p>}
+        {room.request?.kind === 'builder-declared' && <p>Builder-declared testing request.</p>}
         <Link className="button" href={`/trials/rooms/${room.id}`}>Review trial and start</Link>
       </article>)}</div>
       {!rooms.length && <p>No Trial Rooms are open for enrollment.</p>}

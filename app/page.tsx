@@ -3,12 +3,13 @@ import {Fraunces, Geist} from 'next/font/google';
 import {listPublishedTrials} from '../lib/trials/trial-packs';
 import './home.css';
 import {HomeMotion} from './home-motion';
+import {SiteHeader} from './components/site-header';
 
 const display = Fraunces({subsets:['latin'], style:['normal','italic'], variable:'--home-display', display:'swap'});
 const interfaceFont = Geist({subsets:['latin'], variable:'--home-ui', display:'swap'});
 export const dynamic = 'force-dynamic';
 
-function Header(){return <header className="home-header-wrap"><div className="home-header home-inner"><Link href="/" className="home-brand">trycove<span>●</span></Link><nav className="home-desktop-nav" aria-label="Homepage navigation"><details><summary>Explore</summary><div><Link href="/map">Problem map</Link><Link href="/projects">Project catalog</Link></div></details><Link href="/opportunities">Connect</Link><Link href="/trials">Try</Link><Link href="/results">Results</Link><Link href="/about">About</Link><Link href="/account">Account</Link></nav><details className="home-menu"><summary aria-label="Open navigation menu">Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation"><Link href="/map">Problem map</Link><Link href="/projects">Project catalog</Link><Link href="/opportunities">Connect</Link><Link href="/trials">Try</Link><Link href="/results">Results</Link><Link href="/about">About</Link><Link href="/account">Account</Link></nav></details></div></header>}
+
 
 function World(){return <div className="world"><svg viewBox="0 0 900 720" role="group" aria-label="Explore by area" xmlns="http://www.w3.org/2000/svg">
  <defs><pattern id="world-dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.5" fill="#29263b" opacity=".13"/></pattern></defs><rect width="900" height="720" fill="#dfeae9"/><path d="M390 255C450 220 480 275 510 315S545 375 500 421M320 335q-10 36 34 57" fill="none" stroke="#29263b" strokeWidth="5" strokeDasharray="3 15" strokeLinecap="round"/>
@@ -33,7 +34,7 @@ function Invitation(){return <section className="invitation"><div className="inv
 
 export default async function Home(){
  const rooms=await listPublishedTrials();
- return <div className={`home ${display.variable} ${interfaceFont.variable}`}><HomeMotion/><Header/><section className="home-hero home-inner"><div className="home-copy"><h1>It&apos;s built.<br/><em>Now what?</em></h1><div className="home-actions"><Link className="home-primary" href="/projects">Explore projects</Link><Link className="home-secondary" href="/trials">Find a trial</Link></div></div><World/></section>
+ return <div className={`home ${display.variable} ${interfaceFont.variable}`}><HomeMotion/><SiteHeader/><section className="home-hero home-inner"><div className="home-copy"><h1>It&apos;s built.<br/><em>Now what?</em></h1><div className="home-actions"><Link className="home-primary" href="/projects">Explore projects</Link><Link className="home-secondary" href="/trials">Find a trial</Link></div></div><World/></section>
  <CategoryIndex/>
  <section className="home-story" aria-label="A fictional illustrated story"><div className="home-inner story-inner"><h2>Built by one. Needed by another.</h2><Comic/></div></section>
  <section className="home-discover"><div className="home-inner"><div className="discover-title"><h2>Try something</h2><Link href="/trials">All trials</Link></div>{rooms.length?<div className="room-list">{rooms.slice(0,3).map(room=><div className="ticket-wrap" key={room.id}><Link className="ticket" href={`/trials/rooms/${encodeURIComponent(room.id)}`}><div className="ticket-body"><span>Published trial room</span><h3>{room.product.name}</h3><p>{room.description}</p><small>{room.application.network} · {room.tasks.length} {room.tasks.length===1?'task':'tasks'}</small></div><div className="ticket-stub">Explore trial</div></Link></div>)}</div>:<div className="home-empty"><p>No trial rooms are currently open.</p><Link href="/projects">Browse projects</Link></div>}</div></section>

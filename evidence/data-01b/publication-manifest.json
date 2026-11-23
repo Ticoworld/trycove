@@ -1,0 +1,2627 @@
+{
+  "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+  "pilot": {
+    "projects": 5,
+    "sources": 5,
+    "repositories": 4,
+    "categorySignals": 7,
+    "classified": 4,
+    "unmapped": 1,
+    "memberships": 5,
+    "regions": {
+      "payments-checkout": 1,
+      "funding-community": 0,
+      "accounts-identity": 1,
+      "chain-data-indexing": 1,
+      "trading-markets": 1,
+      "developer-tools": 1,
+      "contract-safety": 0,
+      "digital-assets": 0,
+      "cross-chain": 0
+    }
+  },
+  "full": {
+    "projects": 150,
+    "sources": 150,
+    "repositories": 49,
+    "categorySignals": 187,
+    "classified": 136,
+    "unmapped": 14,
+    "memberships": 158,
+    "regions": {
+      "payments-checkout": 10,
+      "funding-community": 41,
+      "accounts-identity": 20,
+      "chain-data-indexing": 12,
+      "trading-markets": 31,
+      "developer-tools": 24,
+      "contract-safety": 5,
+      "digital-assets": 13,
+      "cross-chain": 2
+    }
+  },
+  "idempotency": "passed",
+  "rollback": "passed",
+  "outcomes": {
+    "source-backed-candidate": 64,
+    "review-required": 86,
+    "blocked": 0
+  },
+  "entries": [
+    {
+      "id": "boolleap",
+      "name": "Bool Leap",
+      "sourceId": "ckbdapps-json-boolleap-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/boolleap",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "cross-chain",
+        "digital-assets"
+      ]
+    },
+    {
+      "id": "ckb-on-ramp",
+      "name": "CKB On-ramp",
+      "sourceId": "ckbdapps-json-ckb-on-ramp-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-on-ramp",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "payments-checkout"
+      ]
+    },
+    {
+      "id": "crowdcell",
+      "name": "CrowdCell",
+      "sourceId": "ckbdapps-json-crowdcell-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/crowdcell",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "fiberlink",
+      "name": "Fiber Link",
+      "sourceId": "ckbdapps-json-fiberlink-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fiberlink",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "payments-checkout"
+      ]
+    },
+    {
+      "id": "fibernuts",
+      "name": "FiberNuts",
+      "sourceId": "ckbdapps-json-fibernuts-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fibernuts",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "payments-checkout"
+      ]
+    },
+    {
+      "id": "grid3",
+      "name": "Grid3",
+      "sourceId": "ckbdapps-json-grid3-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/grid3",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "ickb",
+      "name": "iCKB",
+      "sourceId": "ckbdapps-json-ickb-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ickb",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community",
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "imagination",
+      "name": "imagiNation",
+      "sourceId": "ckbdapps-json-imagination-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/imagination",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "digital-assets",
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "joygift",
+      "name": "JoyGift",
+      "sourceId": "ckbdapps-json-joygift-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/joygift",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "payments-checkout"
+      ]
+    },
+    {
+      "id": "meson",
+      "name": "Meson Finance",
+      "sourceId": "ckbdapps-json-meson-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/meson",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "cross-chain",
+        "digital-assets"
+      ]
+    },
+    {
+      "id": "nervdao",
+      "name": "NervDAO",
+      "sourceId": "ckbdapps-json-nervdao-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/nervdao",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "omiga",
+      "name": "Omiga",
+      "sourceId": "ckbdapps-json-omiga-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/omiga",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "digital-assets",
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "scryve",
+      "name": "Scryve",
+      "sourceId": "ckbdapps-json-scryve-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/scryve",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "payments-checkout"
+      ]
+    },
+    {
+      "id": "seekdid",
+      "name": "Seek DID",
+      "sourceId": "ckbdapps-json-seekdid-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/seekdid",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity",
+        "developer-tools",
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "stablepp",
+      "name": "Stable++",
+      "sourceId": "ckbdapps-json-stablepp-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/stablepp",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "digital-assets",
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "utxoplay",
+      "name": "UTXOPlay",
+      "sourceId": "ckbdapps-json-utxoplay-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/utxoplay",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "ckbull",
+      "name": "Bitcoin Light",
+      "sourceId": "ckbdapps-json-ckbull-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbull",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity",
+        "funding-community"
+      ]
+    },
+    {
+      "id": "bitkeep",
+      "name": "Bitget Wallet",
+      "sourceId": "ckbdapps-json-bitkeep-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/bitkeep",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "cobowallet",
+      "name": "Cobo Wallet",
+      "sourceId": "ckbdapps-json-cobowallet-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cobowallet",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "viawallet",
+      "name": "CoinEx Wallet",
+      "sourceId": "ckbdapps-json-viawallet-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/viawallet",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "imkey",
+      "name": "imKey",
+      "sourceId": "ckbdapps-json-imkey-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/imkey",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "imtoken",
+      "name": "imToken",
+      "sourceId": "ckbdapps-json-imtoken-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/imtoken",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-identity-review"
+      ],
+      "aliases": [
+        "imtokenventures"
+      ],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "joyid",
+      "name": "JoyID",
+      "sourceId": "ckbdapps-json-joyid-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/joyid",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity",
+        "digital-assets"
+      ]
+    },
+    {
+      "id": "ledger",
+      "name": "Ledger",
+      "sourceId": "ckbdapps-json-ledger-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ledger",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "neuron",
+      "name": "Neuron",
+      "sourceId": "ckbdapps-json-neuron-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/neuron",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity",
+        "funding-community"
+      ]
+    },
+    {
+      "id": "onekey",
+      "name": "OneKey",
+      "sourceId": "ckbdapps-json-onekey-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/onekey",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "openblock",
+      "name": "OpenBlock",
+      "sourceId": "ckbdapps-json-openblock-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/openblock",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "pocketnode",
+      "name": "Pocket Node",
+      "sourceId": "ckbdapps-json-pocketnode-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/pocketnode",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "quantumpurse",
+      "name": "Quantum Purse",
+      "sourceId": "ckbdapps-json-quantumpurse-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/quantumpurse",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "safepal",
+      "name": "SafePal",
+      "sourceId": "ckbdapps-json-safepal-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/safepal",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "utxoglobal",
+      "name": "UTXO Global",
+      "sourceId": "ckbdapps-json-utxoglobal-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/utxoglobal",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "dotbit",
+      "name": ".bit",
+      "sourceId": "ckbdapps-json-dotbit-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/dotbit",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity",
+        "digital-assets"
+      ]
+    },
+    {
+      "id": "cellula",
+      "name": "Cellula.id",
+      "sourceId": "ckbdapps-json-cellula-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cellula",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity",
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckb-pop",
+      "name": "CKB PoP",
+      "sourceId": "ckbdapps-json-ckb-pop-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-pop",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools",
+        "digital-assets"
+      ]
+    },
+    {
+      "id": "credora",
+      "name": "Credora",
+      "sourceId": "ckbdapps-json-credora-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/credora",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity",
+        "digital-assets"
+      ]
+    },
+    {
+      "id": "nervape",
+      "name": "Nervape",
+      "sourceId": "ckbdapps-json-nervape-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/nervape",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "digital-assets"
+      ]
+    },
+    {
+      "id": "spore",
+      "name": "Spore",
+      "sourceId": "ckbdapps-json-spore-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/spore",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "digital-assets"
+      ]
+    },
+    {
+      "id": "vellum",
+      "name": "Vellum",
+      "sourceId": "ckbdapps-json-vellum-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/vellum",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "accounts-identity"
+      ]
+    },
+    {
+      "id": "ccc",
+      "name": "CCC",
+      "sourceId": "ckbdapps-json-ccc-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ccc",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "cellscript",
+      "name": "CellScript",
+      "sourceId": "ckbdapps-json-cellscript-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cellscript",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "chainpress",
+      "name": "ChainPress",
+      "sourceId": "ckbdapps-json-chainpress-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/chainpress",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckb-cinnabar",
+      "name": "Cinnabar",
+      "sourceId": "ckbdapps-json-ckb-cinnabar-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-cinnabar",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckb-ai",
+      "name": "CKB AI",
+      "sourceId": "ckbdapps-json-ckb-ai-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-ai",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckb-community-fund-dao",
+      "name": "CKB Community Fund DAO",
+      "sourceId": "ckbdapps-json-ckb-community-fund-dao-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-community-fund-dao",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-identity-review"
+      ],
+      "aliases": [
+        "ckbcfdao"
+      ],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "ckbcfdao",
+      "name": "CKB Community Fund DAO Dashboard",
+      "sourceId": "ckbdapps-json-ckbcfdao-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbcfdao",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-identity-review"
+      ],
+      "aliases": [
+        "ckb-community-fund-dao"
+      ],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "ckb-connect-wallet-kit",
+      "name": "CKB Connect Wallet Kit",
+      "sourceId": "ckbdapps-json-ckb-connect-wallet-kit-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-connect-wallet-kit",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckbcontractflow",
+      "name": "CKB Contract Flow",
+      "sourceId": "ckbdapps-json-ckbcontractflow-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbcontractflow",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckbexplorer",
+      "name": "CKB Explorer",
+      "sourceId": "ckbdapps-json-ckbexplorer-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbexplorer",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing"
+      ]
+    },
+    {
+      "id": "ckbguardian",
+      "name": "CKB Guardian",
+      "sourceId": "ckbdapps-json-ckbguardian-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbguardian",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckb-node-probe",
+      "name": "CKB Node Probe",
+      "sourceId": "ckbdapps-json-ckb-node-probe-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-node-probe",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckbpulse",
+      "name": "CKB Pulse",
+      "sourceId": "ckbdapps-json-ckbpulse-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbpulse",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckb-script-templates",
+      "name": "CKB Script Templates",
+      "sourceId": "ckbdapps-json-ckb-script-templates-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-script-templates",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckb-service-runner",
+      "name": "CKB Service Runner (CSR)",
+      "sourceId": "ckbdapps-json-ckb-service-runner-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-service-runner",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckbviz",
+      "name": "ckb-viz",
+      "sourceId": "ckbdapps-json-ckbviz-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbviz",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing",
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "ckbadger",
+      "name": "CKBadger",
+      "sourceId": "ckbdapps-json-ckbadger-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbadger",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing"
+      ]
+    },
+    {
+      "id": "cklibrary",
+      "name": "cklibrary",
+      "sourceId": "ckbdapps-json-cklibrary-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cklibrary",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "cknerv",
+      "name": "cknerv",
+      "sourceId": "ckbdapps-json-cknerv-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cknerv",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing",
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "clasp",
+      "name": "Clasp",
+      "sourceId": "ckbdapps-json-clasp-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/clasp",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools",
+        "payments-checkout"
+      ]
+    },
+    {
+      "id": "fiber",
+      "name": "Fiber Network",
+      "sourceId": "ckbdapps-json-fiber-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fiber",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "payments-checkout"
+      ]
+    },
+    {
+      "id": "fiberdashboard",
+      "name": "Fiber Network Dashboard",
+      "sourceId": "ckbdapps-json-fiberdashboard-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fiberdashboard",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing",
+        "payments-checkout"
+      ]
+    },
+    {
+      "id": "fiberstudio",
+      "name": "Fiber Studio",
+      "sourceId": "ckbdapps-json-fiberstudio-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fiberstudio",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools",
+        "payments-checkout"
+      ]
+    },
+    {
+      "id": "mbabelcloud",
+      "name": "mBabel Cloud",
+      "sourceId": "ckbdapps-json-mbabelcloud-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/mbabelcloud",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "offckb",
+      "name": "OffCKB",
+      "sourceId": "ckbdapps-json-offckb-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/offckb",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "rgbpp",
+      "name": "RGB++",
+      "sourceId": "ckbdapps-json-rgbpp-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/rgbpp",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "digital-assets"
+      ]
+    },
+    {
+      "id": "rgbppexplorer",
+      "name": "RGB++ Explorer",
+      "sourceId": "ckbdapps-json-rgbppexplorer-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/rgbppexplorer",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing",
+        "digital-assets"
+      ]
+    },
+    {
+      "id": "sluice",
+      "name": "Sluice",
+      "sourceId": "ckbdapps-json-sluice-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/sluice",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools",
+        "payments-checkout"
+      ]
+    },
+    {
+      "id": "vericell",
+      "name": "VeriCell.net",
+      "sourceId": "ckbdapps-json-vericell-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/vericell",
+      "availability": "historical-availability-unknown",
+      "outcome": "source-backed-candidate",
+      "review": [],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "developer-tools"
+      ]
+    },
+    {
+      "id": "1confirmation",
+      "name": "1confirmation",
+      "sourceId": "ckbdapps-json-1confirmation-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/1confirmation",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "1kx",
+      "name": "1kx",
+      "sourceId": "ckbdapps-json-1kx-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/1kx",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "2miners",
+      "name": "2miners",
+      "sourceId": "ckbdapps-json-2miners-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/2miners",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "500global",
+      "name": "500 Global",
+      "sourceId": "ckbdapps-json-500global-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/500global",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "accessventures",
+      "name": "Access Ventures",
+      "sourceId": "ckbdapps-json-accessventures-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/accessventures",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "ankr",
+      "name": "Ankr",
+      "sourceId": "ckbdapps-json-ankr-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ankr",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing"
+      ]
+    },
+    {
+      "id": "antpool",
+      "name": "Antpool",
+      "sourceId": "ckbdapps-json-antpool-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/antpool",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "arweave",
+      "name": "Arweave",
+      "sourceId": "ckbdapps-json-arweave-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/arweave",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "bandprotocol",
+      "name": "BandProtocol",
+      "sourceId": "ckbdapps-json-bandprotocol-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/bandprotocol",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing"
+      ]
+    },
+    {
+      "id": "bigone",
+      "name": "BigOne",
+      "sourceId": "ckbdapps-json-bigone-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/bigone",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "binance",
+      "name": "Binance",
+      "sourceId": "ckbdapps-json-binance-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/binance",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "binancepool",
+      "name": "Binance Pool",
+      "sourceId": "ckbdapps-json-binancepool-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/binancepool",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "bingx",
+      "name": "BingX",
+      "sourceId": "ckbdapps-json-bingx-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/bingx",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "bitcoiva",
+      "name": "Bitcoiva",
+      "sourceId": "ckbdapps-json-bitcoiva-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/bitcoiva",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "bithumb",
+      "name": "Bithumb",
+      "sourceId": "ckbdapps-json-bithumb-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/bithumb",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "bitrue",
+      "name": "Bitrue",
+      "sourceId": "ckbdapps-json-bitrue-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/bitrue",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "bixinvc",
+      "name": "Bixin Ventures",
+      "sourceId": "ckbdapps-json-bixinvc-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/bixinvc",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "blockchaincapital",
+      "name": "Blockchain Capital",
+      "sourceId": "ckbdapps-json-blockchaincapital-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/blockchaincapital",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "bybit",
+      "name": "Bybit",
+      "sourceId": "ckbdapps-json-bybit-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/bybit",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "certik",
+      "name": "CertiK",
+      "sourceId": "ckbdapps-json-certik-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/certik",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "contract-safety"
+      ]
+    },
+    {
+      "id": "ceyuanventures",
+      "name": "Ceyuan Ventures",
+      "sourceId": "ckbdapps-json-ceyuanventures-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ceyuanventures",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "chainlink",
+      "name": "ChainLink",
+      "sourceId": "ckbdapps-json-chainlink-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/chainlink",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "chainsafe",
+      "name": "ChainSafe",
+      "sourceId": "ckbdapps-json-chainsafe-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/chainsafe",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "ckba",
+      "name": "CKBA",
+      "sourceId": "ckbdapps-json-ckba-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckba",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "ckbfans",
+      "name": "CKBFans",
+      "sourceId": "ckbdapps-json-ckbfans-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbfans",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "cmcinternational",
+      "name": "CMC International",
+      "sourceId": "ckbdapps-json-cmcinternational-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cmcinternational",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "coinex",
+      "name": "CoinEx",
+      "sourceId": "ckbdapps-json-coinex-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/coinex",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "coinone",
+      "name": "Coinone",
+      "sourceId": "ckbdapps-json-coinone-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/coinone",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "coinw",
+      "name": "CoinW",
+      "sourceId": "ckbdapps-json-coinw-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/coinw",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "covalent",
+      "name": "Covalent",
+      "sourceId": "ckbdapps-json-covalent-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/covalent",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing"
+      ]
+    },
+    {
+      "id": "cryptape",
+      "name": "Cryptape",
+      "sourceId": "ckbdapps-json-cryptape-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cryptape",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "cryptocom",
+      "name": "Crypto.com Exchange",
+      "sourceId": "ckbdapps-json-cryptocom-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cryptocom",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "cumberland",
+      "name": "Cumberland",
+      "sourceId": "ckbdapps-json-cumberland-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cumberland",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "dia",
+      "name": "DIA",
+      "sourceId": "ckbdapps-json-dia-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/dia",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing"
+      ]
+    },
+    {
+      "id": "distributedglobal",
+      "name": "Distributed Global",
+      "sourceId": "ckbdapps-json-distributedglobal-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/distributedglobal",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "dragonfly",
+      "name": "Dragonfly",
+      "sourceId": "ckbdapps-json-dragonfly-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/dragonfly",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "dxpool",
+      "name": "DxPool",
+      "sourceId": "ckbdapps-json-dxpool-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/dxpool",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "f2pool",
+      "name": "F2Pool",
+      "sourceId": "ckbdapps-json-f2pool-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/f2pool",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "fbgcapital",
+      "name": "FBG Capital",
+      "sourceId": "ckbdapps-json-fbgcapital-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fbgcapital",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "fmfwio",
+      "name": "FMFW.io",
+      "sourceId": "ckbdapps-json-fmfwio-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fmfwio",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "freesfund",
+      "name": "FreeS Fund",
+      "sourceId": "ckbdapps-json-freesfund-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/freesfund",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "gateio",
+      "name": "Gate.io",
+      "sourceId": "ckbdapps-json-gateio-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/gateio",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "getblock",
+      "name": "GetBlock",
+      "sourceId": "ckbdapps-json-getblock-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/getblock",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing"
+      ]
+    },
+    {
+      "id": "gitcoin",
+      "name": "Gitcoin",
+      "sourceId": "ckbdapps-json-gitcoin-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/gitcoin",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "grin",
+      "name": "Grin",
+      "sourceId": "ckbdapps-json-grin-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/grin",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "hashpool",
+      "name": "Hash Pools",
+      "sourceId": "ckbdapps-json-hashpool-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/hashpool",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "hashkeygroup",
+      "name": "HashKey Group",
+      "sourceId": "ckbdapps-json-hashkeygroup-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/hashkeygroup",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "hitbtc",
+      "name": "HitBTC",
+      "sourceId": "ckbdapps-json-hitbtc-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/hitbtc",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "huobi",
+      "name": "Huobi",
+      "sourceId": "ckbdapps-json-huobi-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/huobi",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "huobicapital",
+      "name": "Huobi Capital",
+      "sourceId": "ckbdapps-json-huobicapital-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/huobicapital",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "immunefi",
+      "name": "ImmuneFi",
+      "sourceId": "ckbdapps-json-immunefi-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/immunefi",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "imtokenventures",
+      "name": "imToken Ventures",
+      "sourceId": "ckbdapps-json-imtokenventures-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/imtokenventures",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-identity-review",
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [
+        "imtoken"
+      ],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "indodax",
+      "name": "Indodax",
+      "sourceId": "ckbdapps-json-indodax-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/indodax",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "iohk",
+      "name": "IOHK",
+      "sourceId": "ckbdapps-json-iohk-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/iohk",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "kavalabs",
+      "name": "Kava Labs",
+      "sourceId": "ckbdapps-json-kavalabs-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/kavalabs",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "kindredventures",
+      "name": "Kindred Ventures",
+      "sourceId": "ckbdapps-json-kindredventures-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/kindredventures",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "kucoin",
+      "name": "KuCoin",
+      "sourceId": "ckbdapps-json-kucoin-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/kucoin",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "leastauthority",
+      "name": "Least Authority",
+      "sourceId": "ckbdapps-json-leastauthority-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/leastauthority",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "contract-safety"
+      ]
+    },
+    {
+      "id": "matrixpartners",
+      "name": "MatrixPartners",
+      "sourceId": "ckbdapps-json-matrixpartners-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/matrixpartners",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "messari",
+      "name": "Messari",
+      "sourceId": "ckbdapps-json-messari-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/messari",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "mexcglobal",
+      "name": "MEXC Global",
+      "sourceId": "ckbdapps-json-mexcglobal-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/mexcglobal",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "mixpay",
+      "name": "MixPay",
+      "sourceId": "ckbdapps-json-mixpay-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/mixpay",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "multicoincapital",
+      "name": "Multicoin Capital",
+      "sourceId": "ckbdapps-json-multicoincapital-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/multicoincapital",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "nervos",
+      "name": "Nervos Community",
+      "sourceId": "ckbdapps-json-nervos-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/nervos",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "nervosnation",
+      "name": "NervosNation",
+      "sourceId": "ckbdapps-json-nervosnation-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/nervosnation",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "peckshield",
+      "name": "PeckShield",
+      "sourceId": "ckbdapps-json-peckshield-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/peckshield",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "contract-safety"
+      ]
+    },
+    {
+      "id": "polychaincapital",
+      "name": "Polychain Capital",
+      "sourceId": "ckbdapps-json-polychaincapital-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/polychaincapital",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "scalebit",
+      "name": "ScaleBit",
+      "sourceId": "ckbdapps-json-scalebit-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/scalebit",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "contract-safety"
+      ]
+    },
+    {
+      "id": "seedao",
+      "name": "SeeDAO",
+      "sourceId": "ckbdapps-json-seedao-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/seedao",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "sequoia",
+      "name": "Sequoia",
+      "sourceId": "ckbdapps-json-sequoia-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/sequoia",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "snz",
+      "name": "SNZ",
+      "sourceId": "ckbdapps-json-snz-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/snz",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "startfi",
+      "name": "StartFi",
+      "sourceId": "ckbdapps-json-startfi-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/startfi",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "superex",
+      "name": "SuperEx",
+      "sourceId": "ckbdapps-json-superex-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/superex",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "tokocrypto",
+      "name": "Tokocrypto",
+      "sourceId": "ckbdapps-json-tokocrypto-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/tokocrypto",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "trailofbits",
+      "name": "Trail Of Bits",
+      "sourceId": "ckbdapps-json-trailofbits-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/trailofbits",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "contract-safety"
+      ]
+    },
+    {
+      "id": "unifra",
+      "name": "Unifra",
+      "sourceId": "ckbdapps-json-unifra-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/unifra",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "chain-data-indexing"
+      ]
+    },
+    {
+      "id": "unityventures",
+      "name": "Unity Ventures",
+      "sourceId": "ckbdapps-json-unityventures-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/unityventures",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "upbit",
+      "name": "Upbit Korea",
+      "sourceId": "ckbdapps-json-upbit-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/upbit",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "utxoalliance",
+      "name": "UTXO Alliance",
+      "sourceId": "ckbdapps-json-utxoalliance-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/utxoalliance",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": []
+    },
+    {
+      "id": "wazirx",
+      "name": "WazirX",
+      "sourceId": "ckbdapps-json-wazirx-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/wazirx",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "xt-com",
+      "name": "XT.COM",
+      "sourceId": "ckbdapps-json-xt-com-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/xt-com",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "trading-markets"
+      ]
+    },
+    {
+      "id": "zkcapital",
+      "name": "zk Capital",
+      "sourceId": "ckbdapps-json-zkcapital-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/zkcapital",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    },
+    {
+      "id": "wanxiang",
+      "name": "万向区块链",
+      "sourceId": "ckbdapps-json-wanxiang-d1c5b55359c34d33",
+      "sourceUrl": "https://ckbdapps.com/en/projects/wanxiang",
+      "availability": "historical-availability-unknown",
+      "outcome": "review-required",
+      "review": [
+        "requires-ckb-relevance-review"
+      ],
+      "aliases": [],
+      "fixture": false,
+      "publicPromotionApproved": false,
+      "staged": true,
+      "mapDomains": [
+        "funding-community"
+      ]
+    }
+  ]
+}

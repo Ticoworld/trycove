@@ -1,3 +1,4 @@
+import {projectQualifiedMemberships} from './qualified-map';
 import {and, desc, eq, inArray, isNull, or} from 'drizzle-orm';
 import {db} from './db';
 import {
@@ -135,7 +136,12 @@ export async function getProblemMapOverview() {
   const memberships = buildMemberships(categories, intents, capabilities);
   const counts = new Map<string, number>();
   for (const domain of PROBLEM_DOMAINS) counts.set(domain.slug, 0);
-  for (const member of memberships.values()) for (const slug of member.keys()) counts.set(slug, (counts.get(slug) ?? 0) + 1);
+  for (const [id, member] of memberships) {
+    const projected = projectQualifiedMemberships(id, member);
+    if (projected.size) memberships.set(id, projected);
+    else memberships.delete(id);
+    for (const slug of projected.keys()) counts.set(slug, (counts.get(slug) ?? 0) + 1);
+  }
   return {
     projects: allProjects as ProjectSummary[],
     memberships,
@@ -146,7 +152,7 @@ export async function getProblemMapOverview() {
 
 export async function getProjectProblemDomains(projectId: string) {
   const [categories, intents, capabilities] = await classificationInputs(projectId);
-  return buildMemberships(categories, intents, capabilities).get(projectId) ?? new Map<string, ClassificationEvidence[]>();
+  return projectQualifiedMemberships(projectId, buildMemberships(categories, intents, capabilities).get(projectId) ?? new Map());
 }
 
 export async function getProblemDomainData(slug: string) {

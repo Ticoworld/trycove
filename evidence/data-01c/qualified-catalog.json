@@ -1,0 +1,1795 @@
+{
+  "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+  "decisions": [
+    {
+      "id": "boolleap",
+      "sourceId": "ckbdapps-json-boolleap-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/boolleap",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "The description names BTC verification but does not identify the CKB-facing bridge or the RGB++ asset function.",
+      "description": "Bool Network is a BTC verification layer, designed to seamlessly convey any messages across chains, significantly enhancing the security and scalability of the Bitcoin ecosystem without changing Bitcoin’s core consensus.",
+      "website": "https://boolleap.com/",
+      "repository": null,
+      "directoryCategories": [
+        "Bridges",
+        "RGB++"
+      ],
+      "originalDomains": [
+        "cross-chain",
+        "digital-assets"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "cross-chain",
+          "reason": "The description names BTC verification but does not identify the CKB-facing bridge or the RGB++ asset function."
+        },
+        {
+          "domain": "digital-assets",
+          "reason": "The description names BTC verification but does not identify the CKB-facing bridge or the RGB++ asset function."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "The description names BTC verification but does not identify the CKB-facing bridge or the RGB++ asset function."
+      ]
+    },
+    {
+      "id": "ckb-on-ramp",
+      "sourceId": "ckbdapps-json-ckb-on-ramp-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-on-ramp",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Pay a Lightning invoice from an ordinary BTC wallet and receive wrapped BTC in a Fiber channel, with no software to install and no CKB to start with.",
+      "website": "https://onramp.retric.uk/",
+      "repository": "RetricSu/ckb-on-ramp",
+      "directoryCategories": [
+        "Payment",
+        "Fiber"
+      ],
+      "originalDomains": [
+        "payments-checkout"
+      ],
+      "approvedDomains": [
+        "payments-checkout"
+      ],
+      "withheld": [],
+      "directoryTestnet": true,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "crowdcell",
+      "sourceId": "ckbdapps-json-crowdcell-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/crowdcell",
+      "outcome": "QUALIFIED",
+      "reason": "The described product handles conditional crowdfunding pledges, rather than trading.",
+      "description": "All-or-nothing crowdfunding where on-chain scripts release each pledge to the creator or refund it to the backer.",
+      "website": "https://crowdcell.vercel.app/",
+      "repository": "alesfer001/CrowdCell",
+      "directoryCategories": [
+        "DeFi"
+      ],
+      "originalDomains": [
+        "trading-markets"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "trading-markets",
+          "reason": "The described product handles conditional crowdfunding pledges, rather than trading."
+        }
+      ],
+      "directoryTestnet": true,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "fiberlink",
+      "sourceId": "ckbdapps-json-fiberlink-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fiberlink",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Open, instant tipping for online communities, without running payment infrastructure.",
+      "website": "https://fiberlink.me",
+      "repository": "Keith-CY/fiber-link",
+      "directoryCategories": [
+        "Payment",
+        "Fiber"
+      ],
+      "originalDomains": [
+        "payments-checkout"
+      ],
+      "approvedDomains": [
+        "payments-checkout"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "fibernuts",
+      "sourceId": "ckbdapps-json-fibernuts-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fibernuts",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A Cashu ecash wallet and mint that settle over Fiber, for private bearer payments in RUSD.",
+      "website": "https://fibernuts.xyz/",
+      "repository": "code3ks/fibernuts",
+      "directoryCategories": [
+        "Payment",
+        "Fiber"
+      ],
+      "originalDomains": [
+        "payments-checkout"
+      ],
+      "approvedDomains": [
+        "payments-checkout"
+      ],
+      "withheld": [],
+      "directoryTestnet": true,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "grid3",
+      "sourceId": "ckbdapps-json-grid3-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/grid3",
+      "outcome": "QUALIFIED",
+      "reason": "The described product is a staked tic-tac-toe game.",
+      "description": "Tic-tac-toe for two players who stake CKB, with every move checked by an on-chain script.",
+      "website": "https://grid3-ckb.vercel.app/",
+      "repository": "truthixify/grid3",
+      "directoryCategories": [
+        "DeFi"
+      ],
+      "originalDomains": [
+        "trading-markets"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "trading-markets",
+          "reason": "The described product is a staked tic-tac-toe game."
+        }
+      ],
+      "directoryTestnet": true,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ickb",
+      "sourceId": "ckbdapps-json-ickb-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ickb",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Swap CKB for iCKB, a token that earns Nervos DAO compensation while staying easy to move, without waiting out a deposit cycle.",
+      "website": "https://ickb.org/",
+      "repository": "ickb/stack",
+      "directoryCategories": [
+        "DeFi",
+        "Nervos DAO"
+      ],
+      "originalDomains": [
+        "funding-community",
+        "trading-markets"
+      ],
+      "approvedDomains": [
+        "funding-community",
+        "trading-markets"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "imagination",
+      "sourceId": "ckbdapps-json-imagination-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/imagination",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose describes collectibles without a marketplace claim.",
+      "description": "Digital collectibles on CKB. Creative on-chain assets. Unleash your imagination!",
+      "website": "https://imagination.to/",
+      "repository": null,
+      "directoryCategories": [
+        "Marketplace",
+        "NFT",
+        "DOBs"
+      ],
+      "originalDomains": [
+        "digital-assets",
+        "trading-markets"
+      ],
+      "approvedDomains": [
+        "digital-assets"
+      ],
+      "withheld": [
+        {
+          "domain": "trading-markets",
+          "reason": "The retained purpose describes collectibles without a marketplace claim."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "joygift",
+      "sourceId": "ckbdapps-json-joygift-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/joygift",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Crypto red packets on CKB: create a gift, share it as a link or QR code, and friends claim it with JoyID.",
+      "website": "https://joygift.cc/",
+      "repository": null,
+      "directoryCategories": [
+        "Payment"
+      ],
+      "originalDomains": [
+        "payments-checkout"
+      ],
+      "approvedDomains": [
+        "payments-checkout"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "meson",
+      "sourceId": "ckbdapps-json-meson-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/meson",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "The broad cross-chain description does not identify a CKB endpoint or RGB++ asset functionality.",
+      "description": "Meson Finance, a leading provider of cross-chain services, supports all major public chains and Layer2 networks and offers users access to assets like BTC, ETH, and stablecoins.",
+      "website": "https://meson.fi/",
+      "repository": null,
+      "directoryCategories": [
+        "Bridges",
+        "RGB++"
+      ],
+      "originalDomains": [
+        "cross-chain",
+        "digital-assets"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "cross-chain",
+          "reason": "The broad cross-chain description does not identify a CKB endpoint or RGB++ asset functionality."
+        },
+        {
+          "domain": "digital-assets",
+          "reason": "The broad cross-chain description does not identify a CKB endpoint or RGB++ asset functionality."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "The broad cross-chain description does not identify a CKB endpoint or RGB++ asset functionality."
+      ]
+    },
+    {
+      "id": "nervdao",
+      "sourceId": "ckbdapps-json-nervdao-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/nervdao",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Nerv DAO is an advanced implementation of the Nervos DAO, designed to deliver a more user-friendly and accessible experience for CKB holders.",
+      "website": "https://www.nervdao.com/",
+      "repository": "ckb-devrel/nervdao",
+      "directoryCategories": [
+        "Nervos DAO"
+      ],
+      "originalDomains": [
+        "funding-community"
+      ],
+      "approvedDomains": [
+        "funding-community"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "omiga",
+      "sourceId": "ckbdapps-json-omiga-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/omiga",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "An order-book marketplace on CKB for buying, selling and managing UTXO assets such as xUDT tokens, RGB++ DOBs and mNFTs.",
+      "website": "https://omiga.io/",
+      "repository": null,
+      "directoryCategories": [
+        "DEX",
+        "Marketplace",
+        "RGB++"
+      ],
+      "originalDomains": [
+        "digital-assets",
+        "trading-markets"
+      ],
+      "approvedDomains": [
+        "digital-assets",
+        "trading-markets"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "scryve",
+      "sourceId": "ckbdapps-json-scryve-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/scryve",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A long-form publishing platform where readers tip writers on-chain; connect a CKB, EVM or Bitcoin wallet to write and get paid.",
+      "website": "https://scryvehq.com/",
+      "repository": null,
+      "directoryCategories": [
+        "Payment"
+      ],
+      "originalDomains": [
+        "payments-checkout"
+      ],
+      "approvedDomains": [
+        "payments-checkout"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "seekdid",
+      "sourceId": "ckbdapps-json-seekdid-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/seekdid",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "The description does not identify the CKB integration or establish marketplace functionality.",
+      "description": "SEEKDID is a popular DID registration tool, which help you seek a DID for your web3 life.",
+      "website": "https://seekdid.com",
+      "repository": null,
+      "directoryCategories": [
+        "DID",
+        "Marketplace",
+        "Tools"
+      ],
+      "originalDomains": [
+        "accounts-identity",
+        "developer-tools",
+        "trading-markets"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "accounts-identity",
+          "reason": "The description does not identify the CKB integration or establish marketplace functionality."
+        },
+        {
+          "domain": "developer-tools",
+          "reason": "The description does not identify the CKB integration or establish marketplace functionality."
+        },
+        {
+          "domain": "trading-markets",
+          "reason": "The description does not identify the CKB integration or establish marketplace functionality."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "The description does not identify the CKB integration or establish marketplace functionality."
+      ]
+    },
+    {
+      "id": "stablepp",
+      "sourceId": "ckbdapps-json-stablepp-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/stablepp",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "An RGB++ based, over-collateralized stablecoin protocol, using BTC and CKB as collateral while USD-pegged stablecoin RUSD is minted in return.",
+      "website": "https://www.stablepp.xyz/",
+      "repository": null,
+      "directoryCategories": [
+        "RGB++",
+        "DeFi",
+        "Stablecoin"
+      ],
+      "originalDomains": [
+        "digital-assets",
+        "trading-markets"
+      ],
+      "approvedDomains": [
+        "digital-assets",
+        "trading-markets"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "utxoplay",
+      "sourceId": "ckbdapps-json-utxoplay-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/utxoplay",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A browser game store where you sign in with a CKB, Bitcoin or JoyID wallet and buy games with CKB.",
+      "website": "https://store.utxoplay.io/",
+      "repository": "UTXOPlay/UTXOPlay",
+      "directoryCategories": [
+        "Marketplace"
+      ],
+      "originalDomains": [
+        "trading-markets"
+      ],
+      "approvedDomains": [
+        "trading-markets"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckbull",
+      "sourceId": "ckbdapps-json-ckbull-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbull",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A self-custodial mobile wallet for Bitcoin, the Lightning Network and Nervos CKB, formerly CKBull.",
+      "website": "https://www.bitcoinlight.app/",
+      "repository": null,
+      "directoryCategories": [
+        "Wallet",
+        "Nervos DAO"
+      ],
+      "originalDomains": [
+        "accounts-identity",
+        "funding-community"
+      ],
+      "approvedDomains": [
+        "accounts-identity",
+        "funding-community"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "bitkeep",
+      "sourceId": "ckbdapps-json-bitkeep-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/bitkeep",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "The BitKeep slug and Bitget Wallet repository point to different brands. Confirm the canonical rename before qualification.",
+      "description": "A mobile wallet that allows you to access and manage your CKB.",
+      "website": "https://web3.bitget.com/",
+      "repository": "bitgetwallet/download",
+      "directoryCategories": [
+        "Wallet"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "accounts-identity",
+          "reason": "The BitKeep slug and Bitget Wallet repository point to different brands. Confirm the canonical rename before qualification."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "The BitKeep slug and Bitget Wallet repository point to different brands. Confirm the canonical rename before qualification."
+      ]
+    },
+    {
+      "id": "cobowallet",
+      "sourceId": "ckbdapps-json-cobowallet-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cobowallet",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "Multi-chain wallet infrastructure description does not identify CKB support or the specific wallet product.",
+      "description": "Cobo provides crypto wallet infrastructure, with access to various main chains, and multiple token withdrawal and deposit services, via a simple API, at a fixed low cost a month.",
+      "website": "https://www.cobo.com/",
+      "repository": null,
+      "directoryCategories": [
+        "Wallet"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "accounts-identity",
+          "reason": "Multi-chain wallet infrastructure description does not identify CKB support or the specific wallet product."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "Multi-chain wallet infrastructure description does not identify CKB support or the specific wallet product."
+      ]
+    },
+    {
+      "id": "viawallet",
+      "sourceId": "ckbdapps-json-viawallet-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/viawallet",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "The multi-asset description does not identify CKB support or establish the current canonical brand.",
+      "description": "A multi-crypto wallet supporting 46+ coins & 1 million+ tokens, and multi-wallet / assets / NFT management, DApp browser, swap, staking, etc.",
+      "website": "https://wallet.coinex.com/en/",
+      "repository": null,
+      "directoryCategories": [
+        "Wallet"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "accounts-identity",
+          "reason": "The multi-asset description does not identify CKB support or establish the current canonical brand."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "The multi-asset description does not identify CKB support or establish the current canonical brand."
+      ]
+    },
+    {
+      "id": "imkey",
+      "sourceId": "ckbdapps-json-imkey-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/imkey",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "imKey is a hardware wallet with a CC EAL6+ military-grade security chip, secret key offline storage, and Bluetooth connection. It is fully compatible with all imToken 2.0-supported digital assets, including Nervos CKB.",
+      "website": "https://imkey.im/",
+      "repository": null,
+      "directoryCategories": [
+        "Hardware Wallet"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [
+        "accounts-identity"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "joyid",
+      "sourceId": "ckbdapps-json-joyid-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/joyid",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose supports wallet discovery. It does not describe an asset product.",
+      "description": "Passwordless and mnemonic-free wallet solution based on FIDO Webauthn protocol and Nervos CKB.",
+      "website": "https://joy.id/",
+      "repository": null,
+      "directoryCategories": [
+        "RGB++",
+        "Wallet"
+      ],
+      "originalDomains": [
+        "accounts-identity",
+        "digital-assets"
+      ],
+      "approvedDomains": [
+        "accounts-identity"
+      ],
+      "withheld": [
+        {
+          "domain": "digital-assets",
+          "reason": "The retained purpose supports wallet discovery. It does not describe an asset product."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ledger",
+      "sourceId": "ckbdapps-json-ledger-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ledger",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Ledger is the most popular hardware wallet and has support for Nervos CKB. You can store, send and receive CKB using your Ledger Nano X and Ledger Nano S hardware wallets.",
+      "website": "https://www.ledger.com/",
+      "repository": null,
+      "directoryCategories": [
+        "Hardware Wallet"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [
+        "accounts-identity"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "neuron",
+      "sourceId": "ckbdapps-json-neuron-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/neuron",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A CKB wallet produced by the Nervos Foundation",
+      "website": "https://github.com/nervosnetwork/neuron/releases",
+      "repository": "nervosnetwork/neuron",
+      "directoryCategories": [
+        "Wallet",
+        "Nervos DAO"
+      ],
+      "originalDomains": [
+        "accounts-identity",
+        "funding-community"
+      ],
+      "approvedDomains": [
+        "accounts-identity",
+        "funding-community"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "onekey",
+      "sourceId": "ckbdapps-json-onekey-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/onekey",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "The general hardware wallet description lacks a specific CKB support claim.",
+      "description": "Open Source Hardware & Crypto Wallet, Trusted by Millions.",
+      "website": "https://onekey.so/",
+      "repository": "OneKeyHQ/app-monorepo",
+      "directoryCategories": [
+        "Hardware Wallet",
+        "Wallet"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "accounts-identity",
+          "reason": "The general hardware wallet description lacks a specific CKB support claim."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "The general hardware wallet description lacks a specific CKB support claim."
+      ]
+    },
+    {
+      "id": "openblock",
+      "sourceId": "ckbdapps-json-openblock-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/openblock",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "The MPC wallet description omits the CKB integration.",
+      "description": "OpenBlock wallet is secured by MPC protocol, 2-3 TSS security scheme, server-side identity validation, and other security features.",
+      "website": "https://openblock.com/",
+      "repository": null,
+      "directoryCategories": [
+        "Wallet"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "accounts-identity",
+          "reason": "The MPC wallet description omits the CKB integration."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "The MPC wallet description omits the CKB integration."
+      ]
+    },
+    {
+      "id": "pocketnode",
+      "sourceId": "ckbdapps-json-pocketnode-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/pocketnode",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "The first Android wallet that runs a full CKB light client on-device — self-custodial, with no remote indexer or middleman.",
+      "website": "https://www.pocket-node.com",
+      "repository": "RaheemJnr/pocket-node",
+      "directoryCategories": [
+        "Wallet"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [
+        "accounts-identity"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "quantumpurse",
+      "sourceId": "ckbdapps-json-quantumpurse-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/quantumpurse",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A quantum-resistant CKB wallet that runs in your browser with a built-in CKB light client.",
+      "website": "https://www.quantumpurse.org/",
+      "repository": "quantumpurse/quantum-purse-v2",
+      "directoryCategories": [
+        "Wallet"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [
+        "accounts-identity"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "safepal",
+      "sourceId": "ckbdapps-json-safepal-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/safepal",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "SafePal provides hardware wallet, software wallet, and browser extension wallet product lines and supports CKB.",
+      "website": "https://www.safepal.com/",
+      "repository": null,
+      "directoryCategories": [
+        "Hardware Wallet",
+        "Wallet"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [
+        "accounts-identity"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "utxoglobal",
+      "sourceId": "ckbdapps-json-utxoglobal-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/utxoglobal",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "UTXO Global is a revolutionary wallet for the CKB ecosystem. It delivers the robust security guarantees of the UTXO model while addressing its limitations in scalability and interoperability.",
+      "website": "https://utxo.global",
+      "repository": "UTXO-Global/utxo-wallet-extension",
+      "directoryCategories": [
+        "Wallet",
+        "Extension",
+        "Multi-Sig"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [
+        "accounts-identity"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "dotbit",
+      "sourceId": "ckbdapps-json-dotbit-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/dotbit",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose describes identity, with no distinct asset-facing function.",
+      "description": "Cross-chain Web3 identities for you and your community.",
+      "website": "https://did.id",
+      "repository": "dotbitHQ/did-contracts",
+      "directoryCategories": [
+        "DID",
+        "RGB++"
+      ],
+      "originalDomains": [
+        "accounts-identity",
+        "digital-assets"
+      ],
+      "approvedDomains": [
+        "accounts-identity"
+      ],
+      "withheld": [
+        {
+          "domain": "digital-assets",
+          "reason": "The retained purpose describes identity, with no distinct asset-facing function."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "cellula",
+      "sourceId": "ckbdapps-json-cellula-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cellula",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": ".cell names on CKB: one name to get paid at in CKB, sats or Lightning, sign in with, and point to your page.",
+      "website": "https://cellula.id/",
+      "repository": "LusoCryptoLabs/cells-contracts",
+      "directoryCategories": [
+        "DID",
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "accounts-identity",
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "accounts-identity",
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckb-pop",
+      "sourceId": "ckbdapps-json-ckb-pop-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-pop",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Non-transferable badges on CKB for attending real-world events, plus a reusable presence module.",
+      "website": "https://www.ckb-pop.xyz/",
+      "repository": "RobaireTH/ckb-pop",
+      "directoryCategories": [
+        "DOBs",
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools",
+        "digital-assets"
+      ],
+      "approvedDomains": [
+        "developer-tools",
+        "digital-assets"
+      ],
+      "withheld": [],
+      "directoryTestnet": true,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "credora",
+      "sourceId": "ckbdapps-json-credora-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/credora",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose describes certificate issuance and verification via DOBs, without an account or DID management claim.",
+      "description": "Issue, hold and verify course certificates as Spore DOBs on CKB.",
+      "website": "https://credora-ckb.vercel.app/",
+      "repository": "hiepthach/Credora_CKB",
+      "directoryCategories": [
+        "DID",
+        "DOBs"
+      ],
+      "originalDomains": [
+        "accounts-identity",
+        "digital-assets"
+      ],
+      "approvedDomains": [
+        "digital-assets"
+      ],
+      "withheld": [
+        {
+          "domain": "accounts-identity",
+          "reason": "The retained purpose describes certificate issuance and verification via DOBs, without an account or DID management claim."
+        }
+      ],
+      "directoryTestnet": true,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "nervape",
+      "sourceId": "ckbdapps-json-nervape-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/nervape",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "The Bitcoin digital-object description does not establish the specific CKB relationship.",
+      "description": "Nervape, multi-chain composable digital objects built on Bitcoin. BE YOURSELF, TRUST YOURSELF, CREATE YOURSELF.",
+      "website": "https://www.nervape.com/",
+      "repository": "nervape/nervape-btc-mint",
+      "directoryCategories": [
+        "DOBs",
+        "RGB++"
+      ],
+      "originalDomains": [
+        "digital-assets"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "digital-assets",
+          "reason": "The Bitcoin digital-object description does not establish the specific CKB relationship."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "The Bitcoin digital-object description does not establish the specific CKB relationship."
+      ]
+    },
+    {
+      "id": "spore",
+      "sourceId": "ckbdapps-json-spore-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/spore",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "The description omits the chain and contains broad ownership and privacy promises. Confirm the CKB relationship separately.",
+      "description": "Spore Protocol infuses digital objects(DOBs) with enduring value backed by tokenomics, redeemable at any time. Ensures true on-chain ownership, privacy, creative freedom and frictionless interaction.",
+      "website": "https://spore.pro/",
+      "repository": "sporeprotocol/spore-sdk",
+      "directoryCategories": [
+        "DOBs",
+        "Protocol"
+      ],
+      "originalDomains": [
+        "digital-assets"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "digital-assets",
+          "reason": "The description omits the chain and contains broad ownership and privacy promises. Confirm the CKB relationship separately."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "The description omits the chain and contains broad ownership and privacy promises. Confirm the CKB relationship separately."
+      ]
+    },
+    {
+      "id": "vellum",
+      "sourceId": "ckbdapps-json-vellum-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/vellum",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Create and manage a did:ckb identity, with a public profile and a record of your work that you control.",
+      "website": "https://usevellum.xyz/",
+      "repository": "truthixify/vellum",
+      "directoryCategories": [
+        "DID"
+      ],
+      "originalDomains": [
+        "accounts-identity"
+      ],
+      "approvedDomains": [
+        "accounts-identity"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ccc",
+      "sourceId": "ckbdapps-json-ccc-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ccc",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "CKBers' Codebase: the JavaScript/TypeScript toolkit for building on CKB, with wallet connectors for JoyID, MetaMask, UniSat, OKX and more.",
+      "website": "https://docs.ckbccc.com/",
+      "repository": "ckb-devrel/ccc",
+      "directoryCategories": [
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "cellscript",
+      "sourceId": "ckbdapps-json-cellscript-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cellscript",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A small language for CKB Cell contracts that checks state changes at compile time and emits metadata reviewers can audit.",
+      "website": "https://cellscript.dev/",
+      "repository": "CellScript-Labs/CellScript",
+      "directoryCategories": [
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "chainpress",
+      "sourceId": "ckbdapps-json-chainpress-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/chainpress",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Blog posts published on-chain with CKBFS, with edits kept as an append-only version history.",
+      "website": "https://ckb-academy-progress.vercel.app/",
+      "repository": "chetanchauhan64/CKB-Academy-Progress",
+      "directoryCategories": [
+        "Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": true,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckb-cinnabar",
+      "sourceId": "ckbdapps-json-ckb-cinnabar-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-cinnabar",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A Rust framework for CKB contracts built on the calculate-and-verify split, with an AI agent skill that turns product rules into a tested contract.",
+      "website": "https://github.com/ashuralyk/ckb-cinnabar",
+      "repository": "ashuralyk/ckb-cinnabar",
+      "directoryCategories": [
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckb-ai",
+      "sourceId": "ckbdapps-json-ckb-ai-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-ai",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "An MCP server that gives AI coding assistants CKB documentation, chain data and developer tools.",
+      "website": "https://ckb-ai.ckbdev.com/",
+      "repository": "sonami-tech/ckb-mcp",
+      "directoryCategories": [
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckb-connect-wallet-kit",
+      "sourceId": "ckbdapps-json-ckb-connect-wallet-kit-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-connect-wallet-kit",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Composable React components for connecting a CKB wallet through CCC, with optional did:ckb profiles.",
+      "website": "https://ckb-connect-wallet-kit.vercel.app/",
+      "repository": "Victor-Okenwa/revamp-ckb-connect-wallet",
+      "directoryCategories": [
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckbcontractflow",
+      "sourceId": "ckbdapps-json-ckbcontractflow-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbcontractflow",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Visual one-page explainers of how cells move through 46 CKB contracts, plus an on-chain transaction decoder.",
+      "website": "https://gpblockchain.github.io/ckb-contract-flow-html/",
+      "repository": "gpBlockchain/ckb-contract-flow-html",
+      "directoryCategories": [
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckbexplorer",
+      "sourceId": "ckbdapps-json-ckbexplorer-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbexplorer",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A CKB Explorer produced by the Nervos Foundation",
+      "website": "https://explorer.nervos.org/",
+      "repository": "nervosnetwork/ckb-explorer-frontend",
+      "directoryCategories": [
+        "Explorer"
+      ],
+      "originalDomains": [
+        "chain-data-indexing"
+      ],
+      "approvedDomains": [
+        "chain-data-indexing"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckbguardian",
+      "sourceId": "ckbdapps-json-ckbguardian-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbguardian",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Regular RPC checks of the well-known public CKB nodes on mainnet and testnet, published as a test report.",
+      "website": "https://nervosnetwork.github.io/CkbGuardian/",
+      "repository": "nervosnetwork/CkbGuardian",
+      "directoryCategories": [
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckb-node-probe",
+      "sourceId": "ckbdapps-json-ckb-node-probe-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-node-probe",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A live map of the public CKB mainnet nodes, with counts by country and by client version.",
+      "website": "https://nodes.ckb.dev/",
+      "repository": "nervosnetwork/ckb-node-probe-frontend",
+      "directoryCategories": [
+        "Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckbpulse",
+      "sourceId": "ckbdapps-json-ckbpulse-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbpulse",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A live view of public development on CKB: every push, review and release on GitHub, drawn in 3D.",
+      "website": "https://pulse-lab.lusocryptolabs.com/",
+      "repository": "LusoCryptoLabs/ckb-pulse",
+      "directoryCategories": [
+        "Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckb-script-templates",
+      "sourceId": "ckbdapps-json-ckb-script-templates-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-script-templates",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "cargo-generate templates for starting CKB script projects in Rust or C with a stock toolchain.",
+      "website": "https://github.com/nervosnetwork/ckb-script-templates",
+      "repository": "nervosnetwork/ckb-script-templates",
+      "directoryCategories": [
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckb-service-runner",
+      "sourceId": "ckbdapps-json-ckb-service-runner-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckb-service-runner",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A Revenue Layer for CKB Nodes",
+      "website": "https://csr-monitor.chainsolution.net/",
+      "repository": "ckb-service-runner/ckb-service-runner",
+      "directoryCategories": [
+        "Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckbviz",
+      "sourceId": "ckbdapps-json-ckbviz-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbviz",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A read-only CKB transaction visualizer that turns any transaction into a clear flow of cells, with decoded scripts, capacity/fee, and cell lineage.",
+      "website": "https://ckb-viz.truthixify.dev",
+      "repository": "truthixify/ckb-viz",
+      "directoryCategories": [
+        "Tools",
+        "Explorer"
+      ],
+      "originalDomains": [
+        "chain-data-indexing",
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "chain-data-indexing",
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "ckbadger",
+      "sourceId": "ckbdapps-json-ckbadger-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/ckbadger",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A local-first, CKB-native block explorer built around the Cell/UTXO model rather than account-oriented UX patterns borrowed from other chains.",
+      "website": "https://ckbadger-demo.web5.info",
+      "repository": "janx/ckbadger",
+      "directoryCategories": [
+        "Explorer"
+      ],
+      "originalDomains": [
+        "chain-data-indexing"
+      ],
+      "approvedDomains": [
+        "chain-data-indexing"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "cklibrary",
+      "sourceId": "ckbdapps-json-cklibrary-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cklibrary",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A navigable library of canonical Nervos RFCs minted on CKB — every book is a CKBFS cell.",
+      "website": "https://cklibrary.xyz",
+      "repository": null,
+      "directoryCategories": [
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "cknerv",
+      "sourceId": "ckbdapps-json-cknerv-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/cknerv",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A local-first visualizer that shows what your CKB node sees: blocks, transactions, cells and peers.",
+      "website": "https://cknerv.web5.info/",
+      "repository": "janx/cknerv",
+      "directoryCategories": [
+        "Explorer",
+        "Tools"
+      ],
+      "originalDomains": [
+        "chain-data-indexing",
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "chain-data-indexing",
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "clasp",
+      "sourceId": "ckbdapps-json-clasp-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/clasp",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Scoped, time-boxed and revocable wallet sessions, so apps and AI agents can pay over Fiber without holding your keys.",
+      "website": "https://useclasp.xyz/",
+      "repository": "Enoch208/Clasp",
+      "directoryCategories": [
+        "Fiber",
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools",
+        "payments-checkout"
+      ],
+      "approvedDomains": [
+        "developer-tools",
+        "payments-checkout"
+      ],
+      "withheld": [],
+      "directoryTestnet": true,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "fiber",
+      "sourceId": "ckbdapps-json-fiber-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fiber",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Fiber Network is a peer-to-peer payment and swap network built on Nervos CKB",
+      "website": "https://www.fiber.world/",
+      "repository": "nervosnetwork/fiber",
+      "directoryCategories": [
+        "Fiber",
+        "Protocol"
+      ],
+      "originalDomains": [
+        "payments-checkout"
+      ],
+      "approvedDomains": [
+        "payments-checkout"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "fiberdashboard",
+      "sourceId": "ckbdapps-json-fiberdashboard-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fiberdashboard",
+      "outcome": "QUALIFIED",
+      "reason": "The dashboard reports Fiber statistics rather than providing a payment workflow.",
+      "description": "Live statistics of the Fiber Network: nodes, channels and capacity.",
+      "website": "https://dashboard.fiber.channel/",
+      "repository": "nervosnetwork/fiber-dashboard",
+      "directoryCategories": [
+        "Fiber",
+        "Explorer"
+      ],
+      "originalDomains": [
+        "chain-data-indexing",
+        "payments-checkout"
+      ],
+      "approvedDomains": [
+        "chain-data-indexing"
+      ],
+      "withheld": [
+        {
+          "domain": "payments-checkout",
+          "reason": "The dashboard reports Fiber statistics rather than providing a payment workflow."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "fiberstudio",
+      "sourceId": "ckbdapps-json-fiberstudio-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/fiberstudio",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A desktop app for macOS, Windows and Linux that installs and runs your own Fiber node, with channels, invoices and payments in one window.",
+      "website": "https://github.com/chukwuma619/fiber-studio",
+      "repository": "chukwuma619/fiber-studio",
+      "directoryCategories": [
+        "Fiber",
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools",
+        "payments-checkout"
+      ],
+      "approvedDomains": [
+        "developer-tools",
+        "payments-checkout"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "mbabelcloud",
+      "sourceId": "ckbdapps-json-mbabelcloud-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/mbabelcloud",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "Meeting captions description supplies no CKB relationship.",
+      "description": "Real-time Chinese–English captions for easier bilingual meetings.",
+      "website": "https://mbabel.cloud",
+      "repository": null,
+      "directoryCategories": [
+        "Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "developer-tools",
+          "reason": "Meeting captions description supplies no CKB relationship."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "Meeting captions description supplies no CKB relationship."
+      ]
+    },
+    {
+      "id": "offckb",
+      "sourceId": "ckbdapps-json-offckb-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/offckb",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "Start a local CKB development chain with one command, with prebuilt scripts, test accounts and project templates.",
+      "website": "https://github.com/ckb-devrel/offckb",
+      "repository": "ckb-devrel/offckb",
+      "directoryCategories": [
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "rgbpp",
+      "sourceId": "ckbdapps-json-rgbpp-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/rgbpp",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "The description explains the protocol but omits the CKB binding. The Digital Assets placement needs product-specific support.",
+      "description": "An extended RGB protocol by using single-use seals and client-side validation techniques to manage state changes and transaction verification.",
+      "website": "https://rgbpp.com/",
+      "repository": "RGBPlusPlus/rgbpp",
+      "directoryCategories": [
+        "RGB++",
+        "Protocol"
+      ],
+      "originalDomains": [
+        "digital-assets"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "digital-assets",
+          "reason": "The description explains the protocol but omits the CKB binding. The Digital Assets placement needs product-specific support."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "The description explains the protocol but omits the CKB binding. The Digital Assets placement needs product-specific support."
+      ]
+    },
+    {
+      "id": "rgbppexplorer",
+      "sourceId": "ckbdapps-json-rgbppexplorer-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/rgbppexplorer",
+      "outcome": "REVIEW REQUIRED",
+      "reason": "The generic UTXO description does not establish the CKB scope or a distinct asset-focused function.",
+      "description": "Explore the UTXO Ecosystem.",
+      "website": "https://explorer.rgbpp.com/",
+      "repository": "RGBPlusPlus/rgbpp-explorer",
+      "directoryCategories": [
+        "Explorer",
+        "RGB++"
+      ],
+      "originalDomains": [
+        "chain-data-indexing",
+        "digital-assets"
+      ],
+      "approvedDomains": [],
+      "withheld": [
+        {
+          "domain": "chain-data-indexing",
+          "reason": "The generic UTXO description does not establish the CKB scope or a distinct asset-focused function."
+        },
+        {
+          "domain": "digital-assets",
+          "reason": "The generic UTXO description does not establish the CKB scope or a distinct asset-focused function."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": [
+        "The generic UTXO description does not establish the CKB scope or a distinct asset-focused function."
+      ]
+    },
+    {
+      "id": "sluice",
+      "sourceId": "ckbdapps-json-sluice-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/sluice",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose centers on operator liquidity tools rather than a user payment flow.",
+      "description": "A liquidity operations workspace for CKB Fiber node operators — monitor channel liquidity, probe payment routes before sending, and safely rebalance channels from one interface.",
+      "website": "https://sluice.drreamer.digital",
+      "repository": "Maxima24/sluice",
+      "directoryCategories": [
+        "Fiber",
+        "Dev Tools"
+      ],
+      "originalDomains": [
+        "developer-tools",
+        "payments-checkout"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [
+        {
+          "domain": "payments-checkout",
+          "reason": "The retained purpose centers on operator liquidity tools rather than a user payment flow."
+        }
+      ],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    },
+    {
+      "id": "vericell",
+      "sourceId": "ckbdapps-json-vericell-d1c5b55359c34d33",
+      "revision": "d1c5b55359c34d331c474593573e08bbbc7939ecc090db729e24b6945a002658",
+      "sourceUrl": "https://ckbdapps.com/en/projects/vericell",
+      "outcome": "QUALIFIED",
+      "reason": "The retained purpose and directory placement support this distinct source-local listing.",
+      "description": "A proof-of-authorship and integrity service that anchors SHA-256 file manifests in live, versioned cells on the Nervos CKB blockchain.",
+      "website": "https://vericell.net",
+      "repository": "psawyerberlin/vericellnet",
+      "directoryCategories": [
+        "Tools"
+      ],
+      "originalDomains": [
+        "developer-tools"
+      ],
+      "approvedDomains": [
+        "developer-tools"
+      ],
+      "withheld": [],
+      "directoryTestnet": false,
+      "availability": "unknown",
+      "functionality": "directory-claim-only",
+      "caveats": []
+    }
+  ]
+}

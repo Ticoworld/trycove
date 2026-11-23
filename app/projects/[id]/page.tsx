@@ -1,4 +1,5 @@
-import {qualifiedPreviewEnabled} from '../../../lib/qualified-map';
+import {authenticatedUser, isOrganizer, checkProjectPermission} from '../../../lib/authorization';
+import {qualifiedPreviewEnabled, qualifiedCatalogCondition} from '../../../lib/qualified-map';
 import {BuilderDeclarations} from '../../components/builder-declarations';
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
@@ -17,7 +18,17 @@ export const dynamic='force-dynamic';
 const date=(value:Date|string|null|undefined)=>value?new Date(value).toISOString().slice(0,10):'unknown';
 
 export default async function Page({params}:{params:Promise<{id:string}>}){
- const {id}=await params;const [project]=await db.select().from(projects).where(eq(projects.id,id));if(!project)notFound();
+ const {id}=await params;
+ const [publicProject]=await db.select().from(projects).where(and(eq(projects.id,id),qualifiedCatalogCondition()));
+ let project=publicProject;
+ if(!project&&qualifiedPreviewEnabled()){
+  const user=await authenticatedUser();
+  if(user){
+   const permitted=await isOrganizer(user.id)||await checkProjectPermission(db,user.id,id,'edit').then(()=>true,()=>false);
+   if(permitted) [project]=await db.select().from(projects).where(eq(projects.id,id));
+  }
+ }
+ if(!project)notFound();
  const guidedTrial=(await listPublishedTrials()).find(room=>room.product.id===project.id);
  const [ops,facts,intents,needs,sources,repositories,footprints,problemDomains]=await Promise.all([
   db.select().from(opportunities).where(or(eq(opportunities.projectA,id),eq(opportunities.projectB,id))),
@@ -57,7 +68,7 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
  const interfacePriority=(kind:string)=>kind==='transaction_explorer_link'||kind==='transaction_deep_link'||kind==='transaction_deep_link_parser'?0:kind==='network_contract'?1:kind==='broadcast'?2:kind==='declared_network'?3:4;
  const codeObservations=[...new Map([...interfaceObservations,...observations].filter(o=>['function','interface_declaration','api_route','call_signature','locked_dependency','dependency','declared_network','client_network','transaction_explorer_link','transaction_deep_link','transaction_deep_link_parser','network_contract','broadcast'].includes(o.kind)).map(item=>[item.id,item])).values()].sort((a,b)=>interfacePriority(a.kind)-interfacePriority(b.kind)||a.path.localeCompare(b.path)||a.startLine-b.startLine);
  return <>
-  <section className="hero"><Link className="eyebrow" href="/projects">← Product Hub</Link><h1>{project.name}</h1><p>{project.description||localized(directory?.tagline)||'No product description is available from the imported sources.'}</p>{qualifiedPreviewEnabled()&&<p className="muted">Source-attributed historical listing. Current availability is unknown.</p>}<div className="bar">{primaryWebsite&&<a className="button" href={primaryWebsite} rel="noreferrer">Visit source-listed website ↗</a>}{githubClaim&&<a className="button secondary" href={githubClaim} rel="noreferrer">CKBdapps repository claim ↗</a>}</div></section>
+  <section className="hero"><Link className="eyebrow" href="/projects">← Product Hub</Link><h1>{project.name}</h1><p>{project.description||localized(directory?.tagline)||'No product description is available from the imported sources.'}</p>{qualifiedPreviewEnabled()&&publicProject&&<p className="muted">Source-attributed historical listing. Current availability is unknown.</p>}<div className="bar">{primaryWebsite&&<a className="button" href={primaryWebsite} rel="noreferrer">Visit source-listed website ↗</a>}{githubClaim&&<a className="button secondary" href={githubClaim} rel="noreferrer">CKBdapps repository claim ↗</a>}</div></section>
   <BuilderDeclarations projectId={id}/>
 
   <section className="section"><div className="eyebrow">Product Passport</div><h2>Purpose and public entry points</h2>

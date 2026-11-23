@@ -1,4 +1,4 @@
-import {projectQualifiedMemberships} from './qualified-map';
+import {projectQualifiedMemberships, qualifiedCatalogCondition} from './qualified-map';
 import {and, desc, eq, inArray, isNull, or} from 'drizzle-orm';
 import {db} from './db';
 import {
@@ -125,7 +125,7 @@ async function classificationInputs(projectId?: string) {
 export async function getProblemMapOverview() {
   const [allProjects, categories, intents, capabilities] = await Promise.all([
     db.select({id: projects.id, name: projects.name, description: projects.description, website: projects.website, repository: projects.repository, sourceUrl: projects.sourceUrl, revision: projects.revision, observedAt: projects.observedAt})
-      .from(projects).orderBy(projects.name),
+      .from(projects).where(qualifiedCatalogCondition()).orderBy(projects.name),
     db.select({projectId: signals.projectId, kind: signals.kind, claim: signals.claim, sourceUrl: signals.sourceUrl, revision: signals.revision, verification: signals.verification})
       .from(signals).where(or(eq(signals.kind, 'product-category'), inArray(signals.kind, ['capability', 'provides', 'need', 'obstacle']))),
     db.select({projectId: signalIntents.projectId, scope: signalIntents.scope, sourceUrl: signalIntents.sourceUrl, revision: signalIntents.revision, verification: signalIntents.verification})
@@ -136,7 +136,9 @@ export async function getProblemMapOverview() {
   const memberships = buildMemberships(categories, intents, capabilities);
   const counts = new Map<string, number>();
   for (const domain of PROBLEM_DOMAINS) counts.set(domain.slug, 0);
+  const visibleIds = new Set(allProjects.map(project => project.id));
   for (const [id, member] of memberships) {
+    if (!visibleIds.has(id)) { memberships.delete(id); continue; }
     const projected = projectQualifiedMemberships(id, member);
     if (projected.size) memberships.set(id, projected);
     else memberships.delete(id);

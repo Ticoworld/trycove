@@ -1,3 +1,5 @@
+import {and, eq, exists, or, sql} from 'drizzle-orm';
+import {projects, sourceRecords} from './schema';
 import manifest from '../evidence/data-01c/qualified-catalog.json';
 import type {ClassificationEvidence} from './problem-map';
 
@@ -16,4 +18,17 @@ export function projectQualifiedMemberships(id: string, memberships: Map<string,
       row.sourceUrl === decision.sourceUrl && row.revision === decision.revision);
     return supported.length ? [[domain, supported] as const] : [];
   }));
+}
+
+export function qualifiedCatalogCondition() {
+  if (!qualifiedPreviewEnabled()) return undefined;
+  return or(...manifest.decisions.filter(row => row.outcome === 'QUALIFIED').map(row => and(
+    eq(projects.id, row.id),
+    eq(projects.revision, row.revision),
+    eq(projects.sourceUrl, row.sourceUrl),
+    eq(projects.description, row.description),
+    exists(sql`(select 1 from ${sourceRecords} where ${sourceRecords.projectId} = ${projects.id}
+      and ${sourceRecords.id} = ${row.sourceId} and ${sourceRecords.sourceUrl} = ${row.sourceUrl}
+      and ${sourceRecords.revision} = ${row.revision} and ${sourceRecords.source} = 'CKBdapps JSON')`),
+  )));
 }

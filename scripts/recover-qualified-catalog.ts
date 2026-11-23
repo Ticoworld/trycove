@@ -1,3 +1,7 @@
+import {and, eq} from 'drizzle-orm';
+import {qualifiedCatalogCondition} from '../lib/qualified-map';
+import {checkProjectPermission} from '../lib/authorization';
+import {db} from '../lib/db';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {mkdtemp, readFile} from 'node:fs/promises';
@@ -43,9 +47,30 @@ async function main() {
       database.select().from(schema.projectRepositories).orderBy(schema.projectRepositories.id),
       database.select().from(schema.signals).orderBy(schema.signals.id),
     ] as const);
+    const fixture = {...rows[0].project, id: 'editor-fixture', name: 'Editor fixture'};
+    const linked = {...fixture, id: 'trial-linked', name: 'Trial linked project'};
+    const reviewOnly = original.rows.find(row => row.project.id === 'arweave');
+    assert(reviewOnly);
+    await importCatalog(database, [reviewOnly]);
+    await database.insert(schema.projects).values([fixture, linked]);
+    const userId = '00000000-0000-4000-8000-000000000001';
+    await database.insert(schema.appUsers).values({id:userId});
+    await database.insert(schema.projectMemberships).values({userId, projectId:linked.id, role:'owner'});
+    await database.transaction(async tx => {
+      await tx.insert(schema.trialPacks).values({id:'catalog-test-trial', state:'draft', latestVersion:1});
+      await tx.insert(schema.trialPackVersions).values({packId:'catalog-test-trial', version:1, definition:JSON.stringify({productId:linked.id})});
+    });
+    const trialBefore = await database.select().from(schema.trialPackVersions);
     await importCatalog(database, rows);
     const first = await read();
     await importCatalog(database, rows);
+    assert.deepEqual(await read(), first);
+    assert.deepEqual(await database.select().from(schema.trialPackVersions), trialBefore);
+    await checkProjectPermission(db, userId, linked.id, 'edit');
+    await assert.rejects(checkProjectPermission(db, userId, fixture.id, 'edit'), /permission/);
+    assert.equal((await database.select().from(schema.projects).where(and(eq(schema.projects.id, linked.id), qualifiedCatalogCondition()))).length, 0);
+    const conflict = {...rows[0], project:{...rows[0].project, description:'Conflicting description'}};
+    await assert.rejects(importCatalog(database, [conflict]), /provenance conflict/);
     assert.deepEqual(await read(), first);
     const overview = await getProblemMapOverview();
     assert.equal(overview.projects.length, rows.length);

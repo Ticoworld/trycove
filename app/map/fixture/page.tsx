@@ -1,3 +1,4 @@
+import {qualifiedPreviewEnabled} from '../../../lib/qualified-map';
 import {notFound} from 'next/navigation';
 import {Fraunces, Geist} from 'next/font/google';
 import {PROBLEM_DOMAINS} from '../../../lib/problem-map';
@@ -14,4 +15,7 @@ const products:Product[]=[
  ...Array.from({length:12},(_,i)=>({id:`fixture-market-${i}`,name:`Fixture market ${i+1}`,description:'Synthetic test project, not an ecosystem record.',sourceUrl:'https://example.com/',revision:'test',memberships:[{slug:'trading-markets',evidence:evidence('DEX')}]})),
  {id:'fixture-unmapped',name:'Fixture unmapped',description:'Synthetic record without a supported group.',sourceUrl:'',revision:'test',memberships:[]},
 ];
-export default function FixturePage(){if(process.env.NODE_ENV==='production')notFound();return <div className={`home map-page ${display.variable} ${ui.variable}`}><SiteHeader/><div className="map-shell home-inner"><p><strong>Isolated synthetic test fixture — not public project data.</strong></p><MapExplorer domains={PROBLEM_DOMAINS.map(({slug,title,summary})=>({slug,title,summary}))} products={products}/><section className="fixture-records" aria-label="Synthetic evidence examples"><h2>Synthetic evidence examples</h2><p><strong>Documented need:</strong> A fictional application needs a checkout capability.</p><p><strong>Saved proposal · unverified:</strong> The fictional builder may consider Fixture payment tool. Compatibility and any introduction remain unknown.</p></section></div></div>}
+export default function FixturePage(){
+ if(qualifiedPreviewEnabled())notFound();if(process.env.NODE_ENV==='production')notFound();return <div className={`home map-page ${display.variable} ${ui.variable}`}><SiteHeader/><div className="map-shell home-inner"><p><strong>Isolated synthetic test fixture — not public project data.</strong></p><MapExplorer domains={PROBLEM_DOMAINS.map(({slug,title,summary})=>({slug,title,summary}))} products={products}/><section className="fixture-records" aria-label="Synthetic evidence examples"><h2>Synthetic evidence examples</h2><p><strong>Documented need:</strong> A fictional application needs a checkout capability.</p><p><strong>Saved proposal · unverified:</strong> The fictional builder may consider Fixture payment tool. Compatibility and any introduction remain unknown.</p></section></div></div>}
+
+export const dynamic='force-dynamic';

@@ -156,7 +156,7 @@ export function TrialPackEditor({initial, products, sources, editing, scopedProd
     </section>
     <div className="bar">
       {step > 0 && <button type="button" className="button secondary" disabled={pending} onClick={() => setStep(step - 1)}>Back</button>}
-      {step < 3 ? <button type="button" className="button" onClick={next}>Next</button> : <button className="button" disabled={pending}>{pending ? 'Saving…' : 'Save draft and preview'}</button>}
+      {step < 3 ? <button key="next" type="button" className="button" onClick={next}>Next</button> : <button key="save" type="submit" className="button" disabled={pending}>{pending ? 'Saving…' : 'Save draft and preview'}</button>}
     </div>
   </form>;
 }

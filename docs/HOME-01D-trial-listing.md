@@ -1,0 +1,7 @@
+# HOME-01D trial listing release blocker
+
+The `trial_packs` table stores publication state and a published version, but has no audience or fixture classification. `listPublishedTrials()` includes every published pack, and the existing public Trials route and room entry use that same state. The local database contains an editor-test room marked published alongside Owl Pilot. A name, ID, network, source URL, or description is not a reliable public-listing boundary.
+
+Public release is blocked until the product has an explicit, reviewed distinction. A follow-up should add a versioned migration with a conservative `unreviewed` default and explicit `public` and `fixture` classifications, provide an authorized organizer control and audit trail for changes, and require explicit classification before a room can be publicly listed or accessed. Existing records must remain unreviewed until individually reviewed; migration must not infer their status or change historical evidence. Update the homepage, Trials listing, direct room access and publication workflow together so they use the same policy. Test migration and rollback/reapplication, authorization, old records, public/fixture/unreviewed cases, direct URLs, and zero/one/multiple public room layouts. Determine how already published rooms are reviewed before any release.
+
+HOME-01D preserves the existing query and data, including the locally published editor test. The screenshots reflect this local state and are not evidence of public adoption or real trial participation.

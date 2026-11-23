@@ -1,0 +1,20 @@
+// @vitest-environment jsdom
+import React, {act} from 'react';
+import {createRoot, type Root} from 'react-dom/client';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
+import {MapExplorer, type Product} from '../app/map/world-explorer';
+import {PROBLEM_DOMAINS} from '../lib/problem-map';
+vi.mock('next/link',()=>({default:({children,href,...props}:{children:React.ReactNode;href:string})=><a href={href} {...props}>{children}</a>}));
+const domains=PROBLEM_DOMAINS.map(({slug,title,summary})=>({slug,title,summary}));
+const item:Product={id:'p1',name:'Synthetic project',description:'Testing checkout',sourceUrl:'https://example.com',revision:'test',memberships:[{slug:'payments-checkout',evidence:[{kind:'directory-category',label:'Payment'}]}]};
+let root:Root;let container:HTMLDivElement;
+function click(element:Element){act(()=>element.dispatchEvent(new MouseEvent('click',{bubbles:true})));}
+function findButton(text:string){const node=Array.from(container.querySelectorAll('button')).find(e=>e.textContent?.includes(text));if(!node)throw Error(`Missing ${text}`);return node;}
+beforeEach(()=>{Object.assign(globalThis,{IS_REACT_ACT_ENVIRONMENT:true});window.history.replaceState(null,'','/map');window.matchMedia=vi.fn().mockReturnValue({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()});container=document.createElement('div');document.body.append(container);root=createRoot(container)});
+afterEach(()=>{act(()=>root.unmount());container.remove()});
+describe('interactive map',()=>{
+ it('selects each area with keyboard and keeps URL and focus viewport aligned',()=>{act(()=>root.render(<MapExplorer domains={domains} products={[item]}/>));for(const domain of domains){const region=container.querySelector(`[aria-label^="${domain.title},"]`)!;act(()=>region.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true})));expect(window.location.search).toContain(`region=${domain.slug}`);expect(region.getAttribute('aria-pressed')).toBe('true');expect(container.querySelector('.map-panel h2')?.textContent).toBe(domain.title);expect(region.classList.contains('mobile-current')).toBe(true)}});
+ it('opens a project, preserves source evidence, returns and closes',()=>{act(()=>root.render(<MapExplorer domains={domains} products={[item]}/>));click(container.querySelector('[aria-label^="Payments & Fiber,"]')!);click(findButton('Synthetic project'));expect(window.location.search).toContain('project=p1');expect(container.textContent).toContain('Directory category claim: Payment');expect(container.querySelector('a[href="/projects/p1"]')).toBeTruthy();click(findButton('Back to'));expect(container.querySelector('.map-panel h2')?.textContent).toBe('Payments & Fiber');click(container.querySelector('[aria-label="Close discovery panel"]')!);expect(window.location.search).toBe('')});
+ it('searches, selects a result and reports no matches',()=>{act(()=>root.render(<MapExplorer domains={domains} products={[item]}/>));const input=container.querySelector('input')!;const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value')!.set!;act(()=>{set.call(input,'Synthetic');input.dispatchEvent(new Event('input',{bubbles:true}))});expect(container.textContent).toContain('Synthetic project');click(findButton('Synthetic project'));expect(window.location.search).toContain('project=p1');act(()=>{set.call(input,'nothingmatches');input.dispatchEvent(new Event('input',{bubbles:true}))});expect(container.textContent).toContain('No matching projects or areas.')});
+ it('restores a direct URL and responds to browser history',()=>{window.history.replaceState(null,'','/map?region=trading-markets');act(()=>root.render(<MapExplorer domains={domains} products={[item]}/>));expect(container.querySelector('.map-panel h2')?.textContent).toBe('Trading & Markets');window.history.replaceState(null,'','/map?region=payments-checkout');act(()=>window.dispatchEvent(new PopStateEvent('popstate')));expect(container.querySelector('.map-panel h2')?.textContent).toBe('Payments & Fiber');expect(container.querySelector('.mobile-current')?.getAttribute('aria-label')).toContain('Payments & Fiber')});
+});

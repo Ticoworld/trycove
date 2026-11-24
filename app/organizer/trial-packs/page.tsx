@@ -1,3 +1,4 @@
+import {WorkspaceDialog} from '../../workspace-dialog';
 import {authenticatedUser,checkProjectPermission} from '../../../lib/authorization';
 import {notFound} from 'next/navigation';
 import Link from 'next/link';
@@ -65,9 +66,9 @@ export default async function TrialPackOrganizer({searchParams}: {searchParams: 
     safety: definition.safety, tasks: definition.tasks, testingMode: definition.testingMode,
   };
 
-  return <section className="section stack">
-    {project && <Link href={'/builder/' + encodeURIComponent(project)}>← Product workspace</Link>}
-    <span className="eyebrow">Testing room</span><h1>Manage trials</h1>
+  return <section className="section stack editor-workspace final-page">
+    {project && <Link href={'/builder/' + encodeURIComponent(project)}>Product workspace</Link>}
+    <h1>Manage trials</h1>
     <p className="lead">Save a draft, review it, and publish when it is ready for testers.</p>
     <nav className="bar"><Link href={scope ? path + "?" + scope : path}>Create a room</Link>
       {packs.map(item => <Link key={item.id} href={`${path}?room=${item.id}${scope ? "&" + scope : ""}`}>{visible.find(entry => entry.pack.id === item.id)?.definition.application.name || item.id} · {item.state}</Link>)}</nav>
@@ -99,8 +100,8 @@ export default async function TrialPackOrganizer({searchParams}: {searchParams: 
           </form>)}
       </div>}
     </article>}
-    {pack?.state !== 'closed' && (pack ? <details><summary>Edit this trial</summary><TrialPackEditor key={pack.id + '/' + pack.latestVersion}
-      initial={editable ?? {...empty,productId: organizer ? "" : project ?? ""}} products={products} sources={organizer ? sources : sources.filter(item => item.productId === project)} editing scopedProduct={organizer ? undefined : project}/></details> : <TrialPackEditor key="new"
+    {pack?.state !== 'closed' && (pack ? <WorkspaceDialog label="Edit this trial"><TrialPackEditor key={pack.id + '/' + pack.latestVersion}
+      initial={editable ?? {...empty,productId: organizer ? "" : project ?? ""}} products={products} sources={organizer ? sources : sources.filter(item => item.productId === project)} editing scopedProduct={organizer ? undefined : project}/></WorkspaceDialog> : <TrialPackEditor key="new"
       initial={{...empty,productId: organizer ? "" : project ?? ""}} products={products} sources={organizer ? sources : sources.filter(item => item.productId === project)} editing={false} scopedProduct={organizer ? undefined : project}/>)}
   </section>;
 }

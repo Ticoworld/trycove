@@ -80,9 +80,9 @@ export function TrialPackEditor({initial, products, sources, editing, scopedProd
     </label>}
     {importMessage && <p role="status">{importMessage}</p>}
     <input type="hidden" name="definition" value={JSON.stringify(payload)}/>
-    <p aria-live="polite">Step {step + 1} of 4 · {sections[step]}</p>
+    <nav className="editor-steps" aria-label="Trial creation steps">{sections.map((label,index)=><button type="button" key={label} aria-current={step===index?"step":undefined} disabled={index>step} onClick={()=>setStep(index)}><span>{index+1}</span>{label}</button>)}</nav><p className="sr-only" aria-live="polite">Step {step + 1} of 4 · {sections[step]}</p>
     <section data-step="0" hidden={step !== 0}><h3>About this trial</h3>
-    <label>Product Passport
+    <label>Product
       <select required disabled={editing || !!scopedProduct} value={draft.productId} onChange={event => {
         update('productId', event.target.value);
         setSourceId(0);

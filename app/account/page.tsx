@@ -1,3 +1,6 @@
+import {WorkspaceDialog} from '../workspace-dialog';
+import {trialLogos} from '../trials/trial-media';
+import {TrialMark} from '../trials/trial-visual';
 import Link from 'next/link';
 import {eq, or} from 'drizzle-orm';
 import {authenticatedUser, ensureProfile, isOrganizer} from '../../lib/authorization';
@@ -14,12 +17,12 @@ export const dynamic = 'force-dynamic';
 
 export default async function Account({searchParams}: {searchParams: Promise<{error?: string; project?: string; claim?: string; notice?: string}>}) {
   const [query, user] = await Promise.all([searchParams, authenticatedUser()]);
-  if (!user) return <section className="section account-entry"><div className="account-entry-copy"><span className="eyebrow">Trycove account</span><h1>Build with your community.</h1><p>Sign in to manage your product and follow feedback from testers.</p></div><div className="card stack account-entry-card"><h2>Sign in</h2>
+  if (!user) return <section className="section account-entry"><div className="account-entry-copy"><h1>Build with your community.</h1><p>Sign in to manage your product and follow feedback from testers.</p><svg className="account-art" viewBox="0 0 280 100" aria-hidden="true"><path d="M10 72 C55 10 90 100 142 50 S230 20 270 42" fill="none" stroke="#29263b" strokeWidth="3" strokeDasharray="5 7"/><circle cx="10" cy="72" r="9" fill="#f8cb61" stroke="#29263b" strokeWidth="3"/><circle cx="142" cy="50" r="9" fill="#fb907d" stroke="#29263b" strokeWidth="3"/><circle cx="270" cy="42" r="9" fill="#a6d4c5" stroke="#29263b" strokeWidth="3"/></svg></div><div className="card stack account-entry-card"><h2>Sign in</h2>
     {query.error && <p role="alert">Account action failed. Please try again.</p>}
     {authConfigured() && process.env.TRYCOVE_PUBLIC_URL
       ? <form action={githubLogin}><button className="button">Continue with GitHub</button></form>
       : <p>GitHub sign-in is unavailable.</p>}
-    <p>Email sign-in is pending production delivery configuration.</p>
+
     <Link href="/trials">Explore trials as a guest</Link></div>
   </section>;
 
@@ -32,8 +35,9 @@ export default async function Account({searchParams}: {searchParams: Promise<{er
   ]);
   const packs = await db.select().from(trialPacks);
   const rooms = await Promise.all(packs.map(async pack => ({pack, definition: await readPackVersion(pack.id, pack.latestVersion)})));
-  return <section className="section stack workspace">
-    <span className="eyebrow">Builder workspace</span><h1>My products</h1>
+  const logos = await trialLogos(memberships.map(project=>project.id));
+  return <section className="section stack workspace final-page">
+    <h1>My products</h1>
     <p className="lead">Prepare a trial, share it with testers, and follow their feedback.</p>
     {!organizer && process.env.TRYCOVE_BOOTSTRAP_ORGANIZER_ID === user.id &&
       <form action={bootstrapOrganizer}><button className="button">Activate configured organizer access</button></form>}
@@ -41,12 +45,12 @@ export default async function Account({searchParams}: {searchParams: Promise<{er
     <div className="workspace-products">{memberships.map(project => {
       const productRooms = rooms.filter(room => room.definition.product.id === project.id);
       const published = productRooms.filter(room => room.pack.state === 'published').length;
-      return <article className="workspace-product" key={project.id}><div><h2>{project.name}</h2><p>{productRooms.length ? `${published} live · ${productRooms.length} total trial${productRooms.length === 1 ? '' : 's'}` : 'No trial yet'} · {project.role}</p></div><Link className="button" href={'/builder/' + encodeURIComponent(project.id)}>Open workspace →</Link></article>;
+      return <article className="workspace-product" key={project.id}><TrialMark name={project.name} logo={logos.get(project.id)}/><div><h2>{project.name}</h2><p>{productRooms.length ? `${published} live · ${productRooms.length} total trial${productRooms.length === 1 ? '' : 's'}` : 'No trial yet'} · {project.role}</p></div><Link className="button" href={'/builder/' + encodeURIComponent(project.id)}>Open workspace</Link></article>;
     })}</div>
-    <details className="workspace-settings" open={!!query.claim || !!query.error || !!query.project || !!query.notice}><summary>Account and product settings</summary>
+    <WorkspaceDialog label="Account and product settings" initialOpen={!!query.claim || !!query.error || !!query.project || !!query.notice}>
     {query.error && <p role="alert">Account action failed. Please try again.</p>}
     {query.notice && <p role="status">{query.notice === "verified" ? "Ownership verified." : query.notice === "claim" ? "Ownership request started." : "Changes saved."}</p>}
-    <p>Account ID <code>{user.id}</code></p><ActionForm action={logoutAction}><PendingButton label="Sign out" pendingLabel="Signing out…" secondary/></ActionForm>
+    <ActionForm action={logoutAction}><PendingButton label="Sign out" pendingLabel="Signing out…" secondary/></ActionForm>
     {memberships.filter(project => project.role === 'owner').map(project =>
       <ActionForm key={project.id} action={maintainerAction} className="card stack">
         <h3>Manage maintainers for {project.name}</h3>
@@ -78,6 +82,6 @@ export default async function Account({searchParams}: {searchParams: Promise<{er
           <PendingButton label="Revoke ownership" pendingLabel="Revoking…" secondary/></ActionForm>}
       </article>;
     })}
-    </details>
+    </WorkspaceDialog>
   </section>;
 }

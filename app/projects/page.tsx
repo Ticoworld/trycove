@@ -1,5 +1,7 @@
 import {trialLogos} from '../trials/trial-media';
 import {TrialMark} from '../trials/trial-visual';
+import {CatalogFilters} from './catalog-filters';
+import './catalog.css';
 import '../final-ui.css';
 import {qualifiedCatalogCondition, qualifiedPreviewEnabled} from '../../lib/qualified-map';
 import Link from 'next/link';
@@ -60,7 +62,7 @@ export default async function Page({searchParams}:{searchParams:Promise<{q?:stri
  const logos=await trialLogos(rows.map(row=>row.id));
  return <div className="final-page product-catalog">
   <section className="hero"><h1>Find products by what they do.</h1><p>Explore CKB products, their documented needs and the ideas behind them.</p><div className="bar"><Link className="button" href="/map">Browse the Problem Map</Link></div>
-   <form className="search"><input name="q" defaultValue={q} placeholder="Search products, capabilities, needs or dependencies" aria-label="Search products, capabilities, needs or dependencies"/><select name="category" defaultValue={productCategory} aria-label="Filter by product purpose"><option value="">All product purposes</option>{productCategories.map(name=><option value={name} key={name}>{name}</option>)}</select><select name="needCategory" defaultValue={category} aria-label="Filter by builder need"><option value="">All builder needs</option>{categories.map(([key,label])=><option value={key} key={key}>{label}</option>)}</select><button>Search</button></form>
+   <form className="search"><input name="q" defaultValue={q} placeholder="Search products, capabilities, needs or dependencies" aria-label="Search products, capabilities, needs or dependencies"/><CatalogFilters key={`${productCategory}|${category}`} productCategories={productCategories} needCategories={categories} productCategory={productCategory ?? ''} needCategory={category ?? ''}/><button>Search</button></form>
    <span className="muted">{rows.length} products shown{productCategory?` · purpose ${productCategory}`:''}{category?` · need ${categories.find(([key])=>key===category)?.[1]}`:''}</span>
   </section>
   <section className="section"><div className="product-list">{rows.map(project=><Link href={`/projects/${encodeURIComponent(project.id)}`} className="product-row" key={project.id}><TrialMark name={project.name} logo={logos.get(project.id)}/><div><h3>{project.name}</h3><p>{project.description||'No description supplied by the primary product record.'}</p></div></Link>)}</div>{!rows.length&&<p>No products found. Try a different purpose or search term.</p>}</section>

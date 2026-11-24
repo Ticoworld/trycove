@@ -1,48 +1,12 @@
 import {BuilderDeclarations} from '../components/builder-declarations';
 import Link from 'next/link';
-import {desc} from 'drizzle-orm';
-import {db} from '../../lib/db';
-import {trialEvidenceRecords} from '../../lib/schema';
 import {listPublishedTrials} from '../../lib/trials/trial-packs';
-
-export const dynamic = 'force-dynamic';
-
-export default async function Page() {
-  const [rooms, records] = await Promise.all([
-    listPublishedTrials(),
-    db.select().from(trialEvidenceRecords).orderBy(desc(trialEvidenceRecords.createdAt)).limit(50),
-  ]);
-  return <>
-    <section className="hero">
-      <h1>Explore products to test</h1>
-      <p>Try real tasks in a guided room and record private feedback about what worked and where you got stuck. Task outcomes are self-reported.</p>
-    </section>
-    <section className="section" aria-labelledby="guided-trial-rooms">
-      <h2 id="guided-trial-rooms">Published Trial Rooms</h2>
-      <div className="grid">{rooms.map(room => <article className="card stack" key={room.id}>
-        <span className="tag">{room.tasks.length} tasks · {room.application.network}</span>
-        <h3>{room.product.name}</h3>
-        <p>{room.description}</p>
-        {room.prerequisites?.length ? <><strong>Before you start</strong>
-          <ul>{room.prerequisites.map((item, index) => <li key={index}>{item}</li>)}</ul></> : null}
-        {(room.request?.kind === 'externally-sourced' || (!room.request && room.problemMap)) && <p>Externally sourced testing request. Builder participation is unconfirmed.
-          {(room.request?.sourceUrl ?? room.problemMap?.sourceUrl) && <> <a href={room.request?.sourceUrl ?? room.problemMap?.sourceUrl}>View source</a></>}</p>}
-        {room.request?.kind === 'builder-declared' && <p>Builder-declared testing request.</p>}
-        <Link className="button" href={`/trials/rooms/${room.id}`}>Review trial and start</Link>
-      </article>)}</div>
-      {!rooms.length && <p>No Trial Rooms are open for enrollment.</p>}
-    </section>
-    <BuilderDeclarations testingOnly/>
-    <section className="section" aria-labelledby="integration-lab-receipts">
-      <h2 id="integration-lab-receipts">Integration Lab receipts</h2>
-      <p>Inspect controlled experiments, their results and reproduction limits. <Link href="/results">View recorded results</Link></p>
-      <div className="grid">{records.map(record => <Link className="card" key={record.id} href={`/trials/${encodeURIComponent(record.id)}`}>
-        <span className="tag">Level {record.evidenceLevel} · {record.result}</span>
-        <h3>{record.mode.replaceAll('-', ' ')}</h3>
-        <p>{record.createdAt.toISOString().slice(0, 10)}</p>
-        <span className="arrow">View execution receipt →</span>
-      </Link>)}</div>
-      {!records.length && <p className="muted">No recorded executions. Prepare a supported local trial from its documented command.</p>}
-    </section>
-  </>;
+import {trialLogos} from './trial-media';
+import {TrialMark} from './trial-visual';
+export const dynamic='force-dynamic';
+export default async function Page(){
+ const rooms=await listPublishedTrials();const logos=await trialLogos(rooms.map(room=>room.product.id));
+ return <div className="trial-catalog"><section className="trial-catalog-intro"><h1>Try something real.</h1><p>Explore a product through guided tasks and record what you notice. Your outcomes are self-reported.</p><svg viewBox="0 0 300 130" aria-hidden="true"><path d="M12 90Q55 18 105 72T205 54T290 36" fill="none" stroke="#29263b" strokeWidth="3" strokeDasharray="5 9" strokeLinecap="round"/><circle cx="105" cy="72" r="9" fill="#f8cb61" stroke="#29263b" strokeWidth="3"/><circle cx="205" cy="54" r="9" fill="#fb907d" stroke="#29263b" strokeWidth="3"/></svg></section>
+ {rooms.length?<div className="trial-ticket-list">{rooms.map(room=><article className="trial-ticket" key={room.id}><div className="trial-ticket-main"><TrialMark name={room.product.name} logo={logos.get(room.product.id)}/><div><h2>{room.product.name}</h2><p>{room.description}</p><p className="trial-ticket-meta">{room.tasks.length} {room.tasks.length===1?'task':'tasks'} · {room.application.network}</p>{room.prerequisites?.length?<p className="trial-ticket-requirements">Before you start: {room.prerequisites.join(' · ')}</p>:null}{(room.request?.kind==='externally-sourced'||(!room.request&&room.problemMap))&&<p className="trial-ticket-note">Externally sourced request; builder participation is unconfirmed.</p>}{room.request?.kind==='builder-declared'&&<p className="trial-ticket-note">Builder-declared testing request.</p>}</div></div><div className="trial-ticket-stub"><Link className="trial-organic" href={`/trials/rooms/${room.id}`}>Review trial</Link></div></article>)}</div>:<div className="trial-catalog-empty"><h2>No Trial Rooms are open yet.</h2><p>Explore the products while new testing opportunities are prepared.</p><Link className="trial-organic" href="/projects">Explore products</Link></div>}
+ <BuilderDeclarations testingOnly/><p className="trial-catalog-results">Looking for controlled execution records? <Link href="/results?view=technical">Explore technical executions in Results</Link></p></div>;
 }

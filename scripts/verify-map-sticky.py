@@ -39,5 +39,3 @@ with sync_playwright() as playwright:
     page.close()
     browser.close()
 print('Sticky inspector browser checks passed')
-
-

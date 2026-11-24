@@ -1,4 +1,4 @@
-import './globals.css';import './final-ui.css';import {SiteNav} from './site-nav';import {Fraunces,Geist} from 'next/font/google';
+import './globals.css';import './final-ui.css';import './shared-width.css';import {SiteNav} from './site-nav';import {Fraunces,Geist} from 'next/font/google';
 const display=Fraunces({subsets:['latin'],variable:'--final-display',display:'swap'});const ui=Geist({subsets:['latin'],variable:'--final-ui',display:'swap'});
 export const metadata={title:'Trycove — CKB product connections',description:'Browse source-backed problem groups, explore product needs and capabilities, and inspect saved connection evidence.'};
 export default function Layout({children}:{children:React.ReactNode}){return <html lang="en" className={`${display.variable} ${ui.variable}`}><body><header><SiteNav/></header><main className="shell">{children}</main><footer className="shell site-footer"><strong>trycove<span>●</span></strong><p>Find CKB projects, explore connections, and follow what happens next.</p></footer></body></html>}

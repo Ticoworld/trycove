@@ -1,0 +1,24 @@
+/* A shared edge keeps navigation, page content, and footer aligned. */
+html body:has(> main.shell):not(:has(.home)):not(:has(.studio)) > main.shell,
+html body:has(> main.shell):not(:has(.home)):not(:has(.studio)) > header nav.shell,
+html body:has(> main.shell):not(:has(.home)):not(:has(.studio)) > footer.site-footer {
+  width: calc(100% - clamp(36px, 5vw, 96px));
+  max-width: none;
+  padding-inline: 0;
+  margin-inline: auto;
+}
+
+/* Home and Map use full-bleed artwork with their own inner content wrapper. */
+html body .home .home-inner {
+  width: calc(100% - clamp(36px, 5vw, 96px));
+  max-width: none;
+}
+
+/* The focused Trial Room has its own header and remains full-bleed. */
+html body .trials-surface .studio {
+  padding-inline: clamp(18px, 2.5vw, 48px);
+}
+
+html body .trials-surface .studio-top {
+  max-width: none;
+}

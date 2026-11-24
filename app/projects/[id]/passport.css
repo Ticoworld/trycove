@@ -18,3 +18,15 @@
 @media(min-width:701px){.passport-hero::before{width:40%;right:-18%;top:-35%;height:180%;opacity:.65}}
 .passport-source a{text-decoration:underline;text-underline-offset:3px}
 .passport-back{display:inline-flex;align-items:center;min-height:44px;font-size:.86rem;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+/* Passport destinations are grouped as one navigation control. */
+.passport-tabs{display:inline-flex;width:min(100%,520px);min-height:0;gap:2px;margin:24px 0 0;padding:4px;border:1.5px solid #29263b;border-radius:20px 29px 20px 27px;background:#fffaf0;overflow:visible;flex-wrap:nowrap}
+.passport-tabs a{flex:1;display:flex;justify-content:center;align-items:center;min-width:0;min-height:46px;padding:10px 12px;border:0;border-radius:15px 22px 15px 20px;text-align:center;transition:background .16s ease,color .16s ease,transform .16s ease}
+.passport-tabs a:hover{background:var(--district-accent);transform:none}.passport-tabs a[aria-current=page]{background:#29263b;color:#fffaf0;border:0}.passport-tabs a[aria-current=page]:hover{background:#40384c}.passport-tabs a:active{transform:scale(.97)}
+@media(max-width:700px){.passport-tabs{width:100%;margin-top:18px}.passport-tabs a{padding:10px 5px;font-size:.82rem}}
+@media(prefers-reduced-motion:reduce){.passport-tabs a{transition:none}.passport-tabs a:active{transform:none}}
+/* Keep the introduction compact and the product mark close to its name. */
+.passport-hero{padding:clamp(28px,3.5vw,46px) clamp(24px,4vw,48px)}
+.passport-intro{max-width:920px}.passport-identity{gap:clamp(12px,2vw,22px)}
+@media(min-width:701px){.passport-hero::before{width:32%;right:-18%}}
+@media(max-width:700px){.passport-hero{padding:26px 22px}.passport-identity{gap:12px}}
+.passport-empty-note{display:flex;align-items:center;gap:14px;max-width:450px;color:#514a4e}.passport-empty-note svg{width:76px;height:62px;flex:none}.passport-empty-note p{margin:0;font-size:.9rem;line-height:1.5}@media(max-width:700px){.passport-empty-note svg{width:66px;height:54px}}

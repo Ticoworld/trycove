@@ -55,3 +55,26 @@
 @media(max-width:800px){.district-portrait{transform-origin:center top;animation-name:portrait-unfold-mobile}@keyframes portrait-unfold-mobile{from{clip-path:inset(0 0 100% 0);transform:scaleY(.96)}to{clip-path:inset(0);transform:none}}}
 @media(prefers-reduced-motion:reduce){.district-portrait,.district-portrait svg{animation:none}.map-place .place-mechanism{transition:none}}
 .map-landscape{position:relative}.has-district .map-landscape::after{content:'';position:absolute;z-index:5;right:-18px;top:100px;width:18px;height:26px;background:var(--district-accent);border:2px solid #29263b;border-left:0;transform-origin:left;animation:connector-open .28s ease both;pointer-events:none}.district-portrait .place-mechanism{transition:none}.district-portrait .map-place{cursor:default}@keyframes connector-open{from{transform:scaleX(0)}to{transform:scaleX(1)}}@media(max-width:800px){.has-district .map-landscape::after{right:auto;top:auto;bottom:-15px;left:28px;width:30px;height:15px;border:2px solid #29263b;border-top:0;transform-origin:top;animation-name:connector-open-mobile}@keyframes connector-open-mobile{from{transform:scaleY(0)}to{transform:scaleY(1)}}}@media(prefers-reduced-motion:reduce){.has-district .map-landscape::after{animation:none}}
+/* Keep one inspector scroll area with its district context pinned inside it. */
+@media(min-width:801px){
+ .map-explorer.has-panel{grid-template-columns:minmax(0,1fr) minmax(360px,min(30%,480px));overflow-anchor:none}
+ .map-panel{position:sticky;top:12px;max-height:calc(100vh - 24px);padding:0;overflow:auto;overscroll-behavior:contain}
+ .map-panel .map-results{padding:0 28px 28px}
+ .map-panel-header{position:sticky;top:0;z-index:3;background:#fffaf0;border-bottom:1px solid #d5caba;padding:12px 20px 10px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+ .map-panel-header .map-close{float:none;flex:none}
+ .map-district-heading h2{font-family:var(--home-display),serif;font-size:clamp(1.45rem,2vw,1.85rem);line-height:1.08;margin:0;overflow-wrap:anywhere}
+ .map-district-heading p{font-size:.82rem;margin:5px 0 0}
+ .map-panel .map-list{max-height:none;overflow:visible}
+}
+@media(max-width:800px){
+ .map-panel-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+ .map-panel-header .map-close{float:none;flex:none}
+ .map-district-heading h2{font-family:var(--home-display),serif;font-size:1.65rem;line-height:1.08;margin:0}
+ .map-district-heading p{font-size:.82rem;margin:5px 0 12px}
+ .map-mobile-nav .map-mobile-inspector{grid-column:1/-1;background:#fffaf0}
+}
+@media(min-width:801px){
+ /* Keep enough section height for the inspector while lower landmarks are in view. */
+ .map-explorer.has-panel .map-landscape{min-height:calc(72.727vw + 220px)}
+ body:has(.map-explorer){overflow-anchor:none}
+}

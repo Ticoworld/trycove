@@ -19,7 +19,7 @@ with sync_playwright() as pw:
  assert page.locator('.passport-visual img').evaluate('(image)=>image.complete && image.naturalWidth > 0')
  page.screenshot(path=str(out/'desktop.png'),full_page=True)
  page.get_by_role('link',name='Connections',exact=True).click();page.wait_for_url('**/*view=connections*')
- page.get_by_role('link',name='Trials',exact=True).click();page.get_by_text('No published Trial Room').wait_for()
+ page.get_by_role('link',name='Trials',exact=True).click();page.get_by_role('heading',name='No trials on file yet').wait_for()
  page.go_back();page.wait_for_url('**/*view=connections*')
  page.get_by_role('link',name='Evidence',exact=True).click();page.get_by_role('button',name='Directory and source records').click();assert page.get_by_role('dialog').is_visible()
  assert page.get_by_role('dialog').get_by_role('link',name='Inspect primary source').get_attribute('href').startswith('https://')

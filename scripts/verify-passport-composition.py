@@ -22,7 +22,7 @@ with sync_playwright() as p:
  page.goto(f'{base}/projects/ickb?region=funding-community&view=overview',wait_until='networkidle');assert 'Funding' in page.locator('.passport-return').inner_text()
  page.get_by_role('link',name='Connections',exact=True).click();page.wait_for_url('**/*view=connections*')
  page.get_by_role('link',name='Evidence',exact=True).click();page.get_by_role('button',name='Directory and source records').click();assert page.get_by_role('dialog').is_visible();page.keyboard.press('Escape');page.get_by_role('dialog').wait_for(state='hidden')
- page.go_back();page.wait_for_url('**/*view=connections*');page.get_by_role('link',name='Back to iCKB').click();page.wait_for_url('**/projects/ickb?region=funding-community')
+ page.go_back();page.wait_for_url('**/*view=connections*');page.go_back();page.wait_for_url('**/*view=overview*')
  page.locator('.passport-return').click();page.wait_for_url('**/map?*');assert 'project=ickb' in page.url and 'region=funding-community' in page.url
  page.close()
  page=b.new_page(viewport={'width':390,'height':844},reduced_motion='reduce');page.route('**/logos/ccc.webp',lambda route:route.abort());page.goto(f'{base}/projects/ccc',wait_until='networkidle');page.wait_for_timeout(300);assert page.locator('.passport-visual img').count()==0 and page.locator('.passport-illustration svg').is_visible();page.screenshot(path=str(out/'ccc-fallback.png'),full_page=True)

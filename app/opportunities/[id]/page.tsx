@@ -11,7 +11,16 @@ import {LifecycleVerification} from '../../components/lifecycle-verification';
 import {addFollowUp} from './actions';
 import {ConnectionHandoff} from './connection-handoff';
 import {hasOrganizerSession} from '../../../lib/organizer-auth';
+import {authenticatedUser,isOrganizer,checkProjectPermission} from '../../../lib/authorization';
+import {qualifiedPreviewEnabled} from '../../../lib/qualified-map';
 import {listPublishedTrials} from '../../../lib/trials/trial-packs';
+import {Fraunces,Geist} from 'next/font/google';
+import {relationshipProfiles} from '../relationship-profiles';
+import {RelationshipVisual} from '../relationship-visual';
+import '../connections.css';
+import {EvidenceDialog} from '../../projects/[id]/evidence-dialog';
+const display=Fraunces({subsets:['latin'],style:['normal','italic'],variable:'--connection-display',display:'swap'});
+const ui=Geist({subsets:['latin'],variable:'--connection-ui',display:'swap'});
 
 export const dynamic='force-dynamic';
 type ConnectionDetails={boundary?:string;adapter?:string;findings?:Array<{dimension:string;state:string;explanation:string}>;providerRevision?:string;consumerRevision?:string};
@@ -20,8 +29,8 @@ function safeExternalUrl(raw:string){
  try{const url=new URL(raw);return url.protocol==='https:'&&!url.username&&!url.password?url.href:null}catch{return null}
 }
 
-export default async function Page({params}:{params:Promise<{id:string}>}){
- const {id}=await params;
+export default async function Page({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<{view?:string}>}){
+ const {id}=await params;const query=await searchParams;const section=query.view==='records'?'evidence':query.view==='reviews'?'reviews':query.view==='follow-up'?'follow-up':'opportunity';const showRecords=section!=='opportunity';
  const organizer=await hasOrganizerSession();
  const linkedTrial=(await listPublishedTrials()).find(room=>room.problemMap?.opportunityId===id);
  const [opportunity]=await db.select().from(opportunities).where(eq(opportunities.id,id));
@@ -64,17 +73,24 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
  ]):[[],[]];
  const linkedNeedIds=sourceEvidence.map(item=>item.needItemId).filter((x):x is string=>Boolean(x));
  const linkedNeeds=linkedNeedIds.length?await db.select().from(needItems).where(inArray(needItems.id,linkedNeedIds)):[];
+ const profiles=await relationshipProfiles([opportunity.projectA,...opportunity.projectB?[opportunity.projectB]:[]]);
+ const consumerProfile=profiles.get(opportunity.projectA)??{id:opportunity.projectA,name:consumer?.name??'Project unavailable',visible:false};
+ const providerProfile=opportunity.projectB?profiles.get(opportunity.projectB):undefined;
+ const nonpublic=[consumerProfile,providerProfile].filter((profile):profile is NonNullable<typeof profile>=>Boolean(profile&&!profile.visible));
+ const permitted=new Set<string>();
+ if(qualifiedPreviewEnabled()&&nonpublic.length){const user=await authenticatedUser();if(user){const organizerUser=await isOrganizer(user.id);for(const profile of nonpublic)if(organizerUser||await checkProjectPermission(db,user.id,profile.id,'edit').then(()=>true,()=>false))permitted.add(profile.id)}}
+ const recordsHref=`/opportunities/${encodeURIComponent(id)}?view=records`;const overviewHref=`/opportunities/${encodeURIComponent(id)}`;const reviewHref=`${overviewHref}?view=reviews`;const followHref=`${overviewHref}?view=follow-up`;
+ const tested=Boolean(receipts.length||trials.length);const testingRequest=opportunity.kind==='user-testing';
 
- return <>
-  <section className="hero">
-   <Link href="/opportunities" className="eyebrow">← Opportunities</Link>
-   <h1>{consumer?.name} <span className="arrow">{provider?'×':'→'}</span> {provider?.name??'No provider found'}</h1>
-   <p>{opportunity.problem}</p>
-   <div className="tag">{opportunity.kind} / {opportunity.status} / not an adoption claim</div>
-  </section>
+ return <div className={`connections connection-workspace ${display.variable} ${ui.variable}`}>
+  <Link className="connection-return" href="/opportunities">Connections</Link>
+  <section className="connection-intro"><p className="connection-state">{testingRequest?'Testing request':provider?'Potential collaboration':sourceEvidence.length?'Documented need':'Recorded request'}{tested?' · trial record available':''}</p><h1>{opportunity.problem}</h1><RelationshipVisual consumer={consumerProfile} provider={providerProfile} tested={Boolean(provider&&tested)}/><div className="connection-profile-links">{(consumerProfile.visible||permitted.has(consumerProfile.id))&&<Link href={`/projects/${encodeURIComponent(consumerProfile.id)}`}>View {consumerProfile.name}</Link>}{providerProfile&&(providerProfile.visible||permitted.has(providerProfile.id))&&<Link href={`/projects/${encodeURIComponent(providerProfile.id)}`}>View {providerProfile.name}</Link>}</div></section>
+  <nav className="connection-workspace-nav" aria-label="Connection sections"><Link href={overviewHref} aria-current={section==='opportunity'?'page':undefined}>Opportunity</Link><Link href={recordsHref} aria-current={section==='evidence'?'page':undefined}>Evidence</Link><Link href={reviewHref} aria-current={section==='reviews'?'page':undefined}>Reviews</Link><Link href={followHref} aria-current={section==='follow-up'?'page':undefined}>Follow-through</Link></nav>
+  {!showRecords&&<div className="connection-overview"><section><h2>{testingRequest?'What the request asks':provider?'Why this could help':'What is needed'}</h2><p>{opportunity.reasoning}</p>{!provider&&<p className="connection-note">No collaborator is named in this record; others may exist. The source request may be historical.</p>}{provider&&!testingRequest&&<p className="connection-note">This is a proposed relationship. Compatibility, participation and adoption remain unconfirmed.</p>}</section><section className="connection-next"><h2>Take a closer look</h2>{linkedTrial?<><p>A published Trial Room is available for this request.</p><Link className="connection-button" href={`/trials/rooms/${linkedTrial.id}`}>Explore Trial Room</Link></>:<><p>{sourceEvidence.length?`${sourceEvidence.length} source ${sourceEvidence.length===1?'record is':'records are'} available to inspect.`:'Explore the saved context and follow-through for this opportunity.'}</p><Link className="connection-button" href={recordsHref}>Explore evidence</Link></>}{tested&&<p className="connection-note">Recorded trial result: {receipts[0]?.result??trials[0]?.result}. Results are limited to their described scope; independent reproduction is not assumed.</p>}</section></div>}
+  {showRecords&&<>
   <div className="detail section">
    <div className="prose">
-    <div className="eyebrow">Opportunity workspace / 机会工作区</div>
+    {section==='evidence'&&<>
     <h2>Why these projects?</h2><p>{opportunity.reasoning}</p>
     <h2>{provider?'Compatibility & unknowns':'Search decision and unknowns'}</h2>
     {connectionDetails?.boundary&&connectionDetails?.adapter?<article className="card">
@@ -86,6 +102,8 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
      <p className="muted">Later bounded prior-art checks and execution receipts appear in the evidence and follow-up sections below. Unknown source or deployment data remains unresolved.</p>
     </article>:<p>{opportunity.requirements}</p>}
     {linkedNeeds.length>0&&<><h2>Atomic builder need</h2>{linkedNeeds.map(item=><article className="card" key={item.id}><span className="tag">{item.category.replaceAll('-',' ')} · {item.stance.replaceAll('-',' ')} · automated interpretation</span><blockquote><p>{item.excerpt}</p></blockquote><p>Source revision {item.revision} · character offsets {item.startOffset}–{item.endOffset} · lineage {item.lineageKey.slice(-12)}</p><p>Parent source claim: {item.sourceClaim}</p><p>{item.verification}</p></article>)}</>}
+    </>}
+    {section==='reviews'&&<>
     {savedQualification.length>0&&<section className="section" aria-labelledby="qualification-review">
      {qualificationReport?<>
       <div className="tag">{qualificationReport.outcome} · {qualificationReport.actionStatus} · no outreach sent</div>
@@ -169,6 +187,8 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
     <h2>Engine assessment</h2>
     {assessment?<IntelligenceAssessment assessment={assessment} consumer={usedConsumer[0]} provider={usedProvider[0]}/>:<p className="muted">No structured intelligence assessment has been recorded for this opportunity.</p>}
     <LifecycleVerification claims={capabilities} runs={lifecycleRuns} evidence={lifecycleItems}/>
+    </>}
+    {section==='follow-up'&&<>
     <h2>Experiment</h2><p>{opportunity.experiment}</p>
     <p><Link className="source" href="/results">Open unified Results ↗</Link>{linkedTrial&&<> · <Link className="source" href={`/trials/rooms/${linkedTrial.id}`}>Open guided trial room ↗</Link></>}</p>
     {trials.map(trial=><div className="card" key={trial.id}><span className="tag">Independent trial · {trial.result}</span><p>{trial.details}</p></div>)}
@@ -184,12 +204,14 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
      <label htmlFor="note">What happened?</label><textarea id="note" name="note" required maxLength={2000}/>
      <p>Entries are append-only. Status labels record what was reported; they do not independently verify an integration or adoption.</p><button>Add to ledger</button>
     </form>:<p className="muted"><Link href={`/organizer?return=${encodeURIComponent(`/opportunities/${id}`)}`}>Sign in as organizer</Link> to inspect private follow-up notes or append an event.</p>}
+    </>}
    </div>
-   <aside className="stack">
-    <div className="card"><span className="tag">Source evidence / 证据</span>{sourceEvidence.map(item=>{const href=safeExternalUrl(item.sourceUrl);return <div key={item.id}><p>{item.claim}</p>{href&&<a className="source" href={href} target="_blank" rel="noreferrer">Inspect source ↗</a>}<p>{item.verification} · {item.observedAt.toISOString().slice(0,10)}</p></div>})}</div>
+   {section==='evidence'&&<aside className="stack">
+    <div className="connection-source-list"><h2>Source evidence</h2>{sourceEvidence.length?sourceEvidence.map((item,index)=>{const href=safeExternalUrl(item.sourceUrl);return <EvidenceDialog key={item.id} title={`Source ${index+1}`} description={item.verification}><p>{item.claim}</p><p>{item.verification} · {item.observedAt.toISOString().slice(0,10)}</p>{href&&<a href={href} target="_blank" rel="noreferrer">Inspect source</a>}</EvidenceDialog>}):<p>No source evidence is attached.</p>}</div>
     <div className="card"><span className="tag">Project technical footprints</span><p>Latest stored source scans for these projects; observations may not be specific to this opportunity.</p>{consumerFootprints[0]&&<FootprintLink footprint={consumerFootprints[0]} projectName={consumer?.name}/>} {providerFootprints[0]&&<FootprintLink footprint={providerFootprints[0]} projectName={provider?.name}/>} {!consumerFootprints.length&&!providerFootprints.length&&<p>No technical footprints have been recorded for these projects.</p>}</div>
     <div className="card"><span className="tag">Evidence scope</span><p>{provider?'The stored hypothesis is source-derived. Any attached trial is limited to the exact behavior described in its receipt; a passed route check does not prove live chain acceptance, deployment availability, maintainer approval or adoption.':'No suitable provider was supported by the source evidence searched; this is an explicit no-match decision, not proof that no provider exists.'}</p><Link className="source" href={`/projects/${opportunity.projectA}`}>{consumer?.name} profile →</Link>{opportunity.projectB&&<><br/><Link className="source" href={`/projects/${opportunity.projectB}`}>{provider?.name} profile →</Link></>}</div>
-   </aside>
+   </aside>}
   </div>
- </>;
+  </>}
+ </div>;
 }

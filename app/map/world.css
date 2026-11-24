@@ -36,3 +36,22 @@
 .map-place.selected[data-kind="2"] .place-mechanism{transform:translate(18px,-2px) rotate(8deg);transform-origin:40px 50px}.map-panel .map-primary{min-height:44px;box-sizing:border-box}
 .map-place .place-mechanism{transform-box:fill-box;transform-origin:center}.map-place.selected[data-kind="2"] .place-mechanism{transform-origin:right bottom}@media(max-width:800px){.map-list{max-height:none;overflow:visible}}
 .map-place.selected[data-kind="3"] .place-mechanism{transform:translateY(-32px) scaleY(.3);transform-origin:top}
+/* The first frame has a real SVG viewport before Motion hydrates. */
+.landscape-frame > svg{aspect-ratio:1100 / 800}
+/* The paper emerges from the terminal; the market and workshop shutters lift. */
+.map-place[data-kind="0"] .place-mechanism{opacity:0;transform:translateY(-15px)}
+.map-place.selected[data-kind="0"] .place-mechanism{opacity:1;transform:translateY(10px)}
+.map-place.selected[data-kind="1"] .place-mechanism{transform:translateY(-8px) scaleY(.13);transform-origin:top}
+.map-place.selected[data-kind="3"] .place-mechanism{transform:translateY(-4px) scaleY(.12);transform-origin:top}
+/* The portrait opens like a panel cut from the map. Its ink frame and accent
+   expand from the map edge while the inspector content stays available. */
+.map-panel.panel-open{animation:none}
+.map-explorer .map-results{animation:none}
+.district-portrait{position:relative;isolation:isolate;animation:portrait-unfold .32s cubic-bezier(.22,1,.36,1) both;transform-origin:left center}
+.district-portrait::before{content:'';position:absolute;inset:5px;border:1px solid #29263b;pointer-events:none}
+.district-portrait svg{position:relative;animation:portrait-ink .28s ease both}
+@keyframes portrait-unfold{from{clip-path:inset(0 100% 0 0);transform:scaleX(.96)}to{clip-path:inset(0);transform:none}}
+@keyframes portrait-ink{from{opacity:.35}to{opacity:1}}
+@media(max-width:800px){.district-portrait{transform-origin:center top;animation-name:portrait-unfold-mobile}@keyframes portrait-unfold-mobile{from{clip-path:inset(0 0 100% 0);transform:scaleY(.96)}to{clip-path:inset(0);transform:none}}}
+@media(prefers-reduced-motion:reduce){.district-portrait,.district-portrait svg{animation:none}.map-place .place-mechanism{transition:none}}
+.map-landscape{position:relative}.has-district .map-landscape::after{content:'';position:absolute;z-index:5;right:-18px;top:100px;width:18px;height:26px;background:var(--district-accent);border:2px solid #29263b;border-left:0;transform-origin:left;animation:connector-open .28s ease both;pointer-events:none}.district-portrait .place-mechanism{transition:none}.district-portrait .map-place{cursor:default}@keyframes connector-open{from{transform:scaleX(0)}to{transform:scaleX(1)}}@media(max-width:800px){.has-district .map-landscape::after{right:auto;top:auto;bottom:-15px;left:28px;width:30px;height:15px;border:2px solid #29263b;border-top:0;transform-origin:top;animation-name:connector-open-mobile}@keyframes connector-open-mobile{from{transform:scaleY(0)}to{transform:scaleY(1)}}}@media(prefers-reduced-motion:reduce){.has-district .map-landscape::after{animation:none}}

@@ -31,12 +31,12 @@ describe('organizer connection workflow',()=>{
  it('rejects unauthorized writes and creates, reviews and reloads a sourced private candidate',async()=>{
   const reference=new FormData();for(const [key,value] of Object.entries({name:'New reference',description:'Source description',sourceUrl:'https://example.test/new',revision:'revision-1',website:'https://example.test/site'}))reference.set(key,value);
   fixture.authorized=false;await expect(registerProjectReference(reference)).rejects.toThrow('Organizer access');fixture.authorized=true;
-  await registerProjectReference(reference);
+  await expect(registerProjectReference(reference)).rejects.toThrow('redirect:/organizer/connections?reference=created');
   const registered=(await database.select().from(schema.projects)).find(row=>row.name==='New reference');expect(registered?.id).toMatch(/^organizer-ref-/);
   const [provenance]=await database.select().from(schema.sourceRecords).where(eq(schema.sourceRecords.projectId,registered!.id));expect(provenance).toMatchObject({sourceUrl:'https://example.test/new',revision:'revision-1'});
   expect((await database.select().from(schema.projects).where(qualifiedCatalogCondition())).some(row=>row.id===registered!.id)).toBe(false);
-  await expect(registerProjectReference(reference)).rejects.toThrow('already exists');
-  reference.set('name','Different name');await expect(registerProjectReference(reference)).rejects.toThrow('already exists');
+  await expect(registerProjectReference(reference)).rejects.toThrow('redirect:/organizer/connections?reference=duplicate');
+  reference.set('name','Different name');await expect(registerProjectReference(reference)).rejects.toThrow('redirect:/organizer/connections?reference=duplicate');
   const form=new FormData();for(const [key,value] of Object.entries({projectA:'private-project',problem:'Documented need',reasoning:'Context',claim:'Source claim',sourceUrl:'https://example.test/source'}))form.set(key,value);
   fixture.authorized=false;await expect(createOpportunity(form)).rejects.toThrow('Organizer access');fixture.authorized=true;
   await expect(createOpportunity(form)).rejects.toThrow('redirect:');

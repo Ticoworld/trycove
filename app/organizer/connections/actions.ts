@@ -30,19 +30,21 @@ export async function registerProjectReference(form: FormData) {
     try{const url=new URL(trimmed);url.hash='';url.search='';let path=url.pathname.replace(/\/+$/,'');if(url.hostname.toLowerCase()==='github.com')path=path.replace(/\.git$/i,'');return `${url.hostname}${path}`.toLocaleLowerCase()}catch{return trimmed.toLocaleLowerCase()}
   };
   const id=`organizer-ref-${createHash('sha256').update(normalize(name)).digest('hex').slice(0,24)}`;
+  let duplicate=false;
   await db.transaction(async tx=>{
     await tx.execute(sql`select pg_advisory_xact_lock(645016021)`);
     const existing=await tx.select({id:projects.id,name:projects.name,website:projects.website,repository:projects.repository,sourceUrl:projects.sourceUrl}).from(projects);
     const repositories=await tx.select({repository:projectRepositories.repository}).from(projectRepositories);
     const sources=await tx.select({sourceUrl:sourceRecords.sourceUrl}).from(sourceRecords);
-    const duplicate=existing.some(row=>normalize(row.name)===normalize(name)||normalize(row.sourceUrl)===normalize(sourceUrl)||!!website&&normalize(row.website)===normalize(website)||!!repository&&normalize(row.repository)===normalize(repository)) ||
+    duplicate=existing.some(row=>normalize(row.name)===normalize(name)||normalize(row.sourceUrl)===normalize(sourceUrl)||!!website&&normalize(row.website)===normalize(website)||!!repository&&normalize(row.repository)===normalize(repository)) ||
       (!!repository&&repositories.some(row=>normalize(row.repository)===normalize(repository))) || sources.some(row=>normalize(row.sourceUrl)===normalize(sourceUrl));
-    if(duplicate)throw new Error('A project with this name, source, website or repository already exists. Review and select the existing project.');
+    if(duplicate)return;
     const observedAt=new Date();
     await tx.insert(projects).values({id,name,description,website,repository,sourceUrl,revision,observedAt});
     await tx.insert(sourceRecords).values({id:`${id}-source`,projectId:id,source:'Organizer project reference',sourceUrl,revision,observedAt,raw:JSON.stringify({name,description,website,repository,sourceUrl,revision})});
   });
   revalidatePath('/organizer/connections');
+  redirect(duplicate?'/organizer/connections?reference=duplicate':'/organizer/connections?reference=created');
 }
 export async function createOpportunity(form: FormData) {
   await organizer();

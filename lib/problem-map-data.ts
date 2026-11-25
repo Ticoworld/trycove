@@ -1,4 +1,5 @@
 import {projectQualifiedMemberships, qualifiedCatalogCondition} from './qualified-map';
+import {publicOpportunityIds} from './opportunity-visibility';
 import {and, desc, eq, inArray, isNull, or} from 'drizzle-orm';
 import {db} from './db';
 import {
@@ -103,6 +104,8 @@ function buildMemberships(
 }
 
 async function classificationInputs(projectId?: string) {
+  const candidates=await db.select().from(opportunities);
+  const visibleIds=[...await publicOpportunityIds(candidates)];
   const whereProject = projectId ? eq(signals.projectId, projectId) : undefined;
   const scopedSignalKinds = or(
     eq(signals.kind, 'product-category'),
@@ -112,17 +115,20 @@ async function classificationInputs(projectId?: string) {
   const whereCapabilityProject = projectId
     ? or(eq(candidateCapabilities.consumerProjectId, projectId), eq(candidateCapabilities.providerProjectId, projectId))
     : undefined;
-  return Promise.all([
+  const [categoryRows,intentRows,capabilityRows] = await Promise.all([
     db.select({projectId: signals.projectId, kind: signals.kind, claim: signals.claim, sourceUrl: signals.sourceUrl, revision: signals.revision, verification: signals.verification})
       .from(signals).where(and(scopedSignalKinds, whereProject)),
     db.select({projectId: signalIntents.projectId, scope: signalIntents.scope, sourceUrl: signalIntents.sourceUrl, revision: signalIntents.revision, verification: signalIntents.verification})
       .from(signalIntents).where(whereIntentProject),
     db.select({opportunityId: candidateCapabilities.opportunityId, capability: candidateCapabilities.capability, consumerProjectId: candidateCapabilities.consumerProjectId, providerProjectId: candidateCapabilities.providerProjectId, lifecycleState: candidateCapabilities.lifecycleState, compatibilityState: candidateCapabilities.compatibilityState})
-      .from(candidateCapabilities).where(whereCapabilityProject),
+      .from(candidateCapabilities).where(and(whereCapabilityProject,inArray(candidateCapabilities.opportunityId,visibleIds))),
   ]);
+  return [categoryRows,intentRows,capabilityRows] as const;
 }
 
 export async function getProblemMapOverview() {
+  const candidates=await db.select().from(opportunities);
+  const visibleOpportunityIds=[...await publicOpportunityIds(candidates)];
   const [allProjects, categories, intents, capabilities] = await Promise.all([
     db.select({id: projects.id, name: projects.name, description: projects.description, website: projects.website, repository: projects.repository, sourceUrl: projects.sourceUrl, revision: projects.revision, observedAt: projects.observedAt})
       .from(projects).where(qualifiedCatalogCondition()).orderBy(projects.name),
@@ -131,7 +137,7 @@ export async function getProblemMapOverview() {
     db.select({projectId: signalIntents.projectId, scope: signalIntents.scope, sourceUrl: signalIntents.sourceUrl, revision: signalIntents.revision, verification: signalIntents.verification})
       .from(signalIntents),
     db.select({opportunityId: candidateCapabilities.opportunityId, capability: candidateCapabilities.capability, consumerProjectId: candidateCapabilities.consumerProjectId, providerProjectId: candidateCapabilities.providerProjectId, lifecycleState: candidateCapabilities.lifecycleState, compatibilityState: candidateCapabilities.compatibilityState})
-      .from(candidateCapabilities),
+      .from(candidateCapabilities).where(inArray(candidateCapabilities.opportunityId,visibleOpportunityIds)),
   ]);
   const memberships = buildMemberships(categories, intents, capabilities);
   const counts = new Map<string, number>();
@@ -167,13 +173,15 @@ export async function getProblemDomainData(slug: string) {
   if (!memberIds.length) {
     return {products, memberships: overview.memberships, signals: [], needs: [], intents: [], opportunities: [], capabilities: [], evidence: [], footprints: [], observations: [], trialReceipts: [], trialRuns: []};
   }
-  const [signalRows, needRows, intentRows, opportunityRows, footprintRows] = await Promise.all([
+  const [signalRows, needRows, intentRows, allOpportunityRows, footprintRows] = await Promise.all([
     db.select().from(signals).where(and(inArray(signals.projectId, memberIds), inArray(signals.kind, ['capability', 'provides', 'need', 'obstacle', 'dependency', 'deployment', 'environment']))).limit(500),
     db.select().from(needItems).where(and(inArray(needItems.projectId, memberIds), isNull(needItems.supersededAt))).orderBy(desc(needItems.observedAt)).limit(1000),
     db.select().from(signalIntents).where(inArray(signalIntents.projectId, memberIds)).limit(160),
     db.select().from(opportunities).where(or(inArray(opportunities.projectA, memberIds), inArray(opportunities.projectB, memberIds))).limit(100),
     db.select().from(technicalFootprints).where(inArray(technicalFootprints.projectId, memberIds)).orderBy(desc(technicalFootprints.analyzedAt)).limit(Math.min(memberIds.length * 4, 240)),
   ]);
+  const publicIds=await publicOpportunityIds(allOpportunityRows);
+  const opportunityRows=allOpportunityRows.filter(row=>publicIds.has(row.id));
   const opportunityIds = opportunityRows.map((row) => row.id);
   const latestFootprints = new Map<string, (typeof footprintRows)[number]>();
   for (const footprint of footprintRows) if (!latestFootprints.has(footprint.projectId)) latestFootprints.set(footprint.projectId, footprint);

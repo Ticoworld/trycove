@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import {Fraunces,Geist} from 'next/font/google';
-import {asc,desc,eq,inArray,isNull} from 'drizzle-orm';
+import {and,asc,desc,eq,inArray,isNull,or} from 'drizzle-orm';
 import {db} from '../../lib/db';
 import {feedbackListingConsents,followUps,handoffReports,opportunities,projects,trialEvidenceRecords,trialRuns} from '../../lib/schema';
 import {FollowUpRecorder} from '../components/follow-up-recorder';
 import {hasOrganizerSession} from '../../lib/organizer-auth';
+import {publicOpportunityIds} from '../../lib/opportunity-visibility';
 import {ResultsTabs} from './results-tabs';
 import {trialLogos} from '../trials/trial-media';
 import {TrialMark} from '../trials/trial-visual';
@@ -20,12 +21,14 @@ function content(raw:string){try{return obj(JSON.parse(raw))}catch{return {}}}
 export default async function ResultsPage({searchParams}:{searchParams:Promise<{view?:string}>}){
  const query=await searchParams;const initialView=query.view==='connections'||query.view==='technical'?query.view:'feedback';
  const organizer=await hasOrganizerSession();
- const [receipts,runs,opps,projectRows,reports,listed]=await Promise.all([
-  db.select().from(trialEvidenceRecords).orderBy(desc(trialEvidenceRecords.createdAt)).limit(100),db.select().from(trialRuns).orderBy(desc(trialRuns.observedAt)).limit(100),db.select().from(opportunities),db.select({id:projects.id,name:projects.name}).from(projects),
+ const opps=await db.select().from(opportunities);
+ const publicIds=await publicOpportunityIds(opps);
+ const [receipts,runs,projectRows,reports,listed]=await Promise.all([
+  db.select().from(trialEvidenceRecords).where(organizer?undefined:or(isNull(trialEvidenceRecords.opportunityId),inArray(trialEvidenceRecords.opportunityId,[...publicIds]))).orderBy(desc(trialEvidenceRecords.createdAt)).limit(100),db.select().from(trialRuns).where(organizer?undefined:inArray(trialRuns.opportunityId,[...publicIds])).orderBy(desc(trialRuns.observedAt)).limit(100),db.select({id:projects.id,name:projects.name}).from(projects),
   db.select().from(handoffReports).where(eq(handoffReports.kind,'connection')).orderBy(desc(handoffReports.createdAt)),db.select({report:handoffReports}).from(handoffReports).innerJoin(feedbackListingConsents,eq(handoffReports.id,feedbackListingConsents.reportId)).where(isNull(handoffReports.revokedAt)).orderBy(desc(handoffReports.createdAt)),
  ]);
  const feedback=listed.map(row=>row.report),connections=reports.filter(r=>!r.revokedAt);const reportIds=[...feedback,...connections].map(r=>r.id);
- const events=reportIds.length?await db.select().from(followUps).where(inArray(followUps.handoffReportId,reportIds)).orderBy(asc(followUps.createdAt),asc(followUps.id)):[];
+ const events=reportIds.length?await db.select().from(followUps).where(and(inArray(followUps.handoffReportId,reportIds),organizer?undefined:eq(followUps.publicNote,true))).orderBy(asc(followUps.createdAt),asc(followUps.id)):[];
  const eventView=(id:string)=>events.filter(e=>e.handoffReportId===id&&(organizer||e.publicNote)).map(e=>({id:e.id,kind:e.kind,note:e.note,sourceUrl:e.sourceUrl,publicNote:e.publicNote,createdAt:e.createdAt.toISOString()}));
  const opportunityById=new Map(opps.map(x=>[x.id,x])),projectName=new Map(projectRows.map(x=>[x.id,x.name]));
  const [logos,profiles]=await Promise.all([trialLogos(feedback.map(r=>r.projectId)),relationshipProfiles(connections.flatMap(r=>{const opportunity=r.opportunityId?opportunityById.get(r.opportunityId):undefined;return opportunity?[opportunity.projectA,...opportunity.projectB?[opportunity.projectB]:[]]:[]}))]);

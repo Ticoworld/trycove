@@ -19,6 +19,7 @@ import {Fraunces,Geist} from 'next/font/google';
 import {relationshipProfiles} from '../relationship-profiles';
 import {RelationshipVisual} from '../relationship-visual';
 import '../connections.css';
+import {canViewOpportunity,canManageOpportunity} from '../../../lib/opportunity-visibility';
 import {EvidenceDialog} from '../../projects/[id]/evidence-dialog';
 const display=Fraunces({subsets:['latin'],style:['normal','italic'],variable:'--connection-display',display:'swap'});
 const ui=Geist({subsets:['latin'],variable:'--connection-ui',display:'swap'});
@@ -33,31 +34,32 @@ function safeExternalUrl(raw:string){
 export default async function Page({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<{view?:string}>}){
  const {id}=await params;const query=await searchParams;const section=query.view==='records'?'evidence':query.view==='reviews'?'reviews':query.view==='follow-up'?'follow-up':'opportunity';const showRecords=section!=='opportunity';
  const organizer=await hasOrganizerSession();
- const linkedTrial=(await listPublishedTrials()).find(room=>room.problemMap?.opportunityId===id);
  const [opportunity]=await db.select().from(opportunities).where(eq(opportunities.id,id));
- if(!opportunity)notFound();
- const allProjects=await db.select().from(projects);
+ if(!opportunity||!await canViewOpportunity(opportunity))notFound();
+ const privileged=await canManageOpportunity(opportunity);
+ const linkedTrial=(await listPublishedTrials()).find(room=>room.problemMap?.opportunityId===id);
+ const allProjects=await db.select().from(projects).where(inArray(projects.id,[opportunity.projectA,...opportunity.projectB?[opportunity.projectB]:[]]));
  const consumer=allProjects.find(project=>project.id===opportunity.projectA);
  const provider=allProjects.find(project=>project.id===opportunity.projectB);
- const capabilities=await db.select().from(candidateCapabilities).where(eq(candidateCapabilities.opportunityId,id));
+ const capabilities=privileged?await db.select().from(candidateCapabilities).where(eq(candidateCapabilities.opportunityId,id)):[];
  const capabilityIds=capabilities.map(capability=>capability.id);
  const [lifecycleRuns,lifecycleItems]=capabilityIds.length?await Promise.all([
   db.select().from(lifecycleVerificationRuns).where(inArray(lifecycleVerificationRuns.capabilityId,capabilityIds)).orderBy(desc(lifecycleVerificationRuns.checkedAt)),
   db.select().from(lifecycleEvidence).where(inArray(lifecycleEvidence.capabilityId,capabilityIds)).orderBy(desc(lifecycleEvidence.checkedAt)),
  ]):[[],[]];
  const [sourceEvidence,trials,history,consumerFootprints,providerFootprints,assessments,receipts,connectionReports]=await Promise.all([
-  db.select().from(evidence).where(eq(evidence.opportunityId,id)),
+  privileged?db.select().from(evidence).where(eq(evidence.opportunityId,id)):Promise.resolve([]),
   db.select().from(trialRuns).where(eq(trialRuns.opportunityId,id)),
-  db.select().from(followUps).where(eq(followUps.opportunityId,id)).orderBy(desc(followUps.createdAt)),
-  db.select().from(technicalFootprints).where(eq(technicalFootprints.projectId,opportunity.projectA)).orderBy(desc(technicalFootprints.analyzedAt)).limit(1),
-  opportunity.projectB?db.select().from(technicalFootprints).where(eq(technicalFootprints.projectId,opportunity.projectB)).orderBy(desc(technicalFootprints.analyzedAt)).limit(1):Promise.resolve([]),
-  db.select().from(intelligenceAssessments).where(eq(intelligenceAssessments.opportunityId,id)).orderBy(desc(intelligenceAssessments.createdAt)).limit(1),
+  privileged?db.select().from(followUps).where(eq(followUps.opportunityId,id)).orderBy(desc(followUps.createdAt)):Promise.resolve([]),
+  privileged?db.select().from(technicalFootprints).where(eq(technicalFootprints.projectId,opportunity.projectA)).orderBy(desc(technicalFootprints.analyzedAt)).limit(1):Promise.resolve([]),
+  privileged&&opportunity.projectB?db.select().from(technicalFootprints).where(eq(technicalFootprints.projectId,opportunity.projectB)).orderBy(desc(technicalFootprints.analyzedAt)).limit(1):Promise.resolve([]),
+  privileged?db.select().from(intelligenceAssessments).where(eq(intelligenceAssessments.opportunityId,id)).orderBy(desc(intelligenceAssessments.createdAt)).limit(1):Promise.resolve([]),
   db.select({id:trialEvidenceRecords.id,mode:trialEvidenceRecords.mode,result:trialEvidenceRecords.result,evidenceLevel:trialEvidenceRecords.evidenceLevel,createdAt:trialEvidenceRecords.createdAt}).from(trialEvidenceRecords).where(eq(trialEvidenceRecords.opportunityId,id)).orderBy(desc(trialEvidenceRecords.createdAt)).limit(20),
-  db.select().from(handoffReports).where(eq(handoffReports.opportunityId,id)).orderBy(desc(handoffReports.createdAt)),
+  privileged?db.select().from(handoffReports).where(eq(handoffReports.opportunityId,id)).orderBy(desc(handoffReports.createdAt)):Promise.resolve([]),
  ]);
  const [savedQualification,savedPriorWork]=await Promise.all([
-  db.select().from(opportunityQualificationReviews).where(eq(opportunityQualificationReviews.opportunityId,id)).orderBy(desc(opportunityQualificationReviews.createdAt)).limit(1),
-  db.select().from(opportunityPriorWorkReconciliations).where(eq(opportunityPriorWorkReconciliations.opportunityId,id)).orderBy(desc(opportunityPriorWorkReconciliations.createdAt)).limit(1),
+  privileged?db.select().from(opportunityQualificationReviews).where(eq(opportunityQualificationReviews.opportunityId,id)).orderBy(desc(opportunityQualificationReviews.createdAt)).limit(1):Promise.resolve([]),
+  privileged?db.select().from(opportunityPriorWorkReconciliations).where(eq(opportunityPriorWorkReconciliations.opportunityId,id)).orderBy(desc(opportunityPriorWorkReconciliations.createdAt)).limit(1):Promise.resolve([]),
  ]);
  let qualificationReport:null|ReturnType<typeof QualificationReviewReportSchema.parse>=null;
  if(savedQualification[0]){try{const parsed=QualificationReviewReportSchema.safeParse(JSON.parse(savedQualification[0].review));if(parsed.success)qualificationReport=parsed.data}catch{/* Preserve malformed historical reviews and keep the rest of the workspace available. */}}

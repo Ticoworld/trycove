@@ -16,6 +16,7 @@ import {places, Landmark} from '../../components/district-art';
 import {PassportVisual} from './passport-visual';
 import {EvidenceDialog} from './evidence-dialog';
 import './passport.css';
+import {publicOpportunityIds, canViewOpportunity} from '../../../lib/opportunity-visibility';
 import {Fraunces,Geist} from 'next/font/google';
 const display=Fraunces({subsets:['latin'],style:['normal','italic'],variable:'--passport-display',display:'swap'});
 const ui=Geist({subsets:['latin'],variable:'--passport-ui',display:'swap'});
@@ -38,7 +39,7 @@ export default async function Page({params,searchParams}:{params:Promise<{id:str
  if(!project)notFound();
  const guidedTrials=(await listPublishedTrials()).filter(room=>room.product.id===project.id);
  const guidedTrial=guidedTrials[0];
- const [ops,facts,intents,needs,sources,repositories,footprints,problemDomains]=await Promise.all([
+ const [allOps,facts,intents,needs,sources,repositories,footprints,problemDomains]=await Promise.all([
   db.select().from(opportunities).where(or(eq(opportunities.projectA,id),eq(opportunities.projectB,id))),
   db.select().from(signals).where(eq(signals.projectId,id)),
   db.select().from(signalIntents).where(eq(signalIntents.projectId,id)),
@@ -48,6 +49,8 @@ export default async function Page({params,searchParams}:{params:Promise<{id:str
   db.select().from(technicalFootprints).where(eq(technicalFootprints.projectId,id)).orderBy(desc(technicalFootprints.analyzedAt)).limit(5),
   getProjectProblemDomains(id),
  ]);
+ const publicIds=await publicOpportunityIds(allOps);
+ const ops=(await Promise.all(allOps.map(async row=>publicIds.has(row.id)||await canViewOpportunity(row)?row:null))).filter((row):row is typeof allOps[number]=>row!==null);
  const opportunityIds=ops.map(x=>x.id);const footprintIds=footprints.map(x=>x.id);
  const [allProjects,observations,interfaceObservations,trials,trialEvents]=await Promise.all([
   db.select({id:projects.id,name:projects.name}).from(projects),

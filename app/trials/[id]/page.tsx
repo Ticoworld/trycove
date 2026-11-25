@@ -4,13 +4,17 @@ import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {eq} from 'drizzle-orm';
 import {db} from '../../../lib/db';
-import {trialEvidenceRecords} from '../../../lib/schema';
+import {opportunities,trialEvidenceRecords} from '../../../lib/schema';
+import {canViewOpportunity} from '../../../lib/opportunity-visibility';
 
 export const dynamic='force-dynamic';
 
 export default async function Page({params}:{params:Promise<{id:string}>}){
  const {id}=await params;
  if(!/^[a-zA-Z0-9-]{1,100}$/.test(id))notFound();
+ const [metadata]=await db.select({opportunityId:trialEvidenceRecords.opportunityId}).from(trialEvidenceRecords).where(eq(trialEvidenceRecords.id,id));
+ if(!metadata)notFound();
+ if(metadata.opportunityId){const [opportunity]=await db.select().from(opportunities).where(eq(opportunities.id,metadata.opportunityId));if(!opportunity||!await canViewOpportunity(opportunity))notFound();}
  const [record]=await db.select().from(trialEvidenceRecords).where(eq(trialEvidenceRecords.id,id));
  if(!record)notFound();
  let body='Receipt data is unreadable.';

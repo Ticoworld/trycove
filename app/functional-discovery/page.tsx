@@ -43,7 +43,7 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
    <p className="discovery-summary">{report.frozenCohort.selectedCount} repositories reviewed · No connection selected</p>
   </section>
 
-  <WorkspaceDialog label="How we reviewed"><section className="section">
+  <WorkspaceDialog closeOnBackdrop label="How we reviewed"><section className="section">
    <h2>What was evaluated</h2>
    <p>{report.capabilityFamily}. The method and cohort were frozen before source inspection; the matching engine contains no pair names.</p>
    <p><strong>Baseline:</strong> the consumers already make the matched query calls in their pinned application code. The exported provider methods delegate to those same CKB query operations. The source review found no provider-specific data, validation, freshness guarantee, failure reduction, or measurable behavior improvement to justify an adapter.</p>
@@ -55,8 +55,8 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
 
   <section className="section discovery-roles">
    <div className="discovery-section-heading"><h2>{selectedRole?'Project reviewed':'Projects reviewed'}</h2><p>Open a project for the source details.</p></div>
-   <div className="discovery-role-list">{visibleRoles.map(role=>{const name=names.get(role.projectId)??role.projectId;const hasCalls=role.consumerCallCount>0;const hasMethods=role.providerApiCount>0;return <article className="discovery-role" key={role.projectId}><div><h3>{name}</h3><p>{hasCalls||hasMethods?'Source observations recorded':'No matching code found in this review'}</p></div><WorkspaceDialog label={`Details for ${name}`} buttonLabel="View details"><p><strong>Repository:</strong> {githubUrl(role.repository)?<a className="source" href={githubUrl(role.repository)!}>{role.repository}</a>:role.repository}</p><p>Owner {role.owner} · revision <code>{role.revision??'unknown'}</code></p><p><strong>Observed consumer calls:</strong> {role.consumerOperations.join(', ')||'none'} ({role.consumerCallCount} source observations)</p><p><strong>Observed provider methods:</strong> {role.providerOperations.join(', ')||'none'} ({role.providerApiCount} source observations)</p><p><strong>Networks mentioned:</strong> {role.networks.join(', ')||'unknown'}</p>{role.missing.length>0&&<p><strong>Missing evidence:</strong> {role.missing.join('; ')}</p>}</WorkspaceDialog></article>})}</div>
-   {failedInspections.length>0&&<WorkspaceDialog label="Unavailable source reviews">{failedInspections.map(item=><p key={item.repositoryPath}>{item.repositoryPath} · {item.revision??'unpinned'} · {item.sourceInspectionStatus}</p>)}</WorkspaceDialog>}
+   <div className="discovery-role-list">{visibleRoles.map(role=>{const name=names.get(role.projectId)??role.projectId;const hasCalls=role.consumerCallCount>0;const hasMethods=role.providerApiCount>0;return <article className="discovery-role" key={role.projectId}><div><h3>{name}</h3><p>{hasCalls||hasMethods?'Source observations recorded':'No matching code found in this review'}</p></div><WorkspaceDialog closeOnBackdrop label={`Details for ${name}`} buttonLabel="View details"><p><strong>Repository:</strong> {githubUrl(role.repository)?<a className="source" href={githubUrl(role.repository)!}>{role.repository}</a>:role.repository}</p><p>Owner {role.owner} · revision <code>{role.revision??'unknown'}</code></p><p><strong>Observed consumer calls:</strong> {role.consumerOperations.join(', ')||'none'} ({role.consumerCallCount} source observations)</p><p><strong>Observed provider methods:</strong> {role.providerOperations.join(', ')||'none'} ({role.providerApiCount} source observations)</p><p><strong>Networks mentioned:</strong> {role.networks.join(', ')||'unknown'}</p>{role.missing.length>0&&<p><strong>Missing evidence:</strong> {role.missing.join('; ')}</p>}</WorkspaceDialog></article>})}</div>
+   {failedInspections.length>0&&<WorkspaceDialog closeOnBackdrop label="Unavailable source reviews">{failedInspections.map(item=><p key={item.repositoryPath}>{item.repositoryPath} · {item.revision??'unpinned'} · {item.sourceInspectionStatus}</p>)}</WorkspaceDialog>}
   </section>
 
   <section className="section">
@@ -67,7 +67,7 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
     const providerName=names.get(item.provider.projectId)??item.provider.projectId;
     const consumerHref=githubUrl(item.consumer.call.sourceUrl),providerHref=githubUrl(item.provider.api.sourceUrl);
     return <article className="discovery-idea" key={item.id}>
-     <div><h3>{consumerName} and {providerName}</h3><p>Not selected in this review.</p></div><WorkspaceDialog label={`Why ${consumerName} and ${providerName} were not selected`} buttonLabel="View why"><div className="review-answer"><p>Both projects use the same type of CKB data query.</p><p>This review did not find a clear added benefit from connecting them. That is a finding from the available source code, not a verdict on either product.</p></div><WorkspaceDialog label={`Source details for ${consumerName} and ${providerName}`} buttonLabel="View source details">
+     <div><h3>{consumerName} and {providerName}</h3><p>Not selected in this review.</p></div><WorkspaceDialog closeOnBackdrop label={`Why ${consumerName} and ${providerName} were not selected`} buttonLabel="View why"><div className="review-answer"><p>Both projects use the same type of CKB data query.</p><p>This review did not find a clear added benefit from connecting them. That is a finding from the available source code, not a verdict on either product.</p></div><WorkspaceDialog closeOnBackdrop label={`Source details for ${consumerName} and ${providerName}`} buttonLabel="View source details">
      <p><strong>Consumer:</strong> {item.consumer.call.fact} · {item.consumer.callCount} calls · {item.consumer.networks.join(', ')||'network unknown'}.</p>
      <p>{consumerHref?<a className="source" href={consumerHref} target="_blank" rel="noreferrer">{item.consumer.call.path}:{item.consumer.call.startLine} at {item.consumer.revision.slice(0,12)} ↗</a>:`${item.consumer.call.path}:${item.consumer.call.startLine}`} · excerpt SHA-256 <code>{item.consumer.call.evidenceTextSha256}</code></p>
      <p><strong>Provider:</strong> {item.provider.api.fact} · {item.provider.apiCount} matching exports/handlers · {item.provider.networks.join(', ')||'network unknown'}.</p>
@@ -81,9 +81,9 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
    {!findings.length&&<p className="muted">No exact-operation hypotheses involve this product in the frozen cohort.</p>}
   </section>
 
-  {!selectedRole&&<section className="section"><WorkspaceDialog label={`Other comparisons (${report.matcher.result.rejectedOperationEdges.length})`}>{report.matcher.result.rejectedOperationEdges.map((edge,index)=><p key={`${edge.consumerEvidenceId}-${edge.providerEvidenceId}`}><strong>{names.get(edge.consumerProjectId)??edge.consumerProjectId} → {names.get(edge.providerProjectId)??edge.providerProjectId} · {edge.operation}:</strong> {edge.reason}</p>)}</WorkspaceDialog></section>}
+  {!selectedRole&&<section className="section"><WorkspaceDialog closeOnBackdrop label={`Other comparisons (${report.matcher.result.rejectedOperationEdges.length})`}>{report.matcher.result.rejectedOperationEdges.map((edge,index)=><p key={`${edge.consumerEvidenceId}-${edge.providerEvidenceId}`}><strong>{names.get(edge.consumerProjectId)??edge.consumerProjectId} → {names.get(edge.providerProjectId)??edge.providerProjectId} · {edge.operation}:</strong> {edge.reason}</p>)}</WorkspaceDialog></section>}
 
-  <WorkspaceDialog label="More about this review"><section className="section">
+  <WorkspaceDialog closeOnBackdrop label="More about this review"><section className="section">
    <h2>Integration Lab and execution evidence</h2>
    <article className="card"><span className="tag">Not produced for this discovery attempt</span><p>No pair passed the value gate, so there is no adapter, positive case, negative case, baseline-versus-integrated execution, or execution receipt to display. Gate C remains incomplete. The historical Grid3 to CKB Viz URL receipt is a separate regression example and is not evidence for this review.</p></article>
    <h2>Reproduction</h2>
@@ -92,3 +92,4 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
   </section></WorkspaceDialog>
  </div>;
 }
+

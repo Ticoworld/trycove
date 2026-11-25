@@ -67,7 +67,7 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
     const providerName=names.get(item.provider.projectId)??item.provider.projectId;
     const consumerHref=githubUrl(item.consumer.call.sourceUrl),providerHref=githubUrl(item.provider.api.sourceUrl);
     return <article className="discovery-idea" key={item.id}>
-     <div><h3>{consumerName} and {providerName}</h3><p>Not selected in this review.</p></div><WorkspaceDialog label={`Why ${consumerName} and ${providerName} were not selected`} buttonLabel="View why">
+     <div><h3>{consumerName} and {providerName}</h3><p>Not selected in this review.</p></div><WorkspaceDialog label={`Why ${consumerName} and ${providerName} were not selected`} buttonLabel="View why"><div className="review-answer"><p>Both projects use the same type of CKB data query.</p><p>This review did not find a clear added benefit from connecting them. That is a finding from the available source code, not a verdict on either product.</p></div><WorkspaceDialog label={`Source details for ${consumerName} and ${providerName}`} buttonLabel="View source details">
      <p><strong>Consumer:</strong> {item.consumer.call.fact} · {item.consumer.callCount} calls · {item.consumer.networks.join(', ')||'network unknown'}.</p>
      <p>{consumerHref?<a className="source" href={consumerHref} target="_blank" rel="noreferrer">{item.consumer.call.path}:{item.consumer.call.startLine} at {item.consumer.revision.slice(0,12)} ↗</a>:`${item.consumer.call.path}:${item.consumer.call.startLine}`} · excerpt SHA-256 <code>{item.consumer.call.evidenceTextSha256}</code></p>
      <p><strong>Provider:</strong> {item.provider.api.fact} · {item.provider.apiCount} matching exports/handlers · {item.provider.networks.join(', ')||'network unknown'}.</p>
@@ -75,7 +75,7 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
      <p><strong>Potential boundary:</strong> {item.interfaceMapping}</p>
      <ul>{item.compatibility.map(check=><li key={check.dimension}><strong>{check.dimension} · {check.state}:</strong> {check.explanation}</li>)}</ul>
      <p><strong>Value assessment:</strong> {item.valueAssessment.explanation}</p>
-     <p><strong>Rejection:</strong> {item.rejectionReasons.join(' ')}</p></WorkspaceDialog>
+     <p><strong>Rejection:</strong> {item.rejectionReasons.join(' ')}</p></WorkspaceDialog></WorkspaceDialog>
     </article>;
    })}</div>
    {!findings.length&&<p className="muted">No exact-operation hypotheses involve this product in the frozen cohort.</p>}

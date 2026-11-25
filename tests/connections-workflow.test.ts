@@ -11,9 +11,10 @@ vi.mock('../lib/organizer-auth',()=>({hasOrganizerSession:async()=>fixture.autho
 vi.mock('../lib/authorization',()=>({authenticatedUser:async()=>({id:'00000000-0000-4000-8000-000000000001'})}));
 vi.mock('next/cache',()=>({revalidatePath:()=>{}}));
 vi.mock('next/navigation',()=>({redirect:(url:string)=>{throw new Error(`redirect:${url}`)}}));
-import {createOpportunity,saveOperations} from '../app/organizer/connections/actions';
+import {createOpportunity,registerProjectReference,saveOperations} from '../app/organizer/connections/actions';
 import {addFollowUp} from '../app/opportunities/[id]/actions';
 import {publicConnectionCopies} from '../lib/public-connections';
+import {qualifiedCatalogCondition} from '../lib/qualified-map';
 let client:PGlite;
 let database:ReturnType<typeof drizzle<typeof schema>>;
 const actor='00000000-0000-4000-8000-000000000001';
@@ -28,6 +29,14 @@ beforeAll(async()=>{
 afterAll(async()=>{await client.close()});
 describe('organizer connection workflow',()=>{
  it('rejects unauthorized writes and creates, reviews and reloads a sourced private candidate',async()=>{
+  const reference=new FormData();for(const [key,value] of Object.entries({name:'New reference',description:'Source description',sourceUrl:'https://example.test/new',revision:'revision-1',website:'https://example.test/site'}))reference.set(key,value);
+  fixture.authorized=false;await expect(registerProjectReference(reference)).rejects.toThrow('Organizer access');fixture.authorized=true;
+  await registerProjectReference(reference);
+  const registered=(await database.select().from(schema.projects)).find(row=>row.name==='New reference');expect(registered?.id).toMatch(/^organizer-ref-/);
+  const [provenance]=await database.select().from(schema.sourceRecords).where(eq(schema.sourceRecords.projectId,registered!.id));expect(provenance).toMatchObject({sourceUrl:'https://example.test/new',revision:'revision-1'});
+  expect((await database.select().from(schema.projects).where(qualifiedCatalogCondition())).some(row=>row.id===registered!.id)).toBe(false);
+  await expect(registerProjectReference(reference)).rejects.toThrow('already exists');
+  reference.set('name','Different name');await expect(registerProjectReference(reference)).rejects.toThrow('already exists');
   const form=new FormData();for(const [key,value] of Object.entries({projectA:'private-project',problem:'Documented need',reasoning:'Context',claim:'Source claim',sourceUrl:'https://example.test/source'}))form.set(key,value);
   fixture.authorized=false;await expect(createOpportunity(form)).rejects.toThrow('Organizer access');fixture.authorized=true;
   await expect(createOpportunity(form)).rejects.toThrow('redirect:');

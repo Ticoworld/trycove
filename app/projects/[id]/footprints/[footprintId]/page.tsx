@@ -6,6 +6,8 @@ import {and, asc, count, eq} from 'drizzle-orm';
 import {db} from '../../../../../lib/db';
 import {footprintObservations, projects, technicalFootprints} from '../../../../../lib/schema';
 import {ObservationCard, Unknowns} from '../../../../components/footprint';
+import {qualifiedCatalogCondition} from '../../../../../lib/qualified-map';
+import {authenticatedUser,checkProjectPermission,isOrganizer} from '../../../../../lib/authorization';
 
 export const dynamic='force-dynamic';
 const pageSize=24;
@@ -17,9 +19,11 @@ export default async function Page({params,searchParams}:{params:Promise<{id:str
   const dimension=dimensions.find(value=>value===rawDimension);
   const parsedPage=Number(rawPage ?? '1');
   const page=Number.isSafeInteger(parsedPage)&&parsedPage>0&&parsedPage<=10000?parsedPage:1;
-  const [project]=await db.select().from(projects).where(eq(projects.id,id));
+  let [project]=await db.select().from(projects).where(and(eq(projects.id,id),qualifiedCatalogCondition()));
+  if(!project){const user=await authenticatedUser();if(user&&(await isOrganizer(user.id)||await checkProjectPermission(db,user.id,id,'edit').then(()=>true,()=>false)))[project]=await db.select().from(projects).where(eq(projects.id,id));}
+  if(!project)notFound();
   const [footprint]=await db.select().from(technicalFootprints).where(and(eq(technicalFootprints.id,footprintId),eq(technicalFootprints.projectId,id)));
-  if(!project||!footprint)notFound();
+  if(!footprint)notFound();
   const predicate=dimension?and(eq(footprintObservations.footprintId,footprint.id),eq(footprintObservations.dimension,dimension)):eq(footprintObservations.footprintId,footprint.id);
   const [{total}]=await db.select({total:count()}).from(footprintObservations).where(predicate);
   const observations=await db.select().from(footprintObservations).where(predicate)

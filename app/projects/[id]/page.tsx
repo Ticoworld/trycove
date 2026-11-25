@@ -1,5 +1,5 @@
 import {authenticatedUser, isOrganizer, checkProjectPermission} from '../../../lib/authorization';
-import {qualifiedPreviewEnabled, qualifiedCatalogCondition, isQualifiedHistorical} from '../../../lib/qualified-map';
+import {qualifiedCatalogCondition, isQualifiedHistorical} from '../../../lib/qualified-map';
 import {BuilderDeclarations} from '../../components/builder-declarations';
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
@@ -29,7 +29,7 @@ export default async function Page({params,searchParams}:{params:Promise<{id:str
  const query=await searchParams;
  const [publicProject]=await db.select().from(projects).where(and(eq(projects.id,id),qualifiedCatalogCondition()));
  let project=publicProject;
- if(!project&&qualifiedPreviewEnabled()){
+ if(!project){
   const user=await authenticatedUser();
   if(user){
    const permitted=await isOrganizer(user.id)||await checkProjectPermission(db,user.id,id,'edit').then(()=>true,()=>false);

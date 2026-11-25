@@ -26,7 +26,8 @@ export function projectQualifiedMemberships(id: string, memberships: Map<string,
 }
 
 export function qualifiedCatalogCondition() {
-  if (!qualifiedPreviewEnabled()) return undefined;
+  const notReference = sql`${projects.id} not like 'organizer-ref-%'`;
+  if (!qualifiedPreviewEnabled()) return notReference;
   const historical = manifest.decisions.filter(row => row.outcome === 'QUALIFIED').map(row => and(
     eq(projects.id, row.id),
     eq(projects.revision, row.revision),
@@ -46,5 +47,5 @@ export function qualifiedCatalogCondition() {
       where ${trialPacks.state} = 'published'
       and ${trialPackVersions.definition}::jsonb -> 'product' ->> 'id' = ${projects.id})`),
   ) : undefined;
-  return or(...historical, publishedLegacy);
+  return and(notReference, or(...historical, publishedLegacy));
 }

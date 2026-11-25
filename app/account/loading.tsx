@@ -1,1 +1,2 @@
-export default function Loading() { return <section className="section" role="status">Loading your products…</section>; }
+import {LoadingScene} from '../loading-scene';
+export default function Loading(){return <LoadingScene label="Opening your account"/>}

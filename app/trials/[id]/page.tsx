@@ -1,3 +1,5 @@
+import {WorkspaceDialog} from '../../workspace-dialog';
+import '../../evidence-pages.css';
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {eq} from 'drizzle-orm';
@@ -19,19 +21,18 @@ export default async function Page({params}:{params:Promise<{id:string}>}){
  const adapter=parsed&&typeof parsed.adapter==='object'&&parsed.adapter!==null?parsed.adapter as Record<string,unknown>:null;
  const adapterPath=typeof adapter?.path==='string'&&/^experiments\/tc01e\/transaction-inspector\/adapter\.ts$/.test(adapter.path)?adapter.path:null;
  const adapterSha256=typeof adapter?.sha256==='string'&&/^[a-f0-9]{64}$/.test(adapter.sha256)?adapter.sha256:null;
- return <>
-  <section className="hero">
-   <Link className="eyebrow" href="/trials">← Integration Lab</Link>
-   <h1>Execution receipt.</h1>
+ return <div className="evidence-paper receipt-page">
+  <section className="hero evidence-intro">
+   <Link className="evidence-return" href="/results?view=technical">Technical executions</Link>
+   <h1>Execution receipt</h1>
    <p>Level {record.evidenceLevel} · {record.mode} · {record.result}</p>
-   <p>Recorded digest: <code>{record.receiptSha256}</code></p>
+
    <p>{offline?'This is a real offline CKB script-group execution using an archived Testnet fixture. It is not fresh chain acceptance or a broadcast transaction.':upstreamInterface?'Pinned source modules from both named repositories were executed in an offline, restricted container. This receipt covers a read-only URL builder/parser boundary only; it does not prove transaction creation, CKB RPC behavior, chain compatibility, deployment availability, adoption or independent reproduction.': 'The digest checks stored content integrity. Receipt isolation metadata is recorded evidence, not independent attestation or proof of chain validity; this mode may use synthetic or mocked inputs.'}</p>
-   {upstreamInterface&&adapterPath&&adapterSha256&&<p><a className="source" href={`https://github.com/Ticoworld/trycove/blob/main/${adapterPath}`} target="_blank" rel="noreferrer">Inspect adapter source ↗</a> · SHA-256 <code>{adapterSha256}</code></p>}
+   {upstreamInterface&&adapterPath&&adapterSha256&&<p><a className="source" href={`https://github.com/Ticoworld/trycove/blob/main/${adapterPath}`} target="_blank" rel="noreferrer">Inspect adapter source</a> · SHA-256 <code>{adapterSha256}</code></p>}
   </section>
-  <section className="section">
-   <h2>Receipt and limitations</h2>
-   <pre className="card" style={{whiteSpace:'pre-wrap',overflowWrap:'anywhere'}}>{body}</pre>
-   {record.opportunityId&&<Link className="source" href={`/opportunities/${encodeURIComponent(record.opportunityId)}`}>View opportunity →</Link>}
+  <section className="section receipt-details">
+   <WorkspaceDialog label="View full receipt"><p>Recorded digest: <code>{record.receiptSha256}</code></p><pre className="card" style={{whiteSpace:'pre-wrap',overflowWrap:'anywhere'}}>{body}</pre></WorkspaceDialog>
+   {record.opportunityId&&<Link className="source" href={`/opportunities/${encodeURIComponent(record.opportunityId)}`}>View opportunity</Link>}
   </section>
- </>;
+ </div>;
 }

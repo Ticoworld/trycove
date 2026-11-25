@@ -1,3 +1,5 @@
+import {WorkspaceDialog} from '../workspace-dialog';
+import '../evidence-pages.css';
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {db} from '../../lib/db';
@@ -33,15 +35,15 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
  const failedInspections=report.sourceScan.sourceInspections.filter(item=>item.sourceInspectionStatus.startsWith('failed'));
  const passportHref=selectedRole?`/projects/${encodeURIComponent(selectedRole.projectId)}`:'/projects';
 
- return <>
-  <section className="hero">
-   <Link className="eyebrow" href={passportHref}>← {selectedRole?`${names.get(selectedRole.projectId)??selectedRole.projectId} Product Passport`:'Product Hub'}</Link>
+ return <div className="evidence-paper discovery-page">
+  <section className="hero evidence-intro">
+   <Link className="evidence-return" href={passportHref}>{selectedRole?`${names.get(selectedRole.projectId)??selectedRole.projectId} Product Passport`:'Product Hub'}</Link>
    <h1>Functional discovery evidence</h1>
    <p>This is the result of one frozen CKB read-only query review. Source matches are hypotheses. No candidate passed the value requirement, so this attempt has no integration adapter or execution receipt.</p>
    <div className="bar"><span className="tag">{report.frozenCohort.selectedCount} pinned repositories</span><span className="tag">{report.matcher.result.hypothesisCount} exact-operation hypotheses</span><span className="tag">0 selected connections</span></div>
   </section>
 
-  <section className="section">
+  <WorkspaceDialog label="Method and provenance"><section className="section">
    <h2>What was evaluated</h2>
    <p>{report.capabilityFamily}. The method and cohort were frozen before source inspection; the matching engine contains no pair names.</p>
    <p><strong>Baseline:</strong> the consumers already make the matched query calls in their pinned application code. The exported provider methods delegate to those same CKB query operations. The source review found no provider-specific data, validation, freshness guarantee, failure reduction, or measurable behavior improvement to justify an adapter.</p>
@@ -49,7 +51,7 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
    <p><strong>Frozen cohort:</strong> <code>{report.frozenCohort.path}</code> · SHA-256 <code>{report.frozenCohort.sha256}</code> · methodology <code>{report.frozenCohort.methodologyPath}</code> · SHA-256 <code>{report.frozenCohort.methodologySha256}</code></p>
    <p><strong>Source scan:</strong> analyzer {report.sourceScan.analyzerVersion}, {report.sourceScan.commandSucceeded}/{report.sourceScan.selectedCount} scan commands succeeded. One selected source pin yielded zero supported files and remains a failed inspection.</p>
    <p><strong>Trycove revisions:</strong> baseline <code>{report.baselineCommit}</code> · implementation baseline <code>{report.implementationBaseline}</code></p>
-  </section>
+  </section></WorkspaceDialog>
 
   <section className="section">
    <h2>{selectedRole?'Product role assessment':'Frozen product role assessments'}</h2>
@@ -89,7 +91,7 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
    {!findings.length&&<p className="muted">No exact-operation hypotheses involve this product in the frozen cohort.</p>}
   </section>
 
-  {!selectedRole&&<section className="section"><details className="card"><summary>Operation mismatches retained ({report.matcher.result.rejectedOperationEdges.length})</summary>{report.matcher.result.rejectedOperationEdges.map((edge,index)=><p key={`${edge.consumerEvidenceId}-${edge.providerEvidenceId}`}><strong>{names.get(edge.consumerProjectId)??edge.consumerProjectId} → {names.get(edge.providerProjectId)??edge.providerProjectId} · {edge.operation}:</strong> {edge.reason}</p>)}</details></section>}
+  {!selectedRole&&<section className="section"><WorkspaceDialog label={`Operation mismatches (${report.matcher.result.rejectedOperationEdges.length})`}>{report.matcher.result.rejectedOperationEdges.map((edge,index)=><p key={`${edge.consumerEvidenceId}-${edge.providerEvidenceId}`}><strong>{names.get(edge.consumerProjectId)??edge.consumerProjectId} → {names.get(edge.providerProjectId)??edge.providerProjectId} · {edge.operation}:</strong> {edge.reason}</p>)}</WorkspaceDialog></section>}
 
   <section className="section">
    <h2>Integration Lab and execution evidence</h2>
@@ -98,5 +100,5 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
    <p>Verify the frozen cohort with <code>pnpm tc01e:freeze:functional -- --verify</code>. Recompute this discovery from its pinned scan using <code>pnpm tc01e:discover:functional -- --scan {report.sourceScan.path}</code> against the retained local CKBdapps/Pulse database snapshot.</p>
    <p>That command is a repeated local computation, not independent reproduction. No integration existed to reproduce independently. Database verification used PGlite; a PostgreSQL server was unavailable.</p>
   </section>
- </>;
+ </div>;
 }

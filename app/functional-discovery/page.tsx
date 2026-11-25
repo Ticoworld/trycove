@@ -37,13 +37,13 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
 
  return <div className="evidence-paper discovery-page">
   <section className="hero evidence-intro">
-   <Link className="evidence-return" href={passportHref}>{selectedRole?`${names.get(selectedRole.projectId)??selectedRole.projectId} Product Passport`:'Product Hub'}</Link>
-   <h1>Functional discovery evidence</h1>
-   <p>This is the result of one frozen CKB read-only query review. Source matches are hypotheses. No candidate passed the value requirement, so this attempt has no integration adapter or execution receipt.</p>
-   <div className="bar"><span className="tag">{report.frozenCohort.selectedCount} pinned repositories</span><span className="tag">{report.matcher.result.hypothesisCount} exact-operation hypotheses</span><span className="tag">0 selected connections</span></div>
+   <Link className="evidence-return" href={passportHref}>{selectedRole?`${names.get(selectedRole.projectId)??selectedRole.projectId} Product Passport`:'Explore projects'}</Link>
+   <h1>Looking for useful connections</h1>
+   <p>We reviewed how these projects look up CKB data. The source review did not find a connection that clearly added value.</p>
+   <p className="discovery-summary">{report.frozenCohort.selectedCount} repositories reviewed · No connection selected</p>
   </section>
 
-  <WorkspaceDialog label="Method and provenance"><section className="section">
+  <WorkspaceDialog label="How we reviewed"><section className="section">
    <h2>What was evaluated</h2>
    <p>{report.capabilityFamily}. The method and cohort were frozen before source inspection; the matching engine contains no pair names.</p>
    <p><strong>Baseline:</strong> the consumers already make the matched query calls in their pinned application code. The exported provider methods delegate to those same CKB query operations. The source review found no provider-specific data, validation, freshness guarantee, failure reduction, or measurable behavior improvement to justify an adapter.</p>
@@ -53,31 +53,21 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
    <p><strong>Trycove revisions:</strong> baseline <code>{report.baselineCommit}</code> · implementation baseline <code>{report.implementationBaseline}</code></p>
   </section></WorkspaceDialog>
 
-  <section className="section">
-   <h2>{selectedRole?'Product role assessment':'Frozen product role assessments'}</h2>
-   <div className="grid">{visibleRoles.map(role=><article className="card" key={role.projectId}>
-    <span className="tag">{role.consumerCallCount?'consumer':''}{role.consumerCallCount&&role.providerApiCount?' · ':''}{role.providerApiCount?'provider':''}{!role.consumerCallCount&&!role.providerApiCount?'no supported query interface':''}</span>
-    <h3>{names.get(role.projectId)??role.projectId}</h3>
-    <p><a className="source" href={githubUrl(role.repository)??'#'}>{role.repository} ↗</a></p>
-    <p>Owner {role.owner} · revision <code>{role.revision??'unknown'}</code></p>
-    <p><strong>Observed consumer calls:</strong> {role.consumerOperations.join(', ')||'none'} ({role.consumerCallCount} source observations)</p>
-    <p><strong>Observed provider methods:</strong> {role.providerOperations.join(', ')||'none'} ({role.providerApiCount} source observations)</p>
-    <p><strong>Networks mentioned:</strong> {role.networks.join(', ')||'unknown'}</p>
-    {role.missing.length>0&&<p><strong>Missing role evidence:</strong> {role.missing.join('; ')}</p>}
-   </article>)}</div>
-   {failedInspections.map(item=><article className="card" key={item.repositoryPath}><strong>Failed source inspection:</strong> {item.repositoryPath} at {item.revision??'unpinned'} · {item.sourceInspectionStatus}.</article>)}
+  <section className="section discovery-roles">
+   <div className="discovery-section-heading"><h2>{selectedRole?'Project reviewed':'Projects reviewed'}</h2><p>Open a project for the source details.</p></div>
+   <div className="discovery-role-list">{visibleRoles.map(role=>{const name=names.get(role.projectId)??role.projectId;const hasCalls=role.consumerCallCount>0;const hasMethods=role.providerApiCount>0;return <article className="discovery-role" key={role.projectId}><div><h3>{name}</h3><p>{hasCalls||hasMethods?'Source observations recorded':'No matching code found in this review'}</p></div><WorkspaceDialog label={`Details for ${name}`} buttonLabel="View details"><p><strong>Repository:</strong> {githubUrl(role.repository)?<a className="source" href={githubUrl(role.repository)!}>{role.repository}</a>:role.repository}</p><p>Owner {role.owner} · revision <code>{role.revision??'unknown'}</code></p><p><strong>Observed consumer calls:</strong> {role.consumerOperations.join(', ')||'none'} ({role.consumerCallCount} source observations)</p><p><strong>Observed provider methods:</strong> {role.providerOperations.join(', ')||'none'} ({role.providerApiCount} source observations)</p><p><strong>Networks mentioned:</strong> {role.networks.join(', ')||'unknown'}</p>{role.missing.length>0&&<p><strong>Missing evidence:</strong> {role.missing.join('; ')}</p>}</WorkspaceDialog></article>})}</div>
+   {failedInspections.length>0&&<WorkspaceDialog label="Unavailable source reviews">{failedInspections.map(item=><p key={item.repositoryPath}>{item.repositoryPath} · {item.revision??'unpinned'} · {item.sourceInspectionStatus}</p>)}</WorkspaceDialog>}
   </section>
 
   <section className="section">
-   <h2>Rejected exact-operation hypotheses ({findings.length})</h2>
-   <p className="muted">Each row links to the pinned consumer and provider source lines. Extracted source excerpts are represented by hashes in this evidence; no upstream code is copied into the report.</p>
+   <h2>Connections considered ({findings.length})</h2>
+   <p className="muted">These ideas were not selected. Open the details to see why.</p>
    <div className="stack">{findings.map(item=>{
     const consumerName=names.get(item.consumer.projectId)??item.consumer.projectId;
     const providerName=names.get(item.provider.projectId)??item.provider.projectId;
     const consumerHref=githubUrl(item.consumer.call.sourceUrl),providerHref=githubUrl(item.provider.api.sourceUrl);
-    return <article className="card" key={item.id}>
-     <span className="tag">Rejected · {item.status.replaceAll('_',' ')}</span>
-     <h3>{consumerName} → {providerName} · <code>{item.consumer.operation}</code></h3>
+    return <article className="discovery-idea" key={item.id}>
+     <div><h3>{consumerName} and {providerName}</h3><p>Not selected in this review.</p></div><WorkspaceDialog label={`Why ${consumerName} and ${providerName} were not selected`} buttonLabel="View why">
      <p><strong>Consumer:</strong> {item.consumer.call.fact} · {item.consumer.callCount} calls · {item.consumer.networks.join(', ')||'network unknown'}.</p>
      <p>{consumerHref?<a className="source" href={consumerHref} target="_blank" rel="noreferrer">{item.consumer.call.path}:{item.consumer.call.startLine} at {item.consumer.revision.slice(0,12)} ↗</a>:`${item.consumer.call.path}:${item.consumer.call.startLine}`} · excerpt SHA-256 <code>{item.consumer.call.evidenceTextSha256}</code></p>
      <p><strong>Provider:</strong> {item.provider.api.fact} · {item.provider.apiCount} matching exports/handlers · {item.provider.networks.join(', ')||'network unknown'}.</p>
@@ -85,20 +75,20 @@ export default async function Page({searchParams}:{searchParams:Promise<{product
      <p><strong>Potential boundary:</strong> {item.interfaceMapping}</p>
      <ul>{item.compatibility.map(check=><li key={check.dimension}><strong>{check.dimension} · {check.state}:</strong> {check.explanation}</li>)}</ul>
      <p><strong>Value assessment:</strong> {item.valueAssessment.explanation}</p>
-     <p><strong>Rejection:</strong> {item.rejectionReasons.join(' ')}</p>
+     <p><strong>Rejection:</strong> {item.rejectionReasons.join(' ')}</p></WorkspaceDialog>
     </article>;
    })}</div>
    {!findings.length&&<p className="muted">No exact-operation hypotheses involve this product in the frozen cohort.</p>}
   </section>
 
-  {!selectedRole&&<section className="section"><WorkspaceDialog label={`Operation mismatches (${report.matcher.result.rejectedOperationEdges.length})`}>{report.matcher.result.rejectedOperationEdges.map((edge,index)=><p key={`${edge.consumerEvidenceId}-${edge.providerEvidenceId}`}><strong>{names.get(edge.consumerProjectId)??edge.consumerProjectId} → {names.get(edge.providerProjectId)??edge.providerProjectId} · {edge.operation}:</strong> {edge.reason}</p>)}</WorkspaceDialog></section>}
+  {!selectedRole&&<section className="section"><WorkspaceDialog label={`Other comparisons (${report.matcher.result.rejectedOperationEdges.length})`}>{report.matcher.result.rejectedOperationEdges.map((edge,index)=><p key={`${edge.consumerEvidenceId}-${edge.providerEvidenceId}`}><strong>{names.get(edge.consumerProjectId)??edge.consumerProjectId} → {names.get(edge.providerProjectId)??edge.providerProjectId} · {edge.operation}:</strong> {edge.reason}</p>)}</WorkspaceDialog></section>}
 
-  <section className="section">
+  <WorkspaceDialog label="More about this review"><section className="section">
    <h2>Integration Lab and execution evidence</h2>
    <article className="card"><span className="tag">Not produced for this discovery attempt</span><p>No pair passed the value gate, so there is no adapter, positive case, negative case, baseline-versus-integrated execution, or execution receipt to display. Gate C remains incomplete. The historical Grid3 to CKB Viz URL receipt is a separate regression example and is not evidence for this review.</p></article>
    <h2>Reproduction</h2>
    <p>Verify the frozen cohort with <code>pnpm tc01e:freeze:functional -- --verify</code>. Recompute this discovery from its pinned scan using <code>pnpm tc01e:discover:functional -- --scan {report.sourceScan.path}</code> against the retained local CKBdapps/Pulse database snapshot.</p>
    <p>That command is a repeated local computation, not independent reproduction. No integration existed to reproduce independently. Database verification used PGlite; a PostgreSQL server was unavailable.</p>
-  </section>
+  </section></WorkspaceDialog>
  </div>;
 }

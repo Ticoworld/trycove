@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type {technicalFootprints,footprintObservations} from '../../lib/schema';
+import {WorkspaceDialog} from '../workspace-dialog';
 
 type Footprint = typeof technicalFootprints.$inferSelect;
 type Observation = typeof footprintObservations.$inferSelect;
@@ -42,6 +43,6 @@ export function ObservationCard({observation}: {observation: Observation}) {
     <h3>{observation.fact}</h3>
     <p>{observation.path}:{observation.startLine}{observation.endLine !== observation.startLine ? `–${observation.endLine}` : ''} · revision {observation.revision.slice(0, 12)}</p>
     {url && <a className="source" href={url} rel="noreferrer">Inspect pinned source ↗</a>}
-    <details><summary>Source excerpt and limitations</summary><pre style={{whiteSpace:'pre-wrap',overflowWrap:'anywhere'}}>{observation.evidence}</pre><Unknowns value={observation.unknowns}/></details>
+    <WorkspaceDialog label="Source excerpt and limitations"><pre style={{whiteSpace:'pre-wrap',overflowWrap:'anywhere'}}>{observation.evidence}</pre><Unknowns value={observation.unknowns}/></WorkspaceDialog>
   </article>;
 }

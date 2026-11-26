@@ -7,6 +7,7 @@ import {db} from '../lib/db';
 import {saveTrialDraft,setTrialPackState} from '../lib/trials/trial-packs';
 import {createGuidedTrialStore} from '../lib/trials/guided-room-store';
 import {claimPreparedResource,getPreparedResource} from '../lib/trials/prepared-resources';
+import {issuePlaygroundHandoff,redeemPlaygroundHandoff} from '../lib/trials/playground-handoffs';
 
 const url=process.env.PG02_TEST_DATABASE_URL;
 const expectedHost=process.env.PG02_TEST_EXPECTED_HOST;
@@ -36,6 +37,14 @@ describe.skipIf(!url || !expectedHost)('isolated PostgreSQL resource allocation'
    const third=await store.createSession(pack,true),fourth=await store.createSession(pack,true);
    await a.insert(schema.preparedResources).values({id:randomUUID(),packId:pack,packVersion:1,label:'Identity fixture',kind:'identity',launchUrl:`https://example.com/identity-${suffix}`});
    expect((await claimPreparedResource(third.sessionId,pack,third.accessToken,a))?.retired).toBe(true);
+   const ticket=await issuePlaygroundHandoff(third.sessionId,pack,third.accessToken,'https://example.com',a);
+   expect(ticket).toBeTruthy();
+   const credential='x'.repeat(40);
+   expect(await redeemPlaygroundHandoff(ticket!.token,'https://wrong.example',credential,credential,b)).toBeNull();
+   expect(await redeemPlaygroundHandoff(ticket!.token,'https://example.com','invalid',credential,b)).toBeNull();
+   const redemptions=await Promise.all([redeemPlaygroundHandoff(ticket!.token,'https://example.com',credential,credential,a),redeemPlaygroundHandoff(ticket!.token,'https://example.com',credential,credential,b)]);
+   expect(redemptions.filter(Boolean)).toHaveLength(1);
+   expect(await redeemPlaygroundHandoff(ticket!.token,'https://example.com',credential,credential,a)).toBeNull();
    await pools[0].query("UPDATE prepared_resources SET expires_at=now()-interval '1 second' WHERE pack_id=$1 AND kind='identity'",[pack]);
    expect(await claimPreparedResource(fourth.sessionId,pack,fourth.accessToken,b)).toBeNull();
   } finally {await Promise.all(pools.map(pool=>pool.end()));}

@@ -7,6 +7,7 @@ import {db} from '../lib/db';
 import {saveTrialDraft,setTrialPackState} from '../lib/trials/trial-packs';
 import {createGuidedTrialStore} from '../lib/trials/guided-room-store';
 import {claimPreparedResource,getPreparedResource} from '../lib/trials/prepared-resources';
+import {issuePlaygroundHandoff,redeemPlaygroundHandoff} from '../lib/trials/playground-handoffs';
 
 describe('prepared trial resources',()=>{
  it('authorizes sessions, assigns exclusively, resumes and expires without putting access in receipts',async()=>{
@@ -16,6 +17,7 @@ describe('prepared trial resources',()=>{
    for(let i=0;i<names.length;i++)await client.exec(await readFile(`migrations/${String(i+1).padStart(4,'0')}_${names[i]}.sql`,'utf8'));
    await client.exec(await readFile('migrations/0022_prepared_resources.sql','utf8'));
    await client.exec(await readFile('migrations/0023_single_use_identities.sql','utf8'));
+   await client.exec(await readFile('migrations/0024_playground_handoffs.sql','utf8'));
    await client.exec("INSERT INTO projects(id,name,description,source_url,revision,observed_at) VALUES ('p','Product','','https://example.com','r',now())");
    const database=drizzle(client,{schema}) as unknown as typeof db;
    await saveTrialDraft({id:'resource-room',productId:'p',description:'A trial',prerequisites:[],request:{kind:'builder-declared',text:'Try it'},application:{name:'App',url:'https://example.com',network:'test',version:'1'},tasks:[{id:'one',title:'Try',instructions:'Try it',observe:['Observe']}],safety:['No keys'],preparedResource:{description:'An environment',allocationMinutes:60}},database);
@@ -39,6 +41,25 @@ describe('prepared trial resources',()=>{
    const third=await store.createSession('resource-room',true), fourth=await store.createSession('resource-room',true);
    await database.insert(schema.preparedResources).values({id:'r2',packId:'resource-room',packVersion:1,label:'Identity',kind:'identity',launchUrl:'https://example.com/identity'});
    expect((await claimPreparedResource(third.sessionId,'resource-room',third.accessToken,database))?.retired).toBe(true);
+   expect(await issuePlaygroundHandoff(third.sessionId,'resource-room','invalid','https://example.com',database)).toBeNull();
+   expect(await issuePlaygroundHandoff(third.sessionId,'resource-room',third.accessToken,'https://wrong.example',database)).toBeNull();
+   const issued=await issuePlaygroundHandoff(third.sessionId,'resource-room',third.accessToken,'https://example.com',database);
+   expect(issued).toBeTruthy();
+   expect(await issuePlaygroundHandoff(third.sessionId,'resource-room',third.accessToken,'https://example.com',database)).toBeNull();
+   const secret='a'.repeat(40);
+   expect(await redeemPlaygroundHandoff(issued!.token,'https://wrong.example',secret,secret,database)).toBeNull();
+   expect(await redeemPlaygroundHandoff(issued!.token,'https://example.com','wrong',secret,database)).toBeNull();
+   expect(await redeemPlaygroundHandoff(issued!.token,'https://example.com',secret,secret,database)).toMatchObject({resourceId:'r2'});
+   expect(await redeemPlaygroundHandoff(issued!.token,'https://example.com',secret,secret,database)).toBeNull();
+   const fifth=await store.createSession('resource-room',true);
+   await database.insert(schema.preparedResources).values({id:'r3',packId:'resource-room',packVersion:1,label:'Second identity',kind:'identity',launchUrl:'https://example.com/identity-two'});
+   expect((await claimPreparedResource(fifth.sessionId,'resource-room',fifth.accessToken,database))?.id).toBe('r3');
+   const expired=await issuePlaygroundHandoff(fifth.sessionId,'resource-room',fifth.accessToken,'https://example.com',database);
+   expect(expired).toBeTruthy();
+   expect(JSON.stringify(await database.select().from(schema.playgroundHandoffs))).not.toContain(expired!.token);
+   await client.exec("UPDATE playground_handoffs SET expires_at=now()-interval '1 second' WHERE resource_id='r3'");
+   expect(await redeemPlaygroundHandoff(expired!.token,'https://example.com',secret,secret,database)).toBeNull();
+   expect(await issuePlaygroundHandoff(fifth.sessionId,'resource-room',fifth.accessToken,'https://example.com',database)).toBeTruthy();
    await client.exec("UPDATE prepared_resources SET expires_at=now()-interval '1 second' WHERE id='r2'");
    expect(await claimPreparedResource(fourth.sessionId,'resource-room',fourth.accessToken,database)).toBeNull();
    const identity=await database.select().from(schema.preparedResources).where((await import('drizzle-orm')).eq(schema.preparedResources.id,'r2'));

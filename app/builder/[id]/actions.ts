@@ -17,7 +17,8 @@ export async function registerPreparedResource(form:FormData) {
  const kind=z.enum(['environment','identity','access']).parse(form.get('kind'));
  const launchUrl=z.string().url().max(2048).parse(form.get('launchUrl'));
  const url=new URL(launchUrl);
- if(url.protocol!=='https:'||url.username||url.password||url.search||url.hash || /(?:0x)?[0-9a-f]{64}/i.test(decodeURIComponent(launchUrl)+' '+label)) throw new Error('Use an HTTPS address without credentials, keys, query parameters or fragments.');
+ const localPlayground=process.env.NODE_ENV!=='production' && process.env.TRYCOVE_PLAYGROUND_LOCAL==='1' && url.protocol==='http:' && url.hostname==='127.0.0.1';
+ if((url.protocol!=='https:'&&!localPlayground)||url.username||url.password||url.search||url.hash || /(?:0x)?[0-9a-f]{64}/i.test(decodeURIComponent(launchUrl)+' '+label)) throw new Error('Use an HTTPS address without credentials, keys, query parameters or fragments.');
  await db.transaction(async tx=>{
   await lockProjectPermission(tx,user.id,projectId,'edit');
   const [pack]=await tx.select().from(trialPacks).where(eq(trialPacks.id,packId)).for('update');

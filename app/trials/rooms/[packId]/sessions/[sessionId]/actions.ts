@@ -6,6 +6,16 @@ import {revalidatePath} from 'next/cache';
 import {GuidedTrialStatusSchema, guidedTrialStore} from '../../../../../../lib/trials/guided-room-store';
 import {GUIDED_TRIAL_ACCESS_COOKIE} from '../../../../../../lib/trials/room-auth';
 import {claimPreparedResource} from '../../../../../../lib/trials/prepared-resources';
+import {issuePlaygroundHandoff} from '../../../../../../lib/trials/playground-handoffs';
+
+export async function beginPlayground(form:FormData) {
+  const loaded=await authorizedTrial(form);
+  const token=(await cookies()).get(GUIDED_TRIAL_ACCESS_COOKIE)?.value;
+  const origin=process.env.TRYCOVE_PLAYGROUND_APP_ORIGIN;
+  if(!token || !origin || !process.env.TRYCOVE_PLAYGROUND_APP_SECRET || loaded.session.completedAt) return null;
+  const ticket=await issuePlaygroundHandoff(loaded.session.id,loaded.session.packId,token,origin);
+  return ticket ? {token:ticket.token,launchUrl:ticket.launchUrl,origin,expiresAt:ticket.expiresAt.toISOString()} : null;
+}
 
 export async function claimResource(form:FormData) {
   const loaded=await authorizedTrial(form);

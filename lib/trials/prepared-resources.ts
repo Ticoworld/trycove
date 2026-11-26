@@ -17,7 +17,11 @@ export async function claimPreparedResource(sessionId:string, packId:string, tok
   if(!Number.isSafeInteger(version)||version<1)return null;
   await tx.select().from(trialPackVersions).where(and(eq(trialPackVersions.packId,packId),eq(trialPackVersions.version,version))).for('update');
   const now=new Date();
-  await tx.update(preparedResources).set({assignedSessionId:null,expiresAt:null,enabled:false}).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),lte(preparedResources.expiresAt,now)));
+  // Retired identities remain attached to their session after expiry so a
+  // retry can never silently provision a second identity.
+  const [previousIdentity]=await tx.select().from(preparedResources).where(and(eq(preparedResources.assignedSessionId,sessionId),eq(preparedResources.kind,'identity'))).for('update');
+  if(previousIdentity) return previousIdentity.expiresAt && previousIdentity.expiresAt>now ? previousIdentity : null;
+  await tx.update(preparedResources).set({assignedSessionId:null,expiresAt:null,enabled:false}).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.kind,'environment'),lte(preparedResources.expiresAt,now)));
   const [existing]=await tx.select().from(preparedResources).where(and(eq(preparedResources.assignedSessionId,sessionId),gt(preparedResources.expiresAt,now)));
   if(existing)return existing;
   const [available]=await tx.select().from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.enabled,true),eq(preparedResources.retired,false),isNull(preparedResources.assignedSessionId))).limit(1).for('update');
@@ -33,6 +37,7 @@ export async function getPreparedResource(sessionId:string, packId:string, token
  const version=Number(session.definitionVersion);
  const now=new Date();
  const [assigned]=await database.select().from(preparedResources).where(and(eq(preparedResources.assignedSessionId,sessionId),eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),gt(preparedResources.expiresAt,now)));
+ const [retiredIdentity]=await database.select({id:preparedResources.id}).from(preparedResources).where(and(eq(preparedResources.assignedSessionId,sessionId),eq(preparedResources.kind,'identity'),eq(preparedResources.retired,true)));
  const available=await database.select({id:preparedResources.id}).from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.enabled,true),eq(preparedResources.retired,false),isNull(preparedResources.assignedSessionId))).limit(1);
- return {assigned:assigned??null,available:available.length>0};
+ return {assigned:assigned??null,available:available.length>0 && !retiredIdentity,expired:!!retiredIdentity && !assigned};
 }

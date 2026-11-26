@@ -18,6 +18,9 @@ const fields = z.object({
   preparedResource: z.object({
     description: text,
     allocationMinutes: z.number().int().min(1).max(10080),
+    applicationId: trialSlug.optional(),
+    claimLabel: text.optional(),
+    launchLabel: text.optional(),
   }).optional(),
   application: launch.extend({
     network: text, version: text,

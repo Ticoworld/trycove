@@ -125,6 +125,8 @@ export function TrialPackEditor({initial, products, sources, editing, scopedProd
       <small>List wallet requirements, faucet or funding requirements, and setup instructions. Use one line per item.</small>
       <textarea rows={4} value={draft.prerequisites.join('\n')} onChange={event => update('prerequisites', lines(event.target.value))}/>
     </label>
+    <label><input type="checkbox" checked={!!draft.preparedResource} onChange={event => update('preparedResource', event.target.checked ? {description:'',allocationMinutes:60} : undefined)}/> Use a prepared resource</label>
+    {draft.preparedResource && <fieldset className="stack"><legend>Prepared resource</legend><p>Describe the resource publicly. Register individual launch addresses privately in the builder workspace; never enter keys or passwords.</p><label>Tester-facing description <input required value={draft.preparedResource.description} onChange={event=>update('preparedResource',{...draft.preparedResource!,description:event.target.value})}/></label><label>Allocation duration (minutes) <input type="number" min={1} max={10080} required value={draft.preparedResource.allocationMinutes} onChange={event=>update('preparedResource',{...draft.preparedResource!,allocationMinutes:Number(event.target.value)})}/></label></fieldset>}
     </section>
     <section data-step="2" hidden={step !== 2}>
     <h3>Ordered tasks</h3>

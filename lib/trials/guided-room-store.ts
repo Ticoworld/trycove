@@ -89,7 +89,7 @@ function makeReceipt(input: {
   };
 }
 
-function tokenMatches(token: string, digest: string, startedAt: Date) {
+export function tokenMatches(token: string, digest: string, startedAt: Date) {
   if (Date.now() > startedAt.getTime() + GUIDED_TRIAL_ACCESS_MAX_AGE_SECONDS * 1000) return false;
   const actual = Buffer.from(sha256(token), 'hex');
   const expected = Buffer.from(digest, 'hex');

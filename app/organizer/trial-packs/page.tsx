@@ -62,7 +62,7 @@ export default async function TrialPackOrganizer({searchParams}: {searchParams: 
     request: (definition.request?.kind === 'externally-sourced' || (!definition.request && definition.problemMap))
       ? {kind: 'externally-sourced', evidenceId: source?.id ?? 0}
       : {kind: 'builder-declared', text: definition.request?.text ?? ''},
-    application: definition.application, prerequisites: definition.prerequisites ?? [],
+    application: definition.application, preparedResource: definition.preparedResource, prerequisites: definition.prerequisites ?? [],
     safety: definition.safety, tasks: definition.tasks, testingMode: definition.testingMode,
   };
 

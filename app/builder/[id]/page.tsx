@@ -5,9 +5,9 @@ import {and,desc,eq,inArray,isNull} from 'drizzle-orm';
 import {authenticatedUser,checkProjectPermission} from '../../../lib/authorization';
 import {db} from '../../../lib/db';
 import {declarations} from '../../../lib/declarations';
-import {followUps,handoffReports,historicalFeedback,projects,trialPacks} from '../../../lib/schema';
+import {followUps,handoffReports,historicalFeedback,preparedResources,projects,trialPacks} from '../../../lib/schema';
 import {readPackVersion} from '../../../lib/trials/trial-packs';
-import {respondToFeedback,saveDeclaration} from './actions';
+import {respondToFeedback,saveDeclaration,registerPreparedResource,setPreparedResourceAvailability} from './actions';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,6 +27,8 @@ export default async function Builder({params}: {params: Promise<{id:string}>}) 
   const packs = await db.select().from(trialPacks);
   const roomVersions = await Promise.all(packs.map(async pack=>({pack,definition:await readPackVersion(pack.id,pack.latestVersion)})));
   const productRooms = roomVersions.filter(room=>room.definition.product.id===id);
+  const resourceRooms = productRooms.filter(room=>!!room.definition.preparedResource);
+  const resources = resourceRooms.length ? await db.select().from(preparedResources).where(inArray(preparedResources.packId,resourceRooms.map(room=>room.pack.id))) : [];
   const responses = reports.length ? await db.select().from(followUps).where(and(
     inArray(followUps.handoffReportId,reports.map(report=>report.id)),eq(followUps.kind,'builder-responded'),
   )) : [];
@@ -36,6 +38,7 @@ export default async function Builder({params}: {params: Promise<{id:string}>}) 
     <p className="lead">{productRooms.length ? `${productRooms.filter(room=>room.pack.state==='published').length} published trial${productRooms.filter(room=>room.pack.state==='published').length===1?'':'s'} · ${reports.length} approved feedback report${reports.length===1?'':'s'}` : 'Prepare a trial and invite testers to share feedback.'}</p>
     <Link className="button" href={'/organizer/trial-packs?project=' + encodeURIComponent(id)}>Create or manage trial</Link>
     <Link href={'/projects/' + encodeURIComponent(id)}>Product Passport and connections</Link>
+    {resourceRooms.map(({pack,definition})=><section className="card stack" key={pack.id}><h2>Prepared resources · {definition.application.name}</h2><p>Register resources for version {pack.latestVersion}. Never enter wallet keys, passwords or secret recovery phrases. Launch addresses must not contain credentials or query parameters.</p><form action={registerPreparedResource} className="stack"><input type="hidden" name="projectId" value={id}/><input type="hidden" name="packId" value={pack.id}/><label>Resource label <input name="label" maxLength={100} required/></label><label>Type <select name="kind"><option value="environment">Application environment</option><option value="identity">Test identity</option><option value="access">Application access</option></select></label><label>Launch address <input name="launchUrl" type="url" required/></label><button className="button">Register resource</button></form>{resources.filter(resource=>resource.packId===pack.id).map(resource=>{const needsReset=!!resource.assignedSessionId && !!resource.expiresAt && resource.expiresAt <= new Date(); const active=resource.enabled && !needsReset; return <form action={setPreparedResourceAvailability} key={resource.id}><input type="hidden" name="projectId" value={id}/><input type="hidden" name="resourceId" value={resource.id}/><input type="hidden" name="enabled" value={String(!active)}/><p>{resource.label} · {resource.kind} · version {resource.packVersion} · {active?'available for allocation':'disabled or awaiting reset'}{resource.assignedSessionId && resource.expiresAt && resource.expiresAt > new Date()?' · allocated':''}</p>{!active&&<label><input type="checkbox" name="reset" required/> I have reset access for the previous tester</label>}<button className="button secondary">{active?'Disable':'Enable'}</button></form>})}</section>)}
     <WorkspaceDialog label="Manage product declarations"><form action={saveDeclaration} className="card stack">
       <h2>Publish a declaration</h2>
       <input type="hidden" name="projectId" value={id}/>

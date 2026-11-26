@@ -5,6 +5,17 @@ import {notFound} from 'next/navigation';
 import {revalidatePath} from 'next/cache';
 import {GuidedTrialStatusSchema, guidedTrialStore} from '../../../../../../lib/trials/guided-room-store';
 import {GUIDED_TRIAL_ACCESS_COOKIE} from '../../../../../../lib/trials/room-auth';
+import {claimPreparedResource} from '../../../../../../lib/trials/prepared-resources';
+
+export async function claimResource(form:FormData) {
+  const loaded=await authorizedTrial(form);
+  const config=loaded.definition.preparedResource;
+  if(!config || loaded.session.completedAt) notFound();
+  const token=(await cookies()).get(GUIDED_TRIAL_ACCESS_COOKIE)?.value;
+  if(!token)notFound();
+  await claimPreparedResource(loaded.session.id,loaded.session.packId,token);
+  revalidatePath(`/trials/rooms/${loaded.session.packId}/sessions/${loaded.session.id}`);
+}
 
 function field(formData: FormData, name: string) {
   const value = formData.get(name);

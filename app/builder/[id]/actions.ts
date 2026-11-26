@@ -1,11 +1,53 @@
 'use server';
 
 import {randomUUID} from 'node:crypto';
-import {and,eq,isNull} from 'drizzle-orm';
+import {and,eq} from 'drizzle-orm';
 import {z} from 'zod';
-import {revalidatePath} from 'next/cache';
-import {lockProjectPermission, requireUser} from '../../../lib/authorization';
+import {preparedResources,trialPacks} from '../../../lib/schema';
+import {readPackVersion} from '../../../lib/trials/trial-packs';
+import {lockProjectPermission,requireUser} from '../../../lib/authorization';
 import {db} from '../../../lib/db';
+import {revalidatePath} from 'next/cache';
+
+export async function registerPreparedResource(form:FormData) {
+ const user=await requireUser();
+ const projectId=z.string().min(1).max(200).parse(form.get('projectId'));
+ const packId=z.string().min(1).max(80).parse(form.get('packId'));
+ const label=z.string().trim().min(1).max(100).parse(form.get('label'));
+ const kind=z.enum(['environment','identity','access']).parse(form.get('kind'));
+ const launchUrl=z.string().url().max(2048).parse(form.get('launchUrl'));
+ const url=new URL(launchUrl);
+ if(url.protocol!=='https:'||url.username||url.password||url.search||url.hash || /(?:0x)?[0-9a-f]{64}/i.test(decodeURIComponent(launchUrl)+' '+label)) throw new Error('Use an HTTPS address without credentials, keys, query parameters or fragments.');
+ await db.transaction(async tx=>{
+  await lockProjectPermission(tx,user.id,projectId,'edit');
+  const [pack]=await tx.select().from(trialPacks).where(eq(trialPacks.id,packId)).for('update');
+  if(!pack || pack.state==='closed')throw new Error('Trial unavailable.');
+  const definition=await readPackVersion(packId,pack.latestVersion,tx);
+  if(definition.product.id!==projectId||!definition.preparedResource)throw new Error('Configure a prepared resource for this trial first.');
+  await tx.insert(preparedResources).values({id:randomUUID(),packId,packVersion:pack.latestVersion,label,kind,launchUrl:url.href});
+ });
+ revalidatePath('/builder/'+projectId);
+}
+
+export async function setPreparedResourceAvailability(form:FormData) {
+ const user=await requireUser();
+ const projectId=z.string().min(1).max(200).parse(form.get('projectId'));
+ const id=z.string().uuid().parse(form.get('resourceId'));
+ const enabled=z.enum(['true','false']).parse(form.get('enabled'))==='true';
+ await db.transaction(async tx=>{
+  await lockProjectPermission(tx,user.id,projectId,'edit');
+  const [resource]=await tx.select().from(preparedResources).where(eq(preparedResources.id,id)).for('update');
+  if(!resource)throw new Error('Resource unavailable.');
+  const definition=await readPackVersion(resource.packId,resource.packVersion,tx);
+  if(definition.product.id!==projectId)throw new Error('Project permission is required.');
+  if(enabled && resource.assignedSessionId && resource.expiresAt && resource.expiresAt>new Date())throw new Error('This resource is still allocated.');
+  if(enabled && form.get('reset')!=='on')throw new Error('Confirm the external resource has been reset before enabling it.');
+  await tx.update(preparedResources).set({enabled,...enabled?{assignedSessionId:null,expiresAt:null}:{}}).where(and(eq(preparedResources.id,id),eq(preparedResources.packId,resource.packId)));
+ });
+ revalidatePath('/builder/'+projectId);
+}
+
+import {isNull} from 'drizzle-orm';
 import {authorizationAudit, followUps, handoffReports, projectDeclarations} from '../../../lib/schema';
 
 const project = z.string().min(1).max(200);

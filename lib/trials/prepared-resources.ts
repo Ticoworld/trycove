@@ -20,9 +20,9 @@ export async function claimPreparedResource(sessionId:string, packId:string, tok
   await tx.update(preparedResources).set({assignedSessionId:null,expiresAt:null,enabled:false}).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),lte(preparedResources.expiresAt,now)));
   const [existing]=await tx.select().from(preparedResources).where(and(eq(preparedResources.assignedSessionId,sessionId),gt(preparedResources.expiresAt,now)));
   if(existing)return existing;
-  const [available]=await tx.select().from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.enabled,true),isNull(preparedResources.assignedSessionId))).limit(1).for('update');
+  const [available]=await tx.select().from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.enabled,true),eq(preparedResources.retired,false),isNull(preparedResources.assignedSessionId))).limit(1).for('update');
   if(!available)return null;
-  const [assigned]=await tx.update(preparedResources).set({assignedSessionId:sessionId,expiresAt:new Date(now.getTime()+minutes*60000)}).where(eq(preparedResources.id,available.id)).returning();
+  const [assigned]=await tx.update(preparedResources).set({assignedSessionId:sessionId,expiresAt:new Date(now.getTime()+minutes*60000),...(available.kind==='identity'?{retired:true,enabled:false}:{})}).where(eq(preparedResources.id,available.id)).returning();
   return assigned;
  });
 }
@@ -33,6 +33,6 @@ export async function getPreparedResource(sessionId:string, packId:string, token
  const version=Number(session.definitionVersion);
  const now=new Date();
  const [assigned]=await database.select().from(preparedResources).where(and(eq(preparedResources.assignedSessionId,sessionId),eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),gt(preparedResources.expiresAt,now)));
- const available=await database.select({id:preparedResources.id}).from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.enabled,true),isNull(preparedResources.assignedSessionId))).limit(1);
+ const available=await database.select({id:preparedResources.id}).from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.enabled,true),eq(preparedResources.retired,false),isNull(preparedResources.assignedSessionId))).limit(1);
  return {assigned:assigned??null,available:available.length>0};
 }

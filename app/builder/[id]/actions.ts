@@ -38,6 +38,7 @@ export async function setPreparedResourceAvailability(form:FormData) {
   await lockProjectPermission(tx,user.id,projectId,'edit');
   const [resource]=await tx.select().from(preparedResources).where(eq(preparedResources.id,id)).for('update');
   if(!resource)throw new Error('Resource unavailable.');
+  if(enabled && resource.retired)throw new Error('An exposed identity cannot be reused.');
   const definition=await readPackVersion(resource.packId,resource.packVersion,tx);
   if(definition.product.id!==projectId)throw new Error('Project permission is required.');
   if(enabled && resource.assignedSessionId && resource.expiresAt && resource.expiresAt>new Date())throw new Error('This resource is still allocated.');

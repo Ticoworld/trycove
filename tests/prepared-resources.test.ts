@@ -15,6 +15,7 @@ describe('prepared trial resources',()=>{
    const names=['initial','connections','footprints','intelligence','trial_evidence','project_repositories','signal_intents','candidate_lifecycle','need_items','need_taxonomy','need_lineage_and_decisions','opportunity_qualification','opportunity_prior_work_reconciliations','external_source_snapshots','guided_trial_rooms','devrel_handoffs','trial_packs'];
    for(let i=0;i<names.length;i++)await client.exec(await readFile(`migrations/${String(i+1).padStart(4,'0')}_${names[i]}.sql`,'utf8'));
    await client.exec(await readFile('migrations/0022_prepared_resources.sql','utf8'));
+   await client.exec(await readFile('migrations/0023_single_use_identities.sql','utf8'));
    await client.exec("INSERT INTO projects(id,name,description,source_url,revision,observed_at) VALUES ('p','Product','','https://example.com','r',now())");
    const database=drizzle(client,{schema}) as unknown as typeof db;
    await saveTrialDraft({id:'resource-room',productId:'p',description:'A trial',prerequisites:[],request:{kind:'builder-declared',text:'Try it'},application:{name:'App',url:'https://example.com',network:'test',version:'1'},tasks:[{id:'one',title:'Try',instructions:'Try it',observe:['Observe']}],safety:['No keys'],preparedResource:{description:'An environment',allocationMinutes:60}},database);
@@ -35,6 +36,13 @@ describe('prepared trial resources',()=>{
    expect(await claimPreparedResource(loser.sessionId,'resource-room',loser.accessToken,database)).toBeNull();
    await client.exec("UPDATE prepared_resources SET enabled=true, assigned_session_id=NULL, expires_at=NULL WHERE id='r1'");
    expect((await claimPreparedResource(loser.sessionId,'resource-room',loser.accessToken,database))?.id).toBe('r1');
+   const third=await store.createSession('resource-room',true), fourth=await store.createSession('resource-room',true);
+   await database.insert(schema.preparedResources).values({id:'r2',packId:'resource-room',packVersion:1,label:'Identity',kind:'identity',launchUrl:'https://example.com/identity'});
+   expect((await claimPreparedResource(third.sessionId,'resource-room',third.accessToken,database))?.retired).toBe(true);
+   await client.exec("UPDATE prepared_resources SET expires_at=now()-interval '1 second' WHERE id='r2'");
+   expect(await claimPreparedResource(fourth.sessionId,'resource-room',fourth.accessToken,database)).toBeNull();
+   const identity=await database.select().from(schema.preparedResources).where((await import('drizzle-orm')).eq(schema.preparedResources.id,'r2'));
+   expect(identity[0]).toMatchObject({retired:true,enabled:false});
    await store.finishSession({sessionId:loser.sessionId,accessToken:loser.accessToken});
    expect(await claimPreparedResource(loser.sessionId,'resource-room',loser.accessToken,database)).toBeNull();
   } finally {await client.close();}

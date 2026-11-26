@@ -33,6 +33,11 @@ describe.skipIf(!url || !expectedHost)('isolated PostgreSQL resource allocation'
    await pools[0].query('UPDATE prepared_resources SET expires_at=now()-interval \'1 second\' WHERE pack_id=$1',[pack]);
    expect((await getPreparedResource(winner.sessionId,pack,winner.accessToken,b))?.assigned).toBeNull();
    expect(await claimPreparedResource(loser.sessionId,pack,loser.accessToken,b)).toBeNull();
+   const third=await store.createSession(pack,true),fourth=await store.createSession(pack,true);
+   await a.insert(schema.preparedResources).values({id:randomUUID(),packId:pack,packVersion:1,label:'Identity fixture',kind:'identity',launchUrl:`https://example.com/identity-${suffix}`});
+   expect((await claimPreparedResource(third.sessionId,pack,third.accessToken,a))?.retired).toBe(true);
+   await pools[0].query("UPDATE prepared_resources SET expires_at=now()-interval '1 second' WHERE pack_id=$1 AND kind='identity'",[pack]);
+   expect(await claimPreparedResource(fourth.sessionId,pack,fourth.accessToken,b)).toBeNull();
   } finally {await Promise.all(pools.map(pool=>pool.end()));}
  },60000);
 });

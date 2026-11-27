@@ -12,9 +12,11 @@ async function main(){
  if(process.env.NEON_BRANCH!==expectedBranch)throw new Error('This publisher only targets the isolated verification branch.');
  const origin=process.env.TRYCOVE_PG03B_QUOTACELL_ORIGIN;
  const revision=process.env.TRYCOVE_PG03B_QUOTACELL_REVISION;
- const resourceIds=JSON.parse(process.env.TRYCOVE_PG03B_RESOURCE_IDS??'null') as unknown;
+ const resourcePockets=JSON.parse(process.env.TRYCOVE_PG03B_RESOURCE_POCKETS??'null') as unknown;
  if(origin!=='https://trycove-quotacell-playground.netlify.app'||!revision||!/^[0-9a-f]{40}$/.test(revision))throw new Error('Set the exact hosted receiver origin and source commit.');
- if(!Array.isArray(resourceIds)||resourceIds.length!==3||resourceIds.some(id=>typeof id!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id))||new Set(resourceIds).size!==3)throw new Error('Exactly three distinct resource IDs are required.');
+ if(!resourcePockets||typeof resourcePockets!=='object'||Array.isArray(resourcePockets))throw new Error('Set a resource ID to Pocket mapping.');
+ const pocketMap=resourcePockets as Record<string,string>,resourceIds=Object.keys(pocketMap);
+ if(resourceIds.length!==3||resourceIds.some(id=>!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)||!/^0x[0-9a-f]{64}$/i.test(pocketMap[id]))||new Set(Object.values(pocketMap)).size!==3)throw new Error('Exactly three distinct resource IDs and Pocket IDs are required.');
 
  const [product]=await db.select().from(projects).where(eq(projects.id,productId));
  if(!product)throw new Error('The existing QuotaCell project record is unavailable.');
@@ -51,13 +53,13 @@ async function main(){
   const existing=await tx.select().from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version)));
   if(existing.length){
    const currentIds=new Set(existing.map(row=>row.id));
-   if(existing.length!==3||resourceIds.some(id=>!currentIds.has(id))||existing.some(row=>row.kind!=='identity'||row.launchUrl!==`${origin}/app`))throw new Error('The room already has a different resource allocation.');
+   if(existing.length!==3||resourceIds.some(id=>!currentIds.has(id))||existing.some(row=>row.kind!=='identity'||row.launchUrl!==`${origin}/app?pocket=${pocketMap[row.id]}`))throw new Error('The room already has a different resource allocation.');
   }else{
-   await tx.insert(preparedResources).values(resourceIds.map((id,index)=>({id,packId,packVersion:version,label:`Pudge test Pocket ${index+1}`,kind:'identity',launchUrl:`${origin}/app`,enabled:true,retired:false})));
+   await tx.insert(preparedResources).values(resourceIds.map((id,index)=>({id,packId,packVersion:version,label:`Pudge test Pocket ${index+1}`,kind:'identity',launchUrl:`${origin}/app?pocket=${pocketMap[id]}`,enabled:true,retired:false})));
   }
  });
  await setTrialPackState(packId,version,'published');
- console.log(JSON.stringify({packId,productId,applicationId,resourceIds,launchUrl:`${origin}/app`,version,available:3}));
+ console.log(JSON.stringify({packId,productId,applicationId,resourceIds,pockets:Object.values(pocketMap),launchUrl:`${origin}/app`,version,available:3}));
 }
 
 main().catch(error=>{console.error(error instanceof Error?error.message:'Room publishing failed.');process.exit(1)});

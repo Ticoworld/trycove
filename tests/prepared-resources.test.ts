@@ -7,6 +7,7 @@ import {db} from '../lib/db';
 import {saveTrialDraft,setTrialPackState} from '../lib/trials/trial-packs';
 import {createGuidedTrialStore} from '../lib/trials/guided-room-store';
 import {claimPreparedResource,getPreparedResource} from '../lib/trials/prepared-resources';
+import {consumeTrialResourceClaim,TRIAL_RESOURCE_CLAIM_LIMIT,TRIAL_RESOURCE_CLAIM_WINDOW_MS} from '../lib/trials/resource-claim-throttle';
 import {issuePlaygroundHandoff,redeemPlaygroundHandoff} from '../lib/trials/playground-handoffs';
 
 describe('prepared trial resources',()=>{
@@ -19,8 +20,16 @@ describe('prepared trial resources',()=>{
    await client.exec(await readFile('migrations/0023_single_use_identities.sql','utf8'));
    await client.exec(await readFile('migrations/0024_playground_handoffs.sql','utf8'));
    await client.exec(await readFile('migrations/0025_playground_application.sql','utf8'));
+   await client.exec(await readFile('migrations/0026_trial_resource_claim_limits.sql','utf8'));
    await client.exec("INSERT INTO projects(id,name,description,source_url,revision,observed_at) VALUES ('p','Product','','https://example.com','r',now())");
    const database=drizzle(client,{schema}) as unknown as typeof db;
+   const throttleNow=new Date('2026-11-27T12:00:00.000Z'),throttleSecret='claim-throttle-secret-'.padEnd(40,'x');
+   for(let i=0;i<TRIAL_RESOURCE_CLAIM_LIMIT;i++)expect(await consumeTrialResourceClaim('203.0.113.9','resource-room',throttleSecret,database,throttleNow)).toBe(true);
+   expect(await consumeTrialResourceClaim('203.0.113.9','resource-room',throttleSecret,database,throttleNow)).toBe(false);
+   expect(await consumeTrialResourceClaim('203.0.113.10','resource-room',throttleSecret,database,throttleNow)).toBe(true);
+   expect(await consumeTrialResourceClaim('203.0.113.9','another-room',throttleSecret,database,throttleNow)).toBe(true);
+   expect(await consumeTrialResourceClaim('203.0.113.9','resource-room',throttleSecret,database,new Date(throttleNow.getTime()+TRIAL_RESOURCE_CLAIM_WINDOW_MS))).toBe(true);
+   expect(JSON.stringify(await database.select().from(schema.trialResourceClaimLimits))).not.toContain('203.0.113.9');
    await saveTrialDraft({id:'resource-room',productId:'p',description:'A trial',prerequisites:[],request:{kind:'builder-declared',text:'Try it'},application:{name:'App',url:'https://example.com',network:'test',version:'1'},tasks:[{id:'one',title:'Try',instructions:'Try it',observe:['Observe']}],safety:['No keys'],preparedResource:{description:'An environment',allocationMinutes:60}},database);
    await setTrialPackState('resource-room',1,'published',database);
    const store=createGuidedTrialStore(database);

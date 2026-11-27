@@ -1,11 +1,13 @@
 'use server';
 
-import {cookies} from 'next/headers';
+import {cookies,headers} from 'next/headers';
+import {isIP} from 'node:net';
 import {notFound} from 'next/navigation';
 import {revalidatePath} from 'next/cache';
 import {GuidedTrialStatusSchema, guidedTrialStore} from '../../../../../../lib/trials/guided-room-store';
 import {GUIDED_TRIAL_ACCESS_COOKIE} from '../../../../../../lib/trials/room-auth';
 import {claimPreparedResource} from '../../../../../../lib/trials/prepared-resources';
+import {consumeTrialResourceClaim} from '../../../../../../lib/trials/resource-claim-throttle';
 import {issuePlaygroundHandoff} from '../../../../../../lib/trials/playground-handoffs';
 import {playgroundApplication} from '../../../../../../lib/trials/playground-apps';
 
@@ -25,14 +27,22 @@ export async function beginPlayground(form:FormData) {
   return {token:ticket.token,launchUrl:ticket.launchUrl,origin,expiresAt:ticket.expiresAt.toISOString()};
 }
 
-export async function claimResource(form:FormData) {
+export async function claimResource(_state:string,form:FormData):Promise<string> {
   const loaded=await authorizedTrial(form);
   const config=loaded.definition.preparedResource;
   if(!config || loaded.session.completedAt) notFound();
   const token=(await cookies()).get(GUIDED_TRIAL_ACCESS_COOKIE)?.value;
   if(!token)notFound();
-  await claimPreparedResource(loaded.session.id,loaded.session.packId,token);
+  const requestHeaders=await headers();
+  const candidate=requestHeaders.get('x-nf-client-connection-ip')?.trim() || (process.env.NODE_ENV!=='production'?'local-development':'');
+  if(!candidate || (candidate!=='local-development' && !isIP(candidate)))return 'Test access could not verify this connection. Please retry shortly.';
+  const application=playgroundApplication(config.applicationId ?? 'legacy');
+  const throttleSecret=application?.secret ?? process.env.TRYCOVE_CLAIM_THROTTLE_SECRET;
+  if(!throttleSecret)return 'Test access is temporarily unavailable. Your trial session remains open.';
+  if(!await consumeTrialResourceClaim(candidate,loaded.session.packId,throttleSecret))return 'Too many test access requests came from this connection. Please retry later; your trial session remains open.';
+  const assigned=await claimPreparedResource(loaded.session.id,loaded.session.packId,token);
   revalidatePath(`/trials/rooms/${loaded.session.packId}/sessions/${loaded.session.id}`);
+  return assigned?'':'No prepared test identity is available right now. Your trial session remains open.';
 }
 
 function field(formData: FormData, name: string) {

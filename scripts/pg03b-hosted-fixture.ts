@@ -29,11 +29,12 @@ async function main(){
   safety:['Use the isolated hosted receiver and Pudge testnet identity only.','Do not prepare, sign, or submit a transaction during this receiver check.','Do not enter or record private keys, passwords, or seed phrases.'],
   preparedResource:{description:'One dedicated Pudge test identity for receiver acceptance. This room authorizes the handoff check only.',allocationMinutes:30,applicationId,claimLabel:'Get test access',launchLabel:'Open QuotaCell Playground'},
  },db);
- await db.insert(preparedResources).values({id:resourceId,packId,packVersion:pack.latestVersion,label:'PG03B receiver test identity',kind:'identity',launchUrl:`${origin}/`,enabled:true});
+ const launchUrl=`${origin}/app`;
+ await db.insert(preparedResources).values({id:resourceId,packId,packVersion:pack.latestVersion,label:'PG03B receiver test identity',kind:'identity',launchUrl,enabled:true});
  await setTrialPackState(packId,pack.latestVersion,'published',db);
  const [saved]=await db.select({id:trialPackVersions.packId,version:trialPackVersions.version}).from(trialPackVersions).where(and(eq(trialPackVersions.packId,packId),eq(trialPackVersions.version,pack.latestVersion)));
  if(!saved)throw new Error('PG03B fixture version was not persisted.');
- console.log(JSON.stringify({packId,productId,applicationId,resourceId,launchUrl:`${origin}/`,version:pack.latestVersion}));
+ console.log(JSON.stringify({packId,productId,applicationId,resourceId,launchUrl,version:pack.latestVersion}));
 }
 
 main().catch(error=>{console.error(error instanceof Error?error.message:'PG03B fixture setup failed.');process.exit(1)});

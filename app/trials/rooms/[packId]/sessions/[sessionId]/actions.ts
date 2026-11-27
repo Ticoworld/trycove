@@ -12,10 +12,17 @@ import {playgroundApplication} from '../../../../../../lib/trials/playground-app
 export async function beginPlayground(form:FormData) {
   const loaded=await authorizedTrial(form);
   const token=(await cookies()).get(GUIDED_TRIAL_ACCESS_COOKIE)?.value;
-  const origin=playgroundApplication(loaded.definition.preparedResource?.applicationId ?? 'legacy')?.origin;
-  if(!token || !origin || !loaded.definition.preparedResource || loaded.session.completedAt) return null;
-  const ticket=await issuePlaygroundHandoff(loaded.session.id,loaded.session.packId,token,origin,undefined,loaded.definition.preparedResource.applicationId ?? 'legacy');
-  return ticket ? {token:ticket.token,launchUrl:ticket.launchUrl,origin,expiresAt:ticket.expiresAt.toISOString()} : null;
+  const applicationId=loaded.definition.preparedResource?.applicationId ?? 'legacy';
+  const application=playgroundApplication(applicationId);
+  const diagnose=applicationId==='quotacell-playground'?(reason:string)=>console.warn(`[PG03B handoff] ${reason}`):undefined;
+  if(!token || !application || !loaded.definition.preparedResource || loaded.session.completedAt) {
+    diagnose?.(!token?'session-cookie':!application?'application-config':!loaded.definition.preparedResource?'resource-definition':'session-completed');
+    return null;
+  }
+  const ticket=await issuePlaygroundHandoff(loaded.session.id,loaded.session.packId,token,application.origin,undefined,applicationId,diagnose);
+  if(!ticket) return null;
+  const origin=application.origin;
+  return {token:ticket.token,launchUrl:ticket.launchUrl,origin,expiresAt:ticket.expiresAt.toISOString()};
 }
 
 export async function claimResource(form:FormData) {

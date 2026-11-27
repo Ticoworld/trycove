@@ -6,26 +6,27 @@ import {tokenMatches} from './guided-room-store';
 import {DefinitionSchema} from './room-definitions';
 
 const digest=(value:string)=>createHash('sha256').update(value).digest('hex');
-export async function issuePlaygroundHandoff(sessionId:string,packId:string,sessionToken:string,expectedOrigin:string,database=db,applicationId='legacy') {
+export async function issuePlaygroundHandoff(sessionId:string,packId:string,sessionToken:string,expectedOrigin:string,database=db,applicationId='legacy',diagnose?:(reason:string)=>void) {
+ const reject=(reason:string)=>{diagnose?.(reason);return null;};
  return database.transaction(async tx=>{
   const [session]=await tx.select().from(guidedTrialSessions).where(and(eq(guidedTrialSessions.id,sessionId),eq(guidedTrialSessions.packId,packId))).for('update');
-  if(!session || session.completedAt || !tokenMatches(sessionToken,session.accessTokenSha256,session.startedAt))return null;
-  if(digest(session.definitionSnapshot)!==session.definitionSha256)return null;
+  if(!session || session.completedAt || !tokenMatches(sessionToken,session.accessTokenSha256,session.startedAt))return reject('session-or-token');
+  if(digest(session.definitionSnapshot)!==session.definitionSha256)return reject('snapshot-integrity');
   let definition;
-  try { definition=DefinitionSchema.safeParse(JSON.parse(session.definitionSnapshot)); } catch { return null; }
-  if(!definition.success || !definition.data.preparedResource || (definition.data.preparedResource.applicationId ?? 'legacy')!==applicationId)return null;
+  try { definition=DefinitionSchema.safeParse(JSON.parse(session.definitionSnapshot)); } catch { return reject('snapshot-format'); }
+  if(!definition.success || !definition.data.preparedResource || (definition.data.preparedResource.applicationId ?? 'legacy')!==applicationId)return reject('application-mismatch');
   const now=new Date();
   const [resource]=await tx.select().from(preparedResources).where(and(eq(preparedResources.assignedSessionId,sessionId),eq(preparedResources.packId,packId),eq(preparedResources.packVersion,Number(session.definitionVersion)),eq(preparedResources.kind,'identity'),eq(preparedResources.retired,true),gt(preparedResources.expiresAt,now))).for('update');
-  if(!resource || !resource.expiresAt)return null;
+  if(!resource || !resource.expiresAt)return reject('assigned-resource');
   const origin=new URL(resource.launchUrl).origin;
-  if(origin!==expectedOrigin)return null;
+  if(origin!==expectedOrigin)return reject('resource-origin');
   // The resource row is locked above, so replacement and issuance are atomic.
   // Removing a consumed digest also leaves it permanently unredeemable.
   await tx.delete(playgroundHandoffs).where(eq(playgroundHandoffs.resourceId,resource.id));
   const token=randomBytes(32).toString('base64url');
   const expiresAt=new Date(Math.min(resource.expiresAt.getTime(),now.getTime()+120000));
   const [created]=await tx.insert(playgroundHandoffs).values({digest:digest(token),resourceId:resource.id,sessionId,applicationOrigin:origin,applicationId,expiresAt}).onConflictDoNothing().returning();
-  return created?{token,launchUrl:resource.launchUrl,expiresAt}:null;
+  return created?{token,launchUrl:resource.launchUrl,expiresAt}:reject('ticket-conflict');
  });
 }
 

@@ -21,6 +21,7 @@ describe('prepared trial resources',()=>{
    await client.exec(await readFile('migrations/0024_playground_handoffs.sql','utf8'));
    await client.exec(await readFile('migrations/0025_playground_application.sql','utf8'));
    await client.exec(await readFile('migrations/0026_trial_resource_claim_limits.sql','utf8'));
+   await client.exec(await readFile('migrations/0027_shared_resource_launch_urls.sql','utf8'));
    await client.exec("INSERT INTO projects(id,name,description,source_url,revision,observed_at) VALUES ('p','Product','','https://example.com','r',now())");
    const database=drizzle(client,{schema}) as unknown as typeof db;
    const throttleNow=new Date('2026-11-27T12:00:00.000Z'),throttleSecret='claim-throttle-secret-'.padEnd(40,'x');
@@ -67,12 +68,17 @@ describe('prepared trial resources',()=>{
    expect(await redeemPlaygroundHandoff(resumed!.token,'https://example.com',secret,secret,database)).toMatchObject({resourceId:'r2'});
    expect(await redeemPlaygroundHandoff(resumed!.token,'https://example.com',secret,secret,database)).toBeNull();
    for (const appId of ['fixture-a','fixture-b']) {
+    process.env.TRYCOVE_PLAYGROUND_APPLICATIONS=JSON.stringify({'fixture-a':{origin:'https://example.com',secret:'x'.repeat(40)},'fixture-b':{origin:'https://example.com',secret:'x'.repeat(40)}});
     const room=`room-${appId}`;
     await saveTrialDraft({id:room,productId:'p',description:'Fixture',prerequisites:[],request:{kind:'builder-declared',text:'Try'},application:{name:appId,url:'https://example.com',network:'test',version:'1'},tasks:[{id:'one',title:'Try',instructions:'Try',observe:['Observe']}],safety:['Test'],preparedResource:{description:'Access',allocationMinutes:10,applicationId:appId}},database);
     await setTrialPackState(room,1,'published',database);
     const session=await store.createSession(room,true);
     await database.insert(schema.preparedResources).values({id:`resource-${appId}`,packId:room,packVersion:1,label:'Fixture',kind:'identity',launchUrl:`https://example.com/${appId}`});
-    await claimPreparedResource(session.sessionId,room,session.accessToken,database);
+    expect(await claimPreparedResource(session.sessionId,room,session.accessToken,database)).toBeNull();
+    await database.update(schema.preparedResources).set({providerReady:true}).where((await import('drizzle-orm')).eq(schema.preparedResources.id,`resource-${appId}`));
+    expect(await claimPreparedResource(session.sessionId,room,session.accessToken,database,async()=>false)).toBeNull();
+    await database.update(schema.preparedResources).set({providerReady:true}).where((await import('drizzle-orm')).eq(schema.preparedResources.id,`resource-${appId}`));
+    await claimPreparedResource(session.sessionId,room,session.accessToken,database,async()=>true);
     const other=appId==='fixture-a'?'fixture-b':'fixture-a';
     expect(await issuePlaygroundHandoff(session.sessionId,room,session.accessToken,'https://example.com',database,other)).toBeNull();
     const ticket=await issuePlaygroundHandoff(session.sessionId,room,session.accessToken,'https://example.com',database,appId);

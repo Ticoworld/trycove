@@ -1,7 +1,11 @@
 import {and,eq} from 'drizzle-orm';
 import {db} from '../lib/db';
-import {preparedResources,projects,trialPacks} from '../lib/schema';
+import {projects,trialPacks} from '../lib/schema';
 import {readPackVersion,saveTrialDraft,setTrialPackState} from '../lib/trials/trial-packs';
+import {readFile} from 'node:fs/promises';
+import {join} from 'node:path';
+import {registerPreparedResources} from '../lib/trials/register-prepared-resources';
+import {lockProjectPermission} from '../lib/authorization';
 
 const applicationId='quotacell-playground';
 const packId='quotacell-delegated-payment';
@@ -12,15 +16,15 @@ async function main(){
  if(process.env.NEON_BRANCH!==expectedBranch)throw new Error('This publisher only targets the isolated verification branch.');
  const origin=process.env.TRYCOVE_PG03B_QUOTACELL_ORIGIN;
  const revision=process.env.TRYCOVE_PG03B_QUOTACELL_REVISION;
- const resourcePockets=JSON.parse(process.env.TRYCOVE_PG03B_RESOURCE_POCKETS??'null') as unknown;
+ const directory=process.env.PG03B_SCENARIO_DIR,userId=process.env.TRYCOVE_REGISTRATION_USER_ID;
  if(origin!=='https://trycove-quotacell-playground.netlify.app'||!revision||!/^[0-9a-f]{40}$/.test(revision))throw new Error('Set the exact hosted receiver origin and source commit.');
- if(!resourcePockets||typeof resourcePockets!=='object'||Array.isArray(resourcePockets))throw new Error('Set a resource ID to Pocket mapping.');
- const pocketMap=resourcePockets as Record<string,string>,resourceIds=Object.keys(pocketMap);
- if(resourceIds.length!==3||resourceIds.some(id=>!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)||!/^0x[0-9a-f]{64}$/i.test(pocketMap[id]))||new Set(Object.values(pocketMap)).size!==3)throw new Error('Exactly three distinct resource IDs and Pocket IDs are required.');
+ if(!directory||!userId)throw new Error('Set PG03B_SCENARIO_DIR and TRYCOVE_REGISTRATION_USER_ID.');
+ const scenarios=JSON.parse(await readFile(join(directory,'public.json'),'utf8')) as Array<{resourceId:string}>;
+ if(!Array.isArray(scenarios)||!scenarios.length||scenarios.length>100)throw new Error('Invalid scenario metadata.');
+ const resourceIds=scenarios.map(s=>s.resourceId);
 
  const [product]=await db.select().from(projects).where(eq(projects.id,productId));
  if(!product)throw new Error('The existing QuotaCell project record is unavailable.');
- await db.update(projects).set({name:'QuotaCell',description:'A shared spending Pocket app with owner-defined rules and independent wallet keys.',sourceUrl:'https://github.com/Ticoworld/QuotaCell',revision,observedAt:new Date()}).where(eq(projects.id,productId));
 
  const definition={
   id:packId,productId,
@@ -41,7 +45,7 @@ async function main(){
  let [existingPack]=await db.select().from(trialPacks).where(eq(trialPacks.id,packId));
  let version:number;
  if(!existingPack){
-  const saved=await saveTrialDraft(definition);
+  const saved=await saveTrialDraft(definition,db,async(tx,id)=>lockProjectPermission(tx,userId,id,'edit'));
   version=saved.latestVersion;
  }else{
   const savedDefinition=await readPackVersion(packId,existingPack.latestVersion);
@@ -49,17 +53,10 @@ async function main(){
   version=existingPack.latestVersion;
  }
 
- await db.transaction(async tx=>{
-  const existing=await tx.select().from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version)));
-  if(existing.length){
-   const currentIds=new Set(existing.map(row=>row.id));
-   if(existing.length!==3||resourceIds.some(id=>!currentIds.has(id))||existing.some(row=>row.kind!=='identity'||row.launchUrl!==`${origin}/app?pocket=${pocketMap[row.id]}`))throw new Error('The room already has a different resource allocation.');
-  }else{
-   await tx.insert(preparedResources).values(resourceIds.map((id,index)=>({id,packId,packVersion:version,label:`Pudge test Pocket ${index+1}`,kind:'identity',launchUrl:`${origin}/app?pocket=${pocketMap[id]}`,enabled:true,retired:false})));
-  }
- });
- await setTrialPackState(packId,version,'published');
- console.log(JSON.stringify({packId,productId,applicationId,resourceIds,pockets:Object.values(pocketMap),launchUrl:`${origin}/app`,version,available:3}));
+ const registered=await registerPreparedResources({userId,projectId:productId,packId,applicationId,enableVerified:true,resources:resourceIds.map((id,index)=>({id,label:`Pudge test Pocket ${index+1}`,kind:'identity',launchUrl:`${origin}/app`}))});
+ if(registered.ready!==registered.count)throw new Error(`Receiver confirmed ${registered.ready} of ${registered.count} resources; unconfirmed resources remain unavailable.`);
+ await setTrialPackState(packId,version,'published',db,async(tx,id)=>lockProjectPermission(tx,userId,id,'publish'));
+ console.log(JSON.stringify({packId,productId,applicationId,resourceIds,launchUrl:`${origin}/app`,version}));
 }
 
 main().catch(error=>{console.error(error instanceof Error?error.message:'Room publishing failed.');process.exit(1)});

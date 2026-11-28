@@ -13,7 +13,7 @@ const url=process.env.PG02_TEST_DATABASE_URL;
 const expectedHost=process.env.PG02_TEST_EXPECTED_HOST;
 describe.skipIf(!url || !expectedHost)('isolated PostgreSQL resource allocation',()=>{
  it('serializes independent connections and preserves private session access',async()=>{
-  if(new URL(url!).hostname!==expectedHost || !expectedHost!.startsWith('ep-plain-flower-')) throw new Error('Unexpected test database target');
+  if(new URL(url!).hostname!==expectedHost || process.env.PG04A_TEST_ISOLATED_BRANCH!=='trycove-stage2-verification') throw new Error('Unexpected test database target');
   const pools=[new Pool({connectionString:url,max:1}),new Pool({connectionString:url,max:1})];
   const [a,b]=pools.map(pool=>drizzle(pool,{schema}) as unknown as typeof db);
   const suffix=randomUUID().slice(0,8), product=`pg02-${suffix}`, pack=`pg02-${suffix}`;
@@ -48,5 +48,25 @@ describe.skipIf(!url || !expectedHost)('isolated PostgreSQL resource allocation'
    await pools[0].query("UPDATE prepared_resources SET expires_at=now()-interval '1 second' WHERE pack_id=$1 AND kind='identity'",[pack]);
    expect(await claimPreparedResource(fourth.sessionId,pack,fourth.accessToken,b)).toBeNull();
   } finally {await Promise.all(pools.map(pool=>pool.end()));}
+ },60000);
+ it('rejects unavailable integrated resources and serializes claims for a shared URL',async()=>{
+  if(new URL(url!).hostname!==expectedHost || process.env.PG04A_TEST_ISOLATED_BRANCH!=='trycove-stage2-verification')throw new Error('Unexpected test database target');
+  const pools=[new Pool({connectionString:url,max:1}),new Pool({connectionString:url,max:1})];
+  const [a,b]=pools.map(pool=>drizzle(pool,{schema}) as unknown as typeof db);
+  const suffix=randomUUID().slice(0,8),product=`pg04a-${suffix}`,pack=product;
+  const previous=process.env.TRYCOVE_PLAYGROUND_APPLICATIONS;
+  try{
+   process.env.TRYCOVE_PLAYGROUND_APPLICATIONS=JSON.stringify({fixture:{origin:'https://example.com',secret:'x'.repeat(40)}});
+   await a.insert(schema.projects).values({id:product,name:'Fixture',description:'Test',sourceUrl:'https://example.com',revision:'test',observedAt:new Date()});
+   await saveTrialDraft({id:pack,productId:product,description:'Test',prerequisites:[],request:{kind:'builder-declared',text:'Test'},application:{name:'Fixture',url:'https://example.com/app',network:'test',version:'1'},tasks:[{id:'one',title:'Try',instructions:'Try',observe:['Observe']}],safety:['Test'],preparedResource:{description:'Fixture',allocationMinutes:10,applicationId:'fixture'}},a);
+   await setTrialPackState(pack,1,'published',a);
+   const store=createGuidedTrialStore(a),one=await store.createSession(pack,true),two=await store.createSession(pack,true);
+   const ids:string[]=[randomUUID(),randomUUID()];
+   await a.insert(schema.preparedResources).values(ids.map((id,index)=>({id,packId:pack,packVersion:1,label:`Fixture ${index}`,kind:'identity',launchUrl:'https://example.com/app',providerReady:true})));
+   expect(await claimPreparedResource(one.sessionId,pack,one.accessToken,a,async()=>false)).toBeNull();
+   const results=await Promise.all([claimPreparedResource(one.sessionId,pack,one.accessToken,a,async()=>true),claimPreparedResource(two.sessionId,pack,two.accessToken,b,async()=>true)]);
+   expect(results.filter(Boolean)).toHaveLength(1);
+   expect((await a.select().from(schema.preparedResources)).filter(r=>ids.includes(r.id)&&r.retired)).toHaveLength(1);
+  }finally{if(previous===undefined)delete process.env.TRYCOVE_PLAYGROUND_APPLICATIONS;else process.env.TRYCOVE_PLAYGROUND_APPLICATIONS=previous;await Promise.all(pools.map(p=>p.end()));}
  },60000);
 });

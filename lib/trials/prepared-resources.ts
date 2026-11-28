@@ -4,9 +4,10 @@ import {guidedTrialSessions,preparedResources,trialPackVersions} from '../schema
 import {createHash} from 'node:crypto';
 import {DefinitionSchema} from './room-definitions';
 import {tokenMatches} from './guided-room-store';
+import {confirmPlaygroundResource,playgroundApplication} from './playground-apps';
 
 // The session and pack-version rows serialize claims, including retries and expiry.
-export async function claimPreparedResource(sessionId:string, packId:string, token:string, database= db) {
+export async function claimPreparedResource(sessionId:string, packId:string, token:string, database= db, verify=confirmPlaygroundResource) {
  return database.transaction(async tx=>{
   const [session]=await tx.select().from(guidedTrialSessions).where(and(eq(guidedTrialSessions.id,sessionId),eq(guidedTrialSessions.packId,packId))).for('update');
   if(!session || session.completedAt || !tokenMatches(token,session.accessTokenSha256,session.startedAt)) return null;
@@ -24,8 +25,17 @@ export async function claimPreparedResource(sessionId:string, packId:string, tok
   await tx.update(preparedResources).set({assignedSessionId:null,expiresAt:null,enabled:false}).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.kind,'environment'),lte(preparedResources.expiresAt,now)));
   const [existing]=await tx.select().from(preparedResources).where(and(eq(preparedResources.assignedSessionId,sessionId),gt(preparedResources.expiresAt,now)));
   if(existing)return existing;
-  const [available]=await tx.select().from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.enabled,true),eq(preparedResources.retired,false),isNull(preparedResources.assignedSessionId))).limit(1).for('update');
+  const [available]=await tx.select().from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.enabled,true),eq(preparedResources.retired,false),isNull(preparedResources.assignedSessionId),parsed.data.preparedResource.applicationId ? eq(preparedResources.providerReady,true) : undefined)).limit(1).for('update');
   if(!available)return null;
+  const applicationId=parsed.data.preparedResource.applicationId;
+  if(applicationId){
+   const application=playgroundApplication(applicationId);
+   let origin=''; try {origin=new URL(available.launchUrl).origin;} catch { /* Invalid stored URL fails closed. */ }
+   if(!application || origin!==application.origin || !await verify(applicationId,available.id)){
+    await tx.update(preparedResources).set({providerReady:false}).where(eq(preparedResources.id,available.id));
+    return null;
+   }
+  }
   const [assigned]=await tx.update(preparedResources).set({assignedSessionId:sessionId,expiresAt:new Date(now.getTime()+minutes*60000),...(available.kind==='identity'?{retired:true,enabled:false}:{})}).where(eq(preparedResources.id,available.id)).returning();
   return assigned;
  });
@@ -35,9 +45,11 @@ export async function getPreparedResource(sessionId:string, packId:string, token
  const [session]=await database.select().from(guidedTrialSessions).where(and(eq(guidedTrialSessions.id,sessionId),eq(guidedTrialSessions.packId,packId)));
  if(!session || !tokenMatches(token,session.accessTokenSha256,session.startedAt))return null;
  const version=Number(session.definitionVersion);
+ let integrated=true;
+ try { const parsed=DefinitionSchema.safeParse(JSON.parse(session.definitionSnapshot)); integrated=!parsed.success || !!parsed.data.preparedResource?.applicationId; } catch { /* Fail closed. */ }
  const now=new Date();
  const [assigned]=await database.select().from(preparedResources).where(and(eq(preparedResources.assignedSessionId,sessionId),eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),gt(preparedResources.expiresAt,now)));
  const [retiredIdentity]=await database.select({id:preparedResources.id}).from(preparedResources).where(and(eq(preparedResources.assignedSessionId,sessionId),eq(preparedResources.kind,'identity'),eq(preparedResources.retired,true)));
- const available=await database.select({id:preparedResources.id}).from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.enabled,true),eq(preparedResources.retired,false),isNull(preparedResources.assignedSessionId))).limit(1);
+ const available=await database.select({id:preparedResources.id}).from(preparedResources).where(and(eq(preparedResources.packId,packId),eq(preparedResources.packVersion,version),eq(preparedResources.enabled,true),eq(preparedResources.retired,false),isNull(preparedResources.assignedSessionId),integrated ? eq(preparedResources.providerReady,true) : undefined)).limit(1);
  return {assigned:assigned??null,available:available.length>0 && !retiredIdentity,expired:!!retiredIdentity && !assigned};
 }

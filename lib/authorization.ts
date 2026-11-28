@@ -2,11 +2,11 @@ import {and, eq} from 'drizzle-orm';
 import {cache} from 'react';
 import {db} from './db';
 import {appUsers, projectMemberships, projects} from './schema';
-import {authConfigured, serverAuth} from './neon-auth';
 
 export const authenticatedUser = cache(async () => {
-  if (!authConfigured()) return null;
-  const {data, error} = await serverAuth().getSession();
+  const auth=await import('./neon-auth');
+  if (!auth.authConfigured()) return null;
+  const {data, error} = await auth.serverAuth().getSession();
   return error ? null : data?.user ?? null;
 });
 

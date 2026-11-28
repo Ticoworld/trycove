@@ -6,7 +6,7 @@ import {notFound} from 'next/navigation';
 import {revalidatePath} from 'next/cache';
 import {GuidedTrialStatusSchema, guidedTrialStore} from '../../../../../../lib/trials/guided-room-store';
 import {GUIDED_TRIAL_ACCESS_COOKIE} from '../../../../../../lib/trials/room-auth';
-import {claimPreparedResource} from '../../../../../../lib/trials/prepared-resources';
+import {claimPreparedResource,getPreparedResource} from '../../../../../../lib/trials/prepared-resources';
 import {consumeTrialResourceClaim} from '../../../../../../lib/trials/resource-claim-throttle';
 import {issuePlaygroundHandoff} from '../../../../../../lib/trials/playground-handoffs';
 import {playgroundApplication} from '../../../../../../lib/trials/playground-apps';
@@ -16,12 +16,10 @@ export async function beginPlayground(form:FormData) {
   const token=(await cookies()).get(GUIDED_TRIAL_ACCESS_COOKIE)?.value;
   const applicationId=loaded.definition.preparedResource?.applicationId ?? 'legacy';
   const application=playgroundApplication(applicationId);
-  const diagnose=applicationId==='quotacell-playground'?(reason:string)=>console.warn(`[PG03B handoff] ${reason}`):undefined;
   if(!token || !application || !loaded.definition.preparedResource || loaded.session.completedAt) {
-    diagnose?.(!token?'session-cookie':!application?'application-config':!loaded.definition.preparedResource?'resource-definition':'session-completed');
     return null;
   }
-  const ticket=await issuePlaygroundHandoff(loaded.session.id,loaded.session.packId,token,application.origin,undefined,applicationId,diagnose);
+  const ticket=await issuePlaygroundHandoff(loaded.session.id,loaded.session.packId,token,application.origin,undefined,applicationId);
   if(!ticket) return null;
   const origin=application.origin;
   return {token:ticket.token,launchUrl:ticket.launchUrl,origin,expiresAt:ticket.expiresAt.toISOString()};
@@ -33,6 +31,9 @@ export async function claimResource(_state:string,form:FormData):Promise<string>
   if(!config || loaded.session.completedAt) notFound();
   const token=(await cookies()).get(GUIDED_TRIAL_ACCESS_COOKIE)?.value;
   if(!token)notFound();
+  const existing=await getPreparedResource(loaded.session.id,loaded.session.packId,token);
+  if(existing?.assigned)return '';
+  if(existing?.expired || !existing?.available)return 'No prepared test identity is available right now. Your trial session remains open.';
   const requestHeaders=await headers();
   const candidate=requestHeaders.get('x-nf-client-connection-ip')?.trim() || (process.env.NODE_ENV!=='production'?'local-development':'');
   if(!candidate || (candidate!=='local-development' && !isIP(candidate)))return 'Test access could not verify this connection. Please retry shortly.';

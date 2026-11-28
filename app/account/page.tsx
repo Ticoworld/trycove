@@ -34,6 +34,7 @@ export default async function Account({searchParams}: {searchParams: Promise<{er
     db.select().from(ownershipClaims).where(or(eq(ownershipClaims.userId, user.id), organizer ? or(eq(ownershipClaims.status, 'pending'), eq(ownershipClaims.status, 'approved')) : undefined)),
   ]);
   const packs = await db.select().from(trialPacks);
+  const claimableProjects = await db.select({id:projects.id,name:projects.name}).from(projects).orderBy(projects.name);
   const rooms = await Promise.all(packs.map(async pack => ({pack, definition: await readPackVersion(pack.id, pack.latestVersion)})));
   const logos = await trialLogos(memberships.map(project=>project.id));
   return <section className="section stack workspace final-page">
@@ -60,12 +61,12 @@ export default async function Account({searchParams}: {searchParams: Promise<{er
         <PendingButton label="Save membership" pendingLabel="Saving…"/></ActionForm>)}
     <ActionForm action={claimAction} className="card stack">
       <h2>Claim a Product Passport</h2>
-      <label>Product Passport ID <input name="projectId" defaultValue={query.project} required maxLength={200}/></label>
+      <label>Product <select name="projectId" defaultValue={query.project ?? ''} required><option value="">Select a product</option>{claimableProjects.map(project=><option key={project.id} value={project.id}>{project.name}</option>)}</select></label>
       <PendingButton label="Start ownership verification" pendingLabel="Checking…"/></ActionForm>
     {claims.map(claim => {
       const pending = claim.status === 'pending' && claim.expiresAt > new Date();
       return <article className="card stack" key={claim.id}>
-        <h3>{claim.projectId}</h3><p>{claim.repository} ({claim.method})</p>
+        <h3>{claimableProjects.find(project=>project.id===claim.projectId)?.name ?? 'Product'}</h3><p>{claim.repository} ({claim.method})</p>
         <p>{claim.status === 'pending' && !pending ? 'Expired' : claim.status}</p>
         {pending && claim.userId === user.id && claim.method !== 'review' && <ActionForm action={verifyAction}>
           {claim.method === 'organization' && <p>Place <code>{claim.id}</code> in <code>.trycove-ownership</code> on the default branch before {claim.expiresAt.toISOString()}.</p>}

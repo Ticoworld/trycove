@@ -20,7 +20,7 @@ export async function registerPreparedResource(form:FormData) {
  const launchUrl=z.string().url().max(2048).parse(form.get('launchUrl'));
  const idText=z.string().max(4000).parse(form.get('resourceIds')??'').trim();
  const ids=idText?idText.split(/\s+/).map(value=>z.string().uuid().parse(value)):[randomUUID()];
- await registerPreparedResources({userId:user.id,projectId,packId,resources:ids.map((id,index)=>({id,label:ids.length===1?label:`${label} ${index+1}`,kind,launchUrl}))});
+ await registerPreparedResources({userId:user.id,projectId,packId,enableVerified:form.get('enableVerified')==='on',resources:ids.map((id,index)=>({id,label:ids.length===1?label:`${label} ${index+1}`,kind,launchUrl}))});
  revalidatePath('/builder/'+projectId);
 }
 
@@ -42,7 +42,7 @@ export async function setPreparedResourceAvailability(form:FormData) {
    if(!application || new URL(resource.launchUrl).origin!==application.origin || new URL(definition.application.url).origin!==application.origin || !await confirmPlaygroundResource(applicationId,id))throw new Error('The application has not confirmed this resource is ready.');
   }
   if(enabled && resource.assignedSessionId && resource.expiresAt && resource.expiresAt>new Date())throw new Error('This resource is still allocated.');
-  if(enabled && form.get('reset')!=='on')throw new Error('Confirm the external resource has been reset before enabling it.');
+  if(enabled && (resource.kind!=='identity' || resource.assignedSessionId) && form.get('reset')!=='on')throw new Error('Confirm the external resource has been reset before enabling it.');
   await tx.update(preparedResources).set({enabled,...enabled?{assignedSessionId:null,expiresAt:null,...applicationId?{providerReady:true}:{}}:{}}).where(and(eq(preparedResources.id,id),eq(preparedResources.packId,resource.packId)));
  });
  revalidatePath('/builder/'+projectId);

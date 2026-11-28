@@ -35,7 +35,7 @@ export async function registerPreparedResources(input:{userId:string;projectId:s
     let migratable=false;
     try {const old=new URL(existing.launchUrl),next=new URL(resource.launchUrl);migratable=!!applicationId && old.origin===next.origin && old.pathname===next.pathname && !old.hash && [...old.searchParams.keys()].length===1 && /^0x[0-9a-f]{64}$/i.test(old.searchParams.get('pocket')??'');}catch { /* Invalid URLs cannot migrate. */ }
     if(existing.packId!==input.packId||existing.packVersion!==pack.latestVersion||existing.kind!==resource.kind||existing.label!==resource.label||(existing.launchUrl!==resource.launchUrl&&!migratable))throw new Error('Resource ID already has different metadata.');
-    await tx.update(preparedResources).set({providerReady:ready,launchUrl:resource.launchUrl,...(input.enableVerified && ready && !existing.assignedSessionId && !existing.retired?{enabled:true}:{})}).where(eq(preparedResources.id,resource.id));
+    await tx.update(preparedResources).set({providerReady:ready,launchUrl:resource.launchUrl,...(input.enableVerified && ready && existing.kind==='identity' && !existing.assignedSessionId && !existing.retired?{enabled:true}:{})}).where(eq(preparedResources.id,resource.id));
    } else await tx.insert(preparedResources).values({...resource,packId:input.packId,packVersion:pack.latestVersion,enabled:applicationId?ready:true,providerReady:ready});
   }
   return {count:resources.length,ready:readyCount};

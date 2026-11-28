@@ -32,6 +32,11 @@ describe('prepared resource registration',()=>{
    expect(rows).toHaveLength(2);
    expect(rows.find(r=>r.id===id1)?.providerReady).toBe(true);
    expect(rows.find(r=>r.id===id2)?.providerReady).toBe(false);
+   await database.update(schema.preparedResources).set({enabled:false}).where((await import('drizzle-orm')).eq(schema.preparedResources.id,id1));
+   await registerPreparedResources({...input,enableVerified:true},database,async(_app,id)=>id===id1);
+   const refreshed=await database.select().from(schema.preparedResources);
+   expect(refreshed.find(r=>r.id===id1)?.enabled).toBe(true);
+   expect(refreshed.find(r=>r.id===id2)?.enabled).toBe(false);
    await expect(registerPreparedResources({...input,resources:[{...input.resources[0],label:'Changed'}]},database,async()=>true)).rejects.toThrow();
   }finally{if(old===undefined)delete process.env.TRYCOVE_PLAYGROUND_APPLICATIONS;else process.env.TRYCOVE_PLAYGROUND_APPLICATIONS=old;await client.close();}
  },60000);
